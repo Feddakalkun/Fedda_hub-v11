@@ -11,6 +11,7 @@ import base64
 import subprocess
 import sys
 import sqlite3
+import ctypes
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 import re
@@ -181,6 +182,33 @@ async def hardware_stats():
                 "total_gb": round(vm.total / (1024 ** 3), 1),
                 "percentage": round(float(vm.percent), 1),
             }
+        elif os.name == "nt":
+            class MEMORYSTATUSEX(ctypes.Structure):
+                _fields_ = [
+                    ("dwLength", ctypes.c_ulong),
+                    ("dwMemoryLoad", ctypes.c_ulong),
+                    ("ullTotalPhys", ctypes.c_ulonglong),
+                    ("ullAvailPhys", ctypes.c_ulonglong),
+                    ("ullTotalPageFile", ctypes.c_ulonglong),
+                    ("ullAvailPageFile", ctypes.c_ulonglong),
+                    ("ullTotalVirtual", ctypes.c_ulonglong),
+                    ("ullAvailVirtual", ctypes.c_ulonglong),
+                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
+                ]
+
+            mem = MEMORYSTATUSEX()
+            mem.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
+            ok = ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(mem))  # type: ignore[attr-defined]
+            if ok:
+                total = int(mem.ullTotalPhys)
+                avail = int(mem.ullAvailPhys)
+                used = max(0, total - avail)
+                pct = round((used / total) * 100, 1) if total > 0 else 0.0
+                system_ram = {
+                    "used_gb": round(used / (1024 ** 3), 1),
+                    "total_gb": round(total / (1024 ** 3), 1),
+                    "percentage": pct,
+                }
 
         cmd = [
             "nvidia-smi",

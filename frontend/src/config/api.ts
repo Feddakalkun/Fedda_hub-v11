@@ -71,6 +71,7 @@ export const BACKEND_API = {
         OLLAMA_VISION_MODELS: '/api/ollama/vision-models',
         OLLAMA_MODELS: '/api/ollama/models',
         OLLAMA_MODEL_SELECTION: '/api/ollama/model-selection',
+        OLLAMA_PULL: '/api/ollama/pull',
         OLLAMA_PROMPT: '/api/ollama/prompt',
         OLLAMA_CAPTION: '/api/ollama/caption',
         HARDWARE_STATS: '/api/hardware/stats',

@@ -99,7 +99,7 @@ const HUB_CARDS: Array<{
   },
   {
     id: 'explore',
-    label: 'Explore',
+    label: 'Media Hub',
     description: 'Gallery, videos and LoRA library.',
     Icon: Images,
     image: CARD_IMAGE_BY_TAB.explore,
@@ -153,7 +153,7 @@ const TOOL_GROUPS: Record<Exclude<RootSection, 'hub'>, Array<{ title: string; to
   ],
   explore: [
     {
-      title: 'Explore',
+      title: 'Media Hub',
       tools: [
         { tab: 'gallery', label: 'Gallery', description: 'Image history and downloads.' },
         { tab: 'videos', label: 'Videos', description: 'Video history and downloads.' },
@@ -247,64 +247,6 @@ function FeddaApp() {
     description: 'Active workspace view.',
     Icon: Sparkles,
   };
-  const tabSectionMap: Record<string, Exclude<RootSection, 'hub'>> = {
-    image: 'image',
-    'z-image': 'image',
-    'z-image-txt2img': 'image',
-    'z-image-dual-lora': 'image',
-    flux: 'image',
-    'flux-txt2img': 'image',
-    qwen: 'image',
-    'qwen-txt2img': 'image',
-    'qwen-image-ref': 'image',
-    'qwen-multi-angle': 'image',
-    'image-other': 'image',
-    'image-influencer': 'image',
-    video: 'video',
-    'wan21-steady-dancer': 'video',
-    'wan22-vid2vid': 'video',
-    'wan22-img2vid': 'video',
-    'wan22-img2vid-6frames': 'video',
-    ltx: 'video',
-    'ltx-flf': 'video',
-    'ltx-img-audio': 'video',
-    audio: 'video',
-    gallery: 'explore',
-    videos: 'explore',
-    library: 'explore',
-    chat: 'explore',
-  };
-  const sectionHeaderMeta: Record<Exclude<RootSection, 'hub'>, { label: string; description: string; Icon: typeof Sparkles }> = {
-    image: {
-      label: 'Image Studio',
-      description: 'Cards navigation for image workflows.',
-      Icon: Sparkles,
-    },
-    video: {
-      label: 'Video Studio',
-      description: 'Cards navigation for video workflows.',
-      Icon: Video,
-    },
-    explore: {
-      label: 'Explore',
-      description: 'Cards navigation for gallery and library tools.',
-      Icon: Images,
-    },
-  };
-
-  const headerMeta =
-    view === 'workspace'
-      ? meta
-      : view === 'section' && activeSection
-        ? sectionHeaderMeta[activeSection]
-        : {
-            label: 'FEDDA v11',
-            description: 'Cards-first navigation shell',
-            Icon: Sparkles,
-          };
-  const workspaceSection =
-    view === 'workspace' ? sectionHeaderMeta[tabSectionMap[activeTab] ?? 'explore'].label : null;
-
   const openWorkspace = (tab: string, origin: 'hub' | 'section') => {
     if (!VALID_TABS.has(tab)) return;
     setActiveTab(tab);
@@ -357,16 +299,16 @@ function FeddaApp() {
       ? 'Image Studio'
       : activeSection === 'video'
         ? 'Video Studio'
-        : 'Explore';
+        : 'Media Hub';
 
   return (
     <div className="flex h-screen theme-bg-app text-white overflow-hidden font-sans">
       {showLanding && <LandingPage onEnter={() => setShowLanding(false)} />}
 
       <main className="flex-1 flex flex-col overflow-hidden theme-bg-main">
-        <header className="h-14 border-b border-white/10 px-5 md:px-6 flex items-center justify-between backdrop-blur-sm bg-black/30 shrink-0">
-          <div className="flex items-center gap-3">
-            {view !== 'hub' && (
+        <header className="h-14 border-b border-white/10 px-3 md:px-5 flex items-center justify-between backdrop-blur-sm bg-black/30 shrink-0 sticky top-0 z-40">
+          <div className="flex items-center min-w-[36px]">
+            {view !== 'hub' ? (
               <button
                 onClick={() => {
                   if (view === 'workspace') {
@@ -376,21 +318,12 @@ function FeddaApp() {
                   }
                 }}
                 className="v11-icon-btn"
+                title="Back"
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
-            )}
-            <headerMeta.Icon className="w-4 h-4 text-slate-400" />
-            <div className="leading-tight">
-              <p className="text-sm font-semibold">{headerMeta.label}</p>
-              <p className="text-[11px] text-slate-500">{headerMeta.description}</p>
-            </div>
-            {workspaceSection && (
-              <div className="hidden md:flex items-center gap-2 ml-3 text-[11px] text-slate-500">
-                <span className="px-2 py-0.5 rounded border border-white/10 bg-white/[0.03]">{workspaceSection}</span>
-                <span>/</span>
-                <span>{headerMeta.label}</span>
-              </div>
+            ) : (
+              <div className="w-9 h-9" />
             )}
           </div>
           <TopSystemStrip />
