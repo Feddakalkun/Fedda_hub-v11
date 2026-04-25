@@ -23,8 +23,7 @@ if "%1"==":svc_ollama" (
     exit
 )
 if "%1"==":svc_comfy" (
-    if not exist "%BASE_DIR%\logs" mkdir "%BASE_DIR%\logs"
-    call :launch_comfy > "%BASE_DIR%\logs\comfy.log" 2>&1
+    call :launch_comfy
     exit
 )
 if "%1"==":svc_backend" (
@@ -107,7 +106,7 @@ call :is_port_listening 8199
 if errorlevel 1 (
     echo     ComfyUI already running.
 ) else (
-    start "" /B "%~f0" :svc_comfy
+    start "FEDDA ComfyUI Console" cmd /k ""%~f0" :svc_comfy"
 )
 call :wait_for_port 8199 60 ComfyUI
 call :wait_for_http "http://127.0.0.1:8199/system_stats" 30 ComfyUI-HTTP
@@ -278,7 +277,6 @@ exit /b
 :: SUBROUTINE: COMFYUI
 :: ============================================================================
 :launch_comfy
-setlocal EnableDelayedExpansion
 set "BASE_DIR=%~dp0"
 if "%BASE_DIR:~-1%"=="\" set "BASE_DIR=%BASE_DIR:~0,-1%"
 set "COMFYUI_DIR=%BASE_DIR%\ComfyUI"
@@ -328,7 +326,6 @@ echo [%date% %time%] Starting ComfyUI...
 if %errorlevel% neq 0 (
     echo [%date% %time%] [ERROR] ComfyUI crashed with error code %errorlevel%
 )
-endlocal
 exit /b
 
 :: ============================================================================
