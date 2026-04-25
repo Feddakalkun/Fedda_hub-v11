@@ -85,6 +85,7 @@ popd
 if not "%INSTALL_EXIT%"=="0" goto :err_install
 
 call :ensure_root_launchers
+call :cleanup_install_root_launchers
 
 echo.
 echo  ==============================================================
@@ -199,6 +200,12 @@ echo    %INSTALL_DIR%\logs\
 echo [%date% %time%] ERROR: install failed code %INSTALL_EXIT% >> "%LOG_FILE%"
 pause
 exit /b %INSTALL_EXIT%
+
+:cleanup_install_root_launchers
+if exist "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" del /f /q "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" >nul 2>nul
+if exist "%INSTALL_DIR%\FEDDA_Update-v11.bat" del /f /q "%INSTALL_DIR%\FEDDA_Update-v11.bat" >nul 2>nul
+if exist "%INSTALL_DIR%\FEDDA_Push-v11.bat" del /f /q "%INSTALL_DIR%\FEDDA_Push-v11.bat" >nul 2>nul
+exit /b 0
 
 :ensure_root_launchers
 echo  [INFO] Creating root launchers...

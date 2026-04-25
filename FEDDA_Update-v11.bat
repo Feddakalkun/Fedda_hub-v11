@@ -47,6 +47,7 @@ if not exist "%TARGET_DIR%\scripts\install_lite.ps1" (
     exit /b 1
 )
 
+call :cleanup_install_root_launchers
 call :ensure_root_run_launcher
 
 echo  [INFO] Updating %TARGET_NAME%...
@@ -136,6 +137,12 @@ echo  Run app:
 echo    "%ROOT_DIR%\FEDDA_run-v11.bat"
 echo.
 pause
+exit /b 0
+
+:cleanup_install_root_launchers
+if exist "%TARGET_DIR%\FEDDA_OneClick_Installer-v11.bat" del /f /q "%TARGET_DIR%\FEDDA_OneClick_Installer-v11.bat" >nul 2>nul
+if exist "%TARGET_DIR%\FEDDA_Update-v11.bat" del /f /q "%TARGET_DIR%\FEDDA_Update-v11.bat" >nul 2>nul
+if exist "%TARGET_DIR%\FEDDA_Push-v11.bat" del /f /q "%TARGET_DIR%\FEDDA_Push-v11.bat" >nul 2>nul
 exit /b 0
 
 :ensure_root_run_launcher
