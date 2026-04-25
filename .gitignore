@@ -1,0 +1,112 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.local
+
+# Environment files
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ComfyUI Backend (DO NOT COMMIT - these are installed by install.bat)
+ComfyUI/
+!ComfyUI/wildcards/
+python_embeded/
+venv/
+git/
+node_embeded/
+ollama_embeded/
+VoxCPM/
+fanvue-hub/
+git_embeded/
+node_embeded/
+node-v22.14.0-win-x64/
+node.zip
+
+# Generated files
+*.pyc
+__pycache__/
+
+# Logs
+*.log
+logs/
+
+# Frontend specific
+frontend/dist/
+frontend/.vite/
+frontend/node_modules/
+frontend/public/lora-previews/_backup/
+
+# Models and large files (installed separately)
+models/
+checkpoints/
+loras/
+*.safetensors
+*.ckpt
+*.pth
+
+# User data
+output/
+temp/
+input/
+tiktok_downloads/
+
+# Update marker (local timestamp, not for repo)
+.last_node_update
+
+# Lock files (keep package-lock.json for reproducibility)
+# Uncomment if you want to ignore:
+# package-lock.json
+
+# Proprietary Downloaders
+download-*-zimage.bat
+scripts/download_loras.py
+config/loras.json
+loras.json
+
+# Design assets (local only)
+assets/design/
+assets/landingpage/
+
+# Distribution build (local only - distribute as zip/release)
+Feddafront_Distribution/
+
+# Dev-only launcher scripts
+push-to-github.bat
+01.runLTX2.bat
+fix_gpu.bat
+HANDOVER_TO_LTX.md
+comfyfront.code-workspace
+
+# Audio workflows (moved to tracked)
+# backend/workflows/audio/
+01-feddafront.code-workspace
+
+# Prompt harvester (scans private local script folders, not for public repo)
+harvest_log.txt
+backend/prompt_harvester.py
+
+# Local runtime state
+cache/
+.gitconfig
+config/agent_chat_store.json
+config/agent_memory.db
+mockingbird_tts/
