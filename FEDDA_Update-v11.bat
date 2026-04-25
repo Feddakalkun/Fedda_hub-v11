@@ -47,6 +47,8 @@ if not exist "%TARGET_DIR%\install.bat" (
     exit /b 1
 )
 
+call :ensure_root_run_launcher
+
 echo  [INFO] Updating %TARGET_NAME%...
 pushd "%TARGET_DIR%" >nul
 
@@ -131,7 +133,29 @@ echo    Update completed
 echo  =========================================
 echo.
 echo  Run app:
-echo    "%TARGET_DIR%\run.bat"
+echo    "%ROOT_DIR%\FEDDA_run-v11.bat"
 echo.
 pause
+exit /b 0
+
+:ensure_root_run_launcher
+(
+echo @echo off
+echo setlocal EnableExtensions
+echo set "ROOT_DIR=%%~dp0"
+echo if "%%ROOT_DIR:~-1%%"=="\" set "ROOT_DIR=%%ROOT_DIR:~0,-1%%"
+echo set "TARGET_DIR=%%ROOT_DIR%%\comfyuifeddafront"
+echo if not exist "%%TARGET_DIR%%\run.bat" ^(
+echo   echo.
+echo   echo  [ERROR] FEDDA install not found at:
+echo   echo          %%TARGET_DIR%%
+echo   echo.
+echo   echo  Run FEDDA_OneClick_Installer-v11.bat first.
+echo   echo.
+echo   pause
+echo   exit /b 1
+echo ^)
+echo call "%%TARGET_DIR%%\run.bat"
+echo exit /b %%errorlevel%%
+) > "%ROOT_DIR%\FEDDA_run-v11.bat"
 exit /b 0

@@ -287,16 +287,16 @@ body {
 
 .v11-hub-row {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
   width: 100%;
 }
 
 .v11-hub-card {
   aspect-ratio: 9 / 16;
   min-height: 420px;
-  padding: 16px;
-  border-radius: 18px;
+  padding: 0;
+  border-radius: 0;
   isolation: isolate;
   background: #04070f;
 }
@@ -383,7 +383,7 @@ body {
 
 @media (max-width: 1700px) {
   .v11-hub-row {
-    grid-template-columns: repeat(5, minmax(180px, 1fr));
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
   }
 }
 

@@ -11,7 +11,7 @@ import { LibraryPage } from './pages/LibraryPage';
 import { AgentChatPage } from './pages/AgentChatPage';
 import { SectionGroup, StudioCard, ToolCard } from './components/layout/V11Cards';
 
-type RootSection = 'hub' | 'image' | 'video' | 'audio' | 'explore';
+type RootSection = 'hub' | 'image' | 'video' | 'explore';
 
 type ToolItem = { tab: string; label: string; description: string };
 
@@ -98,15 +98,6 @@ const HUB_CARDS: Array<{
     video: CARD_VIDEO_BY_TAB.video,
   },
   {
-    id: 'audio',
-    label: 'Audio / SFX',
-    description: 'Voice and audio workflows.',
-    Icon: Music,
-    image: CARD_IMAGE_BY_TAB.audio,
-    video: CARD_VIDEO_BY_TAB.audio,
-    directTab: 'audio',
-  },
-  {
     id: 'explore',
     label: 'Explore',
     description: 'Gallery, videos and LoRA library.',
@@ -158,12 +149,6 @@ const TOOL_GROUPS: Record<Exclude<RootSection, 'hub'>, Array<{ title: string; to
         { tab: 'ltx-flf', label: 'First / Last Frame', description: 'Generate in-between sequence from keyframes.' },
         { tab: 'ltx-img-audio', label: 'Img + Audio Lipsync', description: 'Lipsync from image + audio.' },
       ],
-    },
-  ],
-  audio: [
-    {
-      title: 'Audio / SFX',
-      tools: [{ tab: 'audio', label: 'Audio Studio', description: 'Audio generation and voice tools.' }],
     },
   ],
   explore: [
@@ -283,7 +268,7 @@ function FeddaApp() {
     ltx: 'video',
     'ltx-flf': 'video',
     'ltx-img-audio': 'video',
-    audio: 'audio',
+    audio: 'video',
     gallery: 'explore',
     videos: 'explore',
     library: 'explore',
@@ -299,11 +284,6 @@ function FeddaApp() {
       label: 'Video Studio',
       description: 'Cards navigation for video workflows.',
       Icon: Video,
-    },
-    audio: {
-      label: 'Audio / SFX',
-      description: 'Cards navigation for audio workflows.',
-      Icon: Music,
     },
     explore: {
       label: 'Explore',
@@ -376,9 +356,7 @@ function FeddaApp() {
       ? 'Image Studio'
       : activeSection === 'video'
         ? 'Video Studio'
-        : activeSection === 'audio'
-          ? 'Audio / SFX'
-          : 'Explore';
+        : 'Explore';
 
   return (
     <div className="flex h-screen theme-bg-app text-white overflow-hidden font-sans">
