@@ -16,6 +16,11 @@ from typing import Optional, Dict, Any, List
 import re
 import time
 
+try:
+    import psutil  # type: ignore
+except Exception:
+    psutil = None
+
 # Ensure backend directory is in sys.path for module imports
 backend_dir = os.path.dirname(os.path.abspath(__file__))
 if backend_dir not in sys.path:
@@ -168,6 +173,15 @@ async def comfy_status():
 async def hardware_stats():
     """GPU hardware stats via nvidia-smi."""
     try:
+        system_ram = None
+        if psutil is not None:
+            vm = psutil.virtual_memory()
+            system_ram = {
+                "used_gb": round((vm.total - vm.available) / (1024 ** 3), 1),
+                "total_gb": round(vm.total / (1024 ** 3), 1),
+                "percentage": round(float(vm.percent), 1),
+            }
+
         cmd = [
             "nvidia-smi",
             "--query-gpu=temperature.gpu,utilization.gpu,gpu_name,memory.used,memory.total",
@@ -186,6 +200,9 @@ async def hardware_stats():
                     "total": int(mem_total),
                     "percentage": round(int(mem_used) / int(mem_total) * 100, 1),
                 },
+            },
+            "system": {
+                "ram": system_ram,
             },
             "status": "ok",
         }
@@ -1365,6 +1382,12 @@ def _get_ollama_text_model() -> Optional[str]:
         if not resp.ok:
             return None
         models = [m["name"] for m in resp.json().get("models", [])]
+        settings = load_settings()
+        preferred = str(settings.get("ollama_text_model") or "").strip()
+        if preferred:
+            for m in models:
+                if m.lower() == preferred.lower():
+                    return m
         priority = [
                     "zarigata/unfiltered-llama3",
                     "dolphin-llama3",
@@ -1392,6 +1415,12 @@ def _get_ollama_vision_model() -> Optional[str]:
         if not resp.ok:
             return None
         models = [m["name"] for m in resp.json().get("models", [])]
+        settings = load_settings()
+        preferred = str(settings.get("ollama_vision_model") or "").strip()
+        if preferred:
+            for m in models:
+                if m.lower() == preferred.lower():
+                    return m
         for p in ["qwen2.5-vl", "qwen2-vl", "minicpm-v", "minicpm", "llava:34b", "llava", "moondream", "vision"]:
             for m in models:
                 if p in m.lower():
@@ -1409,6 +1438,13 @@ def _get_ollama_model_names() -> List[str]:
         return [str(m.get("name", "")).strip() for m in resp.json().get("models", []) if str(m.get("name", "")).strip()]
     except Exception:
         return []
+
+
+def _is_vision_model(model_name: str) -> bool:
+    lowered = (model_name or "").strip().lower()
+    if not lowered:
+        return False
+    return any(token in lowered for token in ["vision", "llava", "minicpm", "qwen2-vl", "qwen2.5-vl", "moondream"])
 
 
 def _resolve_agent_model_for_profile(profile: str) -> Optional[str]:
@@ -1489,10 +1525,19 @@ async def get_ollama_all_models():
                 "recommended_text_model": OLLAMA_RECOMMENDED_TEXT_MODEL,
             }
         models = [m["name"] for m in resp.json().get("models", [])]
+        settings = load_settings()
+        selected_text = str(settings.get("ollama_text_model") or "").strip() or None
+        selected_vision = str(settings.get("ollama_vision_model") or "").strip() or None
+        text_models = [m for m in models if not _is_vision_model(m) and "embed" not in m.lower()]
+        vision_models = [m for m in models if _is_vision_model(m)]
         return {
             "success": True,
             "ollama_online": True,
             "models": models,
+            "text_models": text_models,
+            "vision_models": vision_models,
+            "selected_text_model": selected_text,
+            "selected_vision_model": selected_vision,
             "text_model": _get_ollama_text_model(),
             "vision_model": _get_ollama_vision_model(),
             "recommended_text_model": OLLAMA_RECOMMENDED_TEXT_MODEL,
@@ -1502,11 +1547,49 @@ async def get_ollama_all_models():
             "success": False,
             "ollama_online": False,
             "models": [],
+            "text_models": [],
+            "vision_models": [],
+            "selected_text_model": None,
+            "selected_vision_model": None,
             "text_model": None,
             "vision_model": None,
             "recommended_text_model": OLLAMA_RECOMMENDED_TEXT_MODEL,
             "error": str(exc),
         }
+
+
+class OllamaModelSelectionRequest(BaseModel):
+    text_model: Optional[str] = None
+    vision_model: Optional[str] = None
+
+
+@app.post("/api/ollama/model-selection")
+async def set_ollama_model_selection(req: OllamaModelSelectionRequest):
+    try:
+        data = load_settings()
+        text_model = (req.text_model or "").strip()
+        vision_model = (req.vision_model or "").strip()
+
+        if text_model:
+            data["ollama_text_model"] = text_model
+        else:
+            data.pop("ollama_text_model", None)
+
+        if vision_model:
+            data["ollama_vision_model"] = vision_model
+        else:
+            data.pop("ollama_vision_model", None)
+
+        save_settings(data)
+        return {
+            "success": True,
+            "selected_text_model": data.get("ollama_text_model"),
+            "selected_vision_model": data.get("ollama_vision_model"),
+            "resolved_text_model": _get_ollama_text_model(),
+            "resolved_vision_model": _get_ollama_vision_model(),
+        }
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
 
 
 class OllamaPromptRequest(BaseModel):

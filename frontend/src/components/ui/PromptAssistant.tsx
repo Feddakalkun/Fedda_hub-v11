@@ -115,6 +115,7 @@ export const PromptAssistant = ({
   compact = false,
 }: PromptAssistantProps) => {
   const [mode, setMode] = useState<'enhance' | 'inspire' | 'caption' | null>(null);
+  const [errorText, setErrorText] = useState<string>('');
   const [dragOver, setDragOver] = useState(false);
   const [captionModel, setCaptionModel] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -138,6 +139,7 @@ export const PromptAssistant = ({
     abortRef.current?.abort();
     abortRef.current = new AbortController();
     setMode(reqMode);
+    setErrorText('');
     onChange(''); // clear so the user sees fresh text streaming in
 
     try {
@@ -151,7 +153,9 @@ export const PromptAssistant = ({
       if (err.name !== 'AbortError') {
         // Put the original prompt back on error
         onChange(value);
-        console.error('[PromptAssistant]', err.message);
+        const msg = err?.message || 'Prompt helper failed';
+        setErrorText(msg);
+        console.error('[PromptAssistant]', msg);
       }
     } finally {
       setMode(null);
@@ -167,6 +171,7 @@ export const PromptAssistant = ({
   const captionFile = useCallback(async (file: File) => {
     abortRef.current?.abort();
     setMode('caption');
+    setErrorText('');
     const prevPrompt = value;
 
     try {
@@ -186,7 +191,9 @@ export const PromptAssistant = ({
       if (data.model) setCaptionModel(data.model);
     } catch (err: any) {
       onChange(prevPrompt);
-      console.error('[PromptAssistant caption]', err.message);
+      const msg = err?.message || 'Image caption failed';
+      setErrorText(msg);
+      console.error('[PromptAssistant caption]', msg);
     } finally {
       setMode(null);
     }
@@ -403,6 +410,9 @@ export const PromptAssistant = ({
         <p className={`text-[9px] font-bold uppercase tracking-widest ${ACCENT_SPIN[accent]} opacity-70`}>
           {mode === 'caption' ? 'Analysing image…' : mode === 'enhance' ? 'Enhancing prompt…' : 'Generating prompt…'}
         </p>
+      )}
+      {!!errorText && !isLoading && (
+        <p className="text-[10px] text-rose-300">{errorText}</p>
       )}
     </div>
   );

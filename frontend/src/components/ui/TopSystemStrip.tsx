@@ -19,6 +19,12 @@ export const TopSystemStrip = () => {
   const [civitaiConfigured, setCivitaiConfigured] = useState(false);
   const [civitaiLoading, setCivitaiLoading] = useState(true);
   const [civitaiSaving, setCivitaiSaving] = useState(false);
+  const [ollamaModels, setOllamaModels] = useState<string[]>([]);
+  const [ollamaTextModels, setOllamaTextModels] = useState<string[]>([]);
+  const [ollamaVisionModels, setOllamaVisionModels] = useState<string[]>([]);
+  const [selectedTextModel, setSelectedTextModel] = useState('');
+  const [selectedVisionModel, setSelectedVisionModel] = useState('');
+  const [savingModelSelection, setSavingModelSelection] = useState(false);
 
   // Poll hardware + comfy system stats
   useEffect(() => {
@@ -29,6 +35,22 @@ export const TopSystemStrip = () => {
       try {
         const r = await fetch('/api/hardware/stats', { cache: 'no-store' });
         if (r.ok && mounted) setGpuStats(await r.json());
+      } catch {}
+
+      // Ollama model list for top-bar selectors
+      try {
+        const r = await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.OLLAMA_MODELS}`, { cache: 'no-store' });
+        const data = await r.json();
+        if (r.ok && data?.success) {
+          const models = Array.isArray(data.models) ? data.models : [];
+          const textModels = Array.isArray(data.text_models) ? data.text_models : [];
+          const visionModels = Array.isArray(data.vision_models) ? data.vision_models : [];
+          setOllamaModels(models);
+          setOllamaTextModels(textModels);
+          setOllamaVisionModels(visionModels);
+          setSelectedTextModel(String(data.selected_text_model || data.text_model || ''));
+          setSelectedVisionModel(String(data.selected_vision_model || data.vision_model || ''));
+        }
       } catch {}
 
       // ComfyUI VRAM stats — only when online
@@ -93,6 +115,17 @@ export const TopSystemStrip = () => {
       temp: gpuStats?.gpu?.temperature ?? null,
     };
   }, [comfyStats, gpuStats]);
+
+  const systemRam = useMemo(() => {
+    const ram = gpuStats?.system?.ram;
+    if (!ram || typeof ram !== 'object') return null;
+    if (typeof ram.used_gb !== 'number' || typeof ram.total_gb !== 'number') return null;
+    return {
+      used: ram.used_gb as number,
+      total: ram.total_gb as number,
+      pct: Number(ram.percentage ?? 0),
+    };
+  }, [gpuStats]);
 
   const handlePurge = async () => {
     if (purging) return;
@@ -182,6 +215,23 @@ export const TopSystemStrip = () => {
     }
   };
 
+  const persistModelSelection = async (nextText: string, nextVision: string) => {
+    if (savingModelSelection) return;
+    setSavingModelSelection(true);
+    try {
+      await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.OLLAMA_MODEL_SELECTION}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text_model: nextText || null,
+          vision_model: nextVision || null,
+        }),
+      });
+    } finally {
+      setSavingModelSelection(false);
+    }
+  };
+
   return (
     <div className="hidden xl:flex items-center gap-2">
 
@@ -252,6 +302,76 @@ export const TopSystemStrip = () => {
         ) : (
           <span className="text-slate-500 text-[11px]">GPU loading…</span>
         )}
+      </div>
+
+      {/* System RAM pill */}
+      <div className="h-8 px-3 rounded-lg border border-white/10 bg-white/5 flex items-center gap-2 text-xs">
+        <span className="text-slate-300 font-medium">RAM</span>
+        {systemRam ? (
+          <>
+            <div className="flex items-center gap-1.5">
+              <div className="w-14 h-1.5 bg-white/8 rounded-full overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-700"
+                  style={{
+                    width: `${Math.max(0, Math.min(100, systemRam.pct))}%`,
+                    background: systemRam.pct > 92
+                      ? 'linear-gradient(90deg,#ef4444,#dc2626)'
+                      : systemRam.pct > 80
+                        ? 'linear-gradient(90deg,#f59e0b,#d97706)'
+                        : 'linear-gradient(90deg,#38bdf8,#0ea5e9)',
+                  }}
+                />
+              </div>
+              <span className="text-slate-400 font-mono text-[11px]">
+                {systemRam.used.toFixed(1)}/{systemRam.total.toFixed(1)}GB
+              </span>
+            </div>
+          </>
+        ) : (
+          <span className="text-slate-500 text-[11px]">RAM loading…</span>
+        )}
+      </div>
+
+      {/* Ollama model selectors */}
+      <div className="h-8 px-2 rounded-lg border border-white/10 bg-white/5 flex items-center gap-2">
+        <span className="text-[10px] uppercase tracking-wider text-slate-400">LLM</span>
+        <select
+          value={selectedTextModel}
+          onChange={(e) => {
+            const next = e.target.value;
+            setSelectedTextModel(next);
+            void persistModelSelection(next, selectedVisionModel);
+          }}
+          disabled={!ollama.isConnected || savingModelSelection || (ollamaTextModels.length === 0 && ollamaModels.length === 0)}
+          className="h-6 min-w-[170px] bg-black/40 border border-white/10 rounded px-2 text-[11px] text-slate-200 disabled:opacity-50"
+          title="Model used for Enhance/Generate prompt operations"
+        >
+          <option value="">Auto</option>
+          {(ollamaTextModels.length ? ollamaTextModels : ollamaModels).map((model) => (
+            <option key={`text-${model}`} value={model}>{model}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="h-8 px-2 rounded-lg border border-white/10 bg-white/5 flex items-center gap-2">
+        <span className="text-[10px] uppercase tracking-wider text-slate-400">Caption</span>
+        <select
+          value={selectedVisionModel}
+          onChange={(e) => {
+            const next = e.target.value;
+            setSelectedVisionModel(next);
+            void persistModelSelection(selectedTextModel, next);
+          }}
+          disabled={!ollama.isConnected || savingModelSelection || (ollamaVisionModels.length === 0 && ollamaModels.length === 0)}
+          className="h-6 min-w-[170px] bg-black/40 border border-white/10 rounded px-2 text-[11px] text-slate-200 disabled:opacity-50"
+          title="Vision model used for image-to-caption prompt assist"
+        >
+          <option value="">Auto</option>
+          {(ollamaVisionModels.length ? ollamaVisionModels : ollamaModels).map((model) => (
+            <option key={`vision-${model}`} value={model}>{model}</option>
+          ))}
+        </select>
       </div>
 
       {/* Purge VRAM button */}
