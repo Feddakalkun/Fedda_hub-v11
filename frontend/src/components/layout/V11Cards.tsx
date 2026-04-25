@@ -70,10 +70,11 @@ interface ToolCardProps {
   description: string;
   image?: string;
   video?: string;
+  hideContent?: boolean;
   onClick: () => void;
 }
 
-export const ToolCard = ({ title, description, image, video, onClick }: ToolCardProps) => {
+export const ToolCard = ({ title, description, image, video, hideContent, onClick }: ToolCardProps) => {
   const [videoEnabled, setVideoEnabled] = useState(Boolean(video));
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -91,7 +92,12 @@ export const ToolCard = ({ title, description, image, video, onClick }: ToolCard
   };
 
   return (
-    <button onClick={onClick} onMouseEnter={handleEnter} onMouseLeave={handleLeave} className="v11-tool-card v11-square-card text-left">
+    <button
+      onClick={onClick}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      className={`v11-tool-card v11-square-card text-left ${hideContent ? 'v11-card-minimal' : ''}`}
+    >
       {image ? <div className="v11-card-bg" style={{ backgroundImage: `url(${image})` }} /> : null}
       {video && videoEnabled ? (
         <video
@@ -107,10 +113,12 @@ export const ToolCard = ({ title, description, image, video, onClick }: ToolCard
         </video>
       ) : null}
       <div className="v11-card-overlay" />
-      <div className="relative z-10">
-        <p className="text-[15px] font-semibold text-white">{title}</p>
-        <p className="text-xs text-slate-300 mt-1">{description}</p>
-      </div>
+      {!hideContent ? (
+        <div className="relative z-10">
+          <p className="text-[15px] font-semibold text-white">{title}</p>
+          <p className="text-xs text-slate-300 mt-1">{description}</p>
+        </div>
+      ) : null}
     </button>
   );
 };

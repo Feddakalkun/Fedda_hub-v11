@@ -430,6 +430,7 @@ function FeddaApp() {
                       description={tool.description}
                       image={CARD_IMAGE_BY_TAB[tool.tab]}
                       video={CARD_VIDEO_BY_TAB[tool.tab]}
+                      hideContent
                       onClick={() => openWorkspace(tool.tab, 'section')}
                     />
                   ))}
