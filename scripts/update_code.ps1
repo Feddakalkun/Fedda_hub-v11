@@ -40,7 +40,7 @@ if (-not (Test-Path (Join-Path $RootPath ".git"))) {
         Write-Host "`n  Initializing git from GitHub..." -ForegroundColor Yellow
     }
     & $GitExe init
-    & $GitExe remote add origin https://github.com/Feddakalkun/Fedda_hub-v7.git
+    & $GitExe remote add origin https://github.com/Feddakalkun/Fedda_hub-v11.git
 }
 
 # ============================================================================
@@ -83,3 +83,4 @@ if (-not $SilentMode) {
 }
 
 exit 0
+

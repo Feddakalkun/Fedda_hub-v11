@@ -1,6 +1,6 @@
-# FEDDA Hub v7
+# FEDDA Hub v11
 
-FEDDA Hub v7 is a local AI studio built around ComfyUI, a FastAPI backend, and a React frontend.
+FEDDA Hub v11 is a local AI studio built around ComfyUI, a FastAPI backend, and a React frontend.
 
 ## Structure
 
@@ -14,7 +14,7 @@ FEDDA Hub v7 is a local AI studio built around ComfyUI, a FastAPI backend, and a
 
 Use the top-level setup flow if you want the full guided install:
 
-- `FEDDA_Setup.bat` in the parent workspace clones or updates this repo
+- `FEDDA_OneClick_Installer-v11.bat` in the parent workspace clones or updates this repo
 - the repo `install.bat` handles Full or Lite installation
 
 To run an existing install locally, use `run.bat`.

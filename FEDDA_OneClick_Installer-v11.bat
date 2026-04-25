@@ -93,7 +93,7 @@ echo   Start app:
 echo    %INSTALL_DIR%\run.bat
 echo.
 echo   Update later (recommended):
-echo    %ROOT%\FEDDA_OneClick_Installer-v7.bat
+echo    %ROOT%\FEDDA_Update-v11.bat
 echo.
 echo [%date% %time%] SUCCESS >> "%LOG_FILE%"
 pause
@@ -197,5 +197,6 @@ echo    %INSTALL_DIR%\logs\
 echo [%date% %time%] ERROR: install failed code %INSTALL_EXIT% >> "%LOG_FILE%"
 pause
 exit /b %INSTALL_EXIT%
+
 
 

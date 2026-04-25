@@ -125,7 +125,8 @@ RUN chmod +x /app/runpod_start.sh /app/start_comfy.sh
 WORKDIR /app
 EXPOSE 3000 8199 8888 8000
 
-LABEL org.opencontainers.image.source=https://github.com/Feddakalkun/Fedda_hub-v7
+LABEL org.opencontainers.image.source=https://github.com/Feddakalkun/Fedda_hub-v11
 LABEL org.opencontainers.image.description="FEDDA RunPod Studio (ComfyUI + Backend + Frontend)"
 
 ENTRYPOINT ["/app/runpod_start.sh"]
+

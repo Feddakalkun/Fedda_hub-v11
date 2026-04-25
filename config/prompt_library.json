@@ -2522,7 +2522,7 @@
       "negative": "",
       "characters": [],
       "category": "music",
-      "source": "generate_ace_challenge_v7_prog.py",
+      "source": "generate_ace_challenge_prog.py",
       "index": 0,
       "id": 230
     },
@@ -2532,7 +2532,7 @@
       "negative": "",
       "characters": [],
       "category": "music",
-      "source": "generate_ace_challenge_v7_prog.py",
+      "source": "generate_ace_challenge_prog.py",
       "index": 1,
       "id": 231
     },
@@ -9876,7 +9876,7 @@
       "negative": "cheap studio, hanging flag, dollarstore, bright lighting, happy, plastic skin, smooth skin, airbrushed, photoshop, large breasts, curvy, voluptuous, cleavage, baggy clothes, looking at camera directly, cartoon, anime, 3d render, painting, illustration, messy background",
       "characters": [],
       "category": "general",
-      "source": "olympic_hero_card_v7.py",
+      "source": "olympic_hero_card.py",
       "index": 0,
       "id": 916
     },
@@ -10354,7 +10354,7 @@
       "negative": "goddess, golden, temple, palace, smiling, happy, grinning, child, toddler, large breasts, tall, muscular, airbrushed, plastic skin, pregnant, belly, latex, clothing",
       "characters": [],
       "category": "general",
-      "source": "olympic_v70_auction_block.py",
+      "source": "olympic_auction_block.py",
       "index": 0,
       "id": 963
     },
@@ -10364,7 +10364,7 @@
       "negative": "goddess, golden, temple, palace, smiling, happy, grinning, child, toddler, large breasts, tall, muscular, airbrushed, plastic skin, pregnant, belly, latex, clothing",
       "characters": [],
       "category": "general",
-      "source": "olympic_v71_auction_gallery.py",
+      "source": "olympic_auction_gallery.py",
       "index": 0,
       "id": 964
     },
