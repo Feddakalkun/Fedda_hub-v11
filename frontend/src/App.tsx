@@ -431,6 +431,7 @@ function FeddaApp() {
                       Icon={card.Icon}
                       image={card.image}
                       video={card.video}
+                      hideContent
                       onClick={() => (card.directTab ? openWorkspace(card.directTab, 'hub') : openSection(card.id as Exclude<RootSection, 'hub'>))}
                     />
                   ))}

@@ -298,6 +298,7 @@ body {
   padding: 16px;
   border-radius: 18px;
   isolation: isolate;
+  background: #04070f;
 }
 
 .v11-hub-card:hover {
@@ -322,6 +323,14 @@ body {
   transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
 }
 
+.v11-hub-card .v11-card-bg {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transform: none;
+  filter: saturate(1.04) contrast(1.01);
+}
+
 .v11-card-video {
   position: absolute;
   inset: 0;
@@ -332,6 +341,12 @@ body {
   opacity: 0;
   transition: opacity 0.35s ease;
   z-index: 1;
+}
+
+.v11-hub-card .v11-card-video {
+  object-fit: contain;
+  object-position: center center;
+  background: #04070f;
 }
 
 .v11-card-overlay {
@@ -347,6 +362,11 @@ body {
   filter: saturate(1.12) contrast(1.07);
 }
 
+.v11-hub-card:hover .v11-card-bg {
+  transform: none;
+  filter: saturate(1.06) contrast(1.02);
+}
+
 .v11-studio-card:hover .v11-card-video,
 .v11-tool-card:hover .v11-card-video {
   opacity: 1;
@@ -355,6 +375,10 @@ body {
 .v11-hub-card .v11-icon-wrap {
   backdrop-filter: blur(6px);
   background: rgba(6, 12, 24, 0.44);
+}
+
+.v11-card-minimal .v11-card-overlay {
+  background: linear-gradient(180deg, rgba(4, 8, 18, 0.04) 0%, rgba(4, 8, 18, 0.18) 100%);
 }
 
 @media (max-width: 1700px) {

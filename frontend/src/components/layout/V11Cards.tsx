@@ -7,10 +7,11 @@ interface StudioCardProps {
   Icon: LucideIcon;
   image?: string;
   video?: string;
+  hideContent?: boolean;
   onClick: () => void;
 }
 
-export const StudioCard = ({ title, description, Icon, image, video, onClick }: StudioCardProps) => {
+export const StudioCard = ({ title, description, Icon, image, video, hideContent, onClick }: StudioCardProps) => {
   const [videoEnabled, setVideoEnabled] = useState(Boolean(video));
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -28,7 +29,12 @@ export const StudioCard = ({ title, description, Icon, image, video, onClick }: 
   };
 
   return (
-    <button onClick={onClick} onMouseEnter={handleEnter} onMouseLeave={handleLeave} className="v11-studio-card v11-hub-card text-left">
+    <button
+      onClick={onClick}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      className={`v11-studio-card v11-hub-card text-left ${hideContent ? 'v11-card-minimal' : ''}`}
+    >
       {image ? <div className="v11-card-bg" style={{ backgroundImage: `url(${image})` }} /> : null}
       {video && videoEnabled ? (
         <video
@@ -44,15 +50,17 @@ export const StudioCard = ({ title, description, Icon, image, video, onClick }: 
         </video>
       ) : null}
       <div className="v11-card-overlay" />
-      <div className="relative z-10 flex items-start justify-between gap-3">
-        <div>
-          <p className="text-lg font-semibold text-white">{title}</p>
-          <p className="text-sm text-slate-300 mt-1">{description}</p>
+      {!hideContent ? (
+        <div className="relative z-10 flex items-start justify-between gap-3">
+          <div>
+            <p className="text-lg font-semibold text-white">{title}</p>
+            <p className="text-sm text-slate-300 mt-1">{description}</p>
+          </div>
+          <div className="v11-icon-wrap">
+            <Icon className="w-4 h-4" />
+          </div>
         </div>
-        <div className="v11-icon-wrap">
-          <Icon className="w-4 h-4" />
-        </div>
-      </div>
+      ) : null}
     </button>
   );
 };
