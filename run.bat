@@ -109,6 +109,7 @@ if errorlevel 1 (
     start "FEDDA ComfyUI Console" cmd /k ""%~f0" :svc_comfy"
 )
 call :wait_for_port 8199 60 ComfyUI
+call :wait_for_http "http://127.0.0.1:8199/system_stats" 30 ComfyUI-HTTP
 
 :: 5. Start FastAPI Backend
 echo [5/6] Starting Backend (Port 8000)...
@@ -119,6 +120,7 @@ if errorlevel 1 (
     start "" /B "%~f0" :svc_backend
 )
 call :wait_for_port 8000 30 Backend
+call :wait_for_http "http://127.0.0.1:8000/api/health" 30 Backend-Health
 
 :: 6. Start Frontend
 echo [6/6] Starting FEDDA UI (Port 5173)...
@@ -200,6 +202,34 @@ set /a WAIT_ELAPSED+=1
 goto :wait_loop
 
 :: ============================================================================
+:: SUBROUTINE: WAIT FOR HTTP ENDPOINT
+:: ============================================================================
+:wait_for_http
+setlocal EnableDelayedExpansion
+set "WAIT_URL=%~1"
+set "WAIT_MAX=%~2"
+set "WAIT_NAME=%~3"
+set /a WAIT_ELAPSED=0
+
+:wait_http_loop
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  "$u='%WAIT_URL%'; try { $r=Invoke-WebRequest -Uri $u -UseBasicParsing -TimeoutSec 2; if($r.StatusCode -ge 200 -and $r.StatusCode -lt 500){ exit 0 } else { exit 1 } } catch { exit 1 }" >nul 2>&1
+if !errorlevel! EQU 0 (
+    endlocal
+    exit /b 0
+)
+
+if !WAIT_ELAPSED! GEQ !WAIT_MAX! (
+    echo     [WARN] %WAIT_NAME% did not respond within %WAIT_MAX%s. Continuing...
+    endlocal
+    exit /b 1
+)
+
+timeout /t 1 /nobreak >nul
+set /a WAIT_ELAPSED+=1
+goto :wait_http_loop
+
+:: ============================================================================
 :: SUBROUTINE: DETECT ENVIRONMENT (Portable vs Lite)
 :: ============================================================================
 :detect_env
@@ -265,6 +295,31 @@ for /f "tokens=5" %%a in ('netstat -aon 2^>nul ^| findstr ":8199"') do (taskkill
 timeout /t 1 /nobreak >nul
 
 cd /d "%COMFYUI_DIR%"
+
+set "MANAGER_REQ=%COMFYUI_DIR%\manager_requirements.txt"
+set "MANAGER_MARKER=%BASE_DIR%\logs\.manager_deps_installed"
+if exist "%MANAGER_REQ%" (
+    if not exist "%BASE_DIR%\logs" mkdir "%BASE_DIR%\logs"
+    set "NEED_MANAGER_INSTALL=0"
+    if not exist "%MANAGER_MARKER%" (
+        set "NEED_MANAGER_INSTALL=1"
+    ) else (
+        for %%A in ("%MANAGER_REQ%") do set "REQ_TIME=%%~tA"
+        for %%B in ("%MANAGER_MARKER%") do set "MARKER_TIME=%%~tB"
+        if "!REQ_TIME!" GTR "!MARKER_TIME!" set "NEED_MANAGER_INSTALL=1"
+    )
+    if "!NEED_MANAGER_INSTALL!"=="1" (
+        echo [%date% %time%] Installing ComfyUI-Manager dependencies...
+        "%PYTHON%" -m pip install -r "%MANAGER_REQ%" --no-warn-script-location > "%BASE_DIR%\logs\comfy_manager_deps.log" 2>&1
+        if %errorlevel% neq 0 (
+            echo [%date% %time%] [WARN] ComfyUI-Manager dependency install failed. See logs\comfy_manager_deps.log
+        ) else (
+            echo [%date% %time%] ComfyUI-Manager dependencies ready.
+            echo ok>"%MANAGER_MARKER%"
+        )
+    )
+}
+
 echo [%date% %time%] Starting ComfyUI...
 "%PYTHON%" -W ignore::FutureWarning -s -u main.py %COMFY_EXTRA_FLAGS% --port 8199 --listen 127.0.0.1 --reserve-vram 4 --disable-cuda-malloc --enable-cors-header * --preview-method auto --disable-auto-launch --enable-manager --enable-manager-legacy-ui
 
