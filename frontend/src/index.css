@@ -278,3 +278,24 @@ body {
   box-shadow: 0 0 14px var(--v11-glow);
 }
 
+
+.v11-studio-card,
+.v11-tool-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.v11-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.1) contrast(1.02);
+  transform: scale(1.04);
+}
+
+.v11-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4, 8, 18, 0.25) 0%, rgba(4, 8, 18, 0.72) 52%, rgba(4, 8, 18, 0.9) 100%);
+}

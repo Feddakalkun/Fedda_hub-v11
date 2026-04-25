@@ -13,21 +13,80 @@ import { SectionGroup, StudioCard, ToolCard } from './components/layout/V11Cards
 
 type RootSection = 'hub' | 'image' | 'video' | 'audio' | 'explore';
 
+type ToolItem = { tab: string; label: string; description: string };
+
+const CARD_IMAGE_BY_TAB: Record<string, string> = {
+  chat: '/cards/agent-chat.png',
+  image: '/cards/image-studio.png',
+  video: '/cards/video-studio.png',
+  audio: '/cards/ltx-audio.png',
+  explore: '/cards/explore.png',
+  'z-image-txt2img': '/cards/txt2img.png',
+  'z-image-dual-lora': '/cards/dual-lora.png',
+  'flux-txt2img': '/cards/flux2klein.png',
+  'qwen-txt2img': '/cards/zimage.png',
+  'qwen-image-ref': '/cards/image-ref.png',
+  'qwen-multi-angle': '/cards/multi-angles.png',
+  'image-influencer': '/cards/influencer.png',
+  'wan21-steady-dancer': '/cards/wan21.png',
+  'wan22-vid2vid': '/cards/wan22-vid2vid.png',
+  'wan22-img2vid': '/cards/wan22-img2vid.png',
+  'wan22-img2vid-6frames': '/cards/wan22-story.png',
+  'ltx-flf': '/cards/ltx-flf.png',
+  'ltx-img-audio': '/cards/ltx-audio.png',
+  gallery: '/cards/gallery.png',
+  videos: '/cards/videos.png',
+  library: '/cards/lora-library.png',
+};
+
 const HUB_CARDS: Array<{
   id: RootSection;
   label: string;
   description: string;
   Icon: typeof Sparkles;
+  image: string;
   directTab?: string;
 }> = [
-  { id: 'hub', label: 'Agent Chat', description: 'Assistant, planning and execution.', Icon: MessageSquare, directTab: 'chat' },
-  { id: 'image', label: 'Image Studio', description: 'Z-Image, Qwen, FLUX and Influencer.', Icon: Sparkles },
-  { id: 'video', label: 'Video Studio', description: 'WAN and LTX pipelines.', Icon: Video },
-  { id: 'audio', label: 'Audio / SFX', description: 'Voice and audio workflows.', Icon: Music, directTab: 'audio' },
-  { id: 'explore', label: 'Explore', description: 'Gallery, videos and LoRA library.', Icon: Images },
+  {
+    id: 'hub',
+    label: 'Agent Chat',
+    description: 'Assistant, planning and execution.',
+    Icon: MessageSquare,
+    image: CARD_IMAGE_BY_TAB.chat,
+    directTab: 'chat',
+  },
+  {
+    id: 'image',
+    label: 'Image Studio',
+    description: 'Z-Image, Qwen, FLUX and Influencer.',
+    Icon: Sparkles,
+    image: CARD_IMAGE_BY_TAB.image,
+  },
+  {
+    id: 'video',
+    label: 'Video Studio',
+    description: 'WAN and LTX pipelines.',
+    Icon: Video,
+    image: CARD_IMAGE_BY_TAB.video,
+  },
+  {
+    id: 'audio',
+    label: 'Audio / SFX',
+    description: 'Voice and audio workflows.',
+    Icon: Music,
+    image: CARD_IMAGE_BY_TAB.audio,
+    directTab: 'audio',
+  },
+  {
+    id: 'explore',
+    label: 'Explore',
+    description: 'Gallery, videos and LoRA library.',
+    Icon: Images,
+    image: CARD_IMAGE_BY_TAB.explore,
+  },
 ];
 
-const TOOL_GROUPS: Record<Exclude<RootSection, 'hub'>, Array<{ title: string; tools: Array<{ tab: string; label: string; description: string }> }>> = {
+const TOOL_GROUPS: Record<Exclude<RootSection, 'hub'>, Array<{ title: string; tools: ToolItem[] }>> = {
   image: [
     {
       title: 'Z-Image',
@@ -168,7 +227,73 @@ function FeddaApp() {
     } catch {}
   }, [activeTab]);
 
-  const meta = PAGE_META[activeTab] ?? PAGE_META.chat;
+  const meta = PAGE_META[activeTab] ?? {
+    label: 'Workspace',
+    description: 'Active workspace view.',
+    Icon: Sparkles,
+  };
+  const tabSectionMap: Record<string, Exclude<RootSection, 'hub'>> = {
+    image: 'image',
+    'z-image': 'image',
+    'z-image-txt2img': 'image',
+    'z-image-dual-lora': 'image',
+    flux: 'image',
+    'flux-txt2img': 'image',
+    qwen: 'image',
+    'qwen-txt2img': 'image',
+    'qwen-image-ref': 'image',
+    'qwen-multi-angle': 'image',
+    'image-other': 'image',
+    'image-influencer': 'image',
+    video: 'video',
+    'wan21-steady-dancer': 'video',
+    'wan22-vid2vid': 'video',
+    'wan22-img2vid': 'video',
+    'wan22-img2vid-6frames': 'video',
+    ltx: 'video',
+    'ltx-flf': 'video',
+    'ltx-img-audio': 'video',
+    audio: 'audio',
+    gallery: 'explore',
+    videos: 'explore',
+    library: 'explore',
+    chat: 'explore',
+  };
+  const sectionHeaderMeta: Record<Exclude<RootSection, 'hub'>, { label: string; description: string; Icon: typeof Sparkles }> = {
+    image: {
+      label: 'Image Studio',
+      description: 'Cards navigation for image workflows.',
+      Icon: Sparkles,
+    },
+    video: {
+      label: 'Video Studio',
+      description: 'Cards navigation for video workflows.',
+      Icon: Video,
+    },
+    audio: {
+      label: 'Audio / SFX',
+      description: 'Cards navigation for audio workflows.',
+      Icon: Music,
+    },
+    explore: {
+      label: 'Explore',
+      description: 'Cards navigation for gallery and library tools.',
+      Icon: Images,
+    },
+  };
+
+  const headerMeta =
+    view === 'workspace'
+      ? meta
+      : view === 'section' && activeSection
+        ? sectionHeaderMeta[activeSection]
+        : {
+            label: 'FEDDA v11',
+            description: 'Cards-first navigation shell',
+            Icon: Sparkles,
+          };
+  const workspaceSection =
+    view === 'workspace' ? sectionHeaderMeta[tabSectionMap[activeTab] ?? 'explore'].label : null;
 
   const openWorkspace = (tab: string, origin: 'hub' | 'section') => {
     if (!VALID_TABS.has(tab)) return;
@@ -246,11 +371,18 @@ function FeddaApp() {
                 <ArrowLeft className="w-4 h-4" />
               </button>
             )}
-            <meta.Icon className="w-4 h-4 text-slate-400" />
+            <headerMeta.Icon className="w-4 h-4 text-slate-400" />
             <div className="leading-tight">
-              <p className="text-sm font-semibold">{view === 'hub' ? 'FEDDA v11' : meta.label}</p>
-              <p className="text-[11px] text-slate-500">{view === 'hub' ? 'Cards-first navigation shell' : meta.description}</p>
+              <p className="text-sm font-semibold">{headerMeta.label}</p>
+              <p className="text-[11px] text-slate-500">{headerMeta.description}</p>
             </div>
+            {workspaceSection && (
+              <div className="hidden md:flex items-center gap-2 ml-3 text-[11px] text-slate-500">
+                <span className="px-2 py-0.5 rounded border border-white/10 bg-white/[0.03]">{workspaceSection}</span>
+                <span>/</span>
+                <span>{headerMeta.label}</span>
+              </div>
+            )}
           </div>
           <TopSystemStrip />
         </header>
@@ -267,6 +399,7 @@ function FeddaApp() {
                       title={card.label}
                       description={card.description}
                       Icon={card.Icon}
+                      image={card.image}
                       onClick={() => (card.directTab ? openWorkspace(card.directTab, 'hub') : openSection(card.id as Exclude<RootSection, 'hub'>))}
                     />
                   ))}
@@ -281,7 +414,13 @@ function FeddaApp() {
               {sectionGroups.map((group) => (
                 <SectionGroup key={group.title} title={group.title}>
                   {group.tools.map((tool) => (
-                    <ToolCard key={tool.tab} title={tool.label} description={tool.description} onClick={() => openWorkspace(tool.tab, 'section')} />
+                    <ToolCard
+                      key={tool.tab}
+                      title={tool.label}
+                      description={tool.description}
+                      image={CARD_IMAGE_BY_TAB[tool.tab]}
+                      onClick={() => openWorkspace(tool.tab, 'section')}
+                    />
                   ))}
                 </SectionGroup>
               ))}
@@ -304,4 +443,3 @@ export default function App() {
     </ComfyExecutionProvider>
   );
 }
-
