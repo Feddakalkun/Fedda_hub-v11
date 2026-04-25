@@ -285,24 +285,35 @@ body {
   overflow: hidden;
 }
 
+.v11-hub-canvas {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .v11-hub-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
   width: 100%;
+  height: 100%;
 }
 
 .v11-hub-card {
-  aspect-ratio: 9 / 16;
-  min-height: 420px;
+  aspect-ratio: auto;
+  min-height: 0;
+  height: 100%;
   padding: 0;
-  border-radius: 0;
+  border-radius: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
   isolation: isolate;
   background: #04070f;
 }
 
 .v11-hub-card:hover {
-  transform: translateY(-3px) scale(1.008);
+  transform: none;
+  box-shadow: none !important;
 }
 
 .v11-square-card {
@@ -324,11 +335,11 @@ body {
 }
 
 .v11-hub-card .v11-card-bg {
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center 16%;
   transform: none;
-  filter: saturate(1.04) contrast(1.01);
+  filter: saturate(1.03) contrast(1.01);
 }
 
 .v11-card-video {
@@ -344,8 +355,8 @@ body {
 }
 
 .v11-hub-card .v11-card-video {
-  object-fit: contain;
-  object-position: center center;
+  object-fit: cover;
+  object-position: center 16%;
   background: #04070f;
 }
 
@@ -378,28 +389,23 @@ body {
 }
 
 .v11-card-minimal .v11-card-overlay {
-  background: linear-gradient(180deg, rgba(4, 8, 18, 0.04) 0%, rgba(4, 8, 18, 0.18) 100%);
+  background: linear-gradient(180deg, rgba(4, 8, 18, 0.02) 0%, rgba(4, 8, 18, 0.12) 100%);
 }
 
 @media (max-width: 1700px) {
   .v11-hub-row {
-    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 1360px) {
   .v11-hub-row {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    scrollbar-width: thin;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
   }
 
   .v11-hub-card {
-    min-width: 220px;
-    flex: 0 0 220px;
-    min-height: 390px;
+    min-height: 0;
   }
 }
 

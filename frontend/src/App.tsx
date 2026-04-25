@@ -351,6 +351,7 @@ function FeddaApp() {
   };
 
   const sectionGroups = activeSection ? TOOL_GROUPS[activeSection] : [];
+  const isHubView = view === 'hub';
   const sectionTitle =
     activeSection === 'image'
       ? 'Image Studio'
@@ -395,26 +396,23 @@ function FeddaApp() {
           <TopSystemStrip />
         </header>
 
-        <div className="flex-1 overflow-auto p-5 md:p-8 custom-scrollbar">
+        <div className={isHubView ? 'flex-1 overflow-hidden' : 'flex-1 overflow-auto p-5 md:p-8 custom-scrollbar'}>
           {view === 'hub' && (
-            <div className="w-full space-y-8 animate-fade-in">
-              <section>
-                <p className="v11-kicker mb-3">MAIN HUB</p>
-                <div className="v11-hub-row">
-                  {HUB_CARDS.map((card) => (
-                    <StudioCard
-                      key={card.label}
-                      title={card.label}
-                      description={card.description}
-                      Icon={card.Icon}
-                      image={card.image}
-                      video={card.video}
-                      hideContent
-                      onClick={() => (card.directTab ? openWorkspace(card.directTab, 'hub') : openSection(card.id as Exclude<RootSection, 'hub'>))}
-                    />
-                  ))}
-                </div>
-              </section>
+            <div className="v11-hub-canvas animate-fade-in">
+              <div className="v11-hub-row">
+                {HUB_CARDS.map((card) => (
+                  <StudioCard
+                    key={card.label}
+                    title={card.label}
+                    description={card.description}
+                    Icon={card.Icon}
+                    image={card.image}
+                    video={card.video}
+                    hideContent
+                    onClick={() => (card.directTab ? openWorkspace(card.directTab, 'hub') : openSection(card.id as Exclude<RootSection, 'hub'>))}
+                  />
+                ))}
+              </div>
             </div>
           )}
 
