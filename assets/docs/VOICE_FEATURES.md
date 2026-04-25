@@ -63,7 +63,7 @@ update_dependencies.bat          # Quick update script for existing installs
 ## 🚀 How to Use
 
 ### For New Installations:
-1. Run `install.bat`
+1. Run `FEDDA_OneClick_Installer-v11.bat`
 2. Everything installs automatically!
 3. Run `run.bat` to start
 4. Click mic button in chat to record

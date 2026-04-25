@@ -469,7 +469,7 @@ if ($IsUnsafe) {
     Write-Host ""
     $PathConfirm = Read-Host "  Continue anyway? (Y/N)"
     if ($PathConfirm -ne "Y" -and $PathConfirm -ne "y") {
-        Write-Host "`n  Move the folder and run install.bat again." -ForegroundColor Yellow
+        Write-Host "`n  Move the folder and run FEDDA_OneClick_Installer-v11.bat again." -ForegroundColor Yellow
         exit 0
     }
 }
@@ -1291,5 +1291,5 @@ Write-Log "================================================"
 try { Stop-Transcript } catch {}
 Write-Log "Full log saved to: $TranscriptFile"
 
-# Return to install.bat which handles the pause
+# Return to outer installer wrapper which handles the pause
 Write-Host ""

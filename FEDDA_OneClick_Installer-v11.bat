@@ -71,14 +71,14 @@ git clone --branch %REPO_BRANCH% %REPO_URL% "%INSTALL_DIR%" >> "%LOG_FILE%" 2>&1
 goto :run_install
 
 :run_install
-if not exist "%INSTALL_DIR%\install.bat" goto :err_no_installbat
+if not exist "%INSTALL_DIR%\scripts\install_lite.ps1" goto :err_no_installscript
 
 echo.
 echo  [INFO] Running FEDDA installer...
-echo [%date% %time%] Running install.bat stable profile >> "%LOG_FILE%"
+echo [%date% %time%] Running scripts\install_lite.ps1 stable profile >> "%LOG_FILE%"
 
 pushd "%INSTALL_DIR%" || goto :err_pushd
-call install.bat LITE
+powershell -ExecutionPolicy Bypass -File ".\scripts\install_lite.ps1"
 set "INSTALL_EXIT=%ERRORLEVEL%"
 popd
 
@@ -184,10 +184,10 @@ echo [%date% %time%] ERROR: clone failed >> "%LOG_FILE%"
 pause
 exit /b 1
 
-:err_no_installbat
+:err_no_installscript
 echo.
-echo  [ERROR] install.bat not found in install directory.
-echo [%date% %time%] ERROR: install.bat missing >> "%LOG_FILE%"
+echo  [ERROR] scripts\install_lite.ps1 not found in install directory.
+echo [%date% %time%] ERROR: install_lite.ps1 missing >> "%LOG_FILE%"
 pause
 exit /b 1
 

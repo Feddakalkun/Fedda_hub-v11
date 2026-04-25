@@ -36,7 +36,7 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-if not exist "%TARGET_DIR%\install.bat" (
+if not exist "%TARGET_DIR%\scripts\install_lite.ps1" (
     echo  [ERROR] FEDDA install not found at:
     echo          %TARGET_DIR%
     echo.

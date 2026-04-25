@@ -246,7 +246,7 @@ if exist "%BASE_DIR%\python_embeded\python.exe" (
 ) else (
     echo.
     echo [ERROR] No Python environment found!
-    echo        Run INSTALL.bat or INSTALL-LITE.bat first.
+    echo        Run FEDDA_OneClick_Installer-v11.bat first.
     echo.
     pause
     exit /b 1
@@ -429,6 +429,6 @@ if exist "%EXTERNAL_MOCKINGBIRD_PY%" (
     exit /b
 )
 
-echo [%date% %time%] [WARN] No Mockingbird runtime installed. Re-run INSTALL.bat to install XTTS voice support.
+echo [%date% %time%] [WARN] No Mockingbird runtime installed. Re-run FEDDA_OneClick_Installer-v11.bat to install XTTS voice support.
 exit /b
 

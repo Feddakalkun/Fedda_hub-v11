@@ -45,7 +45,7 @@ if (Test-Path $VenvPy) {
     if (-not $SilentMode) { Write-Host "`n  Mode: Full (portable - no node_embeded)" -ForegroundColor Yellow }
 } else {
     Write-Host "`n  [ERROR] No Python environment found!" -ForegroundColor Red
-    Write-Host "  Run install.bat first." -ForegroundColor Yellow
+    Write-Host "  Run FEDDA_OneClick_Installer-v11.bat first." -ForegroundColor Yellow
     exit 1
 }
 
@@ -64,7 +64,7 @@ $env:GIT_CONFIG_GLOBAL = Join-Path $RootPath ".gitconfig"
 
 if (-not (Test-Path $ComfyDir)) {
     Write-Host "`n  [ERROR] ComfyUI directory not found!" -ForegroundColor Red
-    Write-Host "  Run install.bat first." -ForegroundColor Yellow
+    Write-Host "  Run FEDDA_OneClick_Installer-v11.bat first." -ForegroundColor Yellow
     exit 1
 }
 
@@ -321,7 +321,7 @@ if (Test-Path $FrontendDir) {
                 Write-Host "  Frontend dependencies updated." -ForegroundColor Green
             }
             else {
-                Write-Host "  [WARNING] npm not found - run install.bat first" -ForegroundColor Yellow
+    Write-Host "  [WARNING] npm not found - run FEDDA_OneClick_Installer-v11.bat first" -ForegroundColor Yellow
             }
         }
     } else {

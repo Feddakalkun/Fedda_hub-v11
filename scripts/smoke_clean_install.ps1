@@ -57,7 +57,7 @@ $criticalFiles = @(
     "frontend/vite.config.ts",
     "frontend/package.json",
     "run.bat",
-    "install.bat",
+    "FEDDA_OneClick_Installer-v11.bat",
     "update.bat"
 )
 foreach ($f in $criticalFiles) {
