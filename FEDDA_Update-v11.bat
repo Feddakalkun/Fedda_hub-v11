@@ -1,14 +1,16 @@
 @echo off
 setlocal EnableDelayedExpansion
-title FEDDA AI Studio - Updater v11
+title FEDDA AI Studio - Update Tool v11
 
 set "ROOT_DIR=%~dp0"
 if "%ROOT_DIR:~-1%"=="\" set "ROOT_DIR=%ROOT_DIR:~0,-1%"
 
 set "REPO_URL=https://github.com/Feddakalkun/Fedda_hub-v11"
 set "REPO_BRANCH=v11-main"
-set "FULL_DIR=%ROOT_DIR%\comfyuifeddafront-full"
-set "LITE_DIR=%ROOT_DIR%\comfyuifeddafront-lite"
+set "TARGET_DIR=%ROOT_DIR%\comfyuifeddafront"
+set "TARGET_NAME=FEDDA v11"
+set "FORCE_NODE_ARG="
+if /I "%~1"=="--full-nodes" set "FORCE_NODE_ARG=-ForceNodeUpdate"
 
 echo.
 echo  =========================================
@@ -16,6 +18,13 @@ echo    FEDDA AI Studio ^| Update Tool
 echo  =========================================
 echo.
 echo    Root: %ROOT_DIR%
+echo    Target: %TARGET_DIR%
+if defined FORCE_NODE_ARG (
+    echo    Node mode: FULL ^(force update all installed nodes^)
+) else (
+    echo    Node mode: SMART ^(missing nodes only, faster^)
+    echo               tip: use --full-nodes for full node refresh
+)
 echo.
 
 where git >nul 2>&1
@@ -27,119 +36,102 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-echo  Choose what to update:
-echo.
-echo    [1] FULL  ^(%FULL_DIR%^)
-echo    [2] LITE  ^(%LITE_DIR%^)
-echo    [3] BOTH  ^(default^)
-echo.
-
-:ask_choice
-set "CHOICE="
-set /p "CHOICE=  Enter 1, 2 or 3 (default: 3): "
-if "%CHOICE%"=="" set "CHOICE=3"
-if "%CHOICE%"=="1" goto :update_full
-if "%CHOICE%"=="2" goto :update_lite
-if "%CHOICE%"=="3" goto :update_both
-echo  Invalid choice. Please enter 1, 2 or 3.
-goto :ask_choice
-
-:update_both
-call :update_one "%FULL_DIR%" "FULL"
-call :update_one "%LITE_DIR%" "LITE"
-goto :done
-
-:update_full
-call :update_one "%FULL_DIR%" "FULL"
-goto :done
-
-:update_lite
-call :update_one "%LITE_DIR%" "LITE"
-goto :done
-
-:update_one
-set "TARGET_DIR=%~1"
-set "TARGET_NAME=%~2"
-
-echo.
-echo  -----------------------------------------
-echo    Updating %TARGET_NAME%
-echo  -----------------------------------------
-
 if not exist "%TARGET_DIR%\install.bat" (
-    echo  [WARN] %TARGET_NAME% install not found at:
-    echo         %TARGET_DIR%
-    exit /b 0
+    echo  [ERROR] FEDDA install not found at:
+    echo          %TARGET_DIR%
+    echo.
+    echo  Run installer first:
+    echo          %ROOT_DIR%\FEDDA_OneClick_Installer-v11.bat
+    echo.
+    pause
+    exit /b 1
 )
 
+echo  [INFO] Updating %TARGET_NAME%...
 pushd "%TARGET_DIR%" >nul
 
+set "ORIGIN_URL="
 for /f "delims=" %%r in ('git remote get-url origin 2^>nul') do set "ORIGIN_URL=%%r"
 if /I not "!ORIGIN_URL!"=="%REPO_URL%" (
-    echo  [ERROR] %TARGET_NAME% points to a different repo:
+    echo  [ERROR] Install points to a different repo:
     echo          !ORIGIN_URL!
     echo          Expected: %REPO_URL%
     popd >nul
+    pause
     exit /b 1
 )
 
 set "DIRTY=0"
 for /f %%s in ('git status --porcelain 2^>nul ^| find /c /v ""') do set "DIRTY=%%s"
 if not "!DIRTY!"=="0" (
-    echo  [WARN] %TARGET_NAME% has local changes (^!git status^! not clean^).
+    echo  [WARN] Local changes detected ^(git status not clean^).
     echo         Skipping auto-pull to avoid overwriting your work.
     popd >nul
+    echo.
+    pause
     exit /b 0
 )
 
 echo  [INFO] Fetching latest from %REPO_BRANCH%...
-git pull origin %REPO_BRANCH%
+git fetch origin %REPO_BRANCH%
 if %errorlevel% neq 0 (
-    echo  [ERROR] git pull failed for %TARGET_NAME%.
+    echo  [ERROR] git fetch failed.
     popd >nul
+    pause
+    exit /b 1
+)
+
+git checkout %REPO_BRANCH% >nul 2>&1
+if %errorlevel% neq 0 (
+    echo  [ERROR] git checkout %REPO_BRANCH% failed.
+    popd >nul
+    pause
+    exit /b 1
+)
+
+git pull --ff-only origin %REPO_BRANCH%
+if %errorlevel% neq 0 (
+    echo  [ERROR] git pull failed.
+    popd >nul
+    pause
     exit /b 1
 )
 
 for /f "delims=" %%h in ('git rev-parse --short HEAD 2^>nul') do set "HEAD_SHORT=%%h"
-echo  [OK] %TARGET_NAME% updated to commit !HEAD_SHORT!
+echo  [OK] Updated to commit !HEAD_SHORT!
 
-echo  [INFO] Running post-update repair/sync for %TARGET_NAME%...
+echo  [INFO] Running post-update repair/sync...
 if exist "scripts\update_logic.ps1" (
-    powershell -ExecutionPolicy Bypass -File ".\scripts\update_logic.ps1" -SilentMode
+    powershell -ExecutionPolicy Bypass -File ".\scripts\update_logic.ps1" -SilentMode %FORCE_NODE_ARG%
     if %errorlevel% neq 0 (
-        echo  [WARN] update_logic.ps1 returned non-zero for %TARGET_NAME%.
+        echo  [WARN] update_logic.ps1 returned non-zero.
     ) else (
-        echo  [OK] update_logic.ps1 completed for %TARGET_NAME%.
+        echo  [OK] update_logic.ps1 completed.
     )
 ) else if exist "scripts\update_code.ps1" (
     echo  [WARN] update_logic.ps1 missing, falling back to update_code.ps1...
     powershell -ExecutionPolicy Bypass -File ".\scripts\update_code.ps1" -SilentMode
     if %errorlevel% neq 0 (
-        echo  [WARN] update_code.ps1 returned non-zero for %TARGET_NAME%.
+        echo  [WARN] update_code.ps1 returned non-zero.
     ) else (
-        echo  [OK] update_code.ps1 completed for %TARGET_NAME%.
+        echo  [OK] update_code.ps1 completed.
     )
 ) else (
-    echo  [WARN] No update script found in %TARGET_NAME%, skipping repair.
+    echo  [WARN] No update script found, skipping repair.
 )
 
 if not exist "logs" mkdir logs
 echo [%date% %time%] UPDATED %TARGET_NAME% to !HEAD_SHORT! >> logs\update_wrapper.log
 
 popd >nul
-exit /b 0
 
-:done
 echo.
 echo  =========================================
 echo    Update completed
 echo  =========================================
 echo.
-echo  Tip:
-echo    Run FULL : "%FULL_DIR%\run.bat"
-echo    Run LITE : "%LITE_DIR%\run.bat"
+echo  Run app:
+echo    "%TARGET_DIR%\run.bat"
 echo.
 pause
 exit /b 0
-
-

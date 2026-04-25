@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import type { LucideIcon } from 'lucide-react';
 
 interface StudioCardProps {
@@ -6,13 +6,43 @@ interface StudioCardProps {
   description: string;
   Icon: LucideIcon;
   image?: string;
+  video?: string;
   onClick: () => void;
 }
 
-export const StudioCard = ({ title, description, Icon, image, onClick }: StudioCardProps) => {
+export const StudioCard = ({ title, description, Icon, image, video, onClick }: StudioCardProps) => {
+  const [videoEnabled, setVideoEnabled] = useState(Boolean(video));
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handleEnter = () => {
+    if (videoEnabled && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
-    <button onClick={onClick} className="v11-studio-card text-left">
+    <button onClick={onClick} onMouseEnter={handleEnter} onMouseLeave={handleLeave} className="v11-studio-card v11-hub-card text-left">
       {image ? <div className="v11-card-bg" style={{ backgroundImage: `url(${image})` }} /> : null}
+      {video && videoEnabled ? (
+        <video
+          ref={videoRef}
+          className="v11-card-video"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onError={() => setVideoEnabled(false)}
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+      ) : null}
       <div className="v11-card-overlay" />
       <div className="relative z-10 flex items-start justify-between gap-3">
         <div>
@@ -31,13 +61,43 @@ interface ToolCardProps {
   title: string;
   description: string;
   image?: string;
+  video?: string;
   onClick: () => void;
 }
 
-export const ToolCard = ({ title, description, image, onClick }: ToolCardProps) => {
+export const ToolCard = ({ title, description, image, video, onClick }: ToolCardProps) => {
+  const [videoEnabled, setVideoEnabled] = useState(Boolean(video));
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const handleEnter = () => {
+    if (videoEnabled && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
-    <button onClick={onClick} className="v11-tool-card text-left">
+    <button onClick={onClick} onMouseEnter={handleEnter} onMouseLeave={handleLeave} className="v11-tool-card v11-square-card text-left">
       {image ? <div className="v11-card-bg" style={{ backgroundImage: `url(${image})` }} /> : null}
+      {video && videoEnabled ? (
+        <video
+          ref={videoRef}
+          className="v11-card-video"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          onError={() => setVideoEnabled(false)}
+        >
+          <source src={video} type="video/mp4" />
+        </video>
+      ) : null}
       <div className="v11-card-overlay" />
       <div className="relative z-10">
         <p className="text-[15px] font-semibold text-white">{title}</p>

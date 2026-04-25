@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, Film, Images, LayoutDashboard, MessageSquare, Music, Sparkles, Video } from 'lucide-react';
 import { LandingPage } from './pages/LandingPage';
 import { TopSystemStrip } from './components/ui/TopSystemStrip';
@@ -39,12 +39,37 @@ const CARD_IMAGE_BY_TAB: Record<string, string> = {
   library: '/cards/lora-library.png',
 };
 
+const CARD_VIDEO_BY_TAB: Record<string, string> = {
+  chat: '/cards/clips/hub/agent-chat.mp4',
+  image: '/cards/clips/hub/image-studio.mp4',
+  video: '/cards/clips/hub/video-studio.mp4',
+  audio: '/cards/clips/hub/audio-sfx.mp4',
+  explore: '/cards/clips/hub/explore.mp4',
+  'z-image-txt2img': '/cards/clips/tools/z-image-txt2img.mp4',
+  'z-image-dual-lora': '/cards/clips/tools/z-image-dual-lora.mp4',
+  'flux-txt2img': '/cards/clips/tools/flux2klein-txt2img.mp4',
+  'qwen-txt2img': '/cards/clips/tools/qwen-txt2img.mp4',
+  'qwen-image-ref': '/cards/clips/tools/qwen-image-reference.mp4',
+  'qwen-multi-angle': '/cards/clips/tools/qwen-multi-angles.mp4',
+  'image-influencer': '/cards/clips/tools/influencer.mp4',
+  'wan21-steady-dancer': '/cards/clips/tools/wan21-steady-dancer.mp4',
+  'wan22-vid2vid': '/cards/clips/tools/wan22-vid2vid.mp4',
+  'wan22-img2vid': '/cards/clips/tools/wan22-img2vid.mp4',
+  'wan22-img2vid-6frames': '/cards/clips/tools/wan22-story.mp4',
+  'ltx-flf': '/cards/clips/tools/ltx-first-last.mp4',
+  'ltx-img-audio': '/cards/clips/tools/ltx-img-audio.mp4',
+  gallery: '/cards/clips/tools/gallery.mp4',
+  videos: '/cards/clips/tools/videos.mp4',
+  library: '/cards/clips/tools/lora-library.mp4',
+};
+
 const HUB_CARDS: Array<{
   id: RootSection;
   label: string;
   description: string;
   Icon: typeof Sparkles;
   image: string;
+  video?: string;
   directTab?: string;
 }> = [
   {
@@ -53,6 +78,7 @@ const HUB_CARDS: Array<{
     description: 'Assistant, planning and execution.',
     Icon: MessageSquare,
     image: CARD_IMAGE_BY_TAB.chat,
+    video: CARD_VIDEO_BY_TAB.chat,
     directTab: 'chat',
   },
   {
@@ -61,6 +87,7 @@ const HUB_CARDS: Array<{
     description: 'Z-Image, Qwen, FLUX and Influencer.',
     Icon: Sparkles,
     image: CARD_IMAGE_BY_TAB.image,
+    video: CARD_VIDEO_BY_TAB.image,
   },
   {
     id: 'video',
@@ -68,6 +95,7 @@ const HUB_CARDS: Array<{
     description: 'WAN and LTX pipelines.',
     Icon: Video,
     image: CARD_IMAGE_BY_TAB.video,
+    video: CARD_VIDEO_BY_TAB.video,
   },
   {
     id: 'audio',
@@ -75,6 +103,7 @@ const HUB_CARDS: Array<{
     description: 'Voice and audio workflows.',
     Icon: Music,
     image: CARD_IMAGE_BY_TAB.audio,
+    video: CARD_VIDEO_BY_TAB.audio,
     directTab: 'audio',
   },
   {
@@ -83,6 +112,7 @@ const HUB_CARDS: Array<{
     description: 'Gallery, videos and LoRA library.',
     Icon: Images,
     image: CARD_IMAGE_BY_TAB.explore,
+    video: CARD_VIDEO_BY_TAB.explore,
   },
 ];
 
@@ -389,10 +419,10 @@ function FeddaApp() {
 
         <div className="flex-1 overflow-auto p-5 md:p-8 custom-scrollbar">
           {view === 'hub' && (
-            <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
+            <div className="w-full space-y-8 animate-fade-in">
               <section>
                 <p className="v11-kicker mb-3">MAIN HUB</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                <div className="v11-hub-row">
                   {HUB_CARDS.map((card) => (
                     <StudioCard
                       key={card.label}
@@ -400,6 +430,7 @@ function FeddaApp() {
                       description={card.description}
                       Icon={card.Icon}
                       image={card.image}
+                      video={card.video}
                       onClick={() => (card.directTab ? openWorkspace(card.directTab, 'hub') : openSection(card.id as Exclude<RootSection, 'hub'>))}
                     />
                   ))}
@@ -419,6 +450,7 @@ function FeddaApp() {
                       title={tool.label}
                       description={tool.description}
                       image={CARD_IMAGE_BY_TAB[tool.tab]}
+                      video={CARD_VIDEO_BY_TAB[tool.tab]}
                       onClick={() => openWorkspace(tool.tab, 'section')}
                     />
                   ))}

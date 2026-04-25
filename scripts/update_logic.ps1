@@ -2,7 +2,10 @@
 # FEDDA Update & Repair - auto-detects portable vs lite mode
 # ============================================================================
 
-param([switch]$SilentMode)
+param(
+    [switch]$SilentMode,
+    [switch]$ForceNodeUpdate
+)
 
 $ErrorActionPreference = "Stop"
 $ScriptPath = $PSScriptRoot
@@ -100,18 +103,21 @@ if (-not (Test-Path $CustomNodesDir)) {
     New-Item -ItemType Directory -Path $CustomNodesDir -Force | Out-Null
 }
 
-# Smart update: only git-pull existing nodes once per week
+# Smart update: default to missing-only installs.
+# Full git-pull pass is opt-in via -ForceNodeUpdate.
 $NodeUpdateMarker = Join-Path $RootPath ".last_node_update"
-$NeedNodeUpdate = $true
+$NeedNodeUpdate = $false
 
-if (Test-Path $NodeUpdateMarker) {
+if ($ForceNodeUpdate) {
+    $NeedNodeUpdate = $true
+    Write-Host "`n[1/3] Full custom-node update forced by caller..." -ForegroundColor Yellow
+} elseif (Test-Path $NodeUpdateMarker) {
     $LastUpdate = (Get-Item $NodeUpdateMarker).LastWriteTime
     $DaysSince = ((Get-Date) - $LastUpdate).TotalDays
-    if ($DaysSince -lt 7) {
-        $NeedNodeUpdate = $false
-        $DaysLeft = [math]::Ceiling(7 - $DaysSince)
-        Write-Host "`n[1/3] Custom nodes up to date (next check in ${DaysLeft}d)" -ForegroundColor Green
-    }
+    $DaysAgo = [math]::Floor($DaysSince)
+    Write-Host "`n[1/3] Smart node sync (missing-only). Last full sync: ${DaysAgo}d ago." -ForegroundColor Green
+} else {
+    Write-Host "`n[1/3] Smart node sync (missing-only). No full sync marker yet." -ForegroundColor Green
 }
 
 $InstalledCount = 0
@@ -258,7 +264,10 @@ if ($NeedNodeUpdate -or $HasMissing) {
     if ($UpdatedCount -gt 0)  { $Parts += "$UpdatedCount updated" }
     if ($SkippedCount -gt 0)  { $Parts += "$SkippedCount up to date" }
     if ($FailedCount -gt 0)   { $Parts += "$FailedCount failed" }
+    if ($Parts.Count -eq 0) { $Parts += "nothing changed" }
     Write-Host "`n  Summary: $($Parts -join ', ')" -ForegroundColor Cyan
+} else {
+    Write-Host "  No missing nodes found. Skipping node sync." -ForegroundColor Green
 }
 
 # ============================================================================

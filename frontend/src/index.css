@@ -285,17 +285,102 @@ body {
   overflow: hidden;
 }
 
+.v11-hub-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+.v11-hub-card {
+  aspect-ratio: 9 / 16;
+  min-height: 420px;
+  padding: 16px;
+  border-radius: 18px;
+  isolation: isolate;
+}
+
+.v11-hub-card:hover {
+  transform: translateY(-3px) scale(1.008);
+}
+
+.v11-square-card {
+  aspect-ratio: 1 / 1;
+  min-height: 260px;
+  padding: 14px;
+  border-radius: 14px;
+  isolation: isolate;
+}
+
 .v11-card-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center;
-  filter: saturate(1.1) contrast(1.02);
-  transform: scale(1.04);
+  background-position: center 26%;
+  filter: saturate(1.08) contrast(1.03);
+  transform: scale(1.06);
+  transition: transform 0.35s ease, filter 0.35s ease, opacity 0.35s ease;
+}
+
+.v11-card-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 26%;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
 }
 
 .v11-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(4, 8, 18, 0.25) 0%, rgba(4, 8, 18, 0.72) 52%, rgba(4, 8, 18, 0.9) 100%);
+  background: linear-gradient(180deg, rgba(4, 8, 18, 0.18) 0%, rgba(4, 8, 18, 0.68) 54%, rgba(4, 8, 18, 0.92) 100%);
+  z-index: 2;
+}
+
+.v11-studio-card:hover .v11-card-bg,
+.v11-tool-card:hover .v11-card-bg {
+  transform: scale(1.1);
+  filter: saturate(1.12) contrast(1.07);
+}
+
+.v11-studio-card:hover .v11-card-video,
+.v11-tool-card:hover .v11-card-video {
+  opacity: 1;
+}
+
+.v11-hub-card .v11-icon-wrap {
+  backdrop-filter: blur(6px);
+  background: rgba(6, 12, 24, 0.44);
+}
+
+@media (max-width: 1700px) {
+  .v11-hub-row {
+    grid-template-columns: repeat(5, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 1360px) {
+  .v11-hub-row {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+
+  .v11-hub-card {
+    min-width: 220px;
+    flex: 0 0 220px;
+    min-height: 390px;
+  }
+}
+
+@media (max-width: 900px) {
+  .v11-square-card {
+    min-height: 210px;
+  }
 }
