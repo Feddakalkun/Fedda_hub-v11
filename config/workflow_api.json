@@ -1056,25 +1056,25 @@
       },
       "width": {
         "node_id": "143",
-        "input_key": "Number",
+        "input_key": "value",
         "type": "number",
         "label": "Width"
       },
       "height": {
         "node_id": "144",
-        "input_key": "Number",
+        "input_key": "value",
         "type": "number",
         "label": "Height"
       },
       "video_length_seconds": {
         "node_id": "147",
-        "input_key": "Number",
+        "input_key": "value",
         "type": "number",
         "label": "Video Length (s)"
       },
       "fps": {
         "node_id": "137",
-        "input_key": "Number",
+        "input_key": "value",
         "type": "number",
         "label": "FPS"
       },
@@ -1097,10 +1097,22 @@
         "label": "Pose Strength Spatial"
       },
       "pose_strength_temporal": {
-        "node_id": "71",
-        "input_key": "pose_strength_temporal",
+        "node_id": "90",
+        "input_key": "strength",
         "type": "number",
         "label": "Pose Strength Temporal"
+      },
+      "skip_frames": {
+        "node_id": "75",
+        "input_key": "skip_first_frames",
+        "type": "number",
+        "label": "Skip First Frames"
+      },
+      "max_frames": {
+        "node_id": "75",
+        "input_key": "frame_load_cap",
+        "type": "number",
+        "label": "Max Frames"
       },
       "seed": {
         "node_id": "119",
@@ -1122,4 +1134,4 @@
       }
     }
   }
-}
+}

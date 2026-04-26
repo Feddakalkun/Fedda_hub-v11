@@ -1,50 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import {
   Video, Upload, RefreshCw, Film, Loader2,
-  ChevronDown, ChevronUp, Check, FlameKindling,
+  ChevronDown, ChevronUp, Check, FlameKindling, Settings,
 } from 'lucide-react';
 import { useToast } from '../../components/ui/Toast';
 import { BACKEND_API } from '../../config/api';
+import { fetchJson } from '../../utils/fetchJson';
 import { useComfyExecution } from '../../contexts/ComfyExecutionContext';
 import { usePersistentState } from '../../hooks/usePersistentState';
 import { comfyService } from '../../services/comfyService';
 import { PromptAssistant } from '../../components/ui/PromptAssistant';
 import { LoraSelector } from '../../components/ui/LoraSelector';
-import { FeddaButton, FeddaPanel, FeddaSectionTitle } from '../../components/ui/FeddaPrimitives';
+import { FeddaButton, FeddaSectionTitle } from '../../components/ui/FeddaPrimitives';
 import { VideoOutputPanel } from '../../components/layout/VideoOutputPanel';
-
-const SCENE_COUNT = 3;
-void SCENE_COUNT;
-
-// ── Scene slot ────────────────────────────────────────────────────────────────
-function SceneSlot({ index, url, isActive, isPending }: {
-  index: number; url?: string; isActive: boolean; isPending: boolean;
-}) {
-  return (
-    <div className={`rounded-xl overflow-hidden border transition-all duration-500 ${
-      url ? 'border-violet-500/30 bg-black/60' :
-      isActive ? 'border-violet-500/20 bg-white/[0.03]' : 'border-white/5 bg-white/[0.02]'
-    }`}>
-      {url ? (
-        <video src={url} className="w-full aspect-video object-cover" autoPlay loop muted playsInline />
-      ) : (
-        <div className="w-full aspect-video flex items-center justify-center">
-          {isPending ? <Loader2 className="w-5 h-5 text-violet-400/60 animate-spin" /> : <Film className="w-5 h-5 text-white/10" />}
-        </div>
-      )}
-      <div className="px-3 py-1.5 flex items-center justify-between">
-        <span className="text-[8px] font-black uppercase tracking-widest text-white/30">Scene {index + 1}</span>
-        {url && (
-          <div className="flex items-center gap-1">
-            <div className="w-1.5 h-1.5 rounded-full bg-violet-400/60 animate-pulse" />
-            <span className="text-[7px] font-mono text-violet-400/40">live</span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-void SceneSlot;
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export const Wan22Img2Vid = () => {
@@ -59,6 +27,7 @@ export const Wan22Img2Vid = () => {
   const [loraStrengthHigh, setLoraStrengthHigh] = usePersistentState('wan22i2v_lora_high_strength', 1.0);
   const [loraStrengthLow, setLoraStrengthLow]   = usePersistentState('wan22i2v_lora_low_strength', 1.0);
 
+  const [showAdvanced, setShowAdvanced] = usePersistentState('wan22i2v_show_advanced', false);
   const [expanded, setExpanded] = useState<boolean[]>([true, true, true]);
   const toggleExpand = (i: number) => setExpanded(prev => prev.map((v, idx) => idx === i ? !v : v));
 
@@ -97,21 +66,18 @@ export const Wan22Img2Vid = () => {
     }).catch(() => {});
   }, []);
 
-  // ── Upload ────────────────────────────────────────────────────────────────
   const handleUpload = async (file: File) => {
     setUploading(true);
     try {
       const form = new FormData();
       form.append('file', file);
-      const res  = await fetch(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body: form });
-      const data = await res.json();
+      const data = await fetchJson<any>(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body: form });
       if (!data.success) throw new Error(data.detail || 'Upload failed');
       setUploadedImageName(data.filename);
     } catch (err: any) { toast(err.message || 'Upload failed', 'error'); }
     finally { setUploading(false); }
   };
 
-  // ── Stream videos ─────────────────────────────────────────────────────────
   useEffect(() => {
     if (!isGenerating && !pendingPromptId) return;
     if (!lastOutputVideos?.length) return;
@@ -126,7 +92,6 @@ export const Wan22Img2Vid = () => {
     setHistory(prev => [...urls, ...prev.filter(u => !urls.includes(u))].slice(0, 40));
   }, [outputReadyCount, lastOutputVideos, isGenerating, pendingPromptId, setHistory]);
 
-  // ── Completion ────────────────────────────────────────────────────────────
   useEffect(() => {
     if (!pendingPromptId) return;
     if (execState === 'done') {
@@ -137,7 +102,6 @@ export const Wan22Img2Vid = () => {
     if (execState === 'error') { setIsGenerating(false); setPendingPromptId(null); }
   }, [execState, pendingPromptId, toast]);
 
-  // ── Generate ──────────────────────────────────────────────────────────────
   const handleGenerate = async () => {
     if (!uploadedImageName || !prompt1.trim() || isGenerating) return;
     sessionRef.current   = [];
@@ -145,11 +109,10 @@ export const Wan22Img2Vid = () => {
     setSessionVideos([]);
     setIsGenerating(true);
 
-    fetch(`${BACKEND_API.BASE_URL}/api/workflow/node-map/wan22-img2vid`)
-      .then(r => r.json()).then(d => { if (d.success) registerNodeMap(d.node_map); }).catch(() => {});
+    fetchJson<any>(`${BACKEND_API.BASE_URL}/api/workflow/node-map/wan22-img2vid`).then(d => { if (d.success) registerNodeMap(d.node_map); }).catch(() => {});
 
     try {
-      const res = await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.GENERATE}`, {
+      const data = await fetchJson<any>(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.GENERATE}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           workflow_id: 'wan22-img2vid',
@@ -167,7 +130,6 @@ export const Wan22Img2Vid = () => {
           },
         }),
       });
-      const data = await res.json();
       if (data.success) setPendingPromptId(data.prompt_id);
       else throw new Error(data.detail || 'Failed');
     } catch (err: any) {
@@ -185,18 +147,13 @@ export const Wan22Img2Vid = () => {
 
   return (
     <div className="flex h-full bg-[#080808] overflow-hidden">
-
-      {/* ══ LEFT PANEL ══════════════════════════════════════════════════════ */}
       <div className="flex-1 min-w-0 flex flex-col border-r border-white/5 overflow-y-auto custom-scrollbar">
         <div className="px-5 py-5 space-y-5">
-
-          {/* Header */}
           <div className="flex items-center gap-2">
             <Video className="w-4 h-4 text-violet-400" />
             <h2 className="fedda-kicker">WAN 2.2 - Img2Vid</h2>
           </div>
 
-          {/* ── IMAGE UPLOAD ── */}
           {!uploadedImage ? (
             <div
               onDrop={e => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f?.type.startsWith('image/')) handleUpload(f); }}
@@ -219,16 +176,12 @@ export const Wan22Img2Vid = () => {
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center gap-2">
                 <span className="text-[9px] font-black uppercase tracking-widest text-white/70">Replace</span>
               </div>
-              <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                <span className="text-[8px] font-mono bg-black/60 backdrop-blur-sm rounded px-1.5 py-0.5 text-white/40">{uploadedImageName}</span>
-              </div>
             </div>
           )}
           <input ref={fileInputRef} type="file" accept="image/*" className="hidden"
             onChange={e => e.target.files?.[0] && handleUpload(e.target.files[0])} />
 
-          {/* ── FRAME COUNT ── */}
-          <FeddaPanel className="p-3 space-y-2">
+          <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 space-y-3">
             <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-widest text-slate-600">
               <span>Frame Count</span>
               <span className="font-mono text-violet-400/60">{frameCount}f · {(frameCount / 24).toFixed(1)}s</span>
@@ -237,15 +190,12 @@ export const Wan22Img2Vid = () => {
               onChange={e => setFrameCount(Number(e.target.value))}
               className="w-full accent-violet-500" />
             <div className="flex justify-between text-[8px] font-mono text-slate-600">
-              <span>17f · 0.7s</span>
-              <span className="text-white/15">81f · 3.4s</span>
-              <span>161f · 6.7s</span>
+              <span>Short (17f)</span>
+              <span>Default (81f)</span>
+              <span>Long (161f)</span>
             </div>
-          </FeddaPanel>
+          </div>
 
-          <div className="h-px bg-white/5" />
-
-          {/* ── 3 SCENE PROMPTS ── */}
           <div className="space-y-2">
             <FeddaSectionTitle className="text-slate-500">Scene Expansions</FeddaSectionTitle>
             {prompts.map(({ label, value, set }, i) => (
@@ -255,8 +205,6 @@ export const Wan22Img2Vid = () => {
                   <div className="flex items-center gap-2">
                     <div className={`w-1.5 h-1.5 rounded-full ${value.trim() ? 'bg-violet-400' : 'bg-white/10'}`} />
                     <span className="text-[10px] font-black uppercase tracking-widest text-white/50">{label}</span>
-                    {i > 0 && !value.trim() && <span className="text-[8px] text-white/20 font-mono">→ uses Scene 1</span>}
-                    {value.trim() && <span className="text-[8px] text-violet-400/50 truncate max-w-[140px]">{value.slice(0, 30)}{value.length > 30 ? '…' : ''}</span>}
                   </div>
                   <div className="flex items-center gap-2">
                     {value.trim() && <Check className="w-3 h-3 text-violet-400" />}
@@ -271,7 +219,7 @@ export const Wan22Img2Vid = () => {
                       compact={i > 0}
                       value={value}
                       onChange={set}
-                      placeholder={i === 0 ? 'Describe the motion / action...' : 'Leave empty to reuse Scene 1'}
+                      placeholder={i === 0 ? 'Describe the motion...' : 'Optional addition...'}
                       minRows={i === 0 ? 4 : 3}
                       enableCaption={false}
                     />
@@ -281,84 +229,55 @@ export const Wan22Img2Vid = () => {
             ))}
           </div>
 
-          <div className="h-px bg-white/5" />
-
-          <div className="space-y-3">
-            <FeddaSectionTitle className="text-slate-500">LoRA Loaders</FeddaSectionTitle>
-            <LoraSelector
-              label="High Noise LoRA"
-              value={loraHigh}
-              onChange={setLoraHigh}
-              strength={loraStrengthHigh}
-              onStrengthChange={setLoraStrengthHigh}
-              options={availableLoras}
-              accent="violet"
-            />
-            <LoraSelector
-              label="Low Noise LoRA"
-              value={loraLow}
-              onChange={setLoraLow}
-              strength={loraStrengthLow}
-              onStrengthChange={setLoraStrengthLow}
-              options={availableLoras}
-              accent="violet"
-            />
-          </div>
-
-          <div className="h-px bg-white/5" />
-
-          {/* ── NSFW + SEED ── */}
-          <div className="space-y-2">
-            {/* NSFW toggle */}
+          <div className="space-y-4">
             <button
-              onClick={() => setNsfw(!nsfw)}
-              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl border transition-all ${
-                nsfw
-                  ? 'bg-rose-500/10 border-rose-500/30 text-rose-300'
-                  : 'bg-white/[0.02] border-white/5 text-slate-500'
-              }`}
+              onClick={() => setShowAdvanced(!showAdvanced)}
+              className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/20 hover:text-white/40 transition-colors"
             >
-              <div className="flex items-center gap-2">
-                <FlameKindling className="w-3.5 h-3.5" />
-                <span className="text-[10px] font-black uppercase tracking-widest">NSFW</span>
-              </div>
-              <div className={`w-8 h-4 rounded-full transition-all relative ${nsfw ? 'bg-rose-500' : 'bg-white/10'}`}>
-                <div className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all ${nsfw ? 'left-4' : 'left-0.5'}`} />
-              </div>
+              <Settings className={`w-3 h-3 ${showAdvanced ? 'rotate-90' : ''} transition-transform`} />
+              {showAdvanced ? 'Hide Advanced Settings' : 'Show Advanced Settings'}
             </button>
 
-            {/* Seed */}
-            <div className="flex gap-1.5">
-              <input type="number" value={seed} onChange={e => setSeed(parseInt(e.target.value))}
-                className="flex-1 bg-white/[0.02] border border-white/5 rounded-xl py-3 px-3 text-xs font-mono focus:border-violet-500/20 outline-none text-white/40" />
-              <FeddaButton onClick={() => setSeed(-1)} variant={seed === -1 ? 'violet' : 'ghost'} className="p-3 rounded-xl transition-all">
-                <RefreshCw className="w-3.5 h-3.5" />
-              </FeddaButton>
-            </div>
+            {showAdvanced && (
+              <div className="space-y-4 pt-2 border-t border-white/5 animate-in fade-in slide-in-from-top-1 duration-300">
+                <div className="space-y-3">
+                  <FeddaSectionTitle className="text-slate-500">LoRA Loaders</FeddaSectionTitle>
+                  <LoraSelector label="High Noise LoRA" value={loraHigh} onChange={setLoraHigh} strength={loraStrengthHigh} onStrengthChange={setLoraStrengthHigh} options={availableLoras} accent="violet" />
+                  <LoraSelector label="Low Noise LoRA" value={loraLow} onChange={setLoraLow} strength={loraStrengthLow} onStrengthChange={setLoraStrengthLow} options={availableLoras} accent="violet" />
+                </div>
+                <div className="space-y-2">
+                  <button onClick={() => setNsfw(!nsfw)} className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl border transition-all ${nsfw ? 'bg-rose-500/10 border-rose-500/30 text-rose-300' : 'bg-white/[0.02] border-white/5 text-slate-500'}`}>
+                    <div className="flex items-center gap-2">
+                      <FlameKindling className="w-3.5 h-3.5" />
+                      <span className="text-[10px] font-black uppercase tracking-widest">NSFW</span>
+                    </div>
+                    <div className={`w-8 h-4 rounded-full transition-all relative ${nsfw ? 'bg-rose-500' : 'bg-white/10'}`}>
+                      <div className={`absolute top-0.5 w-3 h-3 rounded-full bg-white transition-all ${nsfw ? 'left-4' : 'left-0.5'}`} />
+                    </div>
+                  </button>
+                  <div className="flex gap-1.5">
+                    <input type="number" value={seed} onChange={e => setSeed(parseInt(e.target.value))} className="flex-1 bg-white/[0.02] border border-white/5 rounded-xl py-3 px-3 text-xs font-mono focus:border-violet-500/20 outline-none text-white/40" />
+                    <FeddaButton onClick={() => setSeed(-1)} variant={seed === -1 ? 'violet' : 'ghost'} className="p-3 rounded-xl transition-all">
+                      <RefreshCw className="w-3.5 h-3.5" />
+                    </FeddaButton>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* ── GENERATE ── */}
           <div className="pb-6">
             <FeddaButton disabled={!uploadedImageName || !prompt1.trim() || isGenerating}
               onClick={handleGenerate}
               variant="violet"
-              className="w-full py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.4em] transition-all duration-500 flex items-center justify-center gap-3 disabled:bg-white/5 disabled:text-white/10">
+              className="w-full py-5 rounded-[2rem] font-black text-xs uppercase tracking-[0.4em] flex items-center justify-center gap-3 disabled:opacity-30">
               {isGenerating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Video className="w-4 h-4" />}
               <span>{isGenerating ? 'Generating...' : 'Generate'}</span>
             </FeddaButton>
           </div>
-
         </div>
       </div>
-
-      <VideoOutputPanel
-        title="WAN Img2Vid Output"
-        currentVideo={currentVideo}
-        history={history}
-        isGenerating={isGenerating}
-      />
-
+      <VideoOutputPanel title="WAN Img2Vid Output" currentVideo={currentVideo} history={history} isGenerating={isGenerating} />
     </div>
   );
 };
-
