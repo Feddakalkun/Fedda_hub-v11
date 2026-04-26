@@ -1030,5 +1030,96 @@
         "label": "Seed"
       }
     }
+  },
+  "wan21-steady-dancer": {
+    "name": "WAN 2.1 - Steady Dancer",
+    "filename": "wan21/WAN-21-STEADY-DANCER.json",
+    "description": "Transfer motion from a reference video to a subject image using WAN 2.1 SteadyDancer.",
+    "inputs": {
+      "image": {
+        "node_id": "76",
+        "input_key": "image",
+        "type": "string",
+        "label": "Subject Image"
+      },
+      "reference_video": {
+        "node_id": "75",
+        "input_key": "video",
+        "type": "string",
+        "label": "Reference Motion Video"
+      },
+      "prompt": {
+        "node_id": "145",
+        "input_key": "string",
+        "type": "string",
+        "label": "Prompt"
+      },
+      "width": {
+        "node_id": "143",
+        "input_key": "Number",
+        "type": "number",
+        "label": "Width"
+      },
+      "height": {
+        "node_id": "144",
+        "input_key": "Number",
+        "type": "number",
+        "label": "Height"
+      },
+      "video_length_seconds": {
+        "node_id": "147",
+        "input_key": "Number",
+        "type": "number",
+        "label": "Video Length (s)"
+      },
+      "fps": {
+        "node_id": "137",
+        "input_key": "Number",
+        "type": "number",
+        "label": "FPS"
+      },
+      "steps": {
+        "node_id": "119",
+        "input_key": "steps",
+        "type": "number",
+        "label": "Steps"
+      },
+      "cfg": {
+        "node_id": "119",
+        "input_key": "cfg",
+        "type": "number",
+        "label": "CFG"
+      },
+      "pose_strength_spatial": {
+        "node_id": "71",
+        "input_key": "pose_strength_spatial",
+        "type": "number",
+        "label": "Pose Strength Spatial"
+      },
+      "pose_strength_temporal": {
+        "node_id": "71",
+        "input_key": "pose_strength_temporal",
+        "type": "number",
+        "label": "Pose Strength Temporal"
+      },
+      "seed": {
+        "node_id": "119",
+        "input_key": "seed",
+        "type": "number",
+        "label": "Seed"
+      },
+      "lora_name": {
+        "node_id": "69",
+        "input_key": "lora",
+        "type": "string",
+        "label": "LoRA Override"
+      },
+      "lora_strength": {
+        "node_id": "69",
+        "input_key": "strength",
+        "type": "number",
+        "label": "LoRA Strength"
+      }
+    }
   }
 }

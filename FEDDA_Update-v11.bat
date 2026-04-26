@@ -10,7 +10,10 @@ set "REPO_BRANCH=v11-main"
 set "TARGET_DIR=%ROOT_DIR%\comfyuifeddafront"
 set "TARGET_NAME=FEDDA v11"
 set "FORCE_NODE_ARG="
+set "NO_STASH=0"
+set "AUTO_STASHED=0"
 if /I "%~1"=="--full-nodes" set "FORCE_NODE_ARG=-ForceNodeUpdate"
+if /I "%~1"=="--no-stash" set "NO_STASH=1"
 
 echo.
 echo  =========================================
@@ -67,12 +70,26 @@ if /I not "!ORIGIN_URL!"=="%REPO_URL%" (
 set "DIRTY=0"
 for /f %%s in ('git status --porcelain 2^>nul ^| find /c /v ""') do set "DIRTY=%%s"
 if not "!DIRTY!"=="0" (
-    echo  [WARN] Local changes detected ^(git status not clean^).
-    echo         Skipping auto-pull to avoid overwriting your work.
-    popd >nul
-    echo.
-    pause
-    exit /b 0
+    if "%NO_STASH%"=="1" (
+        echo  [WARN] Local changes detected ^(git status not clean^).
+        echo         --no-stash is active, so update stops here.
+        popd >nul
+        echo.
+        pause
+        exit /b 0
+    )
+    for /f "delims=" %%t in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "STASH_TS=%%t"
+    set "STASH_MSG=FEDDA auto-stash before update !STASH_TS!"
+    echo  [INFO] Local changes detected. Auto-stashing before pull...
+    git stash push -u -m "!STASH_MSG!" >nul 2>&1
+    if %errorlevel% neq 0 (
+        echo  [ERROR] Auto-stash failed. Update stopped.
+        popd >nul
+        pause
+        exit /b 1
+    )
+    set "AUTO_STASHED=1"
+    set "AUTO_STASH_MSG=!STASH_MSG!"
 )
 
 echo  [INFO] Fetching latest from %REPO_BRANCH%...
@@ -94,6 +111,10 @@ if %errorlevel% neq 0 (
 
 git pull --ff-only origin %REPO_BRANCH%
 if %errorlevel% neq 0 (
+    if "!AUTO_STASHED!"=="1" (
+        echo  [INFO] Pull failed. Restoring stashed changes...
+        git stash pop --index >nul 2>&1
+    )
     echo  [ERROR] git pull failed.
     popd >nul
     pause
@@ -125,6 +146,17 @@ if exist "scripts\update_logic.ps1" (
 
 if not exist "logs" mkdir logs
 echo [%date% %time%] UPDATED %TARGET_NAME% to !HEAD_SHORT! >> logs\update_wrapper.log
+
+if "!AUTO_STASHED!"=="1" (
+    echo  [INFO] Restoring your local changes...
+    git stash pop --index >nul 2>&1
+    if %errorlevel% neq 0 (
+        echo  [WARN] Could not auto-restore cleanly.
+        echo         Your stash is still saved. Run: git stash list
+    ) else (
+        echo  [OK] Local changes restored.
+    )
+)
 
 popd >nul
 

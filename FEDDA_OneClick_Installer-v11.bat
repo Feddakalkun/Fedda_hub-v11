@@ -55,11 +55,26 @@ for /f "delims=" %%r in ('git remote get-url origin 2^>nul') do set "ORIGIN_URL=
 if /I not "%ORIGIN_URL%"=="%REPO_URL%" goto :err_remote
 
 git diff --quiet --ignore-submodules HEAD
-if not "%ERRORLEVEL%"=="0" goto :err_dirty
+if not "%ERRORLEVEL%"=="0" (
+  for /f "delims=" %%t in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "STASH_TS=%%t"
+  set "STASH_MSG=FEDDA auto-stash before installer update !STASH_TS!"
+  echo  [INFO] Local changes detected. Auto-stashing...
+  git stash push -u -m "!STASH_MSG!" >> "%LOG_FILE%" 2>&1 || goto :err_stash
+  set "AUTO_STASHED=1"
+)
 
 git fetch origin %REPO_BRANCH% >> "%LOG_FILE%" 2>&1 || goto :err_fetch
 git checkout %REPO_BRANCH% >> "%LOG_FILE%" 2>&1 || goto :err_checkout
 git pull --ff-only origin %REPO_BRANCH% >> "%LOG_FILE%" 2>&1 || goto :err_pull
+
+if "%AUTO_STASHED%"=="1" (
+  git stash pop --index >> "%LOG_FILE%" 2>&1
+  if not "%ERRORLEVEL%"=="0" (
+    echo  [WARN] Could not auto-restore stashed changes cleanly.
+    echo         Run: git stash list in %INSTALL_DIR%
+    echo [%date% %time%] WARN: stash pop conflict >> "%LOG_FILE%"
+  )
+)
 
 popd
 goto :run_install
@@ -149,6 +164,14 @@ echo  [ERROR] Existing install has local changes.
 echo  To protect your edits, auto-pull is blocked.
 echo  Commit or stash first, then run again.
 echo [%date% %time%] ERROR: dirty working tree >> "%LOG_FILE%"
+popd
+pause
+exit /b 1
+
+:err_stash
+echo.
+echo  [ERROR] Failed to auto-stash local changes.
+echo [%date% %time%] ERROR: auto stash failed >> "%LOG_FILE%"
 popd
 pause
 exit /b 1
