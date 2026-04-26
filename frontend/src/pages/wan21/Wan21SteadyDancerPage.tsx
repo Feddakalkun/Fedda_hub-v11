@@ -152,12 +152,21 @@ export const Wan21SteadyDancerPage = () => {
     const newVids = lastOutputVideos.slice(prevCountRef.current);
     if (!newVids.length) return;
     prevCountRef.current = lastOutputVideos.length;
+
     const urls = newVids.map(
-      (v) => `/comfy/view?filename=${encodeURIComponent(v.filename)}&subfolder=${encodeURIComponent(v.subfolder)}&type=${v.type}`,
+      (v) => ({
+        url: `/comfy/view?filename=${encodeURIComponent(v.filename)}&subfolder=${encodeURIComponent(v.subfolder)}&type=${v.type}`,
+        isVitPose: v.filename.toLowerCase().includes('vitpose') || v.filename.toLowerCase().includes('skeleton')
+      })
     );
-    sessionRef.current = [...sessionRef.current, ...urls];
-    setCurrentVideo(urls[0]);
-    setHistory((prev) => [...urls, ...prev.filter((u) => !urls.includes(u))].slice(0, 40));
+
+    sessionRef.current = [...sessionRef.current, ...urls.map(u => u.url)];
+    
+    // Pick the best video to show: Prefer non-vitpose ones
+    const mainVid = urls.find(u => !u.isVitPose) || urls[urls.length - 1];
+    if (mainVid) setCurrentVideo(mainVid.url);
+
+    setHistory((prev) => [...urls.map(u => u.url), ...prev.filter((u) => !urls.map(x => x.url).includes(u))].slice(0, 40));
   }, [outputReadyCount, lastOutputVideos, isGenerating, pendingPromptId, setCurrentVideo, setHistory]);
 
   useEffect(() => {
