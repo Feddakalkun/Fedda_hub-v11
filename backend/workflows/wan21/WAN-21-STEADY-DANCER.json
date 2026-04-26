@@ -615,6 +615,9 @@
       "fast_mode": false,
       "ensemble": true,
       "scale_factor": 1,
+      "dtype": "fp16",
+      "torch_compile": false,
+      "batch_size": 1,
       "frames": [
         "28",
         0

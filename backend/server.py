@@ -11,7 +11,6 @@ import base64
 import subprocess
 import sys
 import sqlite3
-import ctypes
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 import re
@@ -182,33 +181,6 @@ async def hardware_stats():
                 "total_gb": round(vm.total / (1024 ** 3), 1),
                 "percentage": round(float(vm.percent), 1),
             }
-        elif os.name == "nt":
-            class MEMORYSTATUSEX(ctypes.Structure):
-                _fields_ = [
-                    ("dwLength", ctypes.c_ulong),
-                    ("dwMemoryLoad", ctypes.c_ulong),
-                    ("ullTotalPhys", ctypes.c_ulonglong),
-                    ("ullAvailPhys", ctypes.c_ulonglong),
-                    ("ullTotalPageFile", ctypes.c_ulonglong),
-                    ("ullAvailPageFile", ctypes.c_ulonglong),
-                    ("ullTotalVirtual", ctypes.c_ulonglong),
-                    ("ullAvailVirtual", ctypes.c_ulonglong),
-                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
-                ]
-
-            mem = MEMORYSTATUSEX()
-            mem.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
-            ok = ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(mem))  # type: ignore[attr-defined]
-            if ok:
-                total = int(mem.ullTotalPhys)
-                avail = int(mem.ullAvailPhys)
-                used = max(0, total - avail)
-                pct = round((used / total) * 100, 1) if total > 0 else 0.0
-                system_ram = {
-                    "used_gb": round(used / (1024 ** 3), 1),
-                    "total_gb": round(total / (1024 ** 3), 1),
-                    "percentage": pct,
-                }
 
         cmd = [
             "nvidia-smi",
@@ -2108,9 +2080,40 @@ async def lora_import_url(req: ImportUrlRequest):
     return lora_service.import_from_url(req.url, req.hf_token, req.civitai_token)
 
 
-@app.get("/api/lora/import-status/{job_id}")
-async def lora_import_status(job_id: str):
-    return lora_service.get_import_status(job_id)
+@app.post("/api/download/video")
+async def download_video(req: ImportUrlRequest):
+    return model_downloader.download_media_url(req.url)
+
+
+@app.get("/api/download/status/{job_id}")
+async def download_status(job_id: str):
+    return model_downloader.get_progress(job_id)
+
+
+@app.post("/api/video/extract-frame")
+async def extract_frame(filename: str):
+    """Extract first frame from a video in ComfyUI input using OpenCV."""
+    try:
+        import cv2
+        input_dir = model_downloader.comfy_input_dir
+        video_path = input_dir / filename
+        if not video_path.exists():
+            return {"success": False, "error": "File not found"}
+        
+        cap = cv2.VideoCapture(str(video_path))
+        ret, frame = cap.read()
+        cap.release()
+        
+        if not ret:
+            return {"success": False, "error": "Could not read frame"}
+        
+        out_name = f"ext_{Path(filename).stem}.jpg"
+        out_path = input_dir / out_name
+        cv2.imwrite(str(out_path), frame, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
+        
+        return {"success": True, "filename": out_name}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
 
 
 if __name__ == "__main__":

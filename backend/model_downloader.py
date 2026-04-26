@@ -3,6 +3,7 @@ import re
 import requests
 import threading
 import time
+import yt_dlp
 from pathlib import Path
 from typing import Optional, Dict, List, Any
 
@@ -10,6 +11,7 @@ class ModelDownloader:
     def __init__(self, root_dir: Path):
         self.root_dir = root_dir
         self.comfy_models_dir = root_dir / "ComfyUI" / "models"
+        self.comfy_input_dir = root_dir / "ComfyUI" / "input"
         self.progress: Dict[str, dict] = {}
         self.lock = threading.Lock()
         self._active_downloads: Dict[str, threading.Thread] = {}
@@ -29,6 +31,11 @@ class ModelDownloader:
                 "relative_dir": Path("vae"),
                 "url": "https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors",
                 "min_bytes": 5 * 1024 * 1024,
+            },
+            "clip_vision_h.safetensors": {
+                "relative_dir": Path("clip_vision"),
+                "url": "https://huggingface.co/h94/IP-Adapter/resolve/main/models/image_encoder/model.safetensors",
+                "min_bytes": 100 * 1024 * 1024,
             },
         }
 
@@ -175,6 +182,40 @@ class ModelDownloader:
             return {"success": True, "total_files": len(files)}
         except Exception as e:
             return {"success": False, "error": str(e)}
+
+    def download_media_url(self, url: str):
+        """Use yt-dlp to download a video from TikTok/Youtube/etc into ComfyUI input."""
+        job_id = f"dl_{int(time.time())}"
+        
+        def _task():
+            try:
+                self._update_progress(job_id, "downloading", 0)
+                
+                def progress_hook(d):
+                    if d['status'] == 'downloading':
+                        p = d.get('_percent_str', '0%').replace('%','')
+                        try:
+                            self._update_progress(job_id, "downloading", int(float(p)))
+                        except: pass
+                
+                ydl_opts = {
+                    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+                    'outtmpl': str(self.comfy_input_dir / 'tk_%(id)s.%(ext)s'),
+                    'progress_hooks': [progress_hook],
+                    'noplaylist': True,
+                }
+                
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    info = ydl.extract_info(url, download=True)
+                    filename = ydl.prepare_filename(info)
+                    final_name = Path(filename).name
+                
+                self._update_progress(job_id, "completed", 100, error=final_name) # Hack: use error field to return filename
+            except Exception as e:
+                self._update_progress(job_id, "error", 0, str(e))
+
+        threading.Thread(target=_task, daemon=True).start()
+        return {"success": True, "job_id": job_id}
 
 # Instance for shared use
 model_downloader = ModelDownloader(Path(__file__).parent.parent)

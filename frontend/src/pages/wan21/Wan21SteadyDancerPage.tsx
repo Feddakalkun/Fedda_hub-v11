@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Film, Loader2, RefreshCw, Upload, Video } from 'lucide-react';
+import { Film, Loader2, RefreshCw, Upload, Video, Download, Wand2 } from 'lucide-react';
 import { BACKEND_API } from '../../config/api';
 import { fetchJson } from '../../utils/fetchJson';
 import { useToast } from '../../components/ui/Toast';
@@ -99,6 +99,14 @@ export const Wan21SteadyDancerPage = () => {
   const [uploadingSubject, setUploadingSubject] = useState(false);
   const [uploadingMotion, setUploadingMotion] = useState(false);
 
+  // TikTok Download
+  const [tkUrl, setTkUrl] = useState('');
+  const [isDownloadingTk, setIsDownloadingTk] = useState(false);
+  const [tkProgress, setTkProgress] = useState(0);
+
+  // Frame Capture
+  const [isCapturing, setIsCapturing] = useState(false);
+
   const [isGenerating, setIsGenerating] = useState(false);
   const [pendingPromptId, setPendingPromptId] = useState<string | null>(null);
   const [currentVideo, setCurrentVideo] = usePersistentState<string | null>('wan21_sd_current_video', null);
@@ -115,6 +123,13 @@ export const Wan21SteadyDancerPage = () => {
   const motionPreview = motionVideoFile ? `/comfy/view?filename=${encodeURIComponent(motionVideoFile)}&type=input` : null;
 
   useEffect(() => {
+    // Ensure core models (CLIP vision, etc) are present
+    fetchJson<any>(`${BACKEND_API.BASE_URL}/api/models/zimage-core/ensure`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ models: ['clip_vision_h.safetensors'] })
+    }).catch(() => {});
+
     comfyService
       .getLoras()
       .then((loras) => {
@@ -146,6 +161,67 @@ export const Wan21SteadyDancerPage = () => {
     }
   };
 
+  const handleTkDownload = async () => {
+    if (!tkUrl.trim() || isDownloadingTk) return;
+    setIsDownloadingTk(true);
+    setTkProgress(0);
+    try {
+      const data = await fetchJson<any>(`${BACKEND_API.BASE_URL}/api/download/video`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: tkUrl.trim() }),
+      });
+      if (!data.success) throw new Error(data.error || 'Failed to start download');
+
+      const jobId = data.job_id;
+      const poll = setInterval(async () => {
+        try {
+          const status = await fetchJson<any>(`${BACKEND_API.BASE_URL}/api/download/status/${jobId}`);
+          if (status.status === 'completed') {
+            clearInterval(poll);
+            setIsDownloadingTk(false);
+            setMotionVideoFile(status.error); // We stored the filename in 'error' field as a hack
+            setTkUrl('');
+            toast('Video downloaded successfully', 'success');
+          } else if (status.status === 'error') {
+            clearInterval(poll);
+            setIsDownloadingTk(false);
+            throw new Error(status.error || 'Download failed');
+          } else {
+            setTkProgress(status.progress || 0);
+          }
+        } catch (e: any) {
+          clearInterval(poll);
+          setIsDownloadingTk(false);
+          toast(e.message || 'Polling failed', 'error');
+        }
+      }, 1000);
+    } catch (error: any) {
+      setIsDownloadingTk(false);
+      toast(error.message || 'Failed to download', 'error');
+    }
+  };
+
+  const handleCaptureFrame = async () => {
+    if (!motionVideoFile || isCapturing) return;
+    setIsCapturing(true);
+    try {
+      const data = await fetchJson<any>(`${BACKEND_API.BASE_URL}/api/video/extract-frame?filename=${encodeURIComponent(motionVideoFile)}`, {
+        method: 'POST'
+      });
+      if (data.success) {
+        setSubjectImageFile(data.filename);
+        toast('Captured first frame as subject', 'success');
+      } else {
+        throw new Error(data.error || 'Capture failed');
+      }
+    } catch (e: any) {
+      toast(e.message || 'Capture failed', 'error');
+    } finally {
+      setIsCapturing(false);
+    }
+  };
+
   useEffect(() => {
     if (!isGenerating && !pendingPromptId) return;
     if (!lastOutputVideos?.length) return;
@@ -162,9 +238,11 @@ export const Wan21SteadyDancerPage = () => {
 
     sessionRef.current = [...sessionRef.current, ...urls.map(u => u.url)];
     
-    // Pick the best video to show: Prefer non-vitpose ones
-    const mainVid = urls.find(u => !u.isVitPose) || urls[urls.length - 1];
-    if (mainVid) setCurrentVideo(mainVid.url);
+    // Pick the best video to show: Strictly ignore vitpose for the main view
+    const mainVid = urls.find(u => !u.isVitPose);
+    if (mainVid) {
+      setCurrentVideo(mainVid.url);
+    }
 
     setHistory((prev) => [...urls.map(u => u.url), ...prev.filter((u) => !urls.map(x => x.url).includes(u))].slice(0, 40));
   }, [outputReadyCount, lastOutputVideos, isGenerating, pendingPromptId, setCurrentVideo, setHistory]);
@@ -253,9 +331,11 @@ export const Wan21SteadyDancerPage = () => {
     <div className="flex h-full bg-[#080808] overflow-hidden">
       <div className="flex-1 min-w-0 flex flex-col border-r border-white/[0.04] overflow-y-auto custom-scrollbar">
         <div className="px-5 py-5 space-y-6">
-          <div className="flex items-center gap-2">
-            <Film className="w-4 h-4 text-violet-400" />
-            <h2 className="fedda-kicker text-violet-100/90 tracking-widest">WAN 2.1 Steady Dancer</h2>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Film className="w-4 h-4 text-violet-400" />
+              <h2 className="fedda-kicker text-violet-100/90 tracking-widest">WAN 2.1 Steady Dancer</h2>
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -267,13 +347,52 @@ export const Wan21SteadyDancerPage = () => {
                 uploading={uploadingSubject}
                 onFile={(file) => uploadFile(file, (name) => setSubjectImageFile(name), setUploadingSubject)}
               />
-              <UploadCard
-                label="Step 2: Upload Motion"
-                accept="video/*"
-                previewUrl={motionPreview}
-                uploading={uploadingMotion}
-                onFile={(file) => uploadFile(file, (name) => setMotionVideoFile(name), setUploadingMotion)}
-              />
+              <div className="space-y-3">
+                <div className="relative group">
+                  <UploadCard
+                    label="Step 2: Upload Motion"
+                    accept="video/*"
+                    previewUrl={motionPreview}
+                    uploading={uploadingMotion}
+                    onFile={(file) => uploadFile(file, (name) => setMotionVideoFile(name), setUploadingMotion)}
+                  />
+                  {motionVideoFile && (
+                    <button
+                      onClick={handleCaptureFrame}
+                      disabled={isCapturing}
+                      title="Use first frame as subject"
+                      className="absolute top-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 text-violet-400 opacity-0 group-hover:opacity-100 transition-all hover:bg-violet-500/20"
+                    >
+                      {isCapturing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
+                    </button>
+                  )}
+                </div>
+                
+                {/* TikTok Download Input */}
+                <div className="flex gap-2 p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                  <input
+                    type="text"
+                    value={tkUrl}
+                    onChange={(e) => setTkUrl(e.target.value)}
+                    placeholder="or paste TikTok/YouTube URL..."
+                    className="flex-1 bg-transparent text-[11px] outline-none placeholder:text-white/10"
+                  />
+                  <button
+                    onClick={handleTkDownload}
+                    disabled={!tkUrl.trim() || isDownloadingTk}
+                    className="p-1.5 rounded-lg bg-violet-500/10 hover:bg-violet-500/20 text-violet-400 transition-all disabled:opacity-30"
+                  >
+                    {isDownloadingTk ? (
+                      <div className="relative w-4 h-4 flex items-center justify-center">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span className="absolute text-[6px] font-bold">{tkProgress}%</span>
+                      </div>
+                    ) : (
+                      <Download className="w-4 h-4" />
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
