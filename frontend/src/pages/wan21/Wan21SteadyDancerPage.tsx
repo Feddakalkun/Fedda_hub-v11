@@ -106,6 +106,36 @@ export const Wan21SteadyDancerPage = () => {
 
   // Frame Capture
   const [isCapturing, setIsCapturing] = useState(false);
+  const [syncingPose, setSyncingPose] = useState(false);
+
+  const syncPoseFromVideo = async () => {
+    if (!motionVideoFile) {
+      toast('Please upload a video first', 'error');
+      return;
+    }
+    setSyncingPose(true);
+    try {
+      const res = await fetchJson(`${BACKEND_API}/video/sync-pose-character`, {
+        method: 'POST',
+        body: JSON.stringify({
+          video_filename: motionVideoFile,
+          prompt: prompt,
+          lora_name: loraName,
+        }),
+      });
+
+      if (res.success && res.filename) {
+        setSubjectImageFile(res.filename);
+        toast('Subject character generated from video pose!', 'success');
+      } else {
+        toast(res.error || 'Failed to sync pose', 'error');
+      }
+    } catch (e) {
+      toast('Error syncing pose', 'error');
+    } finally {
+      setSyncingPose(false);
+    }
+  };
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [pendingPromptId, setPendingPromptId] = useState<string | null>(null);
@@ -357,14 +387,24 @@ export const Wan21SteadyDancerPage = () => {
                     onFile={(file) => uploadFile(file, (name) => setMotionVideoFile(name), setUploadingMotion)}
                   />
                   {motionVideoFile && (
-                    <button
-                      onClick={handleCaptureFrame}
-                      disabled={isCapturing}
-                      title="Use first frame as subject"
-                      className="absolute top-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 text-violet-400 opacity-0 group-hover:opacity-100 transition-all hover:bg-violet-500/20"
-                    >
-                      {isCapturing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
-                    </button>
+                    <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                      <button
+                        onClick={handleCaptureFrame}
+                        disabled={isCapturing}
+                        title="Simple Frame Capture"
+                        className="p-2 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 text-white/50 hover:text-white hover:bg-white/10 transition-all"
+                      >
+                        {isCapturing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Video className="w-4 h-4" />}
+                      </button>
+                      <button
+                        onClick={syncPoseFromVideo}
+                        disabled={syncingPose}
+                        title="Magic Sync: Character from Pose"
+                        className="p-2 rounded-xl bg-violet-500/20 backdrop-blur-md border border-violet-500/30 text-violet-300 hover:bg-violet-500/40 transition-all shadow-lg shadow-violet-500/10"
+                      >
+                        {syncingPose ? <Loader2 className="w-4 h-4 animate-spin" /> : <Wand2 className="w-4 h-4" />}
+                      </button>
+                    </div>
                   )}
                 </div>
                 

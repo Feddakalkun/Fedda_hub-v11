@@ -2090,6 +2090,104 @@ async def download_status(job_id: str):
     return model_downloader.get_progress(job_id)
 
 
+@app.post("/api/video/sync-pose-character")
+async def sync_pose_character(payload: Dict[str, Any]):
+    """
+    1. Extract first frame from video.
+    2. Run VitPose on frame to get skeleton.
+    3. Run Z-Image Turbo with skeleton to generate character.
+    4. Return result image path.
+    """
+    video_filename = payload.get("video_filename")
+    prompt = payload.get("prompt", "cinematic portrait of a person, high quality, 8k")
+    lora_name = payload.get("lora_name", "zimage_turbo\\Angela_Sun_PMv1a_ZImage.safetensors")
+    
+    if not video_filename:
+        return {"success": False, "error": "Missing video_filename"}
+
+    try:
+        # 1. Extract frame
+        ext_res = await extract_frame(video_filename)
+        if not ext_res.get("success"):
+            return ext_res
+        
+        frame_name = ext_res["filename"]
+        
+        # 2. Run VitPose extraction prompt
+        # We build a minimal workflow to get the pose image
+        pose_workflow = {
+            "1": {"inputs": {"image": frame_name, "upload": "image"}, "class_type": "LoadImage"},
+            "2": {"inputs": {"vitpose_model": "vitpose-l-wholebody.onnx", "yolo_model": "yolov10m.onnx", "onnx_device": "CUDAExecutionProvider"}, "class_type": "OnnxDetectionModelLoader"},
+            "3": {"inputs": {"width": 1024, "height": 1024, "face_padding": 0, "model": ["2", 0], "images": ["1", 0]}, "class_type": "PoseAndFaceDetection"},
+            "4": {"inputs": {"filename_prefix": "POSE_TEMP", "images": ["3", 0]}, "class_type": "SaveImage"}
+        }
+        
+        # Trigger ComfyUI
+        p_resp = requests.post(f"{COMFY_URL}/prompt", json={"prompt": pose_workflow}, timeout=10)
+        if not p_resp.ok:
+            return {"success": False, "error": "ComfyUI pose extraction failed"}
+        
+        prompt_id = p_resp.json()["prompt_id"]
+        
+        # Wait for pose result (polling for simplicity in this bridge)
+        pose_filename = None
+        for _ in range(30):
+            time.sleep(1)
+            h_resp = requests.get(f"{COMFY_URL}/history/{prompt_id}")
+            if h_resp.ok:
+                hist = h_resp.json()
+                if prompt_id in hist:
+                    outputs = hist[prompt_id].get("outputs", {})
+                    for out in outputs.values():
+                        if "images" in out:
+                            pose_filename = out["images"][0]["filename"]
+                            break
+                    if pose_filename: break
+        
+        if not pose_filename:
+            return {"success": False, "error": "Pose extraction timed out"}
+
+        # 3. Run Z-Image Character generation
+        z_workflow_path = ROOT_DIR / "backend" / "workflows" / "z-image" / "z-image-pose-subject.json"
+        with open(z_workflow_path, "r", encoding="utf-8") as f:
+            z_workflow = json.load(f)
+        
+        # Inject inputs
+        z_workflow["6"]["inputs"]["text"] = prompt
+        z_workflow["185"]["inputs"]["lora_name"] = lora_name
+        z_workflow["187"]["inputs"]["image"] = pose_filename
+        
+        # Trigger Character Gen
+        z_resp = requests.post(f"{COMFY_URL}/prompt", json={"prompt": z_workflow}, timeout=10)
+        if not z_resp.ok:
+            return {"success": False, "error": "Z-Image generation failed"}
+        
+        z_prompt_id = z_resp.json()["prompt_id"]
+        
+        # Wait for character result
+        char_filename = None
+        for _ in range(30):
+            time.sleep(1)
+            zh_resp = requests.get(f"{COMFY_URL}/history/{z_prompt_id}")
+            if zh_resp.ok:
+                zhist = zh_resp.json()
+                if z_prompt_id in zhist:
+                    zoutputs = zhist[z_prompt_id].get("outputs", {})
+                    for zout in zoutputs.values():
+                        if "images" in zout:
+                            char_filename = zout["images"][0]["filename"]
+                            break
+                    if char_filename: break
+        
+        if not char_filename:
+            return {"success": False, "error": "Character generation timed out"}
+            
+        return {"success": True, "filename": char_filename}
+
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
 @app.post("/api/video/extract-frame")
 async def extract_frame(filename: str):
     """Extract first frame from a video in ComfyUI input using OpenCV."""
