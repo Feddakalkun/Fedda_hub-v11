@@ -294,11 +294,15 @@ if (Test-Path $PatchSourceDir) {
 }
 
 # ============================================================================
-# 1b. PATCH PYTHON DEPENDENCIES - fix known version conflicts
+# 1b. PATCH PYTHON DEPENDENCIES - fix known version conflicts & missing deps
 # ============================================================================
 Write-Host "`n[1b/3] Patching Python dependencies..." -ForegroundColor Yellow
 
-# Florence2 requires transformers >= 4.45 for is_flash_attn_greater_or_equal_2_10
+# Ensure OpenCV is installed for video frame extraction
+Write-Host "  Ensuring opencv-python is installed..." -ForegroundColor White
+& $PyExe -m pip install opencv-python --no-warn-script-location 2>&1 | Out-Null
+
+# Florence2 requires transformers >= 4.45
 $TransformersVersion = & $PyExe -c "import transformers; print(transformers.__version__)" 2>$null
 $NeedsTransformersUpgrade = $true
 if ($TransformersVersion -match '^(\d+)\.(\d+)') {

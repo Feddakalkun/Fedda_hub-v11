@@ -286,5 +286,11 @@
     "url": "https://github.com/Saganaki22/ComfyUI-FishAudioS2.git",
     "folder": "ComfyUI-FishAudioS2",
     "note": "Fish Audio S2-Pro TTS — voice clone, multi-speaker, text-to-speech"
+  },
+  {
+    "name": "ComfyUI-WanVideoWrapper",
+    "url": "https://github.com/ZHO-ZHO-ZHO/ComfyUI-WanVideoWrapper.git",
+    "folder": "ComfyUI-WanVideoWrapper",
+    "note": "Essential: Wan 2.1 video nodes (Steady Dancer, I2V, T2V)"
   }
 ]
