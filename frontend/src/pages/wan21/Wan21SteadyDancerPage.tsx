@@ -35,21 +35,21 @@ function UploadCard({
         if (file) onFile(file);
       }}
       onDragOver={(e) => e.preventDefault()}
-      className="relative rounded-xl border border-dashed border-white/[0.08] bg-white/[0.02] hover:border-violet-500/30 transition-all cursor-pointer overflow-hidden min-h-[160px]"
+      className="relative rounded-xl border border-dashed border-white/[0.08] bg-white/[0.02] hover:border-violet-500/30 transition-all cursor-pointer overflow-hidden h-[180px]"
     >
       {previewUrl ? (
-        <div className="h-full">
+        <div className="h-full bg-black/40">
           {isVideo ? (
-            <video src={previewUrl} className="w-full h-full object-cover min-h-[160px]" muted loop autoPlay playsInline />
+            <video src={previewUrl} className="w-full h-full object-contain" muted loop autoPlay playsInline />
           ) : (
-            <img src={previewUrl} alt={label} className="w-full h-full object-cover min-h-[160px]" />
+            <img src={previewUrl} alt={label} className="w-full h-full object-contain" />
           )}
           <div className="absolute inset-0 bg-black/45 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
             <span className="text-[10px] font-black uppercase tracking-widest text-white/75">Replace</span>
           </div>
         </div>
       ) : (
-        <div className="h-full min-h-[160px] flex flex-col items-center justify-center gap-2">
+        <div className="h-full flex flex-col items-center justify-center gap-2">
           {uploading ? <Loader2 className="w-6 h-6 animate-spin text-violet-400/70" /> : <Upload className="w-6 h-6 text-white/15" />}
           <span className="text-[9px] font-black uppercase tracking-widest text-white/25">{uploading ? 'Uploading...' : label}</span>
         </div>
@@ -287,9 +287,9 @@ export const Wan21SteadyDancerPage = () => {
     // Set params based on quality
     let finalSteps = steps;
     let finalCfg = cfg;
-    if (quality === 'fast') { finalSteps = 3; finalCfg = 1.0; }
-    else if (quality === 'balanced') { finalSteps = 5; finalCfg = 1.2; }
-    else if (quality === 'high') { finalSteps = 8; finalCfg = 1.5; }
+    if (quality === 'fast') { finalSteps = 4; finalCfg = 1.0; }
+    else if (quality === 'balanced') { finalSteps = 8; finalCfg = 1.2; }
+    else if (quality === 'high') { finalSteps = 14; finalCfg = 1.8; }
 
     try {
       const data = await fetchJson<any>(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.GENERATE}`, {

@@ -26,8 +26,8 @@ export const VideoOutputPanel = ({
       <div className="p-3 border-b border-white/10">
         {currentVideo ? (
           <div className="space-y-2">
-            <div className="rounded-xl overflow-hidden border border-white/10 bg-black">
-              <video src={currentVideo} className="w-full aspect-video object-contain" controls playsInline />
+            <div className="rounded-xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-sm relative flex items-center justify-center min-h-[300px] max-h-[600px]">
+              <video src={currentVideo} className="max-w-full max-h-[600px] object-contain" controls playsInline />
             </div>
             <div className="grid grid-cols-2 gap-2">
               <button

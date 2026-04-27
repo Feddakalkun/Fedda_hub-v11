@@ -99,7 +99,7 @@ const HUB_CARDS: Array<{
   },
   {
     id: 'explore',
-    label: 'Media Hub',
+    label: 'Explore',
     description: 'Gallery, videos and LoRA library.',
     Icon: Images,
     image: CARD_IMAGE_BY_TAB.explore,
@@ -153,7 +153,7 @@ const TOOL_GROUPS: Record<Exclude<RootSection, 'hub'>, Array<{ title: string; to
   ],
   explore: [
     {
-      title: 'Media Hub',
+      title: 'Explore',
       tools: [
         { tab: 'gallery', label: 'Gallery', description: 'Image history and downloads.' },
         { tab: 'videos', label: 'Videos', description: 'Video history and downloads.' },
@@ -247,6 +247,64 @@ function FeddaApp() {
     description: 'Active workspace view.',
     Icon: Sparkles,
   };
+  const tabSectionMap: Record<string, Exclude<RootSection, 'hub'>> = {
+    image: 'image',
+    'z-image': 'image',
+    'z-image-txt2img': 'image',
+    'z-image-dual-lora': 'image',
+    flux: 'image',
+    'flux-txt2img': 'image',
+    qwen: 'image',
+    'qwen-txt2img': 'image',
+    'qwen-image-ref': 'image',
+    'qwen-multi-angle': 'image',
+    'image-other': 'image',
+    'image-influencer': 'image',
+    video: 'video',
+    'wan21-steady-dancer': 'video',
+    'wan22-vid2vid': 'video',
+    'wan22-img2vid': 'video',
+    'wan22-img2vid-6frames': 'video',
+    ltx: 'video',
+    'ltx-flf': 'video',
+    'ltx-img-audio': 'video',
+    audio: 'video',
+    gallery: 'explore',
+    videos: 'explore',
+    library: 'explore',
+    chat: 'explore',
+  };
+  const sectionHeaderMeta: Record<Exclude<RootSection, 'hub'>, { label: string; description: string; Icon: typeof Sparkles }> = {
+    image: {
+      label: 'Image Studio',
+      description: 'Cards navigation for image workflows.',
+      Icon: Sparkles,
+    },
+    video: {
+      label: 'Video Studio',
+      description: 'Cards navigation for video workflows.',
+      Icon: Video,
+    },
+    explore: {
+      label: 'Explore',
+      description: 'Cards navigation for gallery and library tools.',
+      Icon: Images,
+    },
+  };
+
+  const headerMeta =
+    view === 'workspace'
+      ? meta
+      : view === 'section' && activeSection
+        ? sectionHeaderMeta[activeSection]
+        : {
+            label: 'FEDDA v11',
+            description: 'Cards-first navigation shell',
+            Icon: Sparkles,
+          };
+  const workspaceSection =
+    view === 'workspace' ? sectionHeaderMeta[tabSectionMap[activeTab] ?? 'explore'].label : null;
+
   const openWorkspace = (tab: string, origin: 'hub' | 'section') => {
     if (!VALID_TABS.has(tab)) return;
     setActiveTab(tab);
@@ -299,34 +357,58 @@ function FeddaApp() {
       ? 'Image Studio'
       : activeSection === 'video'
         ? 'Video Studio'
-        : 'Media Hub';
+        : 'Explore';
 
   return (
     <div className="flex h-screen theme-bg-app text-white overflow-hidden font-sans">
       {showLanding && <LandingPage onEnter={() => setShowLanding(false)} />}
 
       <main className="flex-1 flex flex-col overflow-hidden theme-bg-main">
-        <header className="h-14 border-b border-white/10 px-3 md:px-5 flex items-center justify-between backdrop-blur-sm bg-black/30 shrink-0 sticky top-0 z-40">
-          <div className="flex items-center min-w-[36px]">
-            {view !== 'hub' ? (
-              <button
-                onClick={() => {
-                  if (view === 'workspace') {
-                    setView(workspaceOrigin === 'section' ? 'section' : 'hub');
-                  } else {
-                    setView('hub');
-                  }
-                }}
-                className="v11-icon-btn"
-                title="Back"
-              >
-                <ArrowLeft className="w-4 h-4" />
-              </button>
-            ) : (
-              <div className="w-9 h-9" />
-            )}
+        <header className="border-b border-white/10 flex flex-col backdrop-blur-md bg-black/40 shrink-0">
+          {/* Row 1: Primary Navigation & Titles */}
+          <div className="h-12 px-5 md:px-6 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {view !== 'hub' && (
+                <button
+                  onClick={() => {
+                    if (view === 'workspace') {
+                      setView(workspaceOrigin === 'section' ? 'section' : 'hub');
+                    } else {
+                      setView('hub');
+                    }
+                  }}
+                  className="v11-icon-btn"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
+              )}
+              <headerMeta.Icon className="w-4 h-4 text-violet-400/80" />
+              <div className="leading-tight">
+                <p className="text-sm font-bold tracking-tight text-white/90">{headerMeta.label}</p>
+                {/* description hidden on small headers or moved to hover if needed, but for now we keep it clean */}
+              </div>
+              {workspaceSection && (
+                <div className="hidden lg:flex items-center gap-2 ml-3 text-[10px] uppercase font-black tracking-widest text-white/20">
+                  <span className="px-2 py-0.5 rounded border border-white/5 bg-white/[0.02]">{workspaceSection}</span>
+                  <span className="text-[8px] opacity-50">/</span>
+                  <span className="text-white/40">{headerMeta.label}</span>
+                </div>
+              )}
+            </div>
+            
+            <div className="flex items-center gap-4">
+              {/* Logo / Branding */}
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20">
+                <div className="w-2 h-2 rounded-full bg-violet-400 animate-pulse" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-violet-200">FEDDA v11</span>
+              </div>
+            </div>
           </div>
-          <TopSystemStrip />
+
+          {/* Row 2: Technical System Strip */}
+          <div className="h-10 px-4 md:px-6 border-t border-white/[0.04] flex items-center bg-black/20 overflow-x-auto no-scrollbar">
+            <TopSystemStrip />
+          </div>
         </header>
 
         <div className={isHubView ? 'flex-1 overflow-hidden' : 'flex-1 overflow-auto p-5 md:p-8 custom-scrollbar'}>

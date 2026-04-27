@@ -271,6 +271,29 @@ if ($NeedNodeUpdate -or $HasMissing) {
 }
 
 # ============================================================================
+# 1c. APPLY CUSTOM NODE PATCHES
+# ============================================================================
+$PatchSourceDir = Join-Path $RootPath "custom_node_patches"
+if (Test-Path $PatchSourceDir) {
+    Write-Host "`n[1c/3] Applying custom node patches..." -ForegroundColor Yellow
+    $PatchesFound = Get-ChildItem -Path $PatchSourceDir -Directory
+    foreach ($PFolder in $PatchesFound) {
+        $NodeFolderName = $PFolder.Name
+        $TargetNodeDir = Join-Path $CustomNodesDir $NodeFolderName
+        
+        # Special case for WanVideoWrapper because of naming mismatch in repo
+        if ($NodeFolderName -eq "WanVideoWrapper") { $TargetNodeDir = Join-Path $CustomNodesDir "ComfyUI-WanVideoWrapper" }
+        
+        if (Test-Path $TargetNodeDir) {
+            Write-Host "  Applying patches for $NodeFolderName..." -ForegroundColor White
+            # Copy all files from patch folder to target node dir recursively
+            Copy-Item -Path "$(Join-Path $PFolder.FullName '*') " -Destination $TargetNodeDir -Recurse -Force
+            Write-Host "  $NodeFolderName patches applied OK" -ForegroundColor Green
+        }
+    }
+}
+
+# ============================================================================
 # 1b. PATCH PYTHON DEPENDENCIES - fix known version conflicts
 # ============================================================================
 Write-Host "`n[1b/3] Patching Python dependencies..." -ForegroundColor Yellow
