@@ -1,0 +1,425 @@
+{
+  "id": "7f33d090-57b6-4edb-acc9-e666db74f5af",
+  "revision": 0,
+  "last_node_id": 85,
+  "last_link_id": 115,
+  "nodes": [
+    {
+      "id": 49,
+      "type": "Label (rgthree)",
+      "pos": [
+        220,
+        -460
+      ],
+      "size": [
+        662.98828125,
+        100
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "IMPORTANT!!!",
+      "properties": {
+        "fontSize": 100,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 9,
+      "type": "Note",
+      "pos": [
+        220,
+        -330
+      ],
+      "size": [
+        660,
+        220
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "DO NOT USE LONG FOLDER NAMES AND SPACES FOR COMFYUI STUDIO. Because the audio workflow will not work.\nGOOD PATH SAMPLE: C:/studio/\nBAD PATH SAMPLE: C:/comfy ui studio/v 200/\n\nuse 15 seconds audio input.\n\nIf an error occurs, install FFmpeg on your PC. A one-click installer is available in the update archive, or in the Patreon post and Discord.\n\nIf you have low vram use this online tool:\nhttps://huggingface.co/spaces/webml-community/kokoro-web\nhttps://playground.zyphra.com/audio\n\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 80,
+      "type": "AudioCrop",
+      "pos": [
+        270,
+        170
+      ],
+      "size": [
+        310,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 109
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            110,
+            113
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "audio-separation-nodes-comfyui",
+        "ver": "31a4567726e035097cc2d1f767767908a6fda2ea",
+        "Node name for S&R": "AudioCrop"
+      },
+      "widgets_values": [
+        "0:00",
+        "0:15"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 83,
+      "type": "SaveText|pysssss",
+      "pos": [
+        940,
+        -10
+      ],
+      "size": [
+        400,
+        130
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 114
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "SAVE TEXT FILE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "bbda5e52ad580c13ceaa53136d9c2bed9137bd2e",
+        "Node name for S&R": "SaveText|pysssss"
+      },
+      "widgets_values": [
+        "output",
+        "AUDIOCAPTION.txt",
+        "append",
+        true
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 81,
+      "type": "SaveAudio",
+      "pos": [
+        270,
+        300
+      ],
+      "size": [
+        310,
+        112
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 113
+        }
+      ],
+      "outputs": [],
+      "title": "Save Cropped  Audio (FLAC)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "SaveAudio"
+      },
+      "widgets_values": [
+        "AUDIO/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 6,
+      "type": "LoadAudio",
+      "pos": [
+        270,
+        -10
+      ],
+      "size": [
+        310,
+        136
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "slot_index": 0,
+          "links": [
+            109
+          ]
+        }
+      ],
+      "title": "SAMPLE AUDIO",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "AUDIO WOMAN.MP3",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 4,
+      "type": "Apply Whisper",
+      "pos": [
+        600,
+        -10
+      ],
+      "size": [
+        320,
+        122
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 110
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            9
+          ]
+        },
+        {
+          "name": "segments_alignment",
+          "type": "whisper_alignment",
+          "links": null
+        },
+        {
+          "name": "words_alignment",
+          "type": "whisper_alignment",
+          "links": null
+        }
+      ],
+      "title": "AUDIO TO CAPTION - Whisper node",
+      "properties": {
+        "Node name for S&R": "Apply Whisper",
+        "cnr_id": "whisper",
+        "ver": "edd1a485acf5e1e14835fdf8c4af982c0eaf115f"
+      },
+      "widgets_values": [
+        "base",
+        "auto"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 85,
+      "type": "Label (rgthree)",
+      "pos": [
+        740,
+        130
+      ],
+      "size": [
+        179.82421875,
+        22
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Choose Language",
+      "properties": {
+        "fontSize": 22,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 8,
+      "type": "ShowText|pysssss",
+      "pos": [
+        940,
+        160
+      ],
+      "size": [
+        400,
+        170
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "pos": [
+            10,
+            36
+          ],
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            114
+          ]
+        }
+      ],
+      "title": "CAPTION",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "bbda5e52ad580c13ceaa53136d9c2bed9137bd2e",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "So I was like, I was working there and then we had a client that came. And he asked for a drink and I said, oh, you should try this one. And he said, like, well, I would get anything that you sell because you're so magical."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      9,
+      4,
+      0,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      109,
+      6,
+      0,
+      80,
+      0,
+      "AUDIO"
+    ],
+    [
+      110,
+      80,
+      0,
+      4,
+      0,
+      "AUDIO"
+    ],
+    [
+      113,
+      80,
+      0,
+      81,
+      0,
+      "AUDIO"
+    ],
+    [
+      114,
+      8,
+      0,
+      83,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "AUDIO caption",
+      "bounding": [
+        220,
+        -100,
+        1150,
+        540
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2025-01-14T21:02:01.367Z",
+      "modified": "2025-01-21T12:25:02.298Z",
+      "software": "ComfyUI"
+    },
+    "ue_links": [],
+    "frontendVersion": "1.20.7"
+  },
+  "version": 0.4
+}

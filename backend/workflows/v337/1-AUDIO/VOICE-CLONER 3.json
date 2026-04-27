@@ -1,0 +1,1858 @@
+{
+  "id": "7f33d090-57b6-4edb-acc9-e666db74f5af",
+  "revision": 0,
+  "last_node_id": 112,
+  "last_link_id": 134,
+  "nodes": [
+    {
+      "id": 80,
+      "type": "AudioCrop",
+      "pos": [
+        230,
+        670
+      ],
+      "size": [
+        310,
+        82
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 109
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            110,
+            111,
+            113
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "audio-separation-nodes-comfyui",
+        "ver": "31a4567726e035097cc2d1f767767908a6fda2ea",
+        "Node name for S&R": "AudioCrop"
+      },
+      "widgets_values": [
+        "0:00",
+        "0:15"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 81,
+      "type": "SaveAudio",
+      "pos": [
+        230,
+        800
+      ],
+      "size": [
+        310,
+        112
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 113
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "SaveAudio"
+      },
+      "widgets_values": [
+        "AUDIO/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 4,
+      "type": "Apply Whisper",
+      "pos": [
+        570,
+        490
+      ],
+      "size": [
+        320,
+        122
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 110
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            9,
+            89
+          ]
+        },
+        {
+          "name": "segments_alignment",
+          "type": "whisper_alignment",
+          "links": null
+        },
+        {
+          "name": "words_alignment",
+          "type": "whisper_alignment",
+          "links": null
+        }
+      ],
+      "title": "AUDIO TO CAPTION - Whisper node",
+      "properties": {
+        "cnr_id": "whisper",
+        "ver": "edd1a485acf5e1e14835fdf8c4af982c0eaf115f",
+        "Node name for S&R": "Apply Whisper"
+      },
+      "widgets_values": [
+        "base",
+        "auto"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 8,
+      "type": "ShowText|pysssss",
+      "pos": [
+        570,
+        660
+      ],
+      "size": [
+        320,
+        190
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "pos": [
+            10,
+            36
+          ],
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            114
+          ]
+        }
+      ],
+      "title": "CAPTION",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "bbda5e52ad580c13ceaa53136d9c2bed9137bd2e",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "A small bird woke up early and saw the sunrise painting the sky in orange and pink. It spread its wings and flew across the quiet village, singing a cheerful tune. Down below, a little girl looked up and smiled, waving as the birds heard."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 83,
+      "type": "SaveText|pysssss",
+      "pos": [
+        910,
+        780
+      ],
+      "size": [
+        400,
+        130
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 114
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "SAVE TEXT FILE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "bbda5e52ad580c13ceaa53136d9c2bed9137bd2e",
+        "Node name for S&R": "SaveText|pysssss"
+      },
+      "widgets_values": [
+        "output",
+        "AUDIOCAPTION.txt",
+        "append",
+        true
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 9,
+      "type": "Note",
+      "pos": [
+        -500,
+        520
+      ],
+      "size": [
+        660,
+        220
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "DO NOT USE LONG FOLDER NAMES AND SPACES FOR COMFYUI STUDIO. Because the audio workflow will not work.\nGOOD PATH SAMPLE: C:/studio/\nBAD PATH SAMPLE: C:/comfy ui studio/v 200/\n\nuse 15 seconds audio input.\n\nIf an error occurs, install FFmpeg on your PC. A one-click installer is available in the update archive, or in the Patreon post and Discord.\n\nIf you have low vram use this online tool:\nhttps://huggingface.co/spaces/webml-community/kokoro-web\nhttps://playground.zyphra.com/audio\n\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 71,
+      "type": "F5TTSAudioInputs",
+      "pos": [
+        910,
+        490
+      ],
+      "size": [
+        400,
+        252
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "sample_audio",
+          "type": "AUDIO",
+          "link": 111
+        },
+        {
+          "name": "sample_text",
+          "type": "STRING",
+          "widget": {
+            "name": "sample_text"
+          },
+          "link": 89
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "slot_index": 0,
+          "links": [
+            92,
+            119
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-f5-tts",
+        "ver": "5a1994362d53320ba7a4e3bc390d3136132af9be",
+        "Node name for S&R": "F5TTSAudioInputs"
+      },
+      "widgets_values": [
+        "Text of sample_audio",
+        "Introducing the ComfyUI audio workflow for voice cloning, image-to-video lip-sync, and video-to-video lip-sync. Make anyone say anything in 11 languages. Let’s get started!",
+        1009,
+        "randomize",
+        "F5 English",
+        "vocos"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 89,
+      "type": "SaveAudioMP3",
+      "pos": [
+        1340,
+        720
+      ],
+      "size": [
+        310,
+        136
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 119
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.46",
+        "Node name for S&R": "SaveAudioMP3"
+      },
+      "widgets_values": [
+        "AUDIO/0",
+        "320k"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 3,
+      "type": "SaveAudio",
+      "pos": [
+        1330,
+        490
+      ],
+      "size": [
+        320,
+        190
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 92
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "SaveAudio"
+      },
+      "widgets_values": [
+        "AUDIO/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 90,
+      "type": "Label (rgthree)",
+      "pos": [
+        1280,
+        -1610
+      ],
+      "size": [
+        287.79296875,
+        20
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "EMOTION REFERENCE INPUT",
+      "properties": {
+        "fontSize": 20,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 91,
+      "type": "Label (rgthree)",
+      "pos": [
+        740,
+        -1440
+      ],
+      "size": [
+        96.046875,
+        36
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "BASE",
+      "properties": {
+        "fontSize": 36,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 92,
+      "type": "Label (rgthree)",
+      "pos": [
+        1740,
+        -1440
+      ],
+      "size": [
+        332.05078125,
+        36
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "EMOTION SLIDERS",
+      "properties": {
+        "fontSize": 36,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 93,
+      "type": "Note",
+      "pos": [
+        740,
+        -1550
+      ],
+      "size": [
+        400,
+        90
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "BASE – This audio cloner replicates the input audio and generates a new audio track in the same voice and emotion."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 94,
+      "type": "Note",
+      "pos": [
+        1240,
+        -1710
+      ],
+      "size": [
+        400,
+        90
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "You can add a reference audio to provide emotional cues."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 96,
+      "type": "Note",
+      "pos": [
+        1740,
+        -1550
+      ],
+      "size": [
+        400,
+        90
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Use the emotion slider to control emotional intensity."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 99,
+      "type": "SaveAudio",
+      "pos": [
+        1240,
+        -670
+      ],
+      "size": [
+        400,
+        112
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 122
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.57",
+        "Node name for S&R": "SaveAudio",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "filename_prefix": true,
+            "audioUI": true
+          }
+        }
+      },
+      "widgets_values": [
+        "AUDIO/TTS2/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 100,
+      "type": "LoadAudio",
+      "pos": [
+        1240,
+        -1550
+      ],
+      "size": [
+        400,
+        136
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            126
+          ]
+        }
+      ],
+      "title": "Emotion reference audio input",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.57",
+        "Node name for S&R": "LoadAudio",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "audio": true,
+            "audioUI": true,
+            "upload": true
+          }
+        }
+      },
+      "widgets_values": [
+        "AUDIO WOMAN.MP3",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 104,
+      "type": "CR Text",
+      "pos": [
+        240,
+        -1200
+      ],
+      "size": [
+        370,
+        200
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "*",
+          "links": [
+            124,
+            127,
+            129
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "TEXT",
+      "properties": {
+        "cnr_id": "ComfyUI_Comfyroll_CustomNodes",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Text",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "text": true
+          }
+        }
+      },
+      "widgets_values": [
+        "A small bird woke up early and saw the sunrise painting the sky in orange and pink.\nIt spread its wings and flew across the quiet village, singing a cheerful tune.\nDown below, a little girl looked up and smiled, waving as the bird circled above her.\nShe followed its flight until it landed on a tree near her window.\nEvery morning after that, the bird returned to greet her with its song.\nAnd soon, the girl and the bird became the best of friends.",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 49,
+      "type": "Label (rgthree)",
+      "pos": [
+        -480,
+        390
+      ],
+      "size": [
+        662.98828125,
+        100
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "IMPORTANT!!!",
+      "properties": {
+        "fontSize": 100,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 106,
+      "type": "Label (rgthree)",
+      "pos": [
+        200,
+        -1840
+      ],
+      "size": [
+        680.6884765625,
+        50
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "INDEX TTS2 VOICE CLONER",
+      "properties": {
+        "fontSize": 50,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 107,
+      "type": "Label (rgthree)",
+      "pos": [
+        200,
+        -350
+      ],
+      "size": [
+        729.736328125,
+        50
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "CHATTERBOX VOICE CLONER",
+      "properties": {
+        "fontSize": 50,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 108,
+      "type": "Label (rgthree)",
+      "pos": [
+        200,
+        350
+      ],
+      "size": [
+        547.509765625,
+        50
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Multilingual Voice Cloner",
+      "properties": {
+        "fontSize": 50,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 97,
+      "type": "SaveAudio",
+      "pos": [
+        1740,
+        -670
+      ],
+      "size": [
+        400,
+        112
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 120
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.57",
+        "Node name for S&R": "SaveAudio",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "filename_prefix": true,
+            "audioUI": true
+          }
+        }
+      },
+      "widgets_values": [
+        "AUDIO/TTS2/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 101,
+      "type": "IndexTTS2BaseNode",
+      "pos": [
+        740,
+        -1370
+      ],
+      "size": [
+        400,
+        570
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "reference_audio",
+          "type": "AUDIO",
+          "link": 123
+        },
+        {
+          "name": "cache_control",
+          "shape": 7,
+          "type": "DICT",
+          "link": null
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 124
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            121
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "subtitle",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "chenpipi0807/ComfyUI-Index-TTS",
+        "ver": "9f1685ac0db7faa565efd5122a5db747502d142d",
+        "Node name for S&R": "IndexTTS2BaseNode",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "text": true,
+            "mode": true,
+            "do_sample_mode": true,
+            "temperature": true,
+            "top_p": true,
+            "top_k": true,
+            "num_beams": true,
+            "repetition_penalty": true,
+            "length_penalty": true,
+            "max_mel_tokens": true,
+            "max_tokens_per_sentence": true,
+            "seed": true
+          }
+        }
+      },
+      "widgets_values": [
+        "Hello, this is IndexTTS 2.他的完美程度接近85%。版本1，版本2，版本3在4090机器上都可以正确工作",
+        "Auto",
+        "on",
+        0.8,
+        0.9,
+        30,
+        3,
+        10,
+        0,
+        1815,
+        120,
+        3767234066,
+        "randomize",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 110,
+      "type": "easy showAnything",
+      "pos": [
+        -240,
+        -1230
+      ],
+      "size": [
+        400,
+        190
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 130
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "=== GIT CLONE REPORT ===\nTotal repositories: 2\nSuccessfully cloned/updated: 1\nAlready existing: 1\nInterrupted: 0\nFailed: 0\nMax concurrent: 1\nClone depth: Full history\nForce update: False\nInclude submodules: False\n\nDetails:\n✓ IndexTTS-2: Already cloned (258515cc)\n✓ w2v-bert-2.0: Cloned successfully to IndexTTS-2/w2v-bert-2.0 (8.7 GB)"
+      ]
+    },
+    {
+      "id": 111,
+      "type": "Label (rgthree)",
+      "pos": [
+        -260,
+        -1650
+      ],
+      "size": [
+        430.224609375,
+        36
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 13,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [],
+      "title": "Model downloader (5.6GB)",
+      "properties": {
+        "fontSize": 36,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 95,
+      "type": "LoadAudio",
+      "pos": [
+        240,
+        -1390
+      ],
+      "size": [
+        370,
+        136
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            123,
+            125,
+            128
+          ]
+        }
+      ],
+      "title": "Voice Reference",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.57",
+        "Node name for S&R": "LoadAudio",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "audio": true,
+            "audioUI": true,
+            "upload": true
+          }
+        }
+      },
+      "widgets_values": [
+        "Sexy Voice.flac",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 6,
+      "type": "LoadAudio",
+      "pos": [
+        230,
+        490
+      ],
+      "size": [
+        310,
+        136
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "slot_index": 0,
+          "links": [
+            109
+          ]
+        }
+      ],
+      "title": "SAMPLE AUDIO",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "Sexy Voice.flac",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 84,
+      "type": "LoadAudio",
+      "pos": [
+        210,
+        -230
+      ],
+      "size": [
+        342.5999755859375,
+        136
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            131
+          ]
+        }
+      ],
+      "title": "Pick voice to clone",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.40",
+        "Node name for S&R": "LoadAudio",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [
+        "Sexy Voice.flac",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 98,
+      "type": "SaveAudio",
+      "pos": [
+        740,
+        -670
+      ],
+      "size": [
+        400,
+        112
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 121
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.57",
+        "Node name for S&R": "SaveAudio",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "filename_prefix": true,
+            "audioUI": true
+          }
+        }
+      },
+      "widgets_values": [
+        "AUDIO/TTS2/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 109,
+      "type": "GitCloneManager",
+      "pos": [
+        -240,
+        -1570
+      ],
+      "size": [
+        400,
+        300
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clone_report",
+          "type": "STRING",
+          "links": [
+            130
+          ]
+        },
+        {
+          "name": "repository_list",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "bf895c75df55a2e14bd4c34a3fa82826d4b19d71",
+        "Node name for S&R": "GitCloneManager"
+      },
+      "widgets_values": [
+        "https://huggingface.co/IndexTeam/IndexTTS-2 IndexTTS-2\nhttps://huggingface.co/facebook/w2v-bert-2.0 IndexTTS-2/w2v-bert-2.0",
+        true,
+        1,
+        0,
+        true,
+        false,
+        false,
+        "",
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 112,
+      "type": "ChatterboxTTS",
+      "pos": [
+        570,
+        -230
+      ],
+      "size": [
+        418.18182373046875,
+        391.4545593261719
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio_prompt",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 131
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            132,
+            133,
+            134
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-ChatterboxTTS",
+        "ver": "f0300cf84ee1b8fc9cbd38cb68cb3bace1895063",
+        "Node name for S&R": "ChatterboxTTS"
+      },
+      "widgets_values": [
+        "resembleai_default_voice",
+        "A small bird woke up early and saw the sunrise painting the sky in orange and pink.\nIt spread its wings and flew across the quiet village, singing a cheerful tune.\nDown below, a little girl looked up and smiled, waving as the bird circled above her.\nShe followed its flight until it landed on a tree near her window.\nEvery morning after that, the bird returned to greet her with its song.\nAnd soon, the girl and the bird became the best of friends.",
+        1000,
+        0.7,
+        0.5,
+        0.8,
+        0.5,
+        1.2,
+        0.05,
+        1,
+        751441925434451,
+        "randomize",
+        false,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 86,
+      "type": "PreviewAudio",
+      "pos": [
+        1020,
+        -230
+      ],
+      "size": [
+        270,
+        90
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 132
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.40",
+        "Node name for S&R": "PreviewAudio",
+        "widget_ue_connectable": {}
+      },
+      "widgets_values": [],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 87,
+      "type": "SaveAudio",
+      "pos": [
+        1020,
+        -100
+      ],
+      "size": [
+        270,
+        112
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 133
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.43",
+        "Node name for S&R": "SaveAudio"
+      },
+      "widgets_values": [
+        "AUDIO/0"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 88,
+      "type": "SaveAudioMP3",
+      "pos": [
+        1020,
+        60
+      ],
+      "size": [
+        270,
+        136
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 134
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.43",
+        "Node name for S&R": "SaveAudioMP3"
+      },
+      "widgets_values": [
+        "AUDIO/0",
+        "V0"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 102,
+      "type": "IndexTTS2EmotionAudioNode",
+      "pos": [
+        1240,
+        -1370
+      ],
+      "size": [
+        400,
+        570
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "reference_audio",
+          "type": "AUDIO",
+          "link": 125
+        },
+        {
+          "name": "cache_control",
+          "shape": 7,
+          "type": "DICT",
+          "link": null
+        },
+        {
+          "name": "emo_ref_audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 126
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 127
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            122
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "subtitle",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "chenpipi0807/ComfyUI-Index-TTS",
+        "ver": "9f1685ac0db7faa565efd5122a5db747502d142d",
+        "Node name for S&R": "IndexTTS2EmotionAudioNode",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "text": true,
+            "mode": true,
+            "do_sample_mode": true,
+            "temperature": true,
+            "top_p": true,
+            "top_k": true,
+            "num_beams": true,
+            "repetition_penalty": true,
+            "length_penalty": true,
+            "max_mel_tokens": true,
+            "max_tokens_per_sentence": true,
+            "seed": true,
+            "emotion_weight": true
+          }
+        }
+      },
+      "widgets_values": [
+        "Hello, this is IndexTTS 2.他的完美程度接近85%。版本1，版本2，版本3在4090机器上都可以正确工作",
+        "Auto",
+        "on",
+        0.8,
+        0.9,
+        30,
+        3,
+        10,
+        0,
+        1815,
+        120,
+        3947711722,
+        "randomize",
+        1.4,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 103,
+      "type": "IndexTTS2EmotionVectorNode",
+      "pos": [
+        1740,
+        -1370
+      ],
+      "size": [
+        400,
+        613
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "reference_audio",
+          "type": "AUDIO",
+          "link": 128
+        },
+        {
+          "name": "cache_control",
+          "shape": 7,
+          "type": "DICT",
+          "link": null
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 129
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [
+            120
+          ]
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "subtitle",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "chenpipi0807/ComfyUI-Index-TTS",
+        "ver": "9f1685ac0db7faa565efd5122a5db747502d142d",
+        "Node name for S&R": "IndexTTS2EmotionVectorNode",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "text": true,
+            "mode": true,
+            "do_sample_mode": true,
+            "temperature": true,
+            "top_p": true,
+            "top_k": true,
+            "num_beams": true,
+            "repetition_penalty": true,
+            "length_penalty": true,
+            "max_mel_tokens": true,
+            "max_tokens_per_sentence": true,
+            "seed": true,
+            "Happy": true,
+            "Angry": true,
+            "Sad": true,
+            "Fear": true,
+            "Hate": true,
+            "Love": true,
+            "Surprise": true,
+            "Neutral": true
+          }
+        }
+      },
+      "widgets_values": [
+        "Hello, this is IndexTTS 2.他的完美程度接近85%。版本1，版本2，版本3在4090机器上都可以正确工作",
+        "Auto",
+        "on",
+        0.8,
+        0.9,
+        30,
+        1,
+        10,
+        0,
+        1815,
+        120,
+        2568106584,
+        "fixed",
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      9,
+      4,
+      0,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      89,
+      4,
+      0,
+      71,
+      1,
+      "STRING"
+    ],
+    [
+      92,
+      71,
+      0,
+      3,
+      0,
+      "AUDIO"
+    ],
+    [
+      109,
+      6,
+      0,
+      80,
+      0,
+      "AUDIO"
+    ],
+    [
+      110,
+      80,
+      0,
+      4,
+      0,
+      "AUDIO"
+    ],
+    [
+      111,
+      80,
+      0,
+      71,
+      0,
+      "AUDIO"
+    ],
+    [
+      113,
+      80,
+      0,
+      81,
+      0,
+      "AUDIO"
+    ],
+    [
+      114,
+      8,
+      0,
+      83,
+      0,
+      "STRING"
+    ],
+    [
+      119,
+      71,
+      0,
+      89,
+      0,
+      "AUDIO"
+    ],
+    [
+      120,
+      103,
+      0,
+      97,
+      0,
+      "AUDIO"
+    ],
+    [
+      121,
+      101,
+      0,
+      98,
+      0,
+      "AUDIO"
+    ],
+    [
+      122,
+      102,
+      0,
+      99,
+      0,
+      "AUDIO"
+    ],
+    [
+      123,
+      95,
+      0,
+      101,
+      0,
+      "AUDIO"
+    ],
+    [
+      124,
+      104,
+      0,
+      101,
+      2,
+      "STRING"
+    ],
+    [
+      125,
+      95,
+      0,
+      102,
+      0,
+      "AUDIO"
+    ],
+    [
+      126,
+      100,
+      0,
+      102,
+      2,
+      "AUDIO"
+    ],
+    [
+      127,
+      104,
+      0,
+      102,
+      3,
+      "STRING"
+    ],
+    [
+      128,
+      95,
+      0,
+      103,
+      0,
+      "AUDIO"
+    ],
+    [
+      129,
+      104,
+      0,
+      103,
+      2,
+      "STRING"
+    ],
+    [
+      130,
+      109,
+      0,
+      110,
+      0,
+      "*"
+    ],
+    [
+      131,
+      84,
+      0,
+      112,
+      0,
+      "AUDIO"
+    ],
+    [
+      132,
+      112,
+      0,
+      86,
+      0,
+      "AUDIO"
+    ],
+    [
+      133,
+      112,
+      0,
+      87,
+      0,
+      "AUDIO"
+    ],
+    [
+      134,
+      112,
+      0,
+      88,
+      0,
+      "AUDIO"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "AUDIO voice cloner",
+      "bounding": [
+        200,
+        400,
+        1480,
+        550
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "CHATTERBOX TTS TXT2AUDIO",
+      "bounding": [
+        200,
+        -300,
+        1100,
+        509.6000061035156
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "VOICE CLONER INDEX TTS-2 (with emotion control)",
+      "bounding": [
+        200,
+        -1780,
+        2350,
+        1235.5999755859375
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.32.10",
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2025-01-14T21:02:01.367Z",
+      "modified": "2025-01-21T12:25:02.298Z",
+      "software": "ComfyUI"
+    },
+    "ue_links": [],
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "workflowRendererVersion": "LG"
+  },
+  "version": 0.4
+}

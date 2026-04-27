@@ -1,0 +1,7804 @@
+{
+  "last_node_id": 201,
+  "last_link_id": 276,
+  "nodes": [
+    {
+      "id": 56,
+      "type": "SAMLoader",
+      "pos": {
+        "0": -670,
+        "1": 410
+      },
+      "size": {
+        "0": 350,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 0,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "links": [
+            69
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 22,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2700,
+        "1": 740
+      },
+      "size": {
+        "0": 360,
+        "1": 180
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            28
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "5th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "punk hair\nbearded\ndreadlocks\nmohawk\nbald\nsideburns\nmullet"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 23,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2700,
+        "1": 970
+      },
+      "size": {
+        "0": 360,
+        "1": 190
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            27
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "6th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "medieval armor\nCowboy\nSushi Chef\nastronaut\npirate"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 18,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2700,
+        "1": 1200
+      },
+      "size": {
+        "0": 360,
+        "1": 190
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "7th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "motorcycle\ntrike\nsailboat\nracecar\nmotorhome\nspaceship\ncastle\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 20,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2700,
+        "1": 1430
+      },
+      "size": {
+        "0": 360,
+        "1": 170
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "8th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "10mm focal, wide shot, UHD, 8k, film grain, film still, motion blur,"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 29,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2700,
+        "1": 590
+      },
+      "size": {
+        "0": 360,
+        "1": 100
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            35
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "4th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "wearing"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 21,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2700,
+        "1": 330
+      },
+      "size": {
+        "0": 360,
+        "1": 210
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            26
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "3rd",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "woman\nalien\nMonster\nHuman\nalien\nman\nSpider\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 27,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": -1960,
+        "1": 310
+      },
+      "size": {
+        "0": 260,
+        "1": 170
+      },
+      "flags": {},
+      "order": 88,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "text_a"
+          }
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 35,
+          "widget": {
+            "name": "text_b"
+          }
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": 34,
+          "widget": {
+            "name": "text_c"
+          }
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": 33,
+          "widget": {
+            "name": "text_d"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            79
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "false",
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 36,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": -1960,
+        "1": 530
+      },
+      "size": {
+        "0": 260,
+        "1": 142
+      },
+      "flags": {},
+      "order": 84,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 43,
+          "slot_index": 0,
+          "widget": {
+            "name": "text_a"
+          }
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "text_b"
+          }
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          }
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "false",
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 30,
+      "type": "Text Random Line",
+      "pos": {
+        "0": -1960,
+        "1": 1110
+      },
+      "size": {
+        "0": 250,
+        "1": 90
+      },
+      "flags": {},
+      "order": 59,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            38
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Random Line"
+      },
+      "widgets_values": [
+        "",
+        86,
+        "increment"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 24,
+      "type": "Text Random Line",
+      "pos": {
+        "0": -1960,
+        "1": 980
+      },
+      "size": {
+        "0": 250,
+        "1": 82
+      },
+      "flags": {},
+      "order": 60,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 26,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            44
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Random Line"
+      },
+      "widgets_values": [
+        "",
+        86,
+        "increment"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 26,
+      "type": "Text Random Line",
+      "pos": {
+        "0": -1960,
+        "1": 850
+      },
+      "size": {
+        "0": 250,
+        "1": 82
+      },
+      "flags": {},
+      "order": 58,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 27,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Random Line"
+      },
+      "widgets_values": [
+        "",
+        86,
+        "increment"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 25,
+      "type": "Text Random Line",
+      "pos": {
+        "0": -1960,
+        "1": 720
+      },
+      "size": {
+        "0": 260,
+        "1": 82
+      },
+      "flags": {},
+      "order": 57,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 28,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            34
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Random Line"
+      },
+      "widgets_values": [
+        "",
+        86,
+        "increment"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 32,
+      "type": "Text Shuffle",
+      "pos": {
+        "0": -1960,
+        "1": 150
+      },
+      "size": {
+        "0": 271.735595703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 61,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            40
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Shuffle"
+      },
+      "widgets_values": [
+        "",
+        " ",
+        324625485308215,
+        "randomize"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 14,
+      "type": "Replace Text _O",
+      "pos": {
+        "0": -1960,
+        "1": 0
+      },
+      "size": {
+        "0": 270,
+        "1": 90
+      },
+      "flags": {},
+      "order": 92,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 13,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "new",
+          "type": "STRING",
+          "link": 79,
+          "slot_index": 1,
+          "widget": {
+            "name": "new"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Replace Text _O"
+      },
+      "widgets_values": [
+        "",
+        "SSS",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 33,
+      "type": "Text String Truncate",
+      "pos": {
+        "0": -2320,
+        "1": 110
+      },
+      "size": {
+        "0": 300,
+        "1": 170
+      },
+      "flags": {},
+      "order": 76,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 40,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_b"
+          }
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          }
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            43
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "number of words from 2nd",
+      "properties": {
+        "Node name for S&R": "Text String Truncate"
+      },
+      "widgets_values": [
+        "",
+        "words",
+        "end",
+        10,
+        "",
+        "",
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 17,
+      "type": "Replace Text _O",
+      "pos": {
+        "0": -1660,
+        "1": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 96,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 18,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "new",
+          "type": "STRING",
+          "link": 38,
+          "slot_index": 1,
+          "widget": {
+            "name": "new"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            25
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Replace Text _O"
+      },
+      "widgets_values": [
+        "",
+        "LLL",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 59,
+      "type": "LatentUpscaleBy",
+      "pos": {
+        "0": -1190,
+        "1": 800
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 114,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 80
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            81
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LatentUpscaleBy"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1.5
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 60,
+      "type": "KSampler",
+      "pos": {
+        "0": -680,
+        "1": 0
+      },
+      "size": {
+        "0": 430,
+        "1": 262
+      },
+      "flags": {},
+      "order": 118,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 87
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 83
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 82
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 81
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            84
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        85,
+        "increment",
+        20,
+        2,
+        "ddpm",
+        "exponential",
+        0.65
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 61,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -670,
+        "1": 320
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 122,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 84
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 85
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            86,
+            88
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 55,
+      "type": "UltralyticsDetectorProvider",
+      "pos": {
+        "0": -670,
+        "1": 360
+      },
+      "size": {
+        "0": 350,
+        "1": 78
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [
+            68
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 57,
+      "type": "FaceDetailer",
+      "pos": {
+        "0": -220,
+        "1": 0
+      },
+      "size": {
+        "0": 360,
+        "1": 945
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 125,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 88,
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 71
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 72
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 73
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 75
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 76
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 68
+        },
+        {
+          "name": "sam_model_opt",
+          "type": "SAM_MODEL",
+          "link": 69,
+          "shape": 7
+        },
+        {
+          "name": "segm_detector_opt",
+          "type": "SEGM_DETECTOR",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            89
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "cropped_refined",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 1,
+          "shape": 6
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 2,
+          "shape": 6
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 3,
+          "shape": 3
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "cnet_images",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1152,
+        true,
+        1152,
+        24,
+        "fixed",
+        20,
+        2,
+        "ddpm",
+        "exponential",
+        0.6,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 62,
+      "type": "SaveImage",
+      "pos": {
+        "0": 1130,
+        "1": -40
+      },
+      "size": {
+        "0": 920,
+        "1": 590
+      },
+      "flags": {},
+      "order": 124,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 86
+        }
+      ],
+      "outputs": [],
+      "title": "WITHOUT FACEFIX",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "WILDCARDS/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 58,
+      "type": "SaveImage",
+      "pos": {
+        "0": 2060,
+        "1": -40
+      },
+      "size": {
+        "0": 920,
+        "1": 590
+      },
+      "flags": {},
+      "order": 127,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 89
+        }
+      ],
+      "outputs": [],
+      "title": "FACEFIXED",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "WILDCARDS/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -1190,
+        "1": 850
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 113,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            91
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 11,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2700,
+        "1": 0
+      },
+      "size": {
+        "0": 360,
+        "1": 80
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            13
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "1st",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "a photo of SSS in a LLL QQQ"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 31,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2700,
+        "1": 120
+      },
+      "size": {
+        "0": 360,
+        "1": 170
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            39
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "2nd",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "disgusting corrupted disturbing wet smooth rough angular blocky rounded globular furry hairy wooly metalica shiny matte glossy fiberous papery fleshy flabby embossed spattered bumpy ridged serrated tiled mosaic woody wooden bark crumbly crumbled cracked shattered ruined destroyed collapsed split translucent transparent seethrough skinless holographic foil copper aluminium iron lead mercury amber diamond ruby saphire emerald brick stone plated perforated scratched battleworn veiny sinuous tangled tendons woven glass crystal rock crystalline rocky burnt carbonized skeletal bony carpeted aged worn forgotten dusty granular gravel glitter sparkly sparkler misty cloudy smoky plastic clay latex rubber spandex liquid water bubbly frozen icy snowy burning flaming molten glowing incandescant bioluminescant slime goo gooey overgrown alive dead decay infected grazed injured ragged torn crushed inflated swollen stone marble glassware blownglass silk carbonfiber barnicles coral sandy muddy swampy rotting bright dark futuristic retro industrial grimdark sci-fi cyberpunk steampunk perlescant deiselpunk mechanical cybernetic Worn Cheap Used New Old Expensive Fancy Fine Masterwork Powdered Broken Vintage Rare Salted Spiced Magicalaback abaft abandoned abashed aberrant abhorrent abiding abject ablaze able abnormal aboard aboriginal abortive abounding abrasive abrupt absent absorbed absorbing abstracted absurd abundant abusive acceptable accessible accidental accurate acid acidic acoustic acrid actually ad hoc adamant adaptable addicted adhesive adjoining adorable adventurous afraid aggressive agonizing agreeable ahead ajar alcoholic alert alike alive alleged alluring aloof amazing ambiguous ambitious amuck amused amusing ancient angry animated annoyed annoying anxious apathetic aquatic aromatic arrogant ashamed aspiring assorted astonishing attractive auspicious automatic available average awake aware awesome awful axiomatic bad barbarous bashful bawdy beautiful befitting belligerent beneficial bent berserk best better bewildered big billowy bite-sized bitter bizarre black black-and-white bloody blue blue-eyed blushing boiling boorish bored boring bouncy boundless brainy brash brave brawny breakable breezy brief bright bright broad broken brown bumpy burly bustling busy cagey calculating callous calm capable capricious careful careless caring cautious ceaseless certain changeable charming cheap cheerful chemical chief childlike chilly chivalrous chubby chunky clammy classy clean clear clever cloistered cloudy closed clumsy cluttered coherent cold colorful colossal combative comfortable common complete complex concerned condemned confused conscious cooing cool cooperative coordinated courageous cowardly crabby craven crazy creepy crooked crowded cruel cuddly cultured cumbersome curious curly curved curvy cut cute cute cynical daffy daily damaged damaging damp dangerous dapper dark dashing dazzling dead deadpan deafening dear debonair decisive decorous deep deeply defeated defective defiant delicate delicious delightful demonic delirious dependent depressed deranged descriptive deserted detailed determined devilish didactic different difficult diligent direful dirty disagreeable disastrous discreet disgusted disgusting disillusioned dispensable distinct disturbed divergent dizzy domineering doubtful drab draconian dramatic dreary drunk dry dull dusty dusty dynamic dysfunctional eager early earsplitting earthy easy eatable economic educated efficacious efficient eight elastic elated elderly electric elegant elfin elite embarrassed eminent empty enchanted enchanting encouraging endurable energetic enormous entertaining enthusiastic envious equable equal erect erratic ethereal evanescent evasive even excellent excited exciting exclusive exotic expensive extra-large extra-small exuberant exultant fabulous faded faint fair faithful fallacious false familiar famous fanatical fancy fantastic far far-flung fascinated fast fat faulty fearful fearless feeble feigned female fertile festive few fierce filthy fine finicky first five fixed flagrant flaky flashy flat flawless flimsy flippant flowery fluffy fluttering foamy foolish foregoing forgetful fortunate four frail fragile frantic free freezing frequent fresh fretful friendly frightened frightening full fumbling functional funny furry furtive future futuristic fuzzy gabby gainful gamy gaping garrulous gaudy general gentle giant giddy gifted gigantic glamorous gleaming glib glistening glorious glossy godly good goofy gorgeous graceful grandiose grateful gratis gray greasy great greedy green grey grieving groovy grotesque grouchy grubby gruesome grumpy guarded guiltless gullible gusty guttural habitual half hallowed halting handsome handsomely handy hanging hapless happy hard hard-to-find harmonious harsh hateful heady healthy heartbreaking heavenly heavy hellish helpful helpless hesitant hideous high highfalutin high-pitched hilarious hissing historical holistic hollow homeless homely honorable horrible hospitable hot huge hulking humdrum humorous hungry hurried hurt hushed husky hypnotic hysterical icky icy idiotic ignorant ill illegal ill-fated ill-informed illustrious imaginary immense imminent impartial imperfect impolite important imported impossible incandescent incompetent inconclusive industrious incredible inexpensive infamous innate innocent inquisitive insidious instinctive intelligent interesting internal invincible irate irritating itchy jaded jagged jazzy jealous jittery jobless jolly joyous judicious juicy jumbled jumpy juvenile kaput keen kind kindhearted kindly knotty knowing knowledgeable known labored lackadaisical lacking lame lamentable languid large last late laughable lavish lazy lean learned left legal lethal level lewd light like likeable limping literate little lively lively living lonely long longing long-term loose lopsided loud loutish lovely loving low lowly lucky ludicrous lumpy lush luxuriant lying lyrical macabre macho maddening madly magenta magical magnificent majestic makeshift male malicious mammoth maniacal many marked massive married marvelous material materialistic mature mean measly meaty medical meek mellow melodic melted merciful mere messy mighty military milky mindless miniature minor miscreant misty mixed moaning modern moldy momentous motionless mountainous muddled mundane murky mushy mute mysterious naive nappy narrow nasty natural naughty nauseating near neat nebulous necessary needless needy neighborly nervous new next nice nifty nimble nine nippy noiseless noisy nonchalant nondescript nonstop normal nostalgic nosy noxious null numberless numerous nutritious nutty oafish obedient obeisant obese obnoxious obscene obsequious observant obsolete obtainable oceanic odd offbeat old old-fashioned omniscient one onerous open opposite optimal orange ordinary organic ossified outgoing outrageous outstanding oval overconfident overjoyed overrated overt overwrought painful painstaking pale paltry panicky panoramic parallel parched parsimonious past pastoral pathetic peaceful penitent perfect periodic permissible perpetual petite petite phobic physical picayune pink piquant placid plain plant plastic plausible pleasant plucky pointless poised polite political poor possessive possible powerful precious premium present pretty previous pricey prickly private probable productive profuse protective proud psychedelic psychotic public puffy pumped puny purple purring pushy puzzled puzzling quack quaint quarrelsome questionable quick quickest quiet quirky quixotic quizzical rabid racial ragged rainy rambunctious rampant rapid rare raspy ratty ready real rebel receptive recondite red redundant reflective regular relieved remarkable reminiscent repulsive resolute resonant responsible rhetorical rich right righteous rightful rigid ripe ritzy roasted robust romantic roomy rotten rough round royal ruddy rude rural rustic ruthless sable sad safe salty same sassy satisfying savory scandalous scarce scared scary scattered scientific scintillating scrawny screeching second second-hand secret secretive sedate seemly selective selfish separate serious shaggy shaky shallow sharp shiny shivering shocking short shrill shut shy sick silent silent silky silly simple simplistic sincere six skillful skinny sleepy slim slimy slippery sloppy slow small smart smelly smiling smoggy smooth sneaky snobbish snotty soft soggy solid somber sophisticated sordid sore sore sour sparkling special spectacular spicy spiffy spiky spiritual spiteful splendid spooky spotless spotted spotty spurious squalid square squealing squeamish staking stale standing statuesque steadfast steady steep stereotyped sticky stiff stimulating stingy stormy straight strange striped strong stupendous stupid sturdy subdued subsequent substantial successful succinct sudden sulky super superb superficial supreme swanky sweet sweltering swift symptomatic synonymous taboo tacit tacky talented tall tame tan tangible tangy tart tasteful tasteless tasty tawdry tearful tedious teeny teeny-tiny telling temporary ten tender tense tense tenuous terrible terrific tested testy thankful therapeutic thick thin thinkable third thirsty thirsty thoughtful thoughtless threatening three thundering tidy tight tightfisted tiny tired tiresome toothsome torpid tough towering tranquil trashy tremendous tricky trite troubled truculent true truthful two typical ubiquitous ugliest ugly ultra unable unaccountable unadvised unarmed unbecoming unbiased uncovered understood undesirable unequal unequaled uneven unhealthy uninterested unique unkempt unknown unnatural unruly unsightly unsuitable untidy unused unusual unwieldy unwritten upbeat uppity upset uptight used useful useless utopian utter uttermost vacuous vagabond vague valuable various vast vengeful venomous verdant versed victorious vigorous violent violet vivacious voiceless volatile voracious vulgar wacky waggish waiting wakeful wandering wanting warlike warm wary wasteful watery weak wealthy weary well-groomed well-made well-off well-to-do wet whimsical whispering white whole wholesale wicked wide wide-eyed wiggly wild willing windy wiry wise wistful witty woebegone womanly wonderful wooden woozy workable worried worthless wrathful wretched wrong wry xenophobic yellow yielding young youthful yummy zany zealous zesty zippy zonked spanked\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 77,
+      "type": "Replace Text _O",
+      "pos": {
+        "0": -1710,
+        "1": 2120
+      },
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 97,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "new",
+          "type": "STRING",
+          "link": 106,
+          "slot_index": 1,
+          "widget": {
+            "name": "new"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            107
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Replace Text _O"
+      },
+      "widgets_values": [
+        "",
+        "LLL",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 78,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2720,
+        "1": 3320
+      },
+      "size": {
+        "0": 360,
+        "1": 190
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            116
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "7th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "motorcycle\ntrike\nsailboat\nracecar\nmotorhome\nspaceship\ncastle\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 80,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2720,
+        "1": 3550
+      },
+      "size": {
+        "0": 360,
+        "1": 170
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            108
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "8th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "10mm focal, wide shot, UHD, 8k, film grain, film still, motion blur,"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 81,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2720,
+        "1": 2450
+      },
+      "size": {
+        "0": 360,
+        "1": 210
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            109
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "3rd",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "woman\nalien\nMonster\nHuman\nalien\nman\nSpider\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 82,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2720,
+        "1": 2860
+      },
+      "size": {
+        "0": 360,
+        "1": 180
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            110
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "5th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "punk hair\nbearded\ndreadlocks\nmohawk\nbald\nsideburns\nmullet"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 83,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2720,
+        "1": 3090
+      },
+      "size": {
+        "0": 360,
+        "1": 190
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            111
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "6th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "medieval armor\nCowboy\nSushi Chef\nastronaut\npirate"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 84,
+      "type": "Text Random Line",
+      "pos": {
+        "0": -2010,
+        "1": 3100
+      },
+      "size": {
+        "0": 250,
+        "1": 82
+      },
+      "flags": {},
+      "order": 63,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 109,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            120
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Random Line"
+      },
+      "widgets_values": [
+        "",
+        86,
+        "increment"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 85,
+      "type": "Text Random Line",
+      "pos": {
+        "0": -2010,
+        "1": 2840
+      },
+      "size": {
+        "0": 260,
+        "1": 82
+      },
+      "flags": {},
+      "order": 64,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 110,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            114
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Random Line"
+      },
+      "widgets_values": [
+        "",
+        86,
+        "increment"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 86,
+      "type": "Text Random Line",
+      "pos": {
+        "0": -2010,
+        "1": 2970
+      },
+      "size": {
+        "0": 250,
+        "1": 82
+      },
+      "flags": {},
+      "order": 65,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 111,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            115
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Random Line"
+      },
+      "widgets_values": [
+        "",
+        86,
+        "increment"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 87,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": -2010,
+        "1": 2430
+      },
+      "size": {
+        "0": 260,
+        "1": 170
+      },
+      "flags": {},
+      "order": 89,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 112,
+          "widget": {
+            "name": "text_a"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 113,
+          "widget": {
+            "name": "text_b"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": 114,
+          "widget": {
+            "name": "text_c"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": 115,
+          "widget": {
+            "name": "text_d"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            103
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "false",
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 88,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2720,
+        "1": 2710
+      },
+      "size": {
+        "0": 360,
+        "1": 100
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            113
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "4th",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "wearing"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 89,
+      "type": "Text Random Line",
+      "pos": {
+        "0": -2010,
+        "1": 3230
+      },
+      "size": {
+        "0": 250,
+        "1": 90
+      },
+      "flags": {},
+      "order": 62,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 116,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            106
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Random Line"
+      },
+      "widgets_values": [
+        "",
+        86,
+        "increment"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 90,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2720,
+        "1": 2240
+      },
+      "size": {
+        "0": 360,
+        "1": 170
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            117
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "2nd",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "disgusting corrupted disturbing wet smooth rough angular blocky rounded globular furry hairy wooly metalica shiny matte glossy fiberous papery fleshy flabby embossed spattered bumpy ridged serrated tiled mosaic woody wooden bark crumbly crumbled cracked shattered ruined destroyed collapsed split translucent transparent seethrough skinless holographic foil copper aluminium iron lead mercury amber diamond ruby saphire emerald brick stone plated perforated scratched battleworn veiny sinuous tangled tendons woven glass crystal rock crystalline rocky burnt carbonized skeletal bony carpeted aged worn forgotten dusty granular gravel glitter sparkly sparkler misty cloudy smoky plastic clay latex rubber spandex liquid water bubbly frozen icy snowy burning flaming molten glowing incandescant bioluminescant slime goo gooey overgrown alive dead decay infected grazed injured ragged torn crushed inflated swollen stone marble glassware blownglass silk carbonfiber barnicles coral sandy muddy swampy rotting bright dark futuristic retro industrial grimdark sci-fi cyberpunk steampunk perlescant deiselpunk mechanical cybernetic Worn Cheap Used New Old Expensive Fancy Fine Masterwork Powdered Broken Vintage Rare Salted Spiced Magicalaback abaft abandoned abashed aberrant abhorrent abiding abject ablaze able abnormal aboard aboriginal abortive abounding abrasive abrupt absent absorbed absorbing abstracted absurd abundant abusive acceptable accessible accidental accurate acid acidic acoustic acrid actually ad hoc adamant adaptable addicted adhesive adjoining adorable adventurous afraid aggressive agonizing agreeable ahead ajar alcoholic alert alike alive alleged alluring aloof amazing ambiguous ambitious amuck amused amusing ancient angry animated annoyed annoying anxious apathetic aquatic aromatic arrogant ashamed aspiring assorted astonishing attractive auspicious automatic available average awake aware awesome awful axiomatic bad barbarous bashful bawdy beautiful befitting belligerent beneficial bent berserk best better bewildered big billowy bite-sized bitter bizarre black black-and-white bloody blue blue-eyed blushing boiling boorish bored boring bouncy boundless brainy brash brave brawny breakable breezy brief bright bright broad broken brown bumpy burly bustling busy cagey calculating callous calm capable capricious careful careless caring cautious ceaseless certain changeable charming cheap cheerful chemical chief childlike chilly chivalrous chubby chunky clammy classy clean clear clever cloistered cloudy closed clumsy cluttered coherent cold colorful colossal combative comfortable common complete complex concerned condemned confused conscious cooing cool cooperative coordinated courageous cowardly crabby craven crazy creepy crooked crowded cruel cuddly cultured cumbersome curious curly curved curvy cut cute cute cynical daffy daily damaged damaging damp dangerous dapper dark dashing dazzling dead deadpan deafening dear debonair decisive decorous deep deeply defeated defective defiant delicate delicious delightful demonic delirious dependent depressed deranged descriptive deserted detailed determined devilish didactic different difficult diligent direful dirty disagreeable disastrous discreet disgusted disgusting disillusioned dispensable distinct disturbed divergent dizzy domineering doubtful drab draconian dramatic dreary drunk dry dull dusty dusty dynamic dysfunctional eager early earsplitting earthy easy eatable economic educated efficacious efficient eight elastic elated elderly electric elegant elfin elite embarrassed eminent empty enchanted enchanting encouraging endurable energetic enormous entertaining enthusiastic envious equable equal erect erratic ethereal evanescent evasive even excellent excited exciting exclusive exotic expensive extra-large extra-small exuberant exultant fabulous faded faint fair faithful fallacious false familiar famous fanatical fancy fantastic far far-flung fascinated fast fat faulty fearful fearless feeble feigned female fertile festive few fierce filthy fine finicky first five fixed flagrant flaky flashy flat flawless flimsy flippant flowery fluffy fluttering foamy foolish foregoing forgetful fortunate four frail fragile frantic free freezing frequent fresh fretful friendly frightened frightening full fumbling functional funny furry furtive future futuristic fuzzy gabby gainful gamy gaping garrulous gaudy general gentle giant giddy gifted gigantic glamorous gleaming glib glistening glorious glossy godly good goofy gorgeous graceful grandiose grateful gratis gray greasy great greedy green grey grieving groovy grotesque grouchy grubby gruesome grumpy guarded guiltless gullible gusty guttural habitual half hallowed halting handsome handsomely handy hanging hapless happy hard hard-to-find harmonious harsh hateful heady healthy heartbreaking heavenly heavy hellish helpful helpless hesitant hideous high highfalutin high-pitched hilarious hissing historical holistic hollow homeless homely honorable horrible hospitable hot huge hulking humdrum humorous hungry hurried hurt hushed husky hypnotic hysterical icky icy idiotic ignorant ill illegal ill-fated ill-informed illustrious imaginary immense imminent impartial imperfect impolite important imported impossible incandescent incompetent inconclusive industrious incredible inexpensive infamous innate innocent inquisitive insidious instinctive intelligent interesting internal invincible irate irritating itchy jaded jagged jazzy jealous jittery jobless jolly joyous judicious juicy jumbled jumpy juvenile kaput keen kind kindhearted kindly knotty knowing knowledgeable known labored lackadaisical lacking lame lamentable languid large last late laughable lavish lazy lean learned left legal lethal level lewd light like likeable limping literate little lively lively living lonely long longing long-term loose lopsided loud loutish lovely loving low lowly lucky ludicrous lumpy lush luxuriant lying lyrical macabre macho maddening madly magenta magical magnificent majestic makeshift male malicious mammoth maniacal many marked massive married marvelous material materialistic mature mean measly meaty medical meek mellow melodic melted merciful mere messy mighty military milky mindless miniature minor miscreant misty mixed moaning modern moldy momentous motionless mountainous muddled mundane murky mushy mute mysterious naive nappy narrow nasty natural naughty nauseating near neat nebulous necessary needless needy neighborly nervous new next nice nifty nimble nine nippy noiseless noisy nonchalant nondescript nonstop normal nostalgic nosy noxious null numberless numerous nutritious nutty oafish obedient obeisant obese obnoxious obscene obsequious observant obsolete obtainable oceanic odd offbeat old old-fashioned omniscient one onerous open opposite optimal orange ordinary organic ossified outgoing outrageous outstanding oval overconfident overjoyed overrated overt overwrought painful painstaking pale paltry panicky panoramic parallel parched parsimonious past pastoral pathetic peaceful penitent perfect periodic permissible perpetual petite petite phobic physical picayune pink piquant placid plain plant plastic plausible pleasant plucky pointless poised polite political poor possessive possible powerful precious premium present pretty previous pricey prickly private probable productive profuse protective proud psychedelic psychotic public puffy pumped puny purple purring pushy puzzled puzzling quack quaint quarrelsome questionable quick quickest quiet quirky quixotic quizzical rabid racial ragged rainy rambunctious rampant rapid rare raspy ratty ready real rebel receptive recondite red redundant reflective regular relieved remarkable reminiscent repulsive resolute resonant responsible rhetorical rich right righteous rightful rigid ripe ritzy roasted robust romantic roomy rotten rough round royal ruddy rude rural rustic ruthless sable sad safe salty same sassy satisfying savory scandalous scarce scared scary scattered scientific scintillating scrawny screeching second second-hand secret secretive sedate seemly selective selfish separate serious shaggy shaky shallow sharp shiny shivering shocking short shrill shut shy sick silent silent silky silly simple simplistic sincere six skillful skinny sleepy slim slimy slippery sloppy slow small smart smelly smiling smoggy smooth sneaky snobbish snotty soft soggy solid somber sophisticated sordid sore sore sour sparkling special spectacular spicy spiffy spiky spiritual spiteful splendid spooky spotless spotted spotty spurious squalid square squealing squeamish staking stale standing statuesque steadfast steady steep stereotyped sticky stiff stimulating stingy stormy straight strange striped strong stupendous stupid sturdy subdued subsequent substantial successful succinct sudden sulky super superb superficial supreme swanky sweet sweltering swift symptomatic synonymous taboo tacit tacky talented tall tame tan tangible tangy tart tasteful tasteless tasty tawdry tearful tedious teeny teeny-tiny telling temporary ten tender tense tense tenuous terrible terrific tested testy thankful therapeutic thick thin thinkable third thirsty thirsty thoughtful thoughtless threatening three thundering tidy tight tightfisted tiny tired tiresome toothsome torpid tough towering tranquil trashy tremendous tricky trite troubled truculent true truthful two typical ubiquitous ugliest ugly ultra unable unaccountable unadvised unarmed unbecoming unbiased uncovered understood undesirable unequal unequaled uneven unhealthy uninterested unique unkempt unknown unnatural unruly unsightly unsuitable untidy unused unusual unwieldy unwritten upbeat uppity upset uptight used useful useless utopian utter uttermost vacuous vagabond vague valuable various vast vengeful venomous verdant versed victorious vigorous violent violet vivacious voiceless volatile voracious vulgar wacky waggish waiting wakeful wandering wanting warlike warm wary wasteful watery weak wealthy weary well-groomed well-made well-off well-to-do wet whimsical whispering white whole wholesale wicked wide wide-eyed wiggly wild willing windy wiry wise wistful witty woebegone womanly wonderful wooden woozy workable worried worthless wrathful wretched wrong wry xenophobic yellow yielding young youthful yummy zany zealous zesty zippy zonked spanked\n"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 91,
+      "type": "Text Shuffle",
+      "pos": {
+        "0": -2010,
+        "1": 2270
+      },
+      "size": {
+        "0": 271.735595703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 66,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 117,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            118
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Shuffle"
+      },
+      "widgets_values": [
+        "",
+        " ",
+        514803273440377,
+        "randomize"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 92,
+      "type": "Text String Truncate",
+      "pos": {
+        "0": -2340,
+        "1": 2230
+      },
+      "size": {
+        "0": 300,
+        "1": 170
+      },
+      "flags": {},
+      "order": 77,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 118,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_b"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            119
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "number of words from 2nd",
+      "properties": {
+        "Node name for S&R": "Text String Truncate"
+      },
+      "widgets_values": [
+        "",
+        "words",
+        "end",
+        10,
+        "",
+        "",
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 93,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": -2010,
+        "1": 2650
+      },
+      "size": {
+        "0": 260,
+        "1": 142
+      },
+      "flags": {},
+      "order": 85,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 119,
+          "slot_index": 0,
+          "widget": {
+            "name": "text_a"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 120,
+          "widget": {
+            "name": "text_b"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            112
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "false",
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 99,
+      "type": "LatentUpscaleBy",
+      "pos": {
+        "0": -1440,
+        "1": 2900
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 116,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 130
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LatentUpscaleBy"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1.5
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 71,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -1440,
+        "1": 2860
+      },
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 68,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 167
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 99,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            94
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 115,
+      "type": "VAELoader",
+      "pos": {
+        "0": -1250,
+        "1": 2810
+      },
+      "size": {
+        "0": 430,
+        "1": 60
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 17,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            168
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "FLUX1\\ae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 116,
+      "type": "UnetLoaderGGUF",
+      "pos": {
+        "0": -1250,
+        "1": 2910
+      },
+      "size": {
+        "0": 430,
+        "1": 60
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 18,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            162
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnetLoaderGGUF"
+      },
+      "widgets_values": [
+        "flux1-dev-Q4_0.gguf"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 117,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": -1250,
+        "1": 3010
+      },
+      "size": {
+        "0": 430,
+        "1": 110
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 19,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            166,
+            167
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l-for-gguf.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "flux"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 79,
+      "type": "Replace Text _O",
+      "pos": {
+        "0": -1480,
+        "1": 2120
+      },
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 102,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 107,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "new",
+          "type": "STRING",
+          "link": 108,
+          "slot_index": 1,
+          "widget": {
+            "name": "new"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            171
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Replace Text _O"
+      },
+      "widgets_values": [
+        "",
+        "QQQ",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 107,
+      "type": "Load Styles CSV",
+      "pos": {
+        "0": -1710,
+        "1": 2260
+      },
+      "size": {
+        "0": 430,
+        "1": 80
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive prompt",
+          "type": "STRING",
+          "links": [
+            161
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "negative prompt",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "title": "CHOOSE STYLE",
+      "properties": {
+        "Node name for S&R": "Load Styles CSV"
+      },
+      "widgets_values": [
+        "No Style"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 19,
+      "type": "Replace Text _O",
+      "pos": {
+        "0": -1430,
+        "1": 0
+      },
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 101,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 25,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "new",
+          "type": "STRING",
+          "link": 24,
+          "slot_index": 1,
+          "widget": {
+            "name": "new"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            174
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Replace Text _O"
+      },
+      "widgets_values": [
+        "",
+        "QQQ",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 126,
+      "type": "Load Styles CSV",
+      "pos": {
+        "0": -1660,
+        "1": 130
+      },
+      "size": {
+        "0": 440,
+        "1": 80
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive prompt",
+          "type": "STRING",
+          "links": [
+            173
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "negative prompt",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "title": "CHOOSE STYLE",
+      "properties": {
+        "Node name for S&R": "Load Styles CSV"
+      },
+      "widgets_values": [
+        "No Style"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 73,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -2720,
+        "1": 2120
+      },
+      "size": {
+        "0": 360,
+        "1": 80
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            102
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "1st",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "a photo of SSS in a LLL QQQ"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 75,
+      "type": "Replace Text _O",
+      "pos": {
+        "0": -2010,
+        "1": 2120
+      },
+      "size": {
+        "0": 270,
+        "1": 90
+      },
+      "flags": {},
+      "order": 93,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 102,
+          "widget": {
+            "name": "text"
+          }
+        },
+        {
+          "name": "new",
+          "type": "STRING",
+          "link": 103,
+          "slot_index": 1,
+          "widget": {
+            "name": "new"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Replace Text _O"
+      },
+      "widgets_values": [
+        "",
+        "SSS",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 94,
+      "type": "CR Aspect Ratio",
+      "pos": {
+        "0": -1250,
+        "1": 2110
+      },
+      "size": {
+        "0": 430,
+        "1": 322
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "upscale_factor",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "prescale_factor",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "empty_latent",
+          "type": "LATENT",
+          "links": [
+            95
+          ],
+          "slot_index": 5,
+          "shape": 3
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "CHOOSE IMAGE SIZE",
+      "properties": {
+        "Node name for S&R": "CR Aspect Ratio"
+      },
+      "widgets_values": [
+        1920,
+        1080,
+        "custom",
+        "Off",
+        1,
+        1,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 12,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -1660,
+        "1": 250
+      },
+      "size": {
+        "0": 440,
+        "1": 120
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "nsfw, nude, childish, illustration, painting, cartoon drawing, messy."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 37,
+      "type": "CR Aspect Ratio",
+      "pos": {
+        "0": -1200,
+        "1": 0
+      },
+      "size": {
+        "0": 430,
+        "1": 322
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "upscale_factor",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "prescale_factor",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "empty_latent",
+          "type": "LATENT",
+          "links": [
+            45
+          ],
+          "slot_index": 5,
+          "shape": 3
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "CHOOSE IMAGE SIZE",
+      "properties": {
+        "Node name for S&R": "CR Aspect Ratio"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "SDXL - 16:9 landscape 1344x768",
+        "Off",
+        1,
+        1,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": {
+        "0": -1200,
+        "1": 370
+      },
+      "size": {
+        "0": 430,
+        "1": 262
+      },
+      "flags": {},
+      "order": 111,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 6
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 45
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7,
+            80
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        85,
+        "increment",
+        20,
+        2,
+        "ddpm",
+        "exponential",
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": -1190,
+        "1": 680
+      },
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 26,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1,
+            71,
+            87
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            5,
+            72
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            8,
+            73,
+            85
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 127,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": -1190,
+        "1": 890
+      },
+      "size": {
+        "0": 400,
+        "1": 154
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 104,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 174,
+          "widget": {
+            "name": "text_a"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 173,
+          "widget": {
+            "name": "text_b"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            175
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 64,
+      "type": "SaveImage",
+      "pos": {
+        "0": 190,
+        "1": -40
+      },
+      "size": {
+        "0": 930,
+        "1": 590
+      },
+      "flags": {},
+      "order": 117,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 91
+        }
+      ],
+      "outputs": [],
+      "title": "FIRST RENDER",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "WILDCARDS/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 16,
+      "type": "ShowText|pysssss",
+      "pos": {
+        "0": -1660,
+        "1": 410
+      },
+      "size": {
+        "0": 432.3146667480469,
+        "1": 133.03807067871094
+      },
+      "flags": {},
+      "order": 106,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 175,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            17
+          ],
+          "slot_index": 0,
+          "shape": 6
+        }
+      ],
+      "title": "GENERATED PROMPT",
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        [
+          "a photo of jittery lopsided quack wooden dear sci-fi easy barnicles gabby heartbreakingmanwearingmohawkSushi Chef in a  10mm focal, wide shot, UHD, 8k, film grain, film still, motion blur,"
+        ],
+        "a photo of zealous last quirky shiny addicted hilarious quickest spotty Worn terrific, alien, wearing, bearded, Cowboy in a trike 10mm focal, wide shot, UHD, 8k, film grain, film still, motion blur,"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 135,
+      "type": "UltralyticsDetectorProvider",
+      "pos": {
+        "0": -680,
+        "1": 2780
+      },
+      "size": {
+        "0": 350,
+        "1": 78
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 27,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [
+            190
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 136,
+      "type": "SAMLoader",
+      "pos": {
+        "0": -680,
+        "1": 2830
+      },
+      "size": {
+        "0": 350,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 28,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "links": [
+            191
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 141,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -680,
+        "1": 2740
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 126,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 198
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 199
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            184,
+            200
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 125,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": -1440,
+        "1": 2820
+      },
+      "size": {
+        "0": 400,
+        "1": 154
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 105,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 171,
+          "widget": {
+            "name": "text_a"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 161,
+          "widget": {
+            "name": "text_b"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            172
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 70,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -1440,
+        "1": 2990
+      },
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 109,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 166
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 97,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            93
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "POSITIVE",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "beautiful scenery nature glass bottle landscape, , purple galaxy bottle,"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 137,
+      "type": "FaceDetailer",
+      "pos": {
+        "0": -230,
+        "1": 2110
+      },
+      "size": {
+        "0": 360,
+        "1": 945
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 128,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 184,
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 185
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 186
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 187
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 216
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 204
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 190
+        },
+        {
+          "name": "sam_model_opt",
+          "type": "SAM_MODEL",
+          "link": 191,
+          "shape": 7
+        },
+        {
+          "name": "segm_detector_opt",
+          "type": "SEGM_DETECTOR",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            192
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "cropped_refined",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 1,
+          "shape": 6
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 2,
+          "shape": 6
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 3,
+          "shape": 3
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "cnet_images",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1152,
+        true,
+        1152,
+        24,
+        "fixed",
+        20,
+        2,
+        "ddpm",
+        "exponential",
+        0.6,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 76,
+      "type": "ShowText|pysssss",
+      "pos": {
+        "0": -1710,
+        "1": 2380
+      },
+      "size": {
+        "0": 430,
+        "1": 130
+      },
+      "flags": {},
+      "order": 107,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 172,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            97,
+            215
+          ],
+          "slot_index": 0,
+          "shape": 6
+        }
+      ],
+      "title": "GENERATED PROMPT",
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        [
+          "a photo of jittery lopsided quack wooden dear sci-fi easy barnicles gabby heartbreakingmanwearingmohawkSushi Chef in a  10mm focal, wide shot, UHD, 8k, film grain, film still, motion blur,"
+        ],
+        "a photo of nasty mammoth flashy gratis six ugliest spanked unkempt deeply vagabond, alien, wearing, bearded, Cowboy in a trike 10mm focal, wide shot, UHD, 8k, film grain, film still, motion blur,"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 74,
+      "type": "Text Multiline",
+      "pos": {
+        "0": -1710,
+        "1": 2560
+      },
+      "size": {
+        "0": 430,
+        "1": 110
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            99
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "Node name for S&R": "Text Multiline"
+      },
+      "widgets_values": [
+        "nsfw, nude, childish, illustration, painting, cartoon drawing, messy."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 103,
+      "type": "SaveImage",
+      "pos": {
+        "0": 160,
+        "1": 2110
+      },
+      "size": {
+        "0": 930,
+        "1": 590
+      },
+      "flags": {},
+      "order": 119,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 138
+        }
+      ],
+      "outputs": [],
+      "title": "FLUX IMAGE",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "WILDCARDS/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 142,
+      "type": "SaveImage",
+      "pos": {
+        "0": 1120,
+        "1": 2110
+      },
+      "size": {
+        "0": 920,
+        "1": 590
+      },
+      "flags": {},
+      "order": 129,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 200
+        }
+      ],
+      "outputs": [],
+      "title": "SDXL REFINER",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "WILDCARDS/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 138,
+      "type": "SaveImage",
+      "pos": {
+        "0": 2070,
+        "1": 2110
+      },
+      "size": {
+        "0": 920,
+        "1": 590
+      },
+      "flags": {},
+      "order": 130,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 192
+        }
+      ],
+      "outputs": [],
+      "title": "FACEFIXED",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "WILDCARDS/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 140,
+      "type": "KSampler",
+      "pos": {
+        "0": -680,
+        "1": 2110
+      },
+      "size": {
+        "0": 430,
+        "1": 262
+      },
+      "flags": {},
+      "order": 123,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 194
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 220
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 221
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 213
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            198
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        85,
+        "increment",
+        20,
+        2,
+        "ddpm",
+        "exponential",
+        0.65
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 145,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -680,
+        "1": 2870
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 70,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 205
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            204,
+            219
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "negativet",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 149,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -680,
+        "1": 2920
+      },
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 110,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 214
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 215,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            216,
+            218
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "POSITIVE",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "beautiful scenery nature glass bottle landscape, , purple galaxy bottle,"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 72,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -1440,
+        "1": 2949
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 115,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 100
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 168
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            138,
+            209,
+            224
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 147,
+      "type": "VAEEncode",
+      "pos": {
+        "0": -680,
+        "1": 2700
+      },
+      "size": {
+        "0": 195.86322021484375,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 120,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 209
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 210
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            213
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 68,
+      "type": "KSampler",
+      "pos": {
+        "0": -1250,
+        "1": 2490
+      },
+      "size": {
+        "0": 430,
+        "1": 262
+      },
+      "flags": {},
+      "order": 112,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 162
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 93
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 94
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 95
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            100,
+            130
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        56,
+        "fixed",
+        7,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 154,
+      "type": "ControlNetLoader",
+      "pos": {
+        "0": -680,
+        "1": 2960
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 30,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            223
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "controlnet-union-sdxl-1.0.safetensors"
+      ]
+    },
+    {
+      "id": 130,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": -680,
+        "1": 2660
+      },
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 31,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            185,
+            194
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            186,
+            205,
+            214
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            187,
+            199,
+            210,
+            225
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 153,
+      "type": "SetUnionControlNetType",
+      "pos": {
+        "0": -680,
+        "1": 3000
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 69,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 223
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            222
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SetUnionControlNetType"
+      },
+      "widgets_values": [
+        "segment"
+      ]
+    },
+    {
+      "id": 152,
+      "type": "ControlNetApplyAdvanced",
+      "pos": {
+        "0": -680,
+        "1": 2420
+      },
+      "size": {
+        "0": 430,
+        "1": 190
+      },
+      "flags": {},
+      "order": 121,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 218
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 219
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 222
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 224
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 225,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            220
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            221
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        1,
+        0,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -920,
+        "1": 740
+      },
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 108,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 17,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            4,
+            75,
+            83
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "POSITIVE",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "beautiful scenery nature glass bottle landscape, , purple galaxy bottle,"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -1190,
+        "1": 760
+      },
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 67,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            6,
+            76,
+            82
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 158,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": -1070,
+        "1": 4270
+      },
+      "size": {
+        "0": 325,
+        "1": 125
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 32,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            243
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            244,
+            247
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            235,
+            248
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 159,
+      "type": "UltralyticsDetectorProvider",
+      "pos": {
+        "0": -1070,
+        "1": 4110
+      },
+      "size": {
+        "0": 325,
+        "1": 78
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 33,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 160,
+      "type": "KSampler",
+      "pos": {
+        "0": -1420,
+        "1": 3980
+      },
+      "size": {
+        "0": 325,
+        "1": 262
+      },
+      "flags": {},
+      "order": 86,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 230
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 231
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 232
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 233
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            234
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        14,
+        "increment",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 161,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": -2740,
+        "1": 4360
+      },
+      "size": {
+        "0": 420,
+        "1": 110
+      },
+      "flags": {},
+      "order": 34,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            233
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "enter batch size number",
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 162,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -1070,
+        "1": 4070
+      },
+      "size": {
+        "0": 325,
+        "1": 100
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 90,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 234
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 235
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            245,
+            254
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 163,
+      "type": "SaveImage",
+      "pos": {
+        "0": -1420,
+        "1": 4290
+      },
+      "size": {
+        "0": 320,
+        "1": 340
+      },
+      "flags": {},
+      "order": 98,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 236
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "WILDCARDS/SDXL"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 164,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -1070,
+        "1": 4150
+      },
+      "size": {
+        "0": 435,
+        "1": 60
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 78,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 237
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 238,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            232,
+            250
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Negative Prompt from Styles",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "ugly, watermark"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 165,
+      "type": "Load Styles CSV",
+      "pos": {
+        "0": -2740,
+        "1": 4220
+      },
+      "size": {
+        "0": 420,
+        "1": 90
+      },
+      "flags": {},
+      "order": 35,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive prompt",
+          "type": "STRING",
+          "links": [
+            240
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "negative prompt",
+          "type": "STRING",
+          "links": [
+            242
+          ],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "title": "CHOOSE STYLE",
+      "properties": {
+        "Node name for S&R": "Load Styles CSV"
+      },
+      "widgets_values": [
+        "No Style"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 166,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": -1070,
+        "1": 4310
+      },
+      "size": {
+        "0": 210,
+        "1": 142
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 73,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 239,
+          "widget": {
+            "name": "text_a"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 240,
+          "widget": {
+            "name": "text_b"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            255,
+            257
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "POSITIVE",
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 167,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": -1070,
+        "1": 4230
+      },
+      "size": {
+        "0": 210,
+        "1": 142
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 72,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 241,
+          "widget": {
+            "name": "text_a"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 242,
+          "widget": {
+            "name": "text_b"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            238
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 168,
+      "type": "Textbox",
+      "pos": {
+        "0": -2740,
+        "1": 4520
+      },
+      "size": {
+        "0": 420,
+        "1": 90
+      },
+      "flags": {},
+      "order": 36,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "passthrough",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "passthrough"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            241
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "NEGATIVE PROMPT",
+      "properties": {
+        "Node name for S&R": "Textbox"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 169,
+      "type": "Lora Loader Stack (rgthree)",
+      "pos": {
+        "0": -2740,
+        "1": 4660
+      },
+      "size": {
+        "0": 420,
+        "1": 246
+      },
+      "flags": {},
+      "order": 71,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 243
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 244
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            230,
+            246
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            237,
+            256
+          ],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Lora Loader Stack (rgthree)"
+      },
+      "widgets_values": [
+        "None",
+        1,
+        "None",
+        1,
+        "None",
+        1,
+        "None",
+        1
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 170,
+      "type": "SAMLoader",
+      "pos": {
+        "0": -1070,
+        "1": 3990
+      },
+      "size": {
+        "0": 330,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 37,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "links": [
+            252
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 171,
+      "type": "FaceDetailer",
+      "pos": {
+        "0": -1070,
+        "1": 4360
+      },
+      "size": {
+        "0": 360,
+        "1": 945
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 94,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 245,
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 246
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 247
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 248
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 249
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 250
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 251
+        },
+        {
+          "name": "sam_model_opt",
+          "type": "SAM_MODEL",
+          "link": 252,
+          "shape": 7
+        },
+        {
+          "name": "segm_detector_opt",
+          "type": "SEGM_DETECTOR",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null,
+          "shape": 7
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            236,
+            253
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "cropped_refined",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 1,
+          "shape": 6
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 2,
+          "shape": 6
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 3,
+          "shape": 3
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "cnet_images",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1024,
+        true,
+        1024,
+        24,
+        "fixed",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        0.7000000000000001,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 172,
+      "type": "UltralyticsDetectorProvider",
+      "pos": {
+        "0": -1070,
+        "1": 4030
+      },
+      "size": {
+        "0": 435,
+        "1": 78
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 38,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [
+            251
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 173,
+      "type": "Image Comparer (rgthree)",
+      "pos": {
+        "0": -2290,
+        "1": 3980
+      },
+      "size": {
+        "0": 855,
+        "1": 945
+      },
+      "flags": {},
+      "order": 99,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 253,
+          "dir": 3
+        },
+        {
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 254,
+          "dir": 3
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "comparer_mode": "Slide"
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_mynbi_00001_.png&type=temp&subfolder=&rand=0.4446739020043897"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_mynbi_00002_.png&type=temp&subfolder=&rand=0.12183256094752015"
+          }
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 174,
+      "type": "Wildcard Processor",
+      "pos": {
+        "0": -2740,
+        "1": 3980
+      },
+      "size": {
+        "0": 420,
+        "1": 195
+      },
+      "flags": {},
+      "order": 39,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            239
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "Positive prompt + Wildcards",
+      "properties": {
+        "Node name for S&R": "Wildcard Processor"
+      },
+      "widgets_values": [
+        "__animals__, __art-styles__, __landscapes__\n",
+        10,
+        "increment"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 175,
+      "type": "ShowText|pysssss",
+      "pos": {
+        "0": -2290,
+        "1": 4960
+      },
+      "size": {
+        "0": 857.374755859375,
+        "1": 107.43653106689453
+      },
+      "flags": {},
+      "order": 79,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 255,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "title": "Promt viewer",
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "Lion, Art Nouveau, Deserts"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 176,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -1070,
+        "1": 4190
+      },
+      "size": {
+        "0": 435,
+        "1": 60
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 80,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 256,
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 257,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            231,
+            249
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Positive Prompt from Styles",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "rusty metal, mech, cinematic, red eyes"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 179,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": {
+        "0": -770,
+        "1": 4120
+      },
+      "size": {
+        "0": 353.30780029296875,
+        "1": 202
+      },
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "title": "SWITCHER",
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 180,
+      "type": "Wildcard Processor",
+      "pos": {
+        "0": -360,
+        "1": 3970
+      },
+      "size": {
+        "0": 430,
+        "1": 190
+      },
+      "flags": {},
+      "order": 41,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            273
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "Positive prompt + Wildcards",
+      "properties": {
+        "Node name for S&R": "Wildcard Processor"
+      },
+      "widgets_values": [
+        "__animals__, __art-styles__, __landscapes__",
+        10,
+        "increment"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 181,
+      "type": "SaveImage",
+      "pos": {
+        "0": 100,
+        "1": 3970
+      },
+      "size": {
+        "0": 720,
+        "1": 780
+      },
+      "flags": {},
+      "order": 103,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 258
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "WILDCARDS/GGUF"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 182,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 870,
+        "1": 4680
+      },
+      "size": {
+        "0": 435,
+        "1": 60
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 83,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 259,
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 260,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            276
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Positive Prompt from Styles",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "rusty metal, mech, cinematic, red eyes"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 183,
+      "type": "Load Styles CSV",
+      "pos": {
+        "0": -360,
+        "1": 4210
+      },
+      "size": {
+        "0": 428.91326904296875,
+        "1": 87.9738540649414
+      },
+      "flags": {},
+      "order": 42,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive prompt",
+          "type": "STRING",
+          "links": [
+            274
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "negative prompt",
+          "type": "STRING",
+          "links": [],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "title": "CHOOSE STYLE",
+      "properties": {
+        "Node name for S&R": "Load Styles CSV"
+      },
+      "widgets_values": [
+        "No Style"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 184,
+      "type": "ShowText|pysssss",
+      "pos": {
+        "0": 100,
+        "1": 4790
+      },
+      "size": {
+        "0": 722.15673828125,
+        "1": 112.74262237548828
+      },
+      "flags": {},
+      "order": 81,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 261,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        [
+          "a dog, sticker style, on black background, with white contour, text \"DOG\", aerial photography, drone photography, sweeping landscapes, unique perspectives, epic scale, capturing from above, revealing hidden beauty, showcasing vastness, immersive experience, precise compositions, expert piloting, dynamic angles, cinematic storytelling, showcasing natural wonders, aerial exploration"
+        ],
+        "Kangaroo, Pop Art, Jungles"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 185,
+      "type": "Lora Loader Stack (rgthree)",
+      "pos": {
+        "0": -360,
+        "1": 4500
+      },
+      "size": {
+        "0": 432.3304443359375,
+        "1": 246
+      },
+      "flags": {},
+      "order": 75,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 262
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 263
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            264,
+            275
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            259
+          ],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Lora Loader Stack (rgthree)"
+      },
+      "widgets_values": [
+        "None",
+        1,
+        "None",
+        1,
+        "None",
+        1,
+        "None",
+        1
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 186,
+      "type": "BasicGuider",
+      "pos": {
+        "0": 870,
+        "1": 4530
+      },
+      "size": {
+        "0": 217.60060119628906,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 91,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 264,
+          "slot_index": 0
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 265,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            269
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 187,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 870,
+        "1": 4500
+      },
+      "size": {
+        "0": 310,
+        "1": 50
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 100,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 266
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 267
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            258
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 188,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 870,
+        "1": 4610
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 43,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            263
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l-for-gguf.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "flux"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 189,
+      "type": "UnetLoaderGGUF",
+      "pos": {
+        "0": 870,
+        "1": 4570
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 44,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            262
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnetLoaderGGUF"
+      },
+      "widgets_values": [
+        "flux1-dev-Q4_0.gguf"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 190,
+      "type": "SamplerCustomAdvanced",
+      "pos": {
+        "0": 870,
+        "1": 4720
+      },
+      "size": {
+        "0": 317.2845458984375,
+        "1": 113.2920913696289
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 95,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 268,
+          "slot_index": 0
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 269,
+          "slot_index": 1
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 270,
+          "slot_index": 2
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 271,
+          "slot_index": 3
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 272,
+          "slot_index": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": [
+            266
+          ],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 191,
+      "type": "Text Concatenate",
+      "pos": {
+        "0": 870,
+        "1": 4650
+      },
+      "size": {
+        "0": 320,
+        "1": 142
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 74,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 273,
+          "widget": {
+            "name": "text_a"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 274,
+          "widget": {
+            "name": "text_b"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "shape": 7
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            260,
+            261
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 193,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": -360,
+        "1": 4340
+      },
+      "size": {
+        "0": 430,
+        "1": 110
+      },
+      "flags": {},
+      "order": 45,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            272
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 197,
+      "type": "VAELoader",
+      "pos": {
+        "0": 840,
+        "1": 3970
+      },
+      "size": {
+        "0": 312.86260986328125,
+        "1": 58
+      },
+      "flags": {},
+      "order": 46,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            267
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "FLUX1\\ae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 198,
+      "type": "KSamplerSelect",
+      "pos": {
+        "0": 870,
+        "1": 4800
+      },
+      "size": {
+        "0": 219.7760009765625,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 47,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            270
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 199,
+      "type": "RandomNoise",
+      "pos": {
+        "0": 840,
+        "1": 4070
+      },
+      "size": {
+        "0": 315.9766540527344,
+        "1": 82
+      },
+      "flags": {},
+      "order": 48,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            268
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        10,
+        "increment"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 200,
+      "type": "BasicScheduler",
+      "pos": {
+        "0": 840,
+        "1": 4200
+      },
+      "size": {
+        "0": 314.4930725097656,
+        "1": 106
+      },
+      "flags": {},
+      "order": 82,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 275,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            271
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        3,
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 201,
+      "type": "FluxGuidance",
+      "pos": {
+        "0": 870,
+        "1": 4760
+      },
+      "size": {
+        "0": 310,
+        "1": 70
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 87,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 276
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            265
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 128,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": {
+        "0": -3260,
+        "1": -50
+      },
+      "size": {
+        "0": 489.2883605957031,
+        "1": 202
+      },
+      "flags": {},
+      "order": 49,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 192,
+      "type": "Note",
+      "pos": {
+        "0": -770,
+        "1": 4370
+      },
+      "size": {
+        "0": 350,
+        "1": 300
+      },
+      "flags": {},
+      "order": 50,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Wildcard list",
+      "properties": {},
+      "widgets_values": [
+        "Wildcards text files are in this folder:\n..App/ComfyUI/Wildcards\n\n1. Copy and paste these wildcard names into the positive prompt node.\n2. Every queued prompt will create a new variation of styles. You can set the batch count number in the extra settings, then click generate.\n\n__294styles__\n__1500artist__\n__animals__\n__art-styles__\n__clothes__\n__colours__\n__descriptors__\n__fabrics__\n__foods__\n__household-objects__\n__landscapes__\n__poses__"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 195,
+      "type": "Note",
+      "pos": {
+        "0": -770,
+        "1": 4720
+      },
+      "size": {
+        "0": 350,
+        "1": 80
+      },
+      "flags": {},
+      "order": 51,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Before picking a style from the style chooser node, look at the images for each style in the following folder:\n\"ComfyUI-studio\\2-PROMPTS\\0-STYLE PICKER 294\""
+      ],
+      "color": "#ffffff",
+      "bgcolor": "#ffffff"
+    },
+    {
+      "id": 196,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": {
+        "0": -3140,
+        "1": 4420
+      },
+      "size": {
+        "0": 353.30780029296875,
+        "1": 202
+      },
+      "flags": {},
+      "order": 52,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": [],
+          "slot_index": 0
+        }
+      ],
+      "title": "SWITCHER",
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 194,
+      "type": "Note",
+      "pos": {
+        "0": -3140,
+        "1": 4290
+      },
+      "size": [
+        360,
+        70
+      ],
+      "flags": {},
+      "order": 53,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Before picking a style from the style chooser node, look at the images for each style in the following folder:\n\"ComfyUI-studio\\2-PROMPTS\\0-STYLE PICKER 294\""
+      ],
+      "color": "#ffffff",
+      "bgcolor": "#ffffff"
+    },
+    {
+      "id": 177,
+      "type": "Note",
+      "pos": {
+        "0": -3140,
+        "1": 3930
+      },
+      "size": [
+        360,
+        310
+      ],
+      "flags": {},
+      "order": 54,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Wildcard list",
+      "properties": {},
+      "widgets_values": [
+        "Wildcards text files are in this folder:\n..App/ComfyUI/Wildcards\n\n1. Copy and paste these wildcard names into the positive prompt node.\n2. Every queued prompt will create a new variation of WILDCARD words. \n\nYou can set the batch count number in the extra settings, then click generate.\n\n__294styles__\n__1500artist__\n__animals__\n__art-styles__\n__clothes__\n__colours__\n__descriptors__\n__fabrics__\n__foods__\n__household-objects__\n__landscapes__\n__poses__"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 178,
+      "type": "Note",
+      "pos": {
+        "0": -770,
+        "1": 3930
+      },
+      "size": {
+        "0": 350,
+        "1": 150
+      },
+      "flags": {},
+      "order": 55,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "TO ACTIVATE A WORKFLOW:\n1. RIGHT CLICK ON THE EMPTY PART OF THE GROUP\n2. CHOOSE \"Set Group Nodes to Always\"\n\nTO DEACTIVATE A WORKFLOW:\n1. RIGHT CLICK ON THE EMPTY PART OF THE GROUP\n2. CHOOSE \"Set Group Nodes to Never\"\n\nOr use the Switcher node...\nIf you click on the Arrow, you will teleport to the workflow. :)"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 104,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": {
+        "0": -3250,
+        "1": 2050
+      },
+      "size": {
+        "0": 475.4686279296875,
+        "1": 178
+      },
+      "flags": {},
+      "order": 56,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    }
+  ],
+  "links": [
+    [
+      1,
+      4,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      4,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      6,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      7,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      8,
+      4,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      12,
+      12,
+      0,
+      7,
+      1,
+      "STRING"
+    ],
+    [
+      13,
+      11,
+      0,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      17,
+      16,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      18,
+      14,
+      0,
+      17,
+      0,
+      "STRING"
+    ],
+    [
+      24,
+      20,
+      0,
+      19,
+      1,
+      "STRING"
+    ],
+    [
+      25,
+      17,
+      0,
+      19,
+      0,
+      "STRING"
+    ],
+    [
+      26,
+      21,
+      0,
+      24,
+      0,
+      "STRING"
+    ],
+    [
+      27,
+      23,
+      0,
+      26,
+      0,
+      "STRING"
+    ],
+    [
+      28,
+      22,
+      0,
+      25,
+      0,
+      "STRING"
+    ],
+    [
+      33,
+      26,
+      0,
+      27,
+      3,
+      "STRING"
+    ],
+    [
+      34,
+      25,
+      0,
+      27,
+      2,
+      "STRING"
+    ],
+    [
+      35,
+      29,
+      0,
+      27,
+      1,
+      "STRING"
+    ],
+    [
+      37,
+      18,
+      0,
+      30,
+      0,
+      "STRING"
+    ],
+    [
+      38,
+      30,
+      0,
+      17,
+      1,
+      "STRING"
+    ],
+    [
+      39,
+      31,
+      0,
+      32,
+      0,
+      "STRING"
+    ],
+    [
+      40,
+      32,
+      0,
+      33,
+      0,
+      "STRING"
+    ],
+    [
+      42,
+      36,
+      0,
+      27,
+      0,
+      "STRING"
+    ],
+    [
+      43,
+      33,
+      0,
+      36,
+      0,
+      "STRING"
+    ],
+    [
+      44,
+      24,
+      0,
+      36,
+      1,
+      "STRING"
+    ],
+    [
+      45,
+      37,
+      5,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      68,
+      55,
+      0,
+      57,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      69,
+      56,
+      0,
+      57,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      71,
+      4,
+      0,
+      57,
+      1,
+      "MODEL"
+    ],
+    [
+      72,
+      4,
+      1,
+      57,
+      2,
+      "CLIP"
+    ],
+    [
+      73,
+      4,
+      2,
+      57,
+      3,
+      "VAE"
+    ],
+    [
+      75,
+      6,
+      0,
+      57,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      76,
+      7,
+      0,
+      57,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      79,
+      27,
+      0,
+      14,
+      1,
+      "STRING"
+    ],
+    [
+      80,
+      3,
+      0,
+      59,
+      0,
+      "LATENT"
+    ],
+    [
+      81,
+      59,
+      0,
+      60,
+      3,
+      "LATENT"
+    ],
+    [
+      82,
+      7,
+      0,
+      60,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      83,
+      6,
+      0,
+      60,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      84,
+      60,
+      0,
+      61,
+      0,
+      "LATENT"
+    ],
+    [
+      85,
+      4,
+      2,
+      61,
+      1,
+      "VAE"
+    ],
+    [
+      86,
+      61,
+      0,
+      62,
+      0,
+      "IMAGE"
+    ],
+    [
+      87,
+      4,
+      0,
+      60,
+      0,
+      "MODEL"
+    ],
+    [
+      88,
+      61,
+      0,
+      57,
+      0,
+      "IMAGE"
+    ],
+    [
+      89,
+      57,
+      0,
+      58,
+      0,
+      "IMAGE"
+    ],
+    [
+      91,
+      8,
+      0,
+      64,
+      0,
+      "IMAGE"
+    ],
+    [
+      93,
+      70,
+      0,
+      68,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      94,
+      71,
+      0,
+      68,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      95,
+      94,
+      5,
+      68,
+      3,
+      "LATENT"
+    ],
+    [
+      97,
+      76,
+      0,
+      70,
+      1,
+      "STRING"
+    ],
+    [
+      99,
+      74,
+      0,
+      71,
+      1,
+      "STRING"
+    ],
+    [
+      100,
+      68,
+      0,
+      72,
+      0,
+      "LATENT"
+    ],
+    [
+      102,
+      73,
+      0,
+      75,
+      0,
+      "STRING"
+    ],
+    [
+      103,
+      87,
+      0,
+      75,
+      1,
+      "STRING"
+    ],
+    [
+      105,
+      75,
+      0,
+      77,
+      0,
+      "STRING"
+    ],
+    [
+      106,
+      89,
+      0,
+      77,
+      1,
+      "STRING"
+    ],
+    [
+      107,
+      77,
+      0,
+      79,
+      0,
+      "STRING"
+    ],
+    [
+      108,
+      80,
+      0,
+      79,
+      1,
+      "STRING"
+    ],
+    [
+      109,
+      81,
+      0,
+      84,
+      0,
+      "STRING"
+    ],
+    [
+      110,
+      82,
+      0,
+      85,
+      0,
+      "STRING"
+    ],
+    [
+      111,
+      83,
+      0,
+      86,
+      0,
+      "STRING"
+    ],
+    [
+      112,
+      93,
+      0,
+      87,
+      0,
+      "STRING"
+    ],
+    [
+      113,
+      88,
+      0,
+      87,
+      1,
+      "STRING"
+    ],
+    [
+      114,
+      85,
+      0,
+      87,
+      2,
+      "STRING"
+    ],
+    [
+      115,
+      86,
+      0,
+      87,
+      3,
+      "STRING"
+    ],
+    [
+      116,
+      78,
+      0,
+      89,
+      0,
+      "STRING"
+    ],
+    [
+      117,
+      90,
+      0,
+      91,
+      0,
+      "STRING"
+    ],
+    [
+      118,
+      91,
+      0,
+      92,
+      0,
+      "STRING"
+    ],
+    [
+      119,
+      92,
+      0,
+      93,
+      0,
+      "STRING"
+    ],
+    [
+      120,
+      84,
+      0,
+      93,
+      1,
+      "STRING"
+    ],
+    [
+      130,
+      68,
+      0,
+      99,
+      0,
+      "LATENT"
+    ],
+    [
+      138,
+      72,
+      0,
+      103,
+      0,
+      "IMAGE"
+    ],
+    [
+      161,
+      107,
+      0,
+      125,
+      1,
+      "STRING"
+    ],
+    [
+      162,
+      116,
+      0,
+      68,
+      0,
+      "MODEL"
+    ],
+    [
+      166,
+      117,
+      0,
+      70,
+      0,
+      "CLIP"
+    ],
+    [
+      167,
+      117,
+      0,
+      71,
+      0,
+      "CLIP"
+    ],
+    [
+      168,
+      115,
+      0,
+      72,
+      1,
+      "VAE"
+    ],
+    [
+      171,
+      79,
+      0,
+      125,
+      0,
+      "STRING"
+    ],
+    [
+      172,
+      125,
+      0,
+      76,
+      0,
+      "STRING"
+    ],
+    [
+      173,
+      126,
+      0,
+      127,
+      1,
+      "STRING"
+    ],
+    [
+      174,
+      19,
+      0,
+      127,
+      0,
+      "STRING"
+    ],
+    [
+      175,
+      127,
+      0,
+      16,
+      0,
+      "STRING"
+    ],
+    [
+      184,
+      141,
+      0,
+      137,
+      0,
+      "IMAGE"
+    ],
+    [
+      185,
+      130,
+      0,
+      137,
+      1,
+      "MODEL"
+    ],
+    [
+      186,
+      130,
+      1,
+      137,
+      2,
+      "CLIP"
+    ],
+    [
+      187,
+      130,
+      2,
+      137,
+      3,
+      "VAE"
+    ],
+    [
+      190,
+      135,
+      0,
+      137,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      191,
+      136,
+      0,
+      137,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      192,
+      137,
+      0,
+      138,
+      0,
+      "IMAGE"
+    ],
+    [
+      194,
+      130,
+      0,
+      140,
+      0,
+      "MODEL"
+    ],
+    [
+      198,
+      140,
+      0,
+      141,
+      0,
+      "LATENT"
+    ],
+    [
+      199,
+      130,
+      2,
+      141,
+      1,
+      "VAE"
+    ],
+    [
+      200,
+      141,
+      0,
+      142,
+      0,
+      "IMAGE"
+    ],
+    [
+      204,
+      145,
+      0,
+      137,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      205,
+      130,
+      1,
+      145,
+      0,
+      "CLIP"
+    ],
+    [
+      209,
+      72,
+      0,
+      147,
+      0,
+      "IMAGE"
+    ],
+    [
+      210,
+      130,
+      2,
+      147,
+      1,
+      "VAE"
+    ],
+    [
+      213,
+      147,
+      0,
+      140,
+      3,
+      "LATENT"
+    ],
+    [
+      214,
+      130,
+      1,
+      149,
+      0,
+      "CLIP"
+    ],
+    [
+      215,
+      76,
+      0,
+      149,
+      1,
+      "STRING"
+    ],
+    [
+      216,
+      149,
+      0,
+      137,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      218,
+      149,
+      0,
+      152,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      219,
+      145,
+      0,
+      152,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      220,
+      152,
+      0,
+      140,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      221,
+      152,
+      1,
+      140,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      222,
+      153,
+      0,
+      152,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      223,
+      154,
+      0,
+      153,
+      0,
+      "CONTROL_NET"
+    ],
+    [
+      224,
+      72,
+      0,
+      152,
+      3,
+      "IMAGE"
+    ],
+    [
+      225,
+      130,
+      2,
+      152,
+      4,
+      "VAE"
+    ],
+    [
+      230,
+      169,
+      0,
+      160,
+      0,
+      "MODEL"
+    ],
+    [
+      231,
+      176,
+      0,
+      160,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      232,
+      164,
+      0,
+      160,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      233,
+      161,
+      0,
+      160,
+      3,
+      "LATENT"
+    ],
+    [
+      234,
+      160,
+      0,
+      162,
+      0,
+      "LATENT"
+    ],
+    [
+      235,
+      158,
+      2,
+      162,
+      1,
+      "VAE"
+    ],
+    [
+      236,
+      171,
+      0,
+      163,
+      0,
+      "IMAGE"
+    ],
+    [
+      237,
+      169,
+      1,
+      164,
+      0,
+      "CLIP"
+    ],
+    [
+      238,
+      167,
+      0,
+      164,
+      1,
+      "STRING"
+    ],
+    [
+      239,
+      174,
+      0,
+      166,
+      0,
+      "STRING"
+    ],
+    [
+      240,
+      165,
+      0,
+      166,
+      1,
+      "STRING"
+    ],
+    [
+      241,
+      168,
+      0,
+      167,
+      0,
+      "STRING"
+    ],
+    [
+      242,
+      165,
+      1,
+      167,
+      1,
+      "STRING"
+    ],
+    [
+      243,
+      158,
+      0,
+      169,
+      0,
+      "MODEL"
+    ],
+    [
+      244,
+      158,
+      1,
+      169,
+      1,
+      "CLIP"
+    ],
+    [
+      245,
+      162,
+      0,
+      171,
+      0,
+      "IMAGE"
+    ],
+    [
+      246,
+      169,
+      0,
+      171,
+      1,
+      "MODEL"
+    ],
+    [
+      247,
+      158,
+      1,
+      171,
+      2,
+      "CLIP"
+    ],
+    [
+      248,
+      158,
+      2,
+      171,
+      3,
+      "VAE"
+    ],
+    [
+      249,
+      176,
+      0,
+      171,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      250,
+      164,
+      0,
+      171,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      251,
+      172,
+      0,
+      171,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      252,
+      170,
+      0,
+      171,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      253,
+      171,
+      0,
+      173,
+      0,
+      "IMAGE"
+    ],
+    [
+      254,
+      162,
+      0,
+      173,
+      1,
+      "IMAGE"
+    ],
+    [
+      255,
+      166,
+      0,
+      175,
+      0,
+      "STRING"
+    ],
+    [
+      256,
+      169,
+      1,
+      176,
+      0,
+      "CLIP"
+    ],
+    [
+      257,
+      166,
+      0,
+      176,
+      1,
+      "STRING"
+    ],
+    [
+      258,
+      187,
+      0,
+      181,
+      0,
+      "IMAGE"
+    ],
+    [
+      259,
+      185,
+      1,
+      182,
+      0,
+      "CLIP"
+    ],
+    [
+      260,
+      191,
+      0,
+      182,
+      1,
+      "STRING"
+    ],
+    [
+      261,
+      191,
+      0,
+      184,
+      0,
+      "STRING"
+    ],
+    [
+      262,
+      189,
+      0,
+      185,
+      0,
+      "MODEL"
+    ],
+    [
+      263,
+      188,
+      0,
+      185,
+      1,
+      "CLIP"
+    ],
+    [
+      264,
+      185,
+      0,
+      186,
+      0,
+      "MODEL"
+    ],
+    [
+      265,
+      201,
+      0,
+      186,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      266,
+      190,
+      1,
+      187,
+      0,
+      "LATENT"
+    ],
+    [
+      267,
+      197,
+      0,
+      187,
+      1,
+      "VAE"
+    ],
+    [
+      268,
+      199,
+      0,
+      190,
+      0,
+      "NOISE"
+    ],
+    [
+      269,
+      186,
+      0,
+      190,
+      1,
+      "GUIDER"
+    ],
+    [
+      270,
+      198,
+      0,
+      190,
+      2,
+      "SAMPLER"
+    ],
+    [
+      271,
+      200,
+      0,
+      190,
+      3,
+      "SIGMAS"
+    ],
+    [
+      272,
+      193,
+      0,
+      190,
+      4,
+      "LATENT"
+    ],
+    [
+      273,
+      180,
+      0,
+      191,
+      0,
+      "STRING"
+    ],
+    [
+      274,
+      183,
+      0,
+      191,
+      1,
+      "STRING"
+    ],
+    [
+      275,
+      185,
+      0,
+      200,
+      0,
+      "MODEL"
+    ],
+    [
+      276,
+      182,
+      0,
+      201,
+      0,
+      "CONDITIONING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "WILDCARDS GGUF",
+      "bounding": [
+        -370,
+        3900,
+        1570,
+        1180
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "WILDCARDS SDXL",
+      "bounding": [
+        -2750,
+        3900,
+        1904,
+        1177
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "WILDCARDS V2 GGUF",
+      "bounding": [
+        -2750,
+        2020,
+        2010,
+        1720
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "UPSCALE LATENT",
+      "bounding": [
+        -690,
+        -80,
+        840,
+        1840
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "WILDCARDS V2 SDXL",
+      "bounding": [
+        -2750,
+        -80,
+        2010,
+        1840
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "SDXL UPSCALE LATENT",
+      "bounding": [
+        -690,
+        2020,
+        820,
+        1720
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-11-28T19:00:59.614Z",
+      "modified": "2024-11-29T04:38:05.167Z",
+      "software": "ComfyUI"
+    }
+  },
+  "version": 0.4
+}

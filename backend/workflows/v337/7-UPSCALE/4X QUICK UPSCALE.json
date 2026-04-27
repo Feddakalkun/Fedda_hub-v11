@@ -1,0 +1,297 @@
+{
+  "id": "9ee41e2c-708c-4ee5-b0e6-9ebc8ebecdd7",
+  "revision": 0,
+  "last_node_id": 37,
+  "last_link_id": 49,
+  "nodes": [
+    {
+      "id": 32,
+      "type": "SaveImage",
+      "pos": [
+        953.0042724609375,
+        865.5614624023438
+      ],
+      "size": [
+        400,
+        450
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 48
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.50",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "4X QUICK UPSCALE"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 34,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        1383.0042724609375,
+        1165.5615234375
+      ],
+      "size": [
+        325,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "slot_index": 0,
+          "links": [
+            43
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.50",
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "4x_foolhardy_Remacri.pth"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 35,
+      "type": "ImageUpscaleWithModel",
+      "pos": [
+        1383.0042724609375,
+        1275.5615234375
+      ],
+      "size": [
+        325,
+        50
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 43
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 45
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            47
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.50",
+        "Node name for S&R": "ImageUpscaleWithModel"
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 37,
+      "type": "ImageResizeKJ",
+      "pos": [
+        1380,
+        870
+      ],
+      "size": [
+        325,
+        250
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 47
+        },
+        {
+          "name": "get_image_size",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            48
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "479cde218b92f1f4e59800a9fbe1c970c11860c2",
+        "Node name for S&R": "ImageResizeKJ"
+      },
+      "widgets_values": [
+        0,
+        0,
+        "lanczos",
+        false,
+        2,
+        "disabled"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 31,
+      "type": "LoadImage",
+      "pos": [
+        583.0042724609375,
+        865.5614624023438
+      ],
+      "size": [
+        350,
+        450
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            45
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.50",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "logo.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    }
+  ],
+  "links": [
+    [
+      43,
+      34,
+      0,
+      35,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      45,
+      31,
+      0,
+      35,
+      1,
+      "IMAGE"
+    ],
+    [
+      47,
+      35,
+      0,
+      37,
+      0,
+      "IMAGE"
+    ],
+    [
+      48,
+      37,
+      0,
+      32,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 2,
+      "title": "4X QUICK UPSCALE",
+      "bounding": [
+        553.0042724609375,
+        765.5614624023438,
+        1175,
+        600
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7247295000000863,
+      "offset": [
+        451.6677955475943,
+        15.490698983937278
+      ]
+    },
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-09-14T14:37:50.604Z",
+      "modified": "2024-10-06T00:11:06.451Z",
+      "software": "ComfyUI"
+    },
+    "groupNodes": {},
+    "ue_links": [],
+    "frontendVersion": "1.25.8"
+  },
+  "version": 0.4
+}

@@ -1,0 +1,751 @@
+{
+  "id": "e0e2082e-ca0f-4bfc-95f3-c0707aafd8d2",
+  "revision": 0,
+  "last_node_id": 33,
+  "last_link_id": 45,
+  "nodes": [
+    {
+      "id": 15,
+      "type": "Label (rgthree)",
+      "pos": [
+        1630,
+        120
+      ],
+      "size": [
+        355.59375,
+        32
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "MODEL DOWNLOADER",
+      "properties": {
+        "fontSize": 32,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 14,
+      "type": "easy showAnything",
+      "pos": [
+        2130,
+        210
+      ],
+      "size": [
+        510,
+        310
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 19,
+      "type": "Label (rgthree)",
+      "pos": [
+        510,
+        20
+      ],
+      "size": [
+        624.34375,
+        32
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "1. run the workflow to download the models.",
+      "properties": {
+        "fontSize": 32,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 17,
+      "type": "Label (rgthree)",
+      "pos": [
+        510,
+        60
+      ],
+      "size": [
+        259.609375,
+        32
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "2. restart ComfyUI",
+      "properties": {
+        "fontSize": 32,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 18,
+      "type": "Label (rgthree)",
+      "pos": [
+        510,
+        -20
+      ],
+      "size": [
+        240.171875,
+        32
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Installation guide",
+      "properties": {
+        "fontSize": 32,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 20,
+      "type": "Label (rgthree)",
+      "pos": [
+        510,
+        100
+      ],
+      "size": [
+        574.53125,
+        32
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "3. activate the workflow group and run it.",
+      "properties": {
+        "fontSize": 32,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 21,
+      "type": "HeartMuLaTagsBuilder",
+      "pos": [
+        -140,
+        600
+      ],
+      "size": [
+        424.3194111232425,
+        186.72918243017784
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "tags",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-RT-HeartMuLa",
+        "ver": "b188250cfd2291a836da9cc860a5980c5dac3126",
+        "Node name for S&R": "HeartMuLaTagsBuilder",
+        "aux_id": "monnky/ComfyUI-RT-HeartMuLa",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "folk",
+        "female vocal",
+        "energetic",
+        "medium",
+        "piano, guitar",
+        "pop, jazz"
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 22,
+      "type": "Text _O",
+      "pos": [
+        -140,
+        840
+      ],
+      "size": [
+        424.0842210156278,
+        194.73157665283122
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "title": "Manual Tags",
+      "properties": {
+        "cnr_id": "ComfyUI-QualityOfLifeSuit_Omar92",
+        "ver": "f09d10dea0afbd3984a284acf8f0913a634e36ec",
+        "Node name for S&R": "Text _O",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "female, female singer, pop, jazz",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 24,
+      "type": "Reroute",
+      "pos": [
+        310,
+        790
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "STRING",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false,
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "version": "7.5.2",
+          "input_ue_unconnectable": {}
+        }
+      }
+    },
+    {
+      "id": 23,
+      "type": "HeartMuLaLoader",
+      "pos": [
+        -140,
+        270
+      ],
+      "size": [
+        425.5324682184429,
+        262
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "HEARTMULA_MODEL",
+          "links": [
+            40
+          ]
+        },
+        {
+          "name": "tokenizer",
+          "type": "HEARTMULA_TOKENIZER",
+          "links": [
+            41
+          ]
+        },
+        {
+          "name": "codec",
+          "type": "HEART_CODEC",
+          "links": [
+            42
+          ]
+        },
+        {
+          "name": "gen_config",
+          "type": "HEART_GEN_CONFIG",
+          "links": [
+            43
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-RT-HeartMuLa",
+        "ver": "b188250cfd2291a836da9cc860a5980c5dac3126",
+        "Node name for S&R": "HeartMuLaLoader",
+        "aux_id": "monnky/ComfyUI-RT-HeartMuLa",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "HeartMuLa-oss-3B",
+        "HeartCodec-oss",
+        "4bit",
+        "bf16",
+        "bf16",
+        "cuda",
+        false
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 13,
+      "type": "GitCloneManager",
+      "pos": [
+        1520,
+        210
+      ],
+      "size": [
+        590,
+        440
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clone_report",
+          "type": "STRING",
+          "links": [
+            14
+          ]
+        },
+        {
+          "name": "repository_list",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "bf895c75df55a2e14bd4c34a3fa82826d4b19d71",
+        "Node name for S&R": "GitCloneManager"
+      },
+      "widgets_values": [
+        "https://huggingface.co/HeartMuLa/HeartMuLaGen models/HeartMula\nhttps://huggingface.co/HeartMuLa/HeartMuLa-RL-oss-3B-20260123 models/HeartMula/HeartMuLa-RL-oss-3B\nhttps://huggingface.co/HeartMuLa/HeartCodec-oss-20260123 models/HeartMula/HeartCodec-oss\nhttps://huggingface.co/HeartMuLa/HeartTranscriptor-oss models/HeartMula/HeartTranscriptor-oss\nhttps://github.com/monnky/ComfyUI-RT-HeartMuLa.git\n",
+        false,
+        2,
+        0,
+        true,
+        false,
+        false,
+        "",
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 32,
+      "type": "Label (rgthree)",
+      "pos": [
+        560,
+        1030
+      ],
+      "size": [
+        313.125,
+        32
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Before using the node",
+      "properties": {
+        "fontSize": 32,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 33,
+      "type": "Label (rgthree)",
+      "pos": [
+        560,
+        1070
+      ],
+      "size": [
+        323.75,
+        32
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Right click on the node",
+      "properties": {
+        "fontSize": 32,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 31,
+      "type": "Label (rgthree)",
+      "pos": [
+        560,
+        1110
+      ],
+      "size": [
+        323.390625,
+        32
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Choose \"Reload node\"",
+      "properties": {
+        "fontSize": 32,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 30,
+      "type": "HeartMuLaGenerator",
+      "pos": [
+        430,
+        270
+      ],
+      "size": [
+        579.6916688070646,
+        725.3404961112099
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "HEARTMULA_MODEL",
+          "link": 40
+        },
+        {
+          "name": "tokenizer",
+          "type": "HEARTMULA_TOKENIZER",
+          "link": 41
+        },
+        {
+          "name": "codec",
+          "type": "HEART_CODEC",
+          "link": 42
+        },
+        {
+          "name": "gen_config",
+          "type": "HEART_GEN_CONFIG",
+          "link": 43
+        },
+        {
+          "name": "tags",
+          "type": "STRING",
+          "link": 44
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            45
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-RT-HeartMuLa",
+        "ver": "64e5419bf4aa6f002ac6178d4d71841429010021",
+        "Node name for S&R": "HeartMuLaGenerator"
+      },
+      "widgets_values": [
+        "[Intro]\n\n[Verse]\nThe sun creeps in across the floor\nI hear the traffic outside the door\nThe coffee pot begins to hiss\nIt is another morning just like this\n\n[Prechorus]\nThe world keeps spinning round and round\nFeet are planted on the ground\nI find my rhythm in the sound\n\n[Chorus]\nEvery day the light returns\nEvery day the fire burns\nWe keep on walking down this street\nMoving to the same steady beat\nIt is the ordinary magic that we meet\n\n[Verse]\nThe hours tick deeply into noon\nChasing shadows,chasing the moon\nWork is done and the lights go low\nWatching the city start to glow\n\n[Bridge]\nIt is not always easy,not always bright\nSometimes we wrestle with the night\nBut we make it to the morning light\n\n[Chorus]\nEvery day the light returns\nEvery day the fire burns\nWe keep on walking down this street\nMoving to the same steady beat\n\n[Outro]\nJust another day\nEvery single day",
+        true,
+        1.7,
+        1,
+        50,
+        0,
+        "randomize",
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 26,
+      "type": "SaveAudio",
+      "pos": [
+        1030,
+        270
+      ],
+      "size": [
+        387.7537195464063,
+        118.2418687472063
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 45
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.10.0",
+        "Node name for S&R": "SaveAudio",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.5.2"
+        }
+      },
+      "widgets_values": [
+        "AUDIO/MUSIC/0"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      14,
+      13,
+      0,
+      14,
+      0,
+      "STRING"
+    ],
+    [
+      15,
+      22,
+      0,
+      24,
+      0,
+      "STRING"
+    ],
+    [
+      40,
+      23,
+      0,
+      30,
+      0,
+      "HEARTMULA_MODEL"
+    ],
+    [
+      41,
+      23,
+      1,
+      30,
+      1,
+      "HEARTMULA_TOKENIZER"
+    ],
+    [
+      42,
+      23,
+      2,
+      30,
+      2,
+      "HEART_CODEC"
+    ],
+    [
+      43,
+      23,
+      3,
+      30,
+      3,
+      "HEART_GEN_CONFIG"
+    ],
+    [
+      44,
+      24,
+      0,
+      30,
+      4,
+      "STRING"
+    ],
+    [
+      45,
+      30,
+      0,
+      26,
+      0,
+      "AUDIO"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 2,
+      "title": "HeartMula Music Generator",
+      "bounding": [
+        -170,
+        180,
+        1657.3400000000004,
+        1124.0955555555556
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        0,
+        0
+      ]
+    },
+    "frontendVersion": "1.37.11",
+    "workflowRendererVersion": "LG",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "ue_links": []
+  },
+  "version": 0.4
+}

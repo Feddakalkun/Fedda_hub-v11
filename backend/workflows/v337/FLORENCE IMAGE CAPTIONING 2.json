@@ -1,0 +1,867 @@
+{
+  "id": "c04fd7c6-dc70-497b-9489-ff4bd5312a54",
+  "revision": 0,
+  "last_node_id": 83,
+  "last_link_id": 93,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "easy showAnything",
+      "pos": [
+        420,
+        240
+      ],
+      "size": [
+        370,
+        550
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "slot_index": 0,
+          "links": [
+            58
+          ]
+        }
+      ],
+      "title": "IMAGE CAPTION",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "ccb4ba08fcfc508e16dedf6491a85efe74f27e2b",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "A close-up portrait of a young Asian woman with dark brown hair. She is wearing a maroon sleeveless top with gold embroidery on it. Her hair is pulled back and cascades over her shoulders. Her eyes are a piercing blue, and her eyebrows are a darker shade of brown. Her lips are pursed, and she has a slight smile on her face. There are two flower crowns on her head, one on each side of her head. The flowers are orange and pink, with green leaves surrounding them. The background is dark, creating a contrast with the vibrant colors of the woman's hair."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        -30,
+        240
+      ],
+      "size": [
+        440,
+        550
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "INPUT IMAGE",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "woman.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 75,
+      "type": "DownloadAndLoadFlorence2Model",
+      "pos": [
+        540,
+        1660
+      ],
+      "size": [
+        400,
+        106
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "lora",
+          "shape": 7,
+          "type": "PEFTLORA",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "links": [
+            77
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-florence2",
+        "ver": "90b012e922f8bb0482bcd2ae24cdc191ec12a11f",
+        "Node name for S&R": "DownloadAndLoadFlorence2Model"
+      },
+      "widgets_values": [
+        "gokaygokay/Florence-2-SD3-Captioner",
+        "fp16",
+        "sdpa",
+        false
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 73,
+      "type": "JDCN_BatchImageLoadFromDir",
+      "pos": [
+        200,
+        1250
+      ],
+      "size": [
+        250,
+        206
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "Directory",
+          "type": "STRING",
+          "widget": {
+            "name": "Directory"
+          },
+          "link": 74
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Images",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            81
+          ]
+        },
+        {
+          "name": "Image_Names",
+          "shape": 6,
+          "type": "STRING",
+          "slot_index": 1,
+          "links": [
+            86
+          ]
+        },
+        {
+          "name": "Image_Paths",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "Load_Cap",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "Skip_Frame",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "Count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-jdcn",
+        "ver": "1.0.2",
+        "Node name for S&R": "JDCN_BatchImageLoadFromDir"
+      },
+      "widgets_values": [
+        "directory path",
+        1000,
+        0
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 76,
+      "type": "Florence2Run",
+      "pos": [
+        460,
+        1250
+      ],
+      "size": [
+        400,
+        364
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 7,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 81
+        },
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "link": 77
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": []
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "caption",
+          "type": "STRING",
+          "slot_index": 2,
+          "links": [
+            82
+          ]
+        },
+        {
+          "name": "data",
+          "type": "JSON",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-florence2",
+        "ver": "90b012e922f8bb0482bcd2ae24cdc191ec12a11f",
+        "Node name for S&R": "Florence2Run"
+      },
+      "widgets_values": [
+        "",
+        "more_detailed_caption",
+        true,
+        true,
+        3000,
+        10,
+        true,
+        "",
+        592912451870784,
+        "randomize",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 72,
+      "type": "CR Save Text To File",
+      "pos": [
+        900,
+        1280
+      ],
+      "size": [
+        270,
+        130
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "multiline_text",
+          "type": "STRING",
+          "widget": {
+            "name": "multiline_text"
+          },
+          "link": 71
+        },
+        {
+          "name": "output_file_path",
+          "type": "STRING",
+          "widget": {
+            "name": "output_file_path"
+          },
+          "link": 84
+        },
+        {
+          "name": "file_name",
+          "type": "STRING",
+          "widget": {
+            "name": "file_name"
+          },
+          "link": 86
+        }
+      ],
+      "outputs": [
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Comfyroll_CustomNodes",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Save Text To File"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        "txt",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 67,
+      "type": "CR Text Concatenate",
+      "pos": [
+        900,
+        1320
+      ],
+      "size": [
+        315,
+        126
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text1",
+          "shape": 7,
+          "type": "STRING",
+          "link": 70
+        },
+        {
+          "name": "text2",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "*",
+          "links": [
+            71
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Comfyroll_CustomNodes",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Text Concatenate"
+      },
+      "widgets_values": [
+        ", "
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 68,
+      "type": "CR Text",
+      "pos": [
+        900,
+        1360
+      ],
+      "size": [
+        330,
+        108
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 82
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "*",
+          "links": [
+            70
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Comfyroll_CustomNodes",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Text"
+      },
+      "widgets_values": [
+        "[trigger]",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 49,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        1300,
+        170
+      ],
+      "size": [
+        350,
+        82
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "slot_index": 0,
+          "links": []
+        }
+      ],
+      "title": "SWITCHER",
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 69,
+      "type": "CR Text",
+      "pos": [
+        -20,
+        1250
+      ],
+      "size": [
+        210,
+        108
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "*",
+          "links": [
+            74,
+            84
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "FOLDER PATH",
+      "properties": {
+        "cnr_id": "ComfyUI_Comfyroll_CustomNodes",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Text"
+      },
+      "widgets_values": [
+        "PLACE YOUR FOLDER PATH HERE!!!",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 83,
+      "type": "DownloadAndLoadFlorence2Model",
+      "pos": [
+        810,
+        440
+      ],
+      "size": [
+        400,
+        130
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora",
+          "shape": 7,
+          "type": "PEFTLORA",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "links": [
+            93
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-florence2",
+        "ver": "90b012e922f8bb0482bcd2ae24cdc191ec12a11f",
+        "Node name for S&R": "DownloadAndLoadFlorence2Model"
+      },
+      "widgets_values": [
+        "gokaygokay/Florence-2-SD3-Captioner",
+        "fp16",
+        "sdpa",
+        false
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 1,
+      "type": "Florence2Run",
+      "pos": [
+        820,
+        620
+      ],
+      "size": [
+        400,
+        364
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 2
+        },
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "link": 93
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": []
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "name": "caption",
+          "type": "STRING",
+          "slot_index": 2,
+          "links": [
+            5
+          ]
+        },
+        {
+          "name": "data",
+          "type": "JSON",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-florence2",
+        "ver": "90b012e922f8bb0482bcd2ae24cdc191ec12a11f",
+        "Node name for S&R": "Florence2Run"
+      },
+      "widgets_values": [
+        "",
+        "more_detailed_caption",
+        true,
+        true,
+        3000,
+        10,
+        true,
+        "",
+        10477691530017,
+        "randomize",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 52,
+      "type": "SaveText|pysssss",
+      "pos": [
+        810,
+        240
+      ],
+      "size": [
+        400,
+        130
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 58
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "SAVE TEXT FILE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "bbda5e52ad580c13ceaa53136d9c2bed9137bd2e",
+        "Node name for S&R": "SaveText|pysssss"
+      },
+      "widgets_values": [
+        "output",
+        "FLORENCE.txt",
+        "append",
+        true
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      2,
+      3,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      1,
+      2,
+      6,
+      0,
+      "*"
+    ],
+    [
+      58,
+      6,
+      0,
+      52,
+      0,
+      "STRING"
+    ],
+    [
+      70,
+      68,
+      0,
+      67,
+      0,
+      "STRING"
+    ],
+    [
+      71,
+      67,
+      0,
+      72,
+      0,
+      "STRING"
+    ],
+    [
+      74,
+      69,
+      0,
+      73,
+      0,
+      "STRING"
+    ],
+    [
+      77,
+      75,
+      0,
+      76,
+      1,
+      "FL2MODEL"
+    ],
+    [
+      81,
+      73,
+      0,
+      76,
+      0,
+      "IMAGE"
+    ],
+    [
+      82,
+      76,
+      2,
+      68,
+      0,
+      "STRING"
+    ],
+    [
+      84,
+      69,
+      0,
+      72,
+      1,
+      "STRING"
+    ],
+    [
+      86,
+      73,
+      1,
+      72,
+      2,
+      "STRING"
+    ],
+    [
+      93,
+      83,
+      0,
+      1,
+      1,
+      "FL2MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "FLORENCE IMAGE CAPTIONING",
+      "bounding": [
+        -60,
+        140,
+        1330,
+        810
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "BATCH IMAGE CAPTIONING TO TEXT FILE",
+      "bounding": [
+        -60,
+        1140,
+        1330,
+        570
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflowRendererVersion": "LG",
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-12-18T18:30:57.013Z",
+      "modified": "2024-12-20T18:44:25.739Z",
+      "software": "ComfyUI"
+    },
+    "ue_links": [],
+    "frontendVersion": "1.34.9",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

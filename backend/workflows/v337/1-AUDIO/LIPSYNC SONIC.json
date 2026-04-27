@@ -1,0 +1,1235 @@
+{
+  "id": "f31bee30-5eb7-41a5-8c66-7350a5e02cc7",
+  "revision": 0,
+  "last_node_id": 80,
+  "last_link_id": 112,
+  "nodes": [
+    {
+      "id": 52,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        970,
+        -1340
+      ],
+      "size": [
+        480,
+        310
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 58
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 59
+        },
+        {
+          "label": "meta_batch",
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "frame_rate",
+          "type": "FLOAT",
+          "widget": {
+            "name": "frame_rate"
+          },
+          "link": 60
+        }
+      ],
+      "outputs": [
+        {
+          "label": "Filenames",
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AUDIO/sonic",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "sonic_00051-audio.mp4",
+            "subfolder": "AUDIO",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 25
+          },
+          "muted": false
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 53,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1880,
+        -1340
+      ],
+      "size": [
+        214.7587890625,
+        310
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 2,
+      "inputs": [
+        {
+          "label": "images",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 61
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 62
+        },
+        {
+          "label": "meta_batch",
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "Filenames",
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 25,
+        "loop_count": 0,
+        "filename_prefix": "AUDIO/sonic",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "sonic_00052-audio.mp4",
+            "subfolder": "AUDIO",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 25
+          },
+          "muted": false
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 54,
+      "type": "ImageOnlyCheckpointLoader",
+      "pos": [
+        580,
+        -1340
+      ],
+      "size": [
+        369.6000061035156,
+        98
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "MODEL",
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            75
+          ]
+        },
+        {
+          "label": "CLIP_VISION",
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "slot_index": 1,
+          "links": [
+            77
+          ]
+        },
+        {
+          "label": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            78
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "ImageOnlyCheckpointLoader"
+      },
+      "widgets_values": [
+        "svd_xt.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 55,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        1550,
+        -850
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            64
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "4x_foolhardy_Remacri.pth"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 57,
+      "type": "ImageUpscaleWithModel",
+      "pos": [
+        1550,
+        -810
+      ],
+      "size": [
+        320,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 64
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 65
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            109
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "ImageUpscaleWithModel"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 60,
+      "type": "LoadAudio",
+      "pos": [
+        210,
+        -1230
+      ],
+      "size": [
+        340,
+        136
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "slot_index": 0,
+          "links": [
+            59,
+            62,
+            79
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "AUDIO WOMAN.MP3",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 73,
+      "type": "SaveImage",
+      "pos": [
+        2140,
+        -1240
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 93
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "VIDEO/IMAGE"
+      ]
+    },
+    {
+      "id": 76,
+      "type": "SaveImage",
+      "pos": [
+        2470,
+        -1240
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 95
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "VIDEO/IMAGE"
+      ]
+    },
+    {
+      "id": 78,
+      "type": "ImageSelector",
+      "pos": [
+        2470,
+        -1340
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 96
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            95
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-image-selector",
+        "ver": "c16921d14d3350dc8e6db25b2f385b78f64f77bf",
+        "Node name for S&R": "ImageSelector"
+      },
+      "widgets_values": [
+        "-1"
+      ]
+    },
+    {
+      "id": 77,
+      "type": "Note",
+      "pos": [
+        2800,
+        -1340
+      ],
+      "size": [
+        490,
+        160
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "-1 is the last frame from your video, you can use it to extend your video.\nYou can choose any frame or many at once separated with comma. 1,2,3\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 75,
+      "type": "ImageSelector",
+      "pos": [
+        2140,
+        -1340
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 94
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            93
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-image-selector",
+        "ver": "c16921d14d3350dc8e6db25b2f385b78f64f77bf",
+        "Node name for S&R": "ImageSelector"
+      },
+      "widgets_values": [
+        "-1"
+      ]
+    },
+    {
+      "id": 63,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": [
+        -180,
+        -1400
+      ],
+      "size": [
+        340,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 58,
+      "type": "ReActorRestoreFace",
+      "pos": [
+        1540,
+        -750
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 110
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            61,
+            94
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-reactor-node",
+        "ver": "b3d85c761c5c8d113d0ad6e8845996cc83215d29",
+        "Node name for S&R": "ReActorRestoreFace"
+      },
+      "widgets_values": [
+        "retinaface_resnet50",
+        "GFPGANv1.4.pth",
+        1,
+        0.5
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 80,
+      "type": "ImageResizeKJ",
+      "pos": [
+        1550,
+        -1340
+      ],
+      "size": [
+        315,
+        266
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 109
+        },
+        {
+          "name": "get_image_size",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "width_input",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "height_input",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            110
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "d126b62cebee81ea14ec06ea7cd7526999cb0554",
+        "Node name for S&R": "ImageResizeKJ"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "nearest-exact",
+        true,
+        2,
+        "disabled"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 67,
+      "type": "SONIC_PreData",
+      "pos": [
+        580,
+        -1000
+      ],
+      "size": [
+        370,
+        206
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "clip_vision",
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": 77
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 78
+        },
+        {
+          "label": "audio",
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 79
+        },
+        {
+          "label": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 80
+        },
+        {
+          "name": "weight_dtype",
+          "type": "DTYPE",
+          "link": 111
+        },
+        {
+          "name": "duration",
+          "type": "FLOAT",
+          "widget": {
+            "name": "duration"
+          },
+          "link": 112
+        }
+      ],
+      "outputs": [
+        {
+          "label": "data_dict",
+          "name": "data_dict",
+          "type": "SONIC_PREDATA",
+          "slot_index": 0,
+          "links": [
+            82
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Sonic",
+        "ver": "df23ae9beed64aba7596f59789d6aaaf614f07a5",
+        "Node name for S&R": "SONIC_PreData",
+        "aux_id": "smthemex/ComfyUI_Sonic"
+      },
+      "widgets_values": [
+        640,
+        2,
+        0.5
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 64,
+      "type": "SONICSampler",
+      "pos": [
+        580,
+        -740
+      ],
+      "size": [
+        370,
+        174
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL_SONIC",
+          "link": 76
+        },
+        {
+          "label": "data_dict",
+          "name": "data_dict",
+          "type": "SONIC_PREDATA",
+          "link": 82
+        }
+      ],
+      "outputs": [
+        {
+          "label": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            58,
+            65,
+            96
+          ]
+        },
+        {
+          "label": "fps",
+          "name": "fps",
+          "type": "FLOAT",
+          "slot_index": 1,
+          "links": [
+            60
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Sonic",
+        "ver": "df23ae9beed64aba7596f59789d6aaaf614f07a5",
+        "Node name for S&R": "SONICSampler",
+        "aux_id": "smthemex/ComfyUI_Sonic"
+      },
+      "widgets_values": [
+        1,
+        "fixed",
+        25,
+        1,
+        25
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 65,
+      "type": "Note",
+      "pos": [
+        580,
+        -510
+      ],
+      "size": [
+        370,
+        180
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "USER MANUAL",
+      "properties": {},
+      "widgets_values": [
+        "Duration in seconds you can set in the first node.\nFull length of the audio is in the second node.\n\nSONIC PreData node settings:\n\"min resolution\" set to 640 or 704 for 24GB VRAM\n512 for lower VRAM Graphics Cards\n\nSonic Sampler node settings:\n\"Dynamic scale\" is for motion strength.\n1 is low motion.\n2 is for higher motion"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 50,
+      "type": "Label (rgthree)",
+      "pos": [
+        320,
+        -540
+      ],
+      "size": [
+        250.58837890625,
+        55
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "READ ME",
+      "properties": {
+        "fontSize": 55,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 61,
+      "type": "LoadImage",
+      "pos": [
+        210,
+        -1030
+      ],
+      "size": [
+        340,
+        430
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            80
+          ]
+        },
+        {
+          "label": "MASK",
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pose5.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 66,
+      "type": "SONICTLoader",
+      "pos": [
+        580,
+        -1200
+      ],
+      "size": [
+        370,
+        150
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 75
+        }
+      ],
+      "outputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL_SONIC",
+          "slot_index": 0,
+          "links": [
+            76
+          ]
+        },
+        {
+          "name": "dtype",
+          "type": "DTYPE",
+          "slot_index": 1,
+          "links": [
+            111
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI_Sonic",
+        "ver": "df23ae9beed64aba7596f59789d6aaaf614f07a5",
+        "Node name for S&R": "SONICTLoader",
+        "aux_id": "smthemex/ComfyUI_Sonic"
+      },
+      "widgets_values": [
+        "unet.pth",
+        1,
+        true,
+        "fp16"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 59,
+      "type": "Cfg Literal",
+      "pos": [
+        210,
+        -1340
+      ],
+      "size": [
+        340,
+        60
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "slot_index": 0,
+          "links": [
+            112
+          ]
+        }
+      ],
+      "title": "SET LENGTH IN SECONDS",
+      "properties": {
+        "cnr_id": "image-saver",
+        "ver": "65e6903eff274a50f8b5cd768f0f96baf37baea1",
+        "Node name for S&R": "Cfg Literal"
+      },
+      "widgets_values": [
+        100
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    }
+  ],
+  "links": [
+    [
+      58,
+      64,
+      0,
+      52,
+      0,
+      "IMAGE"
+    ],
+    [
+      59,
+      60,
+      0,
+      52,
+      1,
+      "AUDIO"
+    ],
+    [
+      60,
+      64,
+      1,
+      52,
+      4,
+      "FLOAT"
+    ],
+    [
+      61,
+      58,
+      0,
+      53,
+      0,
+      "IMAGE"
+    ],
+    [
+      62,
+      60,
+      0,
+      53,
+      1,
+      "AUDIO"
+    ],
+    [
+      64,
+      55,
+      0,
+      57,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      65,
+      64,
+      0,
+      57,
+      1,
+      "IMAGE"
+    ],
+    [
+      75,
+      54,
+      0,
+      66,
+      0,
+      "MODEL"
+    ],
+    [
+      76,
+      66,
+      0,
+      64,
+      0,
+      "MODEL_SONIC"
+    ],
+    [
+      77,
+      54,
+      1,
+      67,
+      0,
+      "CLIP_VISION"
+    ],
+    [
+      78,
+      54,
+      2,
+      67,
+      1,
+      "VAE"
+    ],
+    [
+      79,
+      60,
+      0,
+      67,
+      2,
+      "AUDIO"
+    ],
+    [
+      80,
+      61,
+      0,
+      67,
+      3,
+      "IMAGE"
+    ],
+    [
+      82,
+      67,
+      0,
+      64,
+      1,
+      "SONIC_PREDATA"
+    ],
+    [
+      93,
+      75,
+      0,
+      73,
+      0,
+      "IMAGE"
+    ],
+    [
+      94,
+      58,
+      0,
+      75,
+      0,
+      "IMAGE"
+    ],
+    [
+      95,
+      78,
+      0,
+      76,
+      0,
+      "IMAGE"
+    ],
+    [
+      96,
+      64,
+      0,
+      78,
+      0,
+      "IMAGE"
+    ],
+    [
+      109,
+      57,
+      0,
+      80,
+      0,
+      "IMAGE"
+    ],
+    [
+      110,
+      80,
+      0,
+      58,
+      0,
+      "IMAGE"
+    ],
+    [
+      111,
+      66,
+      1,
+      67,
+      4,
+      "DTYPE"
+    ],
+    [
+      112,
+      59,
+      0,
+      67,
+      5,
+      "FLOAT"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 6,
+      "title": "SONIC IMG2VID LIPSYNC",
+      "bounding": [
+        190,
+        -1430,
+        1310,
+        1120
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 7,
+      "title": "UPSCALE + RESTORE FACE",
+      "bounding": [
+        1520,
+        -1430,
+        600,
+        840
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.19.9",
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2025-01-14T21:02:01.367Z",
+      "modified": "2025-01-21T12:25:02.298Z",
+      "software": "ComfyUI"
+    },
+    "ue_links": []
+  },
+  "version": 0.4
+}

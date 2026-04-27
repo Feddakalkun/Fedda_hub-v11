@@ -1,0 +1,914 @@
+{
+  "id": "85e071b8-e34e-4263-aff6-ecd6c6ddb4ba",
+  "revision": 0,
+  "last_node_id": 45,
+  "last_link_id": 38,
+  "nodes": [
+    {
+      "id": 13,
+      "type": "PreviewImage",
+      "pos": [
+        1010,
+        260
+      ],
+      "size": [
+        360,
+        370
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 32
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.45",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "LoadImage",
+      "pos": [
+        310,
+        260
+      ],
+      "size": [
+        270,
+        314
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            31
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.45",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "CHARACTER.png",
+        "image"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "easy showAnything",
+      "pos": [
+        640,
+        40
+      ],
+      "size": [
+        210,
+        88
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 30
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "512"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "easy showAnything",
+      "pos": [
+        640,
+        -100
+      ],
+      "size": [
+        210,
+        88
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "512"
+      ]
+    },
+    {
+      "id": 22,
+      "type": "easy showAnything",
+      "pos": [
+        610,
+        770
+      ],
+      "size": [
+        240,
+        150
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "### Model: [model.safetensors](http://www.gg.com)  \n**Output folder:**  \n`App\\ComfyUI\\models\\clip`\n\n---"
+      ]
+    },
+    {
+      "id": 18,
+      "type": "MarkdownNote",
+      "pos": [
+        870,
+        770
+      ],
+      "size": [
+        320,
+        150
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "### Model: [model.safetensors](http://www.gg.com)  \n**Output folder:**  \n`App\\ComfyUI\\models\\clip`\n\n---"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 27,
+      "type": "MarkdownModelNote",
+      "pos": [
+        310,
+        770
+      ],
+      "size": [
+        281.1412048339844,
+        106
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "markdown_note",
+          "type": "STRING",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "a8a66ca268e01b5d6f683fc4004c62c61d9f9155",
+        "Node name for S&R": "MarkdownModelNote"
+      },
+      "widgets_values": [
+        "http://www.gg.com",
+        "model.safetensors",
+        "App\\ComfyUI\\models\\clip"
+      ]
+    },
+    {
+      "id": 29,
+      "type": "Label (rgthree)",
+      "pos": [
+        300,
+        -230
+      ],
+      "size": [
+        212.150390625,
+        36
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Studio-nodes",
+      "properties": {
+        "fontSize": 36,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 30,
+      "type": "AspectRatioImageSize",
+      "pos": [
+        310,
+        -100
+      ],
+      "size": [
+        280,
+        220
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            29
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            30
+          ]
+        },
+        {
+          "name": "resolution_label",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "a8a66ca268e01b5d6f683fc4004c62c61d9f9155",
+        "Node name for S&R": "AspectRatioImageSize"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "16:9",
+        "Vertical"
+      ]
+    },
+    {
+      "id": 31,
+      "type": "AspectRatioResizeImage",
+      "pos": [
+        600,
+        260
+      ],
+      "size": [
+        400,
+        214
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "resized_image",
+          "type": "IMAGE",
+          "links": [
+            32
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "resolution_label",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "a8a66ca268e01b5d6f683fc4004c62c61d9f9155",
+        "Node name for S&R": "AspectRatioResizeImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "16:9",
+        "Horizontal",
+        "Stretch"
+      ]
+    },
+    {
+      "id": 39,
+      "type": "easy showAnything",
+      "pos": [
+        -330,
+        470
+      ],
+      "size": [
+        560,
+        250
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 35
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "No download links provided"
+      ]
+    },
+    {
+      "id": 38,
+      "type": "easy showAnything",
+      "pos": [
+        -330,
+        770
+      ],
+      "size": [
+        560,
+        270
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 36
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "=== DOWNLOAD HISTORY ===\n2025-09-29 15:25:38 | flux_vae.safetensors | 319.77 MB | vae222522/\n2025-09-29 15:14:21 | flux_vae.safetensors | 319.77 MB | vae22222/\n2025-09-29 15:10:21 | flux_vae.safetensors | 319.77 MB | vae2222/\n2025-09-29 15:07:34 | flux_vae.safetensors | 319.77 MB | vae222/\n2025-09-29 15:03:56 | flux_vae.safetensors | 319.77 MB | vae22/\n2025-09-29 13:58:37 | lotus-depth-g-v2-0-disparity.safetensors | 3.23 GB | unet/\n2025-09-29 13:53:30 | comfyui_local_lora16.safetensors | 146.17 MB | loras/\n2025-09-29 13:53:14 | Hyper-FLUX.1-dev-8steps-lora.safetensors | 1.29 GB | loras/\n2025-09-29 13:51:08 | uncensored-flux-lora | 655.63 MB | loras/FLUX/\n2025-09-29 13:50:08 | flux_vae.safetensors | 319.77 MB | vae/\n2025-09-29 13:49:38 | clip_l.safetensors | 234.74 MB | clip/\n2025-09-28 16:51:11 | IndexTTS-2 | 79.33 KB | TTTTTTSSSSS/\n2025-09-28 15:56:28 | flux_vae1.safetensors | 319.77 MB | vae/\n2025-09-28 15:44:48 | fff2 | 319.77 MB | vae/\n2025-09-28 15:43:49 | fff | 319.77 MB | vae/\n\nTotal downloaded: 15 files (8.35 GB)"
+      ]
+    },
+    {
+      "id": 33,
+      "type": "HuggingFaceDownloader",
+      "pos": [
+        -330,
+        -140
+      ],
+      "size": [
+        560,
+        560
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "status_report",
+          "type": "STRING",
+          "links": [
+            35
+          ]
+        },
+        {
+          "name": "download_history",
+          "type": "STRING",
+          "links": [
+            36
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "a8a66ca268e01b5d6f683fc4004c62c61d9f9155",
+        "Node name for S&R": "HuggingFaceDownloader"
+      },
+      "widgets_values": [
+        "",
+        true,
+        3,
+        0,
+        true,
+        false,
+        true,
+        false,
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 37,
+      "type": "Note",
+      "pos": [
+        -330,
+        -290
+      ],
+      "size": [
+        560,
+        100
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "# Download a model in a specific folder\nhttps://huggingface.co/model/file.safetensors checkpoints\n\n# Download a model in a specific folder and a custom name\nhttps://huggingface.co/vae/vae.safetensors vae custom_vae.safetensors"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 41,
+      "type": "Label (rgthree)",
+      "pos": [
+        -310,
+        -370
+      ],
+      "size": [
+        518.326171875,
+        36
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "HuggingFace model downloader",
+      "properties": {
+        "fontSize": 36,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 32,
+      "type": "GitCloneManager",
+      "pos": [
+        -1000,
+        -140
+      ],
+      "size": [
+        560,
+        470
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "clone_report",
+          "type": "STRING",
+          "links": [
+            37
+          ]
+        },
+        {
+          "name": "repository_list",
+          "type": "STRING",
+          "links": [
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "a8a66ca268e01b5d6f683fc4004c62c61d9f9155",
+        "Node name for S&R": "GitCloneManager"
+      },
+      "widgets_values": [
+        "",
+        true,
+        2,
+        0,
+        true,
+        false,
+        false,
+        "",
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 42,
+      "type": "easy showAnything",
+      "pos": [
+        -1000,
+        380
+      ],
+      "size": [
+        560,
+        250
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 37
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "No download links provided"
+      ]
+    },
+    {
+      "id": 43,
+      "type": "easy showAnything",
+      "pos": [
+        -1000,
+        680
+      ],
+      "size": [
+        560,
+        270
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 38
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "=== DOWNLOAD HISTORY ===\n2025-09-29 15:25:38 | flux_vae.safetensors | 319.77 MB | vae222522/\n2025-09-29 15:14:21 | flux_vae.safetensors | 319.77 MB | vae22222/\n2025-09-29 15:10:21 | flux_vae.safetensors | 319.77 MB | vae2222/\n2025-09-29 15:07:34 | flux_vae.safetensors | 319.77 MB | vae222/\n2025-09-29 15:03:56 | flux_vae.safetensors | 319.77 MB | vae22/\n2025-09-29 13:58:37 | lotus-depth-g-v2-0-disparity.safetensors | 3.23 GB | unet/\n2025-09-29 13:53:30 | comfyui_local_lora16.safetensors | 146.17 MB | loras/\n2025-09-29 13:53:14 | Hyper-FLUX.1-dev-8steps-lora.safetensors | 1.29 GB | loras/\n2025-09-29 13:51:08 | uncensored-flux-lora | 655.63 MB | loras/FLUX/\n2025-09-29 13:50:08 | flux_vae.safetensors | 319.77 MB | vae/\n2025-09-29 13:49:38 | clip_l.safetensors | 234.74 MB | clip/\n2025-09-28 16:51:11 | IndexTTS-2 | 79.33 KB | TTTTTTSSSSS/\n2025-09-28 15:56:28 | flux_vae1.safetensors | 319.77 MB | vae/\n2025-09-28 15:44:48 | fff2 | 319.77 MB | vae/\n2025-09-28 15:43:49 | fff | 319.77 MB | vae/\n\nTotal downloaded: 15 files (8.35 GB)"
+      ]
+    },
+    {
+      "id": 36,
+      "type": "Note",
+      "pos": [
+        -1000,
+        -430
+      ],
+      "size": [
+        560,
+        240
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "# Clone custom nodes\nhttps://github.com/ltdrdata/ComfyUI-Manager\nhttps://github.com/WASasquatch/was-node-suite-comfyui\n\n# Clone Full HuggingFace model folders with custom paths  \nhttps://huggingface.co/runwayml/stable-diffusion-v1-5 models/sd15\nhttps://huggingface.co/openai/whisper-large models/whisper\n\n# Clone specific branches\nbranch:main https://github.com/user/experimental-node\nbranch:v2.0 https://github.com/user/stable-node custom_nodes/stable\n\n# Mixed operations\nhttps://github.com/comfyanonymous/ComfyUI-3D-Pack\nhttps://huggingface.co/facebook/bart-large models/bart\nbranch:development https://github.com/user/beta-features"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 40,
+      "type": "Label (rgthree)",
+      "pos": [
+        -1130,
+        -540
+      ],
+      "size": [
+        890.490234375,
+        36
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Git clone Huggingface folder, or Git clone custom nodes",
+      "properties": {
+        "fontSize": 36,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 45,
+      "type": "TransparentVideoSave",
+      "pos": [
+        -330,
+        1090
+      ],
+      "size": [
+        560,
+        174
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images_rgb",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "images_alpha",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "bf895c75df55a2e14bd4c34a3fa82826d4b19d71",
+        "Node name for S&R": "TransparentVideoSave"
+      },
+      "widgets_values": [
+        "ComfyUI",
+        16,
+        true,
+        80,
+        "default"
+      ]
+    }
+  ],
+  "links": [
+    [
+      28,
+      27,
+      0,
+      22,
+      0,
+      "*"
+    ],
+    [
+      29,
+      30,
+      0,
+      1,
+      0,
+      "*"
+    ],
+    [
+      30,
+      30,
+      1,
+      2,
+      0,
+      "*"
+    ],
+    [
+      31,
+      12,
+      0,
+      31,
+      0,
+      "IMAGE"
+    ],
+    [
+      32,
+      31,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      35,
+      33,
+      0,
+      39,
+      0,
+      "*"
+    ],
+    [
+      36,
+      33,
+      1,
+      38,
+      0,
+      "*"
+    ],
+    [
+      37,
+      32,
+      0,
+      42,
+      0,
+      "*"
+    ],
+    [
+      38,
+      32,
+      1,
+      43,
+      0,
+      "*"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "image size",
+      "bounding": [
+        300,
+        -170,
+        560,
+        311.6000061035156
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "image resize",
+      "bounding": [
+        300,
+        190,
+        1080,
+        453.6000061035156
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "markdown note link generator",
+      "bounding": [
+        300,
+        700,
+        900,
+        310
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.27.7",
+    "ue_links": [],
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

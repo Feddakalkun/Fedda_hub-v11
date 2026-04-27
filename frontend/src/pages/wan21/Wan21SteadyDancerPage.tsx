@@ -115,7 +115,7 @@ export const Wan21SteadyDancerPage = () => {
     }
     setSyncingPose(true);
     try {
-      const res = await fetchJson(`${BACKEND_API}/video/sync-pose-character`, {
+      const res = await fetchJson(`${BACKEND_API.BASE_URL}/api/video/sync-pose-character`, {
         method: 'POST',
         body: JSON.stringify({
           video_filename: motionVideoFile,
@@ -271,7 +271,12 @@ export const Wan21SteadyDancerPage = () => {
     // Pick the best video to show: Strictly ignore vitpose for the main view
     const mainVid = urls.find(u => !u.isVitPose);
     if (mainVid) {
+      console.log('SteadyDancer: Setting main video output:', mainVid.url);
       setCurrentVideo(mainVid.url);
+    } else if (urls.length > 0) {
+      console.log('SteadyDancer: Only pose/skeleton received, waiting for main video...');
+    } else {
+      console.warn('SteadyDancer: Received outputReadyCount trigger but no new videos found.');
     }
 
     setHistory((prev) => [...urls.map(u => u.url), ...prev.filter((u) => !urls.map(x => x.url).includes(u))].slice(0, 40));

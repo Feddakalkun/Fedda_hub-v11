@@ -1,0 +1,4543 @@
+{
+  "id": "ee74c6cc-394b-4c31-9395-2721c7391847",
+  "revision": 0,
+  "last_node_id": 282,
+  "last_link_id": 523,
+  "nodes": [
+    {
+      "id": 83,
+      "type": "SaveImage",
+      "pos": [
+        50,
+        190
+      ],
+      "size": [
+        825,
+        875
+      ],
+      "flags": {},
+      "order": 68,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 234
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "270 FOOOCUS STYLES/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 151,
+      "type": "EmptyLatentImage",
+      "pos": [
+        2340,
+        190
+      ],
+      "size": [
+        400,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            341
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 152,
+      "type": "SaveImage",
+      "pos": [
+        2760,
+        190
+      ],
+      "size": [
+        630,
+        680
+      ],
+      "flags": {},
+      "order": 65,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 356
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "FOOCUS STYLE "
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 153,
+      "type": "ShowText|pysssss",
+      "pos": [
+        3080,
+        920
+      ],
+      "size": [
+        310,
+        150
+      ],
+      "flags": {},
+      "order": 45,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 331
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "bbda5e52ad580c13ceaa53136d9c2bed9137bd2e",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "ugly, deformed, noisy, blurry, low contrast",
+        "ugly, deformed, noisy, blurry, low contrast"
+      ]
+    },
+    {
+      "id": 154,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2760,
+        920
+      ],
+      "size": [
+        300,
+        160
+      ],
+      "flags": {},
+      "order": 43,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 332
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "POSITIVE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "bbda5e52ad580c13ceaa53136d9c2bed9137bd2e",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "Action Figure, woman, plastic collectable action figure, collectable toy action figure",
+        "Action Figure, woman, plastic collectable action figure, collectable toy action figure"
+      ]
+    },
+    {
+      "id": 156,
+      "type": "CR Prompt Text",
+      "pos": [
+        2340,
+        490
+      ],
+      "size": [
+        400,
+        110
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            346
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyroll",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Prompt Text"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 157,
+      "type": "StableCascade_StageB_Conditioning",
+      "pos": [
+        3410,
+        670
+      ],
+      "size": [
+        283.081640625,
+        50
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 51,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 335
+        },
+        {
+          "name": "stage_c",
+          "type": "LATENT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "StableCascade_StageB_Conditioning"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 161,
+      "type": "CR Prompt Text",
+      "pos": [
+        2340,
+        340
+      ],
+      "size": [
+        400,
+        110
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            345
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyroll",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Prompt Text"
+      },
+      "widgets_values": [
+        "woman",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 159,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        3410,
+        190
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            338,
+            350
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            333,
+            336,
+            351
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            343,
+            352
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 155,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3410,
+        630
+      ],
+      "size": [
+        275,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 44,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 333
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 334
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            335,
+            339,
+            353
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 158,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3410,
+        710
+      ],
+      "size": [
+        275,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 46,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 336
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 337
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            340,
+            354
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 162,
+      "type": "VAEDecode",
+      "pos": [
+        3410,
+        750
+      ],
+      "size": [
+        275,
+        50
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 56,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 342
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 343
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            349
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 163,
+      "type": "SaveImage",
+      "pos": [
+        3410,
+        790
+      ],
+      "size": [
+        315,
+        270
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 64,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 355
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "FOOOCUS STYLE/0"
+      ]
+    },
+    {
+      "id": 167,
+      "type": "SAMLoader",
+      "pos": [
+        3410,
+        830
+      ],
+      "size": [
+        350,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "slot_index": 0,
+          "links": [
+            348
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 165,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        3410,
+        910
+      ],
+      "size": [
+        350,
+        78
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 5,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "slot_index": 0,
+          "links": [
+            347
+          ]
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-subpack",
+        "ver": "1.2.9",
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 166,
+      "type": "FaceDetailer",
+      "pos": [
+        3410,
+        870
+      ],
+      "size": [
+        360,
+        960
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 60,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 349
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 350
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 351
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 352
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 353
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 354
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 347
+        },
+        {
+          "name": "sam_model_opt",
+          "shape": 7,
+          "type": "SAM_MODEL",
+          "link": 348
+        },
+        {
+          "name": "segm_detector_opt",
+          "shape": 7,
+          "type": "SEGM_DETECTOR",
+          "link": null
+        },
+        {
+          "name": "detailer_hook",
+          "shape": 7,
+          "type": "DETAILER_HOOK",
+          "link": null
+        },
+        {
+          "name": "scheduler_func_opt",
+          "shape": 7,
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            355,
+            356
+          ]
+        },
+        {
+          "name": "cropped_refined",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 2,
+          "links": []
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "slot_index": 3,
+          "links": []
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null
+        },
+        {
+          "name": "cnet_images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1152,
+        true,
+        1152,
+        24,
+        "fixed",
+        12,
+        2,
+        "ddpm",
+        "exponential",
+        0.6,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2,
+        false,
+        false,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 160,
+      "type": "KSampler",
+      "pos": [
+        3410,
+        330
+      ],
+      "size": [
+        325,
+        262
+      ],
+      "flags": {},
+      "order": 52,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 338
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 339
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 340
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 341
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            342
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.29",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        12,
+        2,
+        "ddpm",
+        "exponential",
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 164,
+      "type": "easy stylesSelector",
+      "pos": [
+        2340,
+        640
+      ],
+      "size": [
+        400,
+        630
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "STRING",
+          "link": 345
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "STRING",
+          "link": 346
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            332,
+            334
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": [
+            331,
+            337
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "ccb4ba08fcfc508e16dedf6491a85efe74f27e2b",
+        "Node name for S&R": "easy stylesSelector",
+        "values": [
+          "Action Figure"
+        ]
+      },
+      "widgets_values": [
+        "fooocus_styles",
+        "Action Figure"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 192,
+      "type": "Power Lora Loader (rgthree)",
+      "pos": [
+        2330,
+        2120
+      ],
+      "size": [
+        430,
+        190
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 2,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "model",
+          "type": "MODEL",
+          "link": 523
+        },
+        {
+          "dir": 3,
+          "name": "clip",
+          "type": "CLIP",
+          "link": 387
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "name": "MODEL",
+          "shape": 3,
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            381
+          ]
+        },
+        {
+          "dir": 4,
+          "name": "CLIP",
+          "shape": 3,
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            398
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "70756c044d805ffc260568ca3fe9eafaed5e6363",
+        "Show Strengths": "Single Strength"
+      },
+      "widgets_values": [
+        null,
+        {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        {
+          "on": true,
+          "lora": "FLUX\\HYPERLFUX\\Hyper-FLUX.1-dev-8steps-lora.safetensors",
+          "strength": 0.12,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX\\uncensored-flux-lora.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "woman-wmndlr.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        null,
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 197,
+      "type": "String Literal",
+      "pos": [
+        2330,
+        1820
+      ],
+      "size": [
+        430,
+        250
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            392,
+            394
+          ]
+        }
+      ],
+      "title": "POSITIVE PROMPT",
+      "properties": {
+        "cnr_id": "image-saver",
+        "ver": "65e6903eff274a50f8b5cd768f0f96baf37baea1",
+        "Node name for S&R": "String Literal"
+      },
+      "widgets_values": [
+        "woman",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 199,
+      "type": "Text Concatenate",
+      "pos": [
+        4320,
+        1780
+      ],
+      "size": [
+        345,
+        238
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 47,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "shape": 7,
+          "type": "STRING",
+          "link": 394
+        },
+        {
+          "name": "text_b",
+          "shape": 7,
+          "type": "STRING",
+          "link": 395
+        },
+        {
+          "name": "text_c",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "text_d",
+          "shape": 7,
+          "type": "STRING",
+          "link": 397
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            399
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "was-node-suite-comfyui",
+        "ver": "fe7e0884aaf0188248d9abf1e500f5116097fec1",
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 201,
+      "type": "VAEDecode",
+      "pos": [
+        4320,
+        1740
+      ],
+      "size": [
+        345,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 69,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 400
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 401
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            389
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 202,
+      "type": "CLIPTextEncode",
+      "pos": [
+        4320,
+        1820
+      ],
+      "size": [
+        435,
+        88
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 34,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 402
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            383
+          ]
+        }
+      ],
+      "title": "do not write here",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 203,
+      "type": "CR Conditioning Mixer",
+      "pos": [
+        4320,
+        1860
+      ],
+      "size": [
+        342.5999755859375,
+        102
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 57,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning_1",
+          "type": "CONDITIONING",
+          "link": 459
+        },
+        {
+          "name": "conditioning_2",
+          "type": "CONDITIONING",
+          "link": 461
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            405
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyroll",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Conditioning Mixer"
+      },
+      "widgets_values": [
+        "Concatenate",
+        1
+      ]
+    },
+    {
+      "id": 204,
+      "type": "CR Conditioning Mixer",
+      "pos": [
+        4320,
+        1900
+      ],
+      "size": [
+        342.5999755859375,
+        102
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 61,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning_1",
+          "type": "CONDITIONING",
+          "link": 405
+        },
+        {
+          "name": "conditioning_2",
+          "type": "CONDITIONING",
+          "link": 457
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            382
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyroll",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Conditioning Mixer"
+      },
+      "widgets_values": [
+        "Concatenate",
+        1
+      ]
+    },
+    {
+      "id": 205,
+      "type": "CR Prompt Text",
+      "pos": [
+        4320,
+        1940
+      ],
+      "size": [
+        400,
+        110
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            393
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyroll",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Prompt Text"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 206,
+      "type": "EmptyLatentImage",
+      "pos": [
+        3240,
+        2000
+      ],
+      "size": [
+        310,
+        106
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            384
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1200,
+        1200,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 168,
+      "type": "DualCLIPLoader",
+      "pos": [
+        3250,
+        2200
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
+          "links": [
+            387,
+            402
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l-for-gguf.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "flux",
+        "default"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 191,
+      "type": "VAELoader",
+      "pos": [
+        3250,
+        2240
+      ],
+      "size": [
+        311.81634521484375,
+        60.429901123046875
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
+          "links": [
+            401
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "FLUX1\\ae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 207,
+      "type": "Load Styles CSV",
+      "pos": [
+        2330,
+        1690
+      ],
+      "size": [
+        430,
+        90
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            395
+          ]
+        },
+        {
+          "name": "negative prompt",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": []
+        }
+      ],
+      "title": "CHOOSE STYLE",
+      "properties": {
+        "cnr_id": "comfyui-styles_csv_loader",
+        "ver": "aeee51aaa7044b456c3df081f91185f214b9472a",
+        "Node name for S&R": "Load Styles CSV"
+      },
+      "widgets_values": [
+        "No Style"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 198,
+      "type": "easy stylesSelector",
+      "pos": [
+        2780,
+        1690
+      ],
+      "size": [
+        430,
+        600
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "STRING",
+          "link": 392
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "STRING",
+          "link": 393
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            397
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "ccb4ba08fcfc508e16dedf6491a85efe74f27e2b",
+        "Node name for S&R": "easy stylesSelector",
+        "values": [
+          "Whimsical and Playful"
+        ]
+      },
+      "widgets_values": [
+        "fooocus_styles",
+        "Whimsical and Playful"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 188,
+      "type": "KSampler",
+      "pos": [
+        3240,
+        1690
+      ],
+      "size": [
+        310,
+        262
+      ],
+      "flags": {},
+      "order": 66,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 381
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 382
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 383
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 384
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            400
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        441,
+        "increment",
+        10,
+        1,
+        "euler",
+        "beta",
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 187,
+      "type": "UNETLoader",
+      "pos": [
+        3250,
+        2160
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            523
+          ]
+        }
+      ],
+      "title": "FLUX MODEL",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors",
+        "default"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 194,
+      "type": "SaveImage",
+      "pos": [
+        3570,
+        1690
+      ],
+      "size": [
+        720,
+        780
+      ],
+      "flags": {},
+      "order": 71,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 389
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "FLUX ORIGINAL/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 200,
+      "type": "CLIPTextEncode",
+      "pos": [
+        4320,
+        1700
+      ],
+      "size": [
+        435,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 53,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 398
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 399
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            457,
+            459,
+            461
+          ]
+        }
+      ],
+      "title": "Positive Prompt from Styles",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "rusty metal, mech, cinematic, red eyes",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 229,
+      "type": "VAEDecode",
+      "pos": [
+        1720,
+        1740
+      ],
+      "size": [
+        345,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 70,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 436
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 437
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            450
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 230,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1720,
+        1820
+      ],
+      "size": [
+        435,
+        88
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 36,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 438
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            447
+          ]
+        }
+      ],
+      "title": "do not write here",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 231,
+      "type": "CR Conditioning Mixer",
+      "pos": [
+        1720,
+        1860
+      ],
+      "size": [
+        342.5999755859375,
+        102
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 58,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning_1",
+          "type": "CONDITIONING",
+          "link": 488
+        },
+        {
+          "name": "conditioning_2",
+          "type": "CONDITIONING",
+          "link": 490
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            441
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyroll",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Conditioning Mixer"
+      },
+      "widgets_values": [
+        "Concatenate",
+        1
+      ]
+    },
+    {
+      "id": 232,
+      "type": "CR Conditioning Mixer",
+      "pos": [
+        1720,
+        1900
+      ],
+      "size": [
+        342.5999755859375,
+        102
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 62,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning_1",
+          "type": "CONDITIONING",
+          "link": 441
+        },
+        {
+          "name": "conditioning_2",
+          "type": "CONDITIONING",
+          "link": 486
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            446
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyroll",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Conditioning Mixer"
+      },
+      "widgets_values": [
+        "Concatenate",
+        1
+      ]
+    },
+    {
+      "id": 233,
+      "type": "CR Prompt Text",
+      "pos": [
+        1720,
+        1940
+      ],
+      "size": [
+        400,
+        110
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            444
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyroll",
+        "ver": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+        "Node name for S&R": "CR Prompt Text"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 234,
+      "type": "EmptyLatentImage",
+      "pos": [
+        640,
+        2000
+      ],
+      "size": [
+        310,
+        106
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1200,
+        1200,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 235,
+      "type": "DualCLIPLoader",
+      "pos": [
+        650,
+        2200
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 15,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
+          "links": [
+            432,
+            438
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l-for-gguf.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "flux",
+        "default"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 238,
+      "type": "easy stylesSelector",
+      "pos": [
+        180,
+        1690
+      ],
+      "size": [
+        430,
+        600
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "positive",
+          "shape": 7,
+          "type": "STRING",
+          "link": 443
+        },
+        {
+          "name": "negative",
+          "shape": 7,
+          "type": "STRING",
+          "link": 444
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            435
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "ccb4ba08fcfc508e16dedf6491a85efe74f27e2b",
+        "Node name for S&R": "easy stylesSelector",
+        "values": [
+          "Whimsical and Playful"
+        ]
+      },
+      "widgets_values": [
+        "fooocus_styles",
+        "Whimsical and Playful"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 240,
+      "type": "UNETLoader",
+      "pos": [
+        650,
+        2160
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 16,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            522
+          ]
+        }
+      ],
+      "title": "FLUX MODEL",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors",
+        "default"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 243,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1720,
+        1700
+      ],
+      "size": [
+        435,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 54,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 451
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 452
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            486,
+            488,
+            490
+          ]
+        }
+      ],
+      "title": "Positive Prompt from Styles",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "rusty metal, mech, cinematic, red eyes",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 242,
+      "type": "SaveImage",
+      "pos": [
+        980,
+        1690
+      ],
+      "size": [
+        720,
+        780
+      ],
+      "flags": {},
+      "order": 72,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 450
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "FLUX ORIGINAL/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 236,
+      "type": "VAELoader",
+      "pos": [
+        650,
+        2240
+      ],
+      "size": [
+        311.81634521484375,
+        60.429901123046875
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 17,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
+          "links": [
+            437,
+            455
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "FLUX1\\ae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 244,
+      "type": "VAEEncode",
+      "pos": [
+        650,
+        2280
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 39,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 454
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 455
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            453
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 227,
+      "type": "String Literal",
+      "pos": [
+        -270,
+        2340
+      ],
+      "size": [
+        430,
+        250
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            433,
+            443
+          ]
+        }
+      ],
+      "title": "POSITIVE PROMPT",
+      "properties": {
+        "cnr_id": "image-saver",
+        "ver": "65e6903eff274a50f8b5cd768f0f96baf37baea1",
+        "Node name for S&R": "String Literal"
+      },
+      "widgets_values": [
+        "woman",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 239,
+      "type": "KSampler",
+      "pos": [
+        640,
+        1690
+      ],
+      "size": [
+        310,
+        262
+      ],
+      "flags": {},
+      "order": 67,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 445
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 446
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 447
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 453
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            436
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        441,
+        "increment",
+        10,
+        1,
+        "euler",
+        "beta",
+        0.7000000000000002
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 245,
+      "type": "LoadImage",
+      "pos": [
+        -270,
+        1690
+      ],
+      "size": [
+        430,
+        470
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            454
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "2000PX LATENT UPSCALE_00004_.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 237,
+      "type": "Load Styles CSV",
+      "pos": [
+        -270,
+        2210
+      ],
+      "size": [
+        430,
+        90
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            434
+          ]
+        },
+        {
+          "name": "negative prompt",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": []
+        }
+      ],
+      "title": "CHOOSE STYLE",
+      "properties": {
+        "cnr_id": "comfyui-styles_csv_loader",
+        "ver": "aeee51aaa7044b456c3df081f91185f214b9472a",
+        "Node name for S&R": "Load Styles CSV"
+      },
+      "widgets_values": [
+        "No Style"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 226,
+      "type": "Power Lora Loader (rgthree)",
+      "pos": [
+        180,
+        2340
+      ],
+      "size": [
+        430,
+        190
+      ],
+      "flags": {},
+      "order": 37,
+      "mode": 2,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "model",
+          "type": "MODEL",
+          "link": 522
+        },
+        {
+          "dir": 3,
+          "name": "clip",
+          "type": "CLIP",
+          "link": 432
+        }
+      ],
+      "outputs": [
+        {
+          "dir": 4,
+          "name": "MODEL",
+          "shape": 3,
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            445
+          ]
+        },
+        {
+          "dir": 4,
+          "name": "CLIP",
+          "shape": 3,
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            451
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "70756c044d805ffc260568ca3fe9eafaed5e6363",
+        "Show Strengths": "Single Strength"
+      },
+      "widgets_values": [
+        null,
+        {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        {
+          "on": true,
+          "lora": "FLUX\\HYPERLFUX\\Hyper-FLUX.1-dev-8steps-lora.safetensors",
+          "strength": 0.12,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX\\uncensored-flux-lora.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "woman-wmndlr.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        null,
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 265,
+      "type": "easy promptLine",
+      "pos": [
+        -640,
+        1690
+      ],
+      "size": [
+        310,
+        710
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            495
+          ]
+        },
+        {
+          "name": "COMBO",
+          "shape": 6,
+          "type": "*",
+          "slot_index": 1,
+          "links": null
+        }
+      ],
+      "title": "275 batch styles",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "ccb4ba08fcfc508e16dedf6491a85efe74f27e2b",
+        "Node name for S&R": "easy promptLine"
+      },
+      "widgets_values": [
+        "cinematic still  emotional, harmonious, vignette, 4k epic detailed, shot on kodak, 35mm photo, sharp focus, high budget, cinemascope, moody, epic, gorgeous, film grain, grainy\n(masterpiece), (best quality), (ultra-detailed), , illustration, disheveled hair, detailed eyes, perfect composition, moist skin, intricate details, earrings, by wlop\nphotograph , 50mm . cinematic 4k epic detailed 4k epic detailed photograph shot on kodak detailed cinematic hbo dark moody, 35mm photo, grainy, vignette, vintage, Kodachrome, Lomography, stained, highly detailed, found footage\ncinematic still  emotional, harmonious, vignette, highly detailed, high budget, bokeh, cinemascope, moody, epic, gorgeous, film grain, grainy\nprofessional 3d model  octane render, highly detailed, volumetric, dramatic lighting\nanalog film photo  faded film, desaturated, 35mm photo, grainy, vignette, vintage, Kodachrome, Lomography, stained, highly detailed, found footage\nanime artwork  anime style, key visual, vibrant, studio anime, highly detailed\ncinematic film still  shallow depth of field, vignette, highly detailed, high budget, bokeh, cinemascope, moody, epic, gorgeous, film grain, grainy\ncomic  graphic illustration, comic art, graphic novel art, vibrant, highly detailed\nplay-doh style  sculpture, clay art, centered composition, Claymation\nconcept art  digital artwork, illustrative, painterly, matte painting, highly detailed\nbreathtaking  award-winning, professional, highly detailed\nethereal fantasy concept art of   magnificent, celestial, ethereal, painterly, epic, majestic, magical, fantasy art, cover art, dreamy\nisometric style  vibrant, beautiful, crisp, detailed, ultra detailed, intricate\nline art drawing  professional, sleek, modern, minimalist, graphic, line art, vector graphics\nlow-poly style  low-poly game art, polygon mesh, jagged, blocky, wireframe edges, centered composition\nneonpunk style  cyberpunk, vaporwave, neon, vibes, vibrant, stunningly beautiful, crisp, detailed, sleek, ultramodern, magenta highlights, dark purple shadows, high contrast, cinematic, ultra detailed, intricate, professional\norigami style  paper art, pleated paper, folded, origami art, pleats, cut and fold, centered composition\ncinematic photo  35mm photograph, film, bokeh, professional, 4k, highly detailed\npixel-art  low-res, blocky, pixel art style, 8-bit graphics\ntexture op down close-up\nepic cinematic shot of dynamic n motion. main subject of high budget action movie. raw photo, motion blur. best quality, high resolution\nspontaneous picture of , taken by talented amateur. best quality, high resolution. magical moment, natural look. simple but good looking\npowerful artistic vision of . breathtaking masterpiece made by great artist. best quality, high resolution\ndark and unsettling dream showing . best quality, high resolution. created by genius but depressed mad artist. grim beauty\nastonishing gloomy art made mainly of shadows and lighting, forming . masterful usage of lighting, shadows and chiaroscuro. made by black-hearted artist, drawing from darkness. best quality, high resolution\npicture from really bad dream about terrifying , true horror. bone-chilling vision. mad world that shouldn't exist. best quality, high resolution\nuncanny caliginous vision of , created by remarkable underground artist. best quality, high resolution. raw and brutal art, careless but impressive style. inspired by darkness and chaos\nsurreal painting representing strange vision of . harmonious madness, synergy with chance. unique artstyle, mindbending art, magical surrealism. best quality, high resolution\ninsanely dynamic illustration of . best quality, high resolution. crazy artstyle, careless brushstrokes, emotional and fun\nlong forgotten art created by undead artist illustrating , tribute to the death and decay. miserable art of the damned. wretched and decaying world. best quality, high resolution\nart illustrating insane amounts of raging elemental energy turning into , avatar of elements. magical surrealism, wizardry. best quality, high resolution\nwinner of inter-galactic art contest illustrating , symbol of the interstellar singularity. best quality, high resolution. artstyle previously unseen in the whole galaxy\nsublime ancient illustration of , predating human civilization. crude and simple, but also surprisingly beautiful artwork, made by genius primeval artist. best quality, high resolution\nbrave, shocking, and brutally true art showing . inspired by courage and unlimited creativity. truth found in chaos. best quality, high resolution\nheroic fantasy painting of , in the dangerous fantasy world. airbrush over oil on canvas. best quality, high resolution\ndark cyberpunk illustration of brutal n a world without hope, ruled by ruthless criminal corporations. best quality, high resolution\ngeometric and lyrical abstraction painting presenting . oil on metal. best quality, high resolution\nbig long brushstrokes of deep black sumi-e turning into symbolic painting of . master level raw art. best quality, high resolution\nhighly detailed black sumi-e painting of . in-depth study of perfection, created by a master. best quality, high resolution\nmanga artwork presenting . created by japanese manga artist. highly emotional. best quality, high resolution\nanime artwork illustrating . created by japanese anime studio. highly emotional. best quality, high resolution\nbreathtaking illustration from adult comic book presenting . fabulous artwork. best quality, high resolution\nadvertising poster style  Professional, modern, product-focused, commercial, eye-catching, highly detailed\nautomotive advertisement style  sleek, dynamic, professional, commercial, vehicle-focused, high-resolution, highly detailed\ncorporate branding style  professional, clean, modern, sleek, minimalist, business-oriented, highly detailed\nfashion editorial style  high fashion, trendy, stylish, editorial, magazine style, professional, highly detailed\nfood photography style  appetizing, professional, culinary, high-resolution, commercial, highly detailed\ngourmet food photo of  soft natural lighting, macro details, vibrant colors, fresh ingredients, glistening textures, bokeh background, styled plating, wooden tabletop, garnished, tantalizing, editorial quality\nluxury product style  elegant, sophisticated, high-end, luxurious, professional, highly detailed\nreal estate photography style  professional, inviting, well-lit, high-resolution, property-focused, commercial, highly detailed\nretail packaging style  vibrant, enticing, commercial, product-focused, eye-catching, professional, highly detailed\nabstract style  non-representational, colors and shapes, expression of feelings, imaginative, highly detailed\nabstract expressionist painting  energetic brushwork, bold colors, abstract forms, expressive, emotional\nart deco style  geometric shapes, bold colors, luxurious, elegant, decorative, symmetrical, ornate, detailed\nart nouveau style  elegant, decorative, curvilinear forms, nature-inspired, ornate, detailed\nconstructivist style  geometric shapes, bold colors, dynamic composition, propaganda art style\ncubist artwork  geometric shapes, abstract, innovative, revolutionary\nexpressionist  raw, emotional, dynamic, distortion for emotional effect, vibrant, use of unusual colors, detailed\ngraffiti style  street art, vibrant, urban, detailed, tag, mural\nhyperrealistic art  extremely high-resolution details, photographic, realism pushed to extreme, fine texture, incredibly lifelike\nimpressionist painting  loose brushwork, vibrant color, light and shadow play, captures feeling over form\npointillism style  composed entirely of small, distinct dots of color, vibrant, highly detailed\npop Art style  bright colors, bold outlines, popular culture themes, ironic or kitsch\npsychedelic style  vibrant colors, swirling patterns, abstract forms, surreal, trippy\nrenaissance style  realistic, perspective, light and shadow, religious or mythological themes, highly detailed\nsteampunk style  antique, mechanical, brass and copper tones, gears, intricate, detailed\nsurrealist art  dreamlike, mysterious, provocative, symbolic, intricate, detailed\ntypographic art  stylized, intricate, detailed, artistic, text-based\nwatercolor painting  vibrant, beautiful, painterly, detailed, textural, artistic\nbiomechanical style  blend of organic and mechanical elements, futuristic, cybernetic, detailed, intricate\nbiomechanical cyberpunk  cybernetics, human-machine fusion, dystopian, organic meets artificial, dark, intricate, highly detailed\ncybernetic style  futuristic, technological, cybernetic enhancements, robotics, artificial intelligence themes\ncybernetic robot  android, AI, machine, metal, wires, tech, futuristic, highly detailed\ncyberpunk cityscape  neon lights, dark alleys, skyscrapers, futuristic, vibrant colors, high contrast, highly detailed\nfuturistic style  sleek, modern, ultramodern, high tech, detailed\nretro cyberpunk  80's inspired, synthwave, neon, vibrant, detailed, retro futurism\nretro-futuristic  vintage sci-fi, 50s and 60s style, atomic age, vibrant, highly detailed\nsci-fi style  futuristic, technological, alien worlds, space themes, advanced civilizations\nvaporwave style  retro aesthetic, cyberpunk, vibrant, neon colors, vintage 80s and 90s style, highly detailed\nBubble Bobble style  8-bit, cute, pixelated, fantasy, vibrant, reminiscent of Bubble Bobble game\ncyberpunk game style  neon, dystopian, futuristic, digital, vibrant, detailed, high contrast, reminiscent of cyberpunk genre video games\nfighting game style  dynamic, vibrant, action-packed, detailed character design, reminiscent of fighting video games\nGTA-style artwork  satirical, exaggerated, pop art style, vibrant colors, iconic characters, action-packed\nSuper Mario style  vibrant, cute, cartoony, fantasy, playful, reminiscent of Super Mario series\nMinecraft style  blocky, pixelated, vibrant colors, recognizable characters and objects, game assets\nPokémon style  vibrant, cute, anime, fantasy, reminiscent of Pokémon series\nretro arcade style  8-bit, pixelated, vibrant, classic video game, old school gaming, reminiscent of 80s and 90s arcade games\nretro game art  16-bit, vibrant colors, pixelated, nostalgic, charming, fun\nrole-playing game (RPG) style fantasy  detailed, vibrant, immersive, reminiscent of high fantasy RPG games\nstrategy game style  overhead view, detailed map, units, reminiscent of real-time strategy video games\nStreet Fighter style  vibrant, dynamic, arcade, 2D fighting game, highly detailed, reminiscent of Street Fighter series\nLegend of Zelda style  vibrant, fantasy, detailed, epic, heroic, reminiscent of The Legend of Zelda series\narchitectural style  clean lines, geometric shapes, minimalist, modern, architectural drawing, highly detailed\ndisco-themed  vibrant, groovy, retro 70s style, shiny disco balls, neon lights, dance floor, highly detailed\ndreamscape  surreal, ethereal, dreamy, mysterious, fantasy, highly detailed\ndystopian style  bleak, post-apocalyptic, somber, dramatic, highly detailed\nfairy tale  magical, fantastical, enchanting, storybook style, highly detailed\ngothic style  dark, mysterious, haunting, dramatic, ornate, detailed\ngrunge style  textured, distressed, vintage, edgy, punk rock vibe, dirty, noisy\nhorror-themed  eerie, unsettling, dark, spooky, suspenseful, grim, highly detailed\nkawaii style  cute, adorable, brightly colored, cheerful, anime influence, highly detailed\nlovecraftian horror  eldritch, cosmic horror, unknown, mysterious, surreal, highly detailed\nmacabre style  dark, gothic, grim, haunting, highly detailed\nmanga style  vibrant, high-energy, detailed, iconic, Japanese comic style\nmetropolis-themed  urban, cityscape, skyscrapers, modern, futuristic, highly detailed\nminimalist style  simple, clean, uncluttered, modern, elegant\nmonochrome  black and white, contrast, tone, texture, detailed\nnautical-themed  sea, ocean, ships, maritime, beach, marine life, highly detailed\nspace-themed  cosmic, celestial, stars, galaxies, nebulas, planets, science fiction, highly detailed\nstained glass style  vibrant, beautiful, translucent, intricate, detailed\ntechwear fashion  futuristic, cyberpunk, urban, tactical, sleek, dark, highly detailed\ntribal style  indigenous, ethnic, traditional patterns, bold, natural colors, highly detailed\nzentangle  intricate, abstract, monochrome, patterns, meditative, highly detailed\ncollage style  mixed media, layered, textural, detailed, artistic\nflat papercut style  silhouette, clean cuts, paper, sharp edges, minimalist, color block\nkirigami representation of  3D, paper folding, paper cutting, Japanese, intricate, symmetrical, precision, clean lines\npaper mache representation of  3D, sculptural, textured, handmade, vibrant, fun\npaper quilling art of  intricate, delicate, curling, rolling, shaping, coiling, loops, 3D, dimensional, ornamental\npapercut collage of  mixed media, textured paper, overlapping, asymmetrical, abstract, vibrant\n3D papercut shadow box of  layered, dimensional, depth, silhouette, shadow, papercut, handmade, high contrast\nstacked papercut art of  3D, layered, dimensional, depth, precision cut, stacked layers, papercut, high contrast\nthick layered papercut art of  deep 3D, volumetric, dimensional, depth, thick paper, high stack, heavy texture, tangible layers\nalien-themed  extraterrestrial, cosmic, otherworldly, mysterious, sci-fi, highly detailed\nfilm noir style  monochrome, high contrast, dramatic shadows, 1940s style, mysterious, cinematic\nglamorous photo  high fashion, luxurious, extravagant, stylish, sensual, opulent, elegance, stunning beauty, professional, high contrast, detailed\nHDR photo of  High dynamic range, vivid, rich details, clear shadows and highlights, realistic, intense, enhanced contrast, highly detailed\niphone photo  large depth of field, deep depth of field, highly detailed\nlong exposure photo of  Blurred motion, streaks of light, surreal, dreamy, ghosting effect, highly detailed\nneon noir  cyberpunk, dark, rainy streets, neon signs, high contrast, low light, vibrant, highly detailed\nsilhouette style  high contrast, minimalistic, black and white, stark, dramatic\ntilt-shift photo of  selective focus, miniature effect, blurred background, highly detailed, vibrant, perspective control\nUHD, 8K, ultra detailed, a cinematic photograph of , beautiful lighting, great composition\nAbstract Expressionism Art, , High contrast, minimalistic, colorful, stark, dramatic, expressionism\nAcademia, , preppy Ivy League style, stark, dramatic, chic boarding school, academia\nAction Figure, , plastic collectable action figure, collectable toy action figure\nAdorable 3D Character, , 3D render, adorable character, 3D art\nAdorable Kawaii, , pretty, cute, adorable, kawaii\nArt Deco, , sleek, geometric forms, art deco style\nArt Nouveau, beautiful art, , sleek, organic forms, long, sinuous, art nouveau style\nAstral Aura, , astral, colorful aura, vibrant energy\nAvant-garde, , unusual, experimental, avant-garde art\nBaroque, , dramatic, exuberant, grandeur, baroque art\nBauhaus-Style Poster, , simple geometric shapes, clean lines, primary colors, Bauhaus-Style Poster\nBlueprint Schematic Drawing, , technical drawing, blueprint, schematic\nCaricature, , exaggerated, comical, caricature\nCel Shaded Art, , 2D, flat color, toon shading, cel shaded style\nCharacter Design Sheet, , character reference sheet, character turn around\nClassicism Art, , inspired by Roman and Greek culture, clarity, harmonious, classicism art\nColor Field Painting, , abstract, simple, geometic, color field painting style\nColored Pencil Art, , colored pencil strokes, light color, visible paper texture, colored pencil art\nConceptual Art, , concept art\nConstructivism Art, , minimalistic, geometric forms, constructivism art\nCubism Art, , flat geometric forms, cubism art\nDadaism Art, , satirical, nonsensical, dadaism art\nDark Fantasy Art, , dark, moody, dark fantasy style\nDark Moody Atmosphere, , dramatic, mysterious, dark moody atmosphere\nDMT Art Style, , bright colors, surreal visuals, swirling patterns, DMT art style\nDoodle Art Style, , drawing, freeform, swirling patterns, doodle art style\nDouble Exposure Style, , double image ghost effect, image combination, double exposure style\nDripping Paint Splatter Art, , dramatic, paint drips, splatters, dripping paint\nExpressionism Art Style, , movement, contrast, emotional, exaggerated forms, expressionism art style\nFaded Polaroid Photo, , analog, old faded photo, old polaroid\nFauvism Art, , painterly, bold colors, textured brushwork, fauvism art\nFlat 2D Art, , simple flat color, 2-dimensional, Flat 2D Art Style\nFortnite Art Style, , 3D cartoon, colorful, Fortnite Art Style\nFuturism Art Style, , dynamic, dramatic, Futurism Art Style\nGlitchcore Art Style, , dynamic, dramatic, distorted, vibrant colors, glitchcore art style\nGlo-fi Art Style, , dynamic, dramatic, vibrant colors, glo-fi art style\nGoogie Art Style, , dynamic, dramatic, 1950's futurism, bold boomerang angles, Googie art style\nGraffiti Art Style, , dynamic, dramatic, vibrant colors, graffiti art style\nHarlem Renaissance Art Style, , dynamic, dramatic, 1920s African American culture, Harlem Renaissance art style\nHigh Fashion, , dynamic, dramatic, haute couture, elegant, ornate clothing, High Fashion\nIdyllic, , peaceful, happy, pleasant, happy, harmonious, picturesque, charming\nImpressionism, , painterly, small brushstrokes, visible brushstrokes, impressionistic style\nInfographic Drawing, , diagram, infographic\nInk Dripping Drawing, , ink drawing, dripping ink\nJapanese Ink Drawing, , ink drawing, inkwash, Japanese Ink Drawing\nKnolling Photography, , flat lay photography, object arrangment, knolling photography\nLight Cheery Atmosphere, , happy, joyful, cheerful, carefree, gleeful, lighthearted, pleasant atmosphere\nLogo Design, , dynamic graphic art, vector art, minimalist, professional logo design\nLuxurious Elegance, , extravagant, ornate, designer, opulent, picturesque, lavish\nMacro Photography, , close-up, macro 100mm, macro photography\nMandola art style, , complex, circular design, mandola\nMarker Drawing, , bold marker lines, visibile paper texture, marker drawing\nMedievalism, , inspired by The Middle Ages, medieval art, elaborate patterns and decoration, Medievalism\nMinimalism, , abstract, simple geometic shapes, hard edges, sleek contours, Minimalism\nNeo-Baroque, , ornate and elaborate, dynaimc, Neo-Baroque\nNeo-Byzantine, , grand decorative religious style, Orthodox Christian inspired, Neo-Byzantine\nNeo-Futurism, , high-tech, curves, spirals, flowing lines, idealistic future, Neo-Futurism\nNeo-Impressionism, , tiny dabs of color, Pointillism, painterly, Neo-Impressionism\nNeo-Rococo, , curved forms, naturalistic ornamentation, elaborate, decorative, gaudy, Neo-Rococo\nNeoclassicism, , ancient Rome and Greece inspired, idealic, sober colors, Neoclassicism\nOp Art, , optical illusion, abstract, geometric pattern, impression of movement, Op Art\nOrnate and Intricate, , decorative, highly detailed, elaborate, ornate, intricate\nPop Art, , vivid colors, flat color, 2D, strong lines, Pop Art\nRococo, , flamboyant, pastel colors, curved lines, elaborate detail, Rococo\nSilhouette Art, , high contrast, well defined, Silhouette Art\nSimple Vector Art, , 2D flat, simple shapes, minimalistic, professional graphic, flat color, high contrast, Simple Vector Art\nSketchup, , CAD, professional design, Sketchup\nSteampunk, , retrofuturistic science fantasy, steam-powered tech, vintage industry, gears, neo-victorian, steampunk\nSurrealism, , expressive, dramatic, organic lines and forms, dreamlike and mysterious, Surrealism\nSuprematism, , abstract, limited color palette, geometric forms, Suprematism\nTerragen, , beautiful massive landscape, epic scenery, Terragen\nTranquil Relaxing Atmosphere, , calming style, soothing colors, peaceful, idealic, Tranquil Relaxing Atmosphere\nVector Art Stickers, , professional vector design, sticker designs, Sticker Sheet\nVibrant Rim Light, , bright rim light, high contrast, bold edge light\nVolumetric Lighting, , light depth, dramatic atmospheric lighting, Volumetric Lighting\nWatercolor style painting, , visible paper texture, colorwash, watercolor\nWhimsical and Playful, , imaginative, fantastical, bight colors, stylized, happy, Whimsical and Playful\nChromolithograph . Vibrant colors, intricate details, rich color saturation, meticulous registration, multi-layered printing, decorative elements, historical charm, artistic reproductions, commercial posters, nostalgic, ornate compositions.\nCross processing print . Experimental color shifts, unconventional tonalities, vibrant and surreal hues, heightened contrasts, unpredictable results, artistic unpredictability, retro and vintage feel, dynamic color interplay, abstract and dreamlike.\nDufaycolor photograph . Vintage color palette, distinctive color rendering, soft and dreamy atmosphere, historical charm, unique color process, grainy texture, evocative mood, nostalgic aesthetic, hand-tinted appearance, artistic patina.\nHerbarium drawing. Botanical accuracy, old botanical book illustration, detailed illustrations, pressed plants, delicate and precise linework, scientific documentation, meticulous presentation, educational purpose, organic compositions, timeless aesthetic, naturalistic beauty.\npunk collage style  mixed media, papercut,textured paper, overlapping, ripped posters, safety pins, chaotic layers, graffiti-style elements, anarchy symbols, vintage photos, cut-and-paste aesthetic, bold typography, distorted images, political messages, urban decay, distressed textures, newspaper clippings, spray paint, rebellious icons, DIY spirit, vivid colors, punk band logos, edgy and raw compositions,\nmosaic style  fragmented, assembled, colorful, highly detailed\nOil painting by Van Gogh  Expressive, impasto, swirling brushwork, vibrant, brush strokes, Brushstroke-heavy, Textured, Impasto, Colorful, Dynamic, Bold, Distinctive, Vibrant, Whirling, Expressive, Dramatic, Swirling, Layered, Intense, Contrastive, Atmospheric, Luminous, Textural, Evocative, SpiraledVan Gogh style\ncentered black and white high contrast line drawing, coloring book style, monochrome, blank white background\nOil painting by John Singer Sargent . Elegant, refined, masterful technique,realistic portrayal, subtle play of light, captivating expression, rich details, harmonious colors, skillful composition, brush strokes, chiaroscuro.\nOil painting by Jackson Pollock . Abstract expressionism, drip painting, chaotic composition, energetic, spontaneous, unconventional technique, dynamic, bold, distinctive, vibrant, intense, expressive, energetic, layered, non-representational, gestural.\nArtwork by Jean-Michel Basquiat . Neo-expressionism, street art influence, graffiti-inspired, raw, energetic, bold colors, dynamic composition, chaotic, layered, textural, expressive, spontaneous, distinctive, symbolic,energetic brushstrokes.\nArtwork in the style of Andy Warhol . Pop art, vibrant colors, bold compositions, repetition of iconic imagery, celebrity culture, commercial aesthetics, mass production influence, stylized simplicity, cultural commentary, graphical elements, distinctive portraits.\nHalftone print of . Dot matrix pattern, grayscale tones, vintage aesthetic, newspaper print vibe, stylized dots, visual texture, black and white contrasts, retro appearance, artistic pointillism,pop culture, (Roy Lichtenstein style:1.5).\nGond painting . Intricate patterns, vibrant colors, detailed motifs, nature-inspired themes, tribal folklore, fine lines, intricate detailing, storytelling compositions, mystical and folkloric, cultural richness.\nAlbumen print . Sepia tones, fine details, subtle tonal gradations, delicate highlights, vintage aesthetic, soft and muted atmosphere, historical charm, rich textures, meticulous craftsmanship, classic photographic technique, vignetting.\nAquatint print . Soft tonal gradations, atmospheric effects, velvety textures, rich contrasts, fine details, etching process, delicate lines, nuanced shading, expressive and moody atmosphere, artistic depth.\nAnthotype print . Monochrome dye, soft and muted colors, organic textures, ephemeral and delicate appearance, low details, watercolor canvas, low contrast, overexposed, silhouette, textured paper.\nA sculpture made of ivory, ade of . Sculptures, Inuit art style, intricate carvings, natural materials, storytelling motifs, arctic wildlife themes, symbolic representations, cultural traditions, earthy tones, harmonious compositions, spiritual and mythological elements.\nBromoil print . Painterly effects, sepia tones, textured surfaces, rich contrasts, expressive brushwork, tonal variations, vintage aesthetic, atmospheric mood, handmade quality, artistic experimentation, darkroom craftsmanship, vignetting.\nCalotype print . Soft focus, subtle tonal range, paper negative process, fine details, vintage aesthetic, artistic experimentation, atmospheric mood, early photographic charm, handmade quality, vignetting.\nColor sketchnote . Hand-drawn elements, vibrant colors, visual hierarchy, playful illustrations, varied typography, graphic icons, organic and dynamic layout, personalized touches, creative expression, engaging storytelling.\nA sculpture made of blue pattern porcelain of . Classic design, blue and white color scheme, intricate detailing, floral motifs, onion-shaped elements, historical charm, rococo, white ware, cobalt blue, underglaze pattern, fine craftsmanship, traditional elegance, delicate patterns, vintage aesthetic, Meissen, Blue Onion pattern, Cibulak.\nAlcohol ink art . Fluid and vibrant colors, unpredictable patterns, organic textures, translucent layers, abstract compositions, ethereal and dreamy effects, free-flowing movement, expressive brushstrokes, contemporary aesthetic, wet textured paper.\nOne line art . Continuous and unbroken black line, minimalistic, simplicity, economical use of space, flowing and dynamic, symbolic representations, contemporary aesthetic, evocative and abstract, white background.\nBlacklight paint . Fluorescent pigments, vibrant and surreal colors, ethereal glow, otherworldly effects, dynamic and psychedelic compositions, neon aesthetics, transformative in ultraviolet light, contemporary and experimental.\nA sculpture made of Carnival glass, . Iridescent surfaces, vibrant colors, intricate patterns, opalescent hues, reflective and prismatic effects, Art Nouveau and Art Deco influences, vintage charm, intricate detailing, lustrous and luminous appearance, Carnival Glass style.\nCyanotype print . Prussian blue tones, distinctive coloration, high contrast, blueprint aesthetics, atmospheric mood, sun-exposed paper, silhouette effects, delicate details, historical charm, handmade and experimental quality.\nCross-stitching . Intricate patterns, embroidery thread, sewing, fine details, precise stitches, textile artistry, symmetrical designs, varied color palette, traditional and contemporary motifs, handmade and crafted,canvas, nostalgic charm.\nEncaustic paint . Textured surfaces, translucent layers, luminous quality, wax medium, rich color saturation, fluid and organic shapes, contemporary and historical influences, mixed media elements, atmospheric depth.\nEmbroidery . Intricate stitching, embroidery thread, fine details, varied thread textures, textile artistry, embellished surfaces, diverse color palette, traditional and contemporary motifs, handmade and crafted, tactile and ornate.\nGyotaku . Fish impressions, realistic details, ink rubbings, textured surfaces, traditional Japanese art form, nature-inspired compositions, artistic representation of marine life, black and white contrasts, cultural significance.\nLuminogram . Photogram technique, ethereal and abstract effects, light and shadow interplay, luminous quality, experimental process, direct light exposure, unique and unpredictable results, artistic experimentation.\nLite Brite art . Luminous and colorful designs, pixelated compositions, retro aesthetic, glowing effects, creative patterns, interactive and playful, nostalgic charm, vibrant and dynamic arrangements.\nMokume-gane . Wood-grain patterns, mixed metal layers, intricate and organic designs, traditional Japanese metalwork, harmonious color combinations, artisanal craftsmanship, unique and layered textures, cultural and historical significance.\na sculpture made of peebles, . Pebble art style,natural materials, textured surfaces, balanced compositions, organic forms, harmonious arrangements, tactile and 3D effects, beach-inspired aesthetic, creative storytelling, artisanal craftsmanship.\nPalekh art . Miniature paintings, intricate details, vivid colors, folkloric themes, lacquer finish, storytelling compositions, symbolic elements, Russian folklore influence, cultural and historical significance.\nSuminagashi . Floating ink patterns, marbled effects, delicate and ethereal designs, water-based ink, fluid and unpredictable compositions, meditative process, monochromatic or subtle color palette, Japanese artistic tradition.\nA Scrimshaw engraving of . Intricate engravings on a spermwhale's teeth, marine motifs, detailed scenes, nautical themes, black and white contrasts, historical craftsmanship, artisanal carving, storytelling compositions, maritime heritage.\nShibori . Textured fabric, intricate patterns, resist-dyeing technique, indigo or vibrant colors, organic and flowing designs, Japanese textile art, cultural tradition, tactile and visual interest.\nA sculpture made of Vitreous enamel . Smooth and glossy surfaces, vibrant colors, glass-like finish, durable and resilient, intricate detailing, traditional and contemporary applications, artistic craftsmanship, jewelry and decorative objects, , Vitreous enamel, colored glass.\nUkiyo-e . Woodblock prints, vibrant colors, intricate details, depictions of landscapes, kabuki actors, beautiful women, cultural scenes, traditional Japanese art, artistic craftsmanship, historical significance.\nvintage airline poster  classic aviation fonts, pastel colors, elegant aircraft illustrations, scenic destinations, distressed textures, retro travel allure\nvintage travel poster  retro fonts, muted colors, scenic illustrations, iconic landmarks, distressed textures, nostalgic vibes\nBauhaus-inspired  minimalism, geometric precision, primary colors, sans-serif typography, asymmetry, functional design\nAfrofuturism illustration  vibrant colors, futuristic elements, cultural symbolism, cosmic imagery, dynamic patterns, empowering narratives\nAtompunk illustation,  retro-futuristic, atomic age aesthetics, sleek lines, metallic textures, futuristic technology, optimism, energy\nConstructivism  geometric abstraction, bold colors, industrial aesthetics, dynamic compositions, utilitarian design, revolutionary spirit\nChicano art  bold colors, cultural symbolism, muralism, lowrider aesthetics, barrio life, political messages, social activism, Mexico\nDe Stijl Art  neoplasticism, primary colors, geometric abstraction, horizontal and vertical lines, simplicity, harmony, utopian ideals\nDayak art sculpture of  intricate patterns, nature-inspired motifs, vibrant colors, traditional craftsmanship, cultural symbolism, storytelling\nFayum portrait  encaustic painting, realistic facial features, warm earth tones, serene expressions, ancient Egyptian influences\nIlluminated manuscript  intricate calligraphy, rich colors, detailed illustrations, gold leaf accents, ornate borders, religious, historical, medieval\nKalighat painting  bold lines, vibrant colors, narrative storytelling, cultural motifs, flat compositions, expressive characters\nMadhubani painting  intricate patterns, vibrant colors, nature-inspired motifs, cultural storytelling, symmetry, folk art aesthetics\nPictorialism illustration soft focus, atmospheric effects, artistic interpretation, tonality, muted colors, evocative storytelling\nPichwai painting  intricate detailing, vibrant colors, religious themes, nature motifs, devotional storytelling, gold leaf accents\nPatachitra painting  bold outlines, vibrant colors, intricate detailing, mythological themes, storytelling, traditional craftsmanship\nSamoan art-inspired wooden sculpture  traditional motifs, natural elements, bold colors, cultural symbolism, storytelling, craftsmanship\nTlingit art  formline design, natural elements, animal motifs, bold colors, cultural storytelling, traditional craftsmanship, Alaska traditional art, (totem:1.5)\nPainting by Adnate realistic portraits, street art, large-scale murals, subdued color palette, social narratives\nPainting by Ron English  pop-surrealism, cultural subversion, iconic mash-ups, vibrant and bold colors, satirical commentary\nPainting by Shepard Fairey  street art, political activism, iconic stencils, bold typography, high contrast, red, black, and white color palette",
+        0,
+        275,
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 228,
+      "type": "Text Concatenate",
+      "pos": [
+        1720,
+        1780
+      ],
+      "size": [
+        345,
+        238
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 48,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "shape": 7,
+          "type": "STRING",
+          "link": 433
+        },
+        {
+          "name": "text_b",
+          "shape": 7,
+          "type": "STRING",
+          "link": 434
+        },
+        {
+          "name": "text_c",
+          "shape": 7,
+          "type": "STRING",
+          "link": 495
+        },
+        {
+          "name": "text_d",
+          "shape": 7,
+          "type": "STRING",
+          "link": 435
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            452
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "was-node-suite-comfyui",
+        "ver": "fe7e0884aaf0188248d9abf1e500f5116097fec1",
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 274,
+      "type": "VAEDecode",
+      "pos": [
+        910,
+        500
+      ],
+      "size": [
+        325,
+        100
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 59,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 503
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 504
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            513
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 268,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        910,
+        540
+      ],
+      "size": [
+        325,
+        125
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 22,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            499,
+            506
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            496,
+            497,
+            507
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            504,
+            508,
+            514
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 275,
+      "type": "VAEEncode",
+      "pos": [
+        910,
+        580
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 515
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 514
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            516
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 266,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        910,
+        620
+      ],
+      "size": [
+        325,
+        78
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 23,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "slot_index": 0,
+          "links": [
+            505
+          ]
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-subpack",
+        "ver": "1.2.9",
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 269,
+      "type": "SAMLoader",
+      "pos": [
+        910,
+        660
+      ],
+      "size": [
+        325,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "slot_index": 0,
+          "links": [
+            509
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 277,
+      "type": "Text Concatenate",
+      "pos": [
+        910,
+        740
+      ],
+      "size": [
+        345,
+        238
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "shape": 7,
+          "type": "STRING",
+          "link": 519
+        },
+        {
+          "name": "text_b",
+          "shape": 7,
+          "type": "STRING",
+          "link": 520
+        },
+        {
+          "name": "text_c",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "text_d",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            517,
+            518
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "was-node-suite-comfyui",
+        "ver": "fe7e0884aaf0188248d9abf1e500f5116097fec1",
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 272,
+      "type": "CLIPTextEncode",
+      "pos": [
+        910,
+        700
+      ],
+      "size": [
+        315,
+        88
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 497
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 517
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            500,
+            511,
+            512
+          ]
+        }
+      ],
+      "title": "Positive Prompt from Styles",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "rusty metal, mech, cinematic, red eyes",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 276,
+      "type": "LoadImage",
+      "pos": [
+        -290,
+        540
+      ],
+      "size": [
+        330,
+        430
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            515
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "2000PX LATENT UPSCALE_00004_.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 270,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -290,
+        390
+      ],
+      "size": [
+        330,
+        110
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 496
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            521
+          ]
+        }
+      ],
+      "title": "Negative Prompt from Styles",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 278,
+      "type": "String Literal",
+      "pos": [
+        -290,
+        190
+      ],
+      "size": [
+        330,
+        160
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            519
+          ]
+        }
+      ],
+      "title": "POSITIVE PROMPT",
+      "properties": {
+        "cnr_id": "image-saver",
+        "ver": "65e6903eff274a50f8b5cd768f0f96baf37baea1",
+        "Node name for S&R": "String Literal"
+      },
+      "widgets_values": [
+        "woman",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 130,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1250,
+        190
+      ],
+      "size": [
+        330,
+        420
+      ],
+      "flags": {},
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 518
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "bbda5e52ad580c13ceaa53136d9c2bed9137bd2e",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "woman"
+      ]
+    },
+    {
+      "id": 273,
+      "type": "KSampler",
+      "pos": [
+        900,
+        190
+      ],
+      "size": [
+        325,
+        262
+      ],
+      "flags": {},
+      "order": 55,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 499
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 500
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 521
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 516
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            503
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        4,
+        "increment",
+        15,
+        2,
+        "ddpm",
+        "exponential",
+        0.7200000000000002
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 51,
+      "type": "FaceDetailer",
+      "pos": [
+        910,
+        780
+      ],
+      "size": [
+        350,
+        960
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 63,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 513
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 506
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 507
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 508
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 512
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 511
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 505
+        },
+        {
+          "name": "sam_model_opt",
+          "shape": 7,
+          "type": "SAM_MODEL",
+          "link": 509
+        },
+        {
+          "name": "segm_detector_opt",
+          "shape": 7,
+          "type": "SEGM_DETECTOR",
+          "link": null
+        },
+        {
+          "name": "detailer_hook",
+          "shape": 7,
+          "type": "DETAILER_HOOK",
+          "link": null
+        },
+        {
+          "name": "scheduler_func_opt",
+          "shape": 7,
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            234
+          ]
+        },
+        {
+          "name": "cropped_refined",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 2,
+          "links": []
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "slot_index": 3,
+          "links": []
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null
+        },
+        {
+          "name": "cnet_images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1152,
+        true,
+        1152,
+        851,
+        "increment",
+        18,
+        2,
+        "ddpm",
+        "exponential",
+        0.6,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2,
+        false,
+        false,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 137,
+      "type": "easy promptLine",
+      "pos": [
+        -640,
+        130
+      ],
+      "size": [
+        310,
+        710
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            520
+          ]
+        },
+        {
+          "name": "COMBO",
+          "shape": 6,
+          "type": "*",
+          "slot_index": 1,
+          "links": null
+        }
+      ],
+      "title": "275 batch styles",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "ccb4ba08fcfc508e16dedf6491a85efe74f27e2b",
+        "Node name for S&R": "easy promptLine"
+      },
+      "widgets_values": [
+        "cinematic still  emotional, harmonious, vignette, 4k epic detailed, shot on kodak, 35mm photo, sharp focus, high budget, cinemascope, moody, epic, gorgeous, film grain, grainy\n(masterpiece), (best quality), (ultra-detailed), , illustration, disheveled hair, detailed eyes, perfect composition, moist skin, intricate details, earrings, by wlop\nphotograph , 50mm . cinematic 4k epic detailed 4k epic detailed photograph shot on kodak detailed cinematic hbo dark moody, 35mm photo, grainy, vignette, vintage, Kodachrome, Lomography, stained, highly detailed, found footage\ncinematic still  emotional, harmonious, vignette, highly detailed, high budget, bokeh, cinemascope, moody, epic, gorgeous, film grain, grainy\nprofessional 3d model  octane render, highly detailed, volumetric, dramatic lighting\nanalog film photo  faded film, desaturated, 35mm photo, grainy, vignette, vintage, Kodachrome, Lomography, stained, highly detailed, found footage\nanime artwork  anime style, key visual, vibrant, studio anime, highly detailed\ncinematic film still  shallow depth of field, vignette, highly detailed, high budget, bokeh, cinemascope, moody, epic, gorgeous, film grain, grainy\ncomic  graphic illustration, comic art, graphic novel art, vibrant, highly detailed\nplay-doh style  sculpture, clay art, centered composition, Claymation\nconcept art  digital artwork, illustrative, painterly, matte painting, highly detailed\nbreathtaking  award-winning, professional, highly detailed\nethereal fantasy concept art of   magnificent, celestial, ethereal, painterly, epic, majestic, magical, fantasy art, cover art, dreamy\nisometric style  vibrant, beautiful, crisp, detailed, ultra detailed, intricate\nline art drawing  professional, sleek, modern, minimalist, graphic, line art, vector graphics\nlow-poly style  low-poly game art, polygon mesh, jagged, blocky, wireframe edges, centered composition\nneonpunk style  cyberpunk, vaporwave, neon, vibes, vibrant, stunningly beautiful, crisp, detailed, sleek, ultramodern, magenta highlights, dark purple shadows, high contrast, cinematic, ultra detailed, intricate, professional\norigami style  paper art, pleated paper, folded, origami art, pleats, cut and fold, centered composition\ncinematic photo  35mm photograph, film, bokeh, professional, 4k, highly detailed\npixel-art  low-res, blocky, pixel art style, 8-bit graphics\ntexture op down close-up\nepic cinematic shot of dynamic n motion. main subject of high budget action movie. raw photo, motion blur. best quality, high resolution\nspontaneous picture of , taken by talented amateur. best quality, high resolution. magical moment, natural look. simple but good looking\npowerful artistic vision of . breathtaking masterpiece made by great artist. best quality, high resolution\ndark and unsettling dream showing . best quality, high resolution. created by genius but depressed mad artist. grim beauty\nastonishing gloomy art made mainly of shadows and lighting, forming . masterful usage of lighting, shadows and chiaroscuro. made by black-hearted artist, drawing from darkness. best quality, high resolution\npicture from really bad dream about terrifying , true horror. bone-chilling vision. mad world that shouldn't exist. best quality, high resolution\nuncanny caliginous vision of , created by remarkable underground artist. best quality, high resolution. raw and brutal art, careless but impressive style. inspired by darkness and chaos\nsurreal painting representing strange vision of . harmonious madness, synergy with chance. unique artstyle, mindbending art, magical surrealism. best quality, high resolution\ninsanely dynamic illustration of . best quality, high resolution. crazy artstyle, careless brushstrokes, emotional and fun\nlong forgotten art created by undead artist illustrating , tribute to the death and decay. miserable art of the damned. wretched and decaying world. best quality, high resolution\nart illustrating insane amounts of raging elemental energy turning into , avatar of elements. magical surrealism, wizardry. best quality, high resolution\nwinner of inter-galactic art contest illustrating , symbol of the interstellar singularity. best quality, high resolution. artstyle previously unseen in the whole galaxy\nsublime ancient illustration of , predating human civilization. crude and simple, but also surprisingly beautiful artwork, made by genius primeval artist. best quality, high resolution\nbrave, shocking, and brutally true art showing . inspired by courage and unlimited creativity. truth found in chaos. best quality, high resolution\nheroic fantasy painting of , in the dangerous fantasy world. airbrush over oil on canvas. best quality, high resolution\ndark cyberpunk illustration of brutal n a world without hope, ruled by ruthless criminal corporations. best quality, high resolution\ngeometric and lyrical abstraction painting presenting . oil on metal. best quality, high resolution\nbig long brushstrokes of deep black sumi-e turning into symbolic painting of . master level raw art. best quality, high resolution\nhighly detailed black sumi-e painting of . in-depth study of perfection, created by a master. best quality, high resolution\nmanga artwork presenting . created by japanese manga artist. highly emotional. best quality, high resolution\nanime artwork illustrating . created by japanese anime studio. highly emotional. best quality, high resolution\nbreathtaking illustration from adult comic book presenting . fabulous artwork. best quality, high resolution\nadvertising poster style  Professional, modern, product-focused, commercial, eye-catching, highly detailed\nautomotive advertisement style  sleek, dynamic, professional, commercial, vehicle-focused, high-resolution, highly detailed\ncorporate branding style  professional, clean, modern, sleek, minimalist, business-oriented, highly detailed\nfashion editorial style  high fashion, trendy, stylish, editorial, magazine style, professional, highly detailed\nfood photography style  appetizing, professional, culinary, high-resolution, commercial, highly detailed\ngourmet food photo of  soft natural lighting, macro details, vibrant colors, fresh ingredients, glistening textures, bokeh background, styled plating, wooden tabletop, garnished, tantalizing, editorial quality\nluxury product style  elegant, sophisticated, high-end, luxurious, professional, highly detailed\nreal estate photography style  professional, inviting, well-lit, high-resolution, property-focused, commercial, highly detailed\nretail packaging style  vibrant, enticing, commercial, product-focused, eye-catching, professional, highly detailed\nabstract style  non-representational, colors and shapes, expression of feelings, imaginative, highly detailed\nabstract expressionist painting  energetic brushwork, bold colors, abstract forms, expressive, emotional\nart deco style  geometric shapes, bold colors, luxurious, elegant, decorative, symmetrical, ornate, detailed\nart nouveau style  elegant, decorative, curvilinear forms, nature-inspired, ornate, detailed\nconstructivist style  geometric shapes, bold colors, dynamic composition, propaganda art style\ncubist artwork  geometric shapes, abstract, innovative, revolutionary\nexpressionist  raw, emotional, dynamic, distortion for emotional effect, vibrant, use of unusual colors, detailed\ngraffiti style  street art, vibrant, urban, detailed, tag, mural\nhyperrealistic art  extremely high-resolution details, photographic, realism pushed to extreme, fine texture, incredibly lifelike\nimpressionist painting  loose brushwork, vibrant color, light and shadow play, captures feeling over form\npointillism style  composed entirely of small, distinct dots of color, vibrant, highly detailed\npop Art style  bright colors, bold outlines, popular culture themes, ironic or kitsch\npsychedelic style  vibrant colors, swirling patterns, abstract forms, surreal, trippy\nrenaissance style  realistic, perspective, light and shadow, religious or mythological themes, highly detailed\nsteampunk style  antique, mechanical, brass and copper tones, gears, intricate, detailed\nsurrealist art  dreamlike, mysterious, provocative, symbolic, intricate, detailed\ntypographic art  stylized, intricate, detailed, artistic, text-based\nwatercolor painting  vibrant, beautiful, painterly, detailed, textural, artistic\nbiomechanical style  blend of organic and mechanical elements, futuristic, cybernetic, detailed, intricate\nbiomechanical cyberpunk  cybernetics, human-machine fusion, dystopian, organic meets artificial, dark, intricate, highly detailed\ncybernetic style  futuristic, technological, cybernetic enhancements, robotics, artificial intelligence themes\ncybernetic robot  android, AI, machine, metal, wires, tech, futuristic, highly detailed\ncyberpunk cityscape  neon lights, dark alleys, skyscrapers, futuristic, vibrant colors, high contrast, highly detailed\nfuturistic style  sleek, modern, ultramodern, high tech, detailed\nretro cyberpunk  80's inspired, synthwave, neon, vibrant, detailed, retro futurism\nretro-futuristic  vintage sci-fi, 50s and 60s style, atomic age, vibrant, highly detailed\nsci-fi style  futuristic, technological, alien worlds, space themes, advanced civilizations\nvaporwave style  retro aesthetic, cyberpunk, vibrant, neon colors, vintage 80s and 90s style, highly detailed\nBubble Bobble style  8-bit, cute, pixelated, fantasy, vibrant, reminiscent of Bubble Bobble game\ncyberpunk game style  neon, dystopian, futuristic, digital, vibrant, detailed, high contrast, reminiscent of cyberpunk genre video games\nfighting game style  dynamic, vibrant, action-packed, detailed character design, reminiscent of fighting video games\nGTA-style artwork  satirical, exaggerated, pop art style, vibrant colors, iconic characters, action-packed\nSuper Mario style  vibrant, cute, cartoony, fantasy, playful, reminiscent of Super Mario series\nMinecraft style  blocky, pixelated, vibrant colors, recognizable characters and objects, game assets\nPokémon style  vibrant, cute, anime, fantasy, reminiscent of Pokémon series\nretro arcade style  8-bit, pixelated, vibrant, classic video game, old school gaming, reminiscent of 80s and 90s arcade games\nretro game art  16-bit, vibrant colors, pixelated, nostalgic, charming, fun\nrole-playing game (RPG) style fantasy  detailed, vibrant, immersive, reminiscent of high fantasy RPG games\nstrategy game style  overhead view, detailed map, units, reminiscent of real-time strategy video games\nStreet Fighter style  vibrant, dynamic, arcade, 2D fighting game, highly detailed, reminiscent of Street Fighter series\nLegend of Zelda style  vibrant, fantasy, detailed, epic, heroic, reminiscent of The Legend of Zelda series\narchitectural style  clean lines, geometric shapes, minimalist, modern, architectural drawing, highly detailed\ndisco-themed  vibrant, groovy, retro 70s style, shiny disco balls, neon lights, dance floor, highly detailed\ndreamscape  surreal, ethereal, dreamy, mysterious, fantasy, highly detailed\ndystopian style  bleak, post-apocalyptic, somber, dramatic, highly detailed\nfairy tale  magical, fantastical, enchanting, storybook style, highly detailed\ngothic style  dark, mysterious, haunting, dramatic, ornate, detailed\ngrunge style  textured, distressed, vintage, edgy, punk rock vibe, dirty, noisy\nhorror-themed  eerie, unsettling, dark, spooky, suspenseful, grim, highly detailed\nkawaii style  cute, adorable, brightly colored, cheerful, anime influence, highly detailed\nlovecraftian horror  eldritch, cosmic horror, unknown, mysterious, surreal, highly detailed\nmacabre style  dark, gothic, grim, haunting, highly detailed\nmanga style  vibrant, high-energy, detailed, iconic, Japanese comic style\nmetropolis-themed  urban, cityscape, skyscrapers, modern, futuristic, highly detailed\nminimalist style  simple, clean, uncluttered, modern, elegant\nmonochrome  black and white, contrast, tone, texture, detailed\nnautical-themed  sea, ocean, ships, maritime, beach, marine life, highly detailed\nspace-themed  cosmic, celestial, stars, galaxies, nebulas, planets, science fiction, highly detailed\nstained glass style  vibrant, beautiful, translucent, intricate, detailed\ntechwear fashion  futuristic, cyberpunk, urban, tactical, sleek, dark, highly detailed\ntribal style  indigenous, ethnic, traditional patterns, bold, natural colors, highly detailed\nzentangle  intricate, abstract, monochrome, patterns, meditative, highly detailed\ncollage style  mixed media, layered, textural, detailed, artistic\nflat papercut style  silhouette, clean cuts, paper, sharp edges, minimalist, color block\nkirigami representation of  3D, paper folding, paper cutting, Japanese, intricate, symmetrical, precision, clean lines\npaper mache representation of  3D, sculptural, textured, handmade, vibrant, fun\npaper quilling art of  intricate, delicate, curling, rolling, shaping, coiling, loops, 3D, dimensional, ornamental\npapercut collage of  mixed media, textured paper, overlapping, asymmetrical, abstract, vibrant\n3D papercut shadow box of  layered, dimensional, depth, silhouette, shadow, papercut, handmade, high contrast\nstacked papercut art of  3D, layered, dimensional, depth, precision cut, stacked layers, papercut, high contrast\nthick layered papercut art of  deep 3D, volumetric, dimensional, depth, thick paper, high stack, heavy texture, tangible layers\nalien-themed  extraterrestrial, cosmic, otherworldly, mysterious, sci-fi, highly detailed\nfilm noir style  monochrome, high contrast, dramatic shadows, 1940s style, mysterious, cinematic\nglamorous photo  high fashion, luxurious, extravagant, stylish, sensual, opulent, elegance, stunning beauty, professional, high contrast, detailed\nHDR photo of  High dynamic range, vivid, rich details, clear shadows and highlights, realistic, intense, enhanced contrast, highly detailed\niphone photo  large depth of field, deep depth of field, highly detailed\nlong exposure photo of  Blurred motion, streaks of light, surreal, dreamy, ghosting effect, highly detailed\nneon noir  cyberpunk, dark, rainy streets, neon signs, high contrast, low light, vibrant, highly detailed\nsilhouette style  high contrast, minimalistic, black and white, stark, dramatic\ntilt-shift photo of  selective focus, miniature effect, blurred background, highly detailed, vibrant, perspective control\nUHD, 8K, ultra detailed, a cinematic photograph of , beautiful lighting, great composition\nAbstract Expressionism Art, , High contrast, minimalistic, colorful, stark, dramatic, expressionism\nAcademia, , preppy Ivy League style, stark, dramatic, chic boarding school, academia\nAction Figure, , plastic collectable action figure, collectable toy action figure\nAdorable 3D Character, , 3D render, adorable character, 3D art\nAdorable Kawaii, , pretty, cute, adorable, kawaii\nArt Deco, , sleek, geometric forms, art deco style\nArt Nouveau, beautiful art, , sleek, organic forms, long, sinuous, art nouveau style\nAstral Aura, , astral, colorful aura, vibrant energy\nAvant-garde, , unusual, experimental, avant-garde art\nBaroque, , dramatic, exuberant, grandeur, baroque art\nBauhaus-Style Poster, , simple geometric shapes, clean lines, primary colors, Bauhaus-Style Poster\nBlueprint Schematic Drawing, , technical drawing, blueprint, schematic\nCaricature, , exaggerated, comical, caricature\nCel Shaded Art, , 2D, flat color, toon shading, cel shaded style\nCharacter Design Sheet, , character reference sheet, character turn around\nClassicism Art, , inspired by Roman and Greek culture, clarity, harmonious, classicism art\nColor Field Painting, , abstract, simple, geometic, color field painting style\nColored Pencil Art, , colored pencil strokes, light color, visible paper texture, colored pencil art\nConceptual Art, , concept art\nConstructivism Art, , minimalistic, geometric forms, constructivism art\nCubism Art, , flat geometric forms, cubism art\nDadaism Art, , satirical, nonsensical, dadaism art\nDark Fantasy Art, , dark, moody, dark fantasy style\nDark Moody Atmosphere, , dramatic, mysterious, dark moody atmosphere\nDMT Art Style, , bright colors, surreal visuals, swirling patterns, DMT art style\nDoodle Art Style, , drawing, freeform, swirling patterns, doodle art style\nDouble Exposure Style, , double image ghost effect, image combination, double exposure style\nDripping Paint Splatter Art, , dramatic, paint drips, splatters, dripping paint\nExpressionism Art Style, , movement, contrast, emotional, exaggerated forms, expressionism art style\nFaded Polaroid Photo, , analog, old faded photo, old polaroid\nFauvism Art, , painterly, bold colors, textured brushwork, fauvism art\nFlat 2D Art, , simple flat color, 2-dimensional, Flat 2D Art Style\nFortnite Art Style, , 3D cartoon, colorful, Fortnite Art Style\nFuturism Art Style, , dynamic, dramatic, Futurism Art Style\nGlitchcore Art Style, , dynamic, dramatic, distorted, vibrant colors, glitchcore art style\nGlo-fi Art Style, , dynamic, dramatic, vibrant colors, glo-fi art style\nGoogie Art Style, , dynamic, dramatic, 1950's futurism, bold boomerang angles, Googie art style\nGraffiti Art Style, , dynamic, dramatic, vibrant colors, graffiti art style\nHarlem Renaissance Art Style, , dynamic, dramatic, 1920s African American culture, Harlem Renaissance art style\nHigh Fashion, , dynamic, dramatic, haute couture, elegant, ornate clothing, High Fashion\nIdyllic, , peaceful, happy, pleasant, happy, harmonious, picturesque, charming\nImpressionism, , painterly, small brushstrokes, visible brushstrokes, impressionistic style\nInfographic Drawing, , diagram, infographic\nInk Dripping Drawing, , ink drawing, dripping ink\nJapanese Ink Drawing, , ink drawing, inkwash, Japanese Ink Drawing\nKnolling Photography, , flat lay photography, object arrangment, knolling photography\nLight Cheery Atmosphere, , happy, joyful, cheerful, carefree, gleeful, lighthearted, pleasant atmosphere\nLogo Design, , dynamic graphic art, vector art, minimalist, professional logo design\nLuxurious Elegance, , extravagant, ornate, designer, opulent, picturesque, lavish\nMacro Photography, , close-up, macro 100mm, macro photography\nMandola art style, , complex, circular design, mandola\nMarker Drawing, , bold marker lines, visibile paper texture, marker drawing\nMedievalism, , inspired by The Middle Ages, medieval art, elaborate patterns and decoration, Medievalism\nMinimalism, , abstract, simple geometic shapes, hard edges, sleek contours, Minimalism\nNeo-Baroque, , ornate and elaborate, dynaimc, Neo-Baroque\nNeo-Byzantine, , grand decorative religious style, Orthodox Christian inspired, Neo-Byzantine\nNeo-Futurism, , high-tech, curves, spirals, flowing lines, idealistic future, Neo-Futurism\nNeo-Impressionism, , tiny dabs of color, Pointillism, painterly, Neo-Impressionism\nNeo-Rococo, , curved forms, naturalistic ornamentation, elaborate, decorative, gaudy, Neo-Rococo\nNeoclassicism, , ancient Rome and Greece inspired, idealic, sober colors, Neoclassicism\nOp Art, , optical illusion, abstract, geometric pattern, impression of movement, Op Art\nOrnate and Intricate, , decorative, highly detailed, elaborate, ornate, intricate\nPop Art, , vivid colors, flat color, 2D, strong lines, Pop Art\nRococo, , flamboyant, pastel colors, curved lines, elaborate detail, Rococo\nSilhouette Art, , high contrast, well defined, Silhouette Art\nSimple Vector Art, , 2D flat, simple shapes, minimalistic, professional graphic, flat color, high contrast, Simple Vector Art\nSketchup, , CAD, professional design, Sketchup\nSteampunk, , retrofuturistic science fantasy, steam-powered tech, vintage industry, gears, neo-victorian, steampunk\nSurrealism, , expressive, dramatic, organic lines and forms, dreamlike and mysterious, Surrealism\nSuprematism, , abstract, limited color palette, geometric forms, Suprematism\nTerragen, , beautiful massive landscape, epic scenery, Terragen\nTranquil Relaxing Atmosphere, , calming style, soothing colors, peaceful, idealic, Tranquil Relaxing Atmosphere\nVector Art Stickers, , professional vector design, sticker designs, Sticker Sheet\nVibrant Rim Light, , bright rim light, high contrast, bold edge light\nVolumetric Lighting, , light depth, dramatic atmospheric lighting, Volumetric Lighting\nWatercolor style painting, , visible paper texture, colorwash, watercolor\nWhimsical and Playful, , imaginative, fantastical, bight colors, stylized, happy, Whimsical and Playful\nChromolithograph . Vibrant colors, intricate details, rich color saturation, meticulous registration, multi-layered printing, decorative elements, historical charm, artistic reproductions, commercial posters, nostalgic, ornate compositions.\nCross processing print . Experimental color shifts, unconventional tonalities, vibrant and surreal hues, heightened contrasts, unpredictable results, artistic unpredictability, retro and vintage feel, dynamic color interplay, abstract and dreamlike.\nDufaycolor photograph . Vintage color palette, distinctive color rendering, soft and dreamy atmosphere, historical charm, unique color process, grainy texture, evocative mood, nostalgic aesthetic, hand-tinted appearance, artistic patina.\nHerbarium drawing. Botanical accuracy, old botanical book illustration, detailed illustrations, pressed plants, delicate and precise linework, scientific documentation, meticulous presentation, educational purpose, organic compositions, timeless aesthetic, naturalistic beauty.\npunk collage style  mixed media, papercut,textured paper, overlapping, ripped posters, safety pins, chaotic layers, graffiti-style elements, anarchy symbols, vintage photos, cut-and-paste aesthetic, bold typography, distorted images, political messages, urban decay, distressed textures, newspaper clippings, spray paint, rebellious icons, DIY spirit, vivid colors, punk band logos, edgy and raw compositions,\nmosaic style  fragmented, assembled, colorful, highly detailed\nOil painting by Van Gogh  Expressive, impasto, swirling brushwork, vibrant, brush strokes, Brushstroke-heavy, Textured, Impasto, Colorful, Dynamic, Bold, Distinctive, Vibrant, Whirling, Expressive, Dramatic, Swirling, Layered, Intense, Contrastive, Atmospheric, Luminous, Textural, Evocative, SpiraledVan Gogh style\ncentered black and white high contrast line drawing, coloring book style, monochrome, blank white background\nOil painting by John Singer Sargent . Elegant, refined, masterful technique,realistic portrayal, subtle play of light, captivating expression, rich details, harmonious colors, skillful composition, brush strokes, chiaroscuro.\nOil painting by Jackson Pollock . Abstract expressionism, drip painting, chaotic composition, energetic, spontaneous, unconventional technique, dynamic, bold, distinctive, vibrant, intense, expressive, energetic, layered, non-representational, gestural.\nArtwork by Jean-Michel Basquiat . Neo-expressionism, street art influence, graffiti-inspired, raw, energetic, bold colors, dynamic composition, chaotic, layered, textural, expressive, spontaneous, distinctive, symbolic,energetic brushstrokes.\nArtwork in the style of Andy Warhol . Pop art, vibrant colors, bold compositions, repetition of iconic imagery, celebrity culture, commercial aesthetics, mass production influence, stylized simplicity, cultural commentary, graphical elements, distinctive portraits.\nHalftone print of . Dot matrix pattern, grayscale tones, vintage aesthetic, newspaper print vibe, stylized dots, visual texture, black and white contrasts, retro appearance, artistic pointillism,pop culture, (Roy Lichtenstein style:1.5).\nGond painting . Intricate patterns, vibrant colors, detailed motifs, nature-inspired themes, tribal folklore, fine lines, intricate detailing, storytelling compositions, mystical and folkloric, cultural richness.\nAlbumen print . Sepia tones, fine details, subtle tonal gradations, delicate highlights, vintage aesthetic, soft and muted atmosphere, historical charm, rich textures, meticulous craftsmanship, classic photographic technique, vignetting.\nAquatint print . Soft tonal gradations, atmospheric effects, velvety textures, rich contrasts, fine details, etching process, delicate lines, nuanced shading, expressive and moody atmosphere, artistic depth.\nAnthotype print . Monochrome dye, soft and muted colors, organic textures, ephemeral and delicate appearance, low details, watercolor canvas, low contrast, overexposed, silhouette, textured paper.\nA sculpture made of ivory, ade of . Sculptures, Inuit art style, intricate carvings, natural materials, storytelling motifs, arctic wildlife themes, symbolic representations, cultural traditions, earthy tones, harmonious compositions, spiritual and mythological elements.\nBromoil print . Painterly effects, sepia tones, textured surfaces, rich contrasts, expressive brushwork, tonal variations, vintage aesthetic, atmospheric mood, handmade quality, artistic experimentation, darkroom craftsmanship, vignetting.\nCalotype print . Soft focus, subtle tonal range, paper negative process, fine details, vintage aesthetic, artistic experimentation, atmospheric mood, early photographic charm, handmade quality, vignetting.\nColor sketchnote . Hand-drawn elements, vibrant colors, visual hierarchy, playful illustrations, varied typography, graphic icons, organic and dynamic layout, personalized touches, creative expression, engaging storytelling.\nA sculpture made of blue pattern porcelain of . Classic design, blue and white color scheme, intricate detailing, floral motifs, onion-shaped elements, historical charm, rococo, white ware, cobalt blue, underglaze pattern, fine craftsmanship, traditional elegance, delicate patterns, vintage aesthetic, Meissen, Blue Onion pattern, Cibulak.\nAlcohol ink art . Fluid and vibrant colors, unpredictable patterns, organic textures, translucent layers, abstract compositions, ethereal and dreamy effects, free-flowing movement, expressive brushstrokes, contemporary aesthetic, wet textured paper.\nOne line art . Continuous and unbroken black line, minimalistic, simplicity, economical use of space, flowing and dynamic, symbolic representations, contemporary aesthetic, evocative and abstract, white background.\nBlacklight paint . Fluorescent pigments, vibrant and surreal colors, ethereal glow, otherworldly effects, dynamic and psychedelic compositions, neon aesthetics, transformative in ultraviolet light, contemporary and experimental.\nA sculpture made of Carnival glass, . Iridescent surfaces, vibrant colors, intricate patterns, opalescent hues, reflective and prismatic effects, Art Nouveau and Art Deco influences, vintage charm, intricate detailing, lustrous and luminous appearance, Carnival Glass style.\nCyanotype print . Prussian blue tones, distinctive coloration, high contrast, blueprint aesthetics, atmospheric mood, sun-exposed paper, silhouette effects, delicate details, historical charm, handmade and experimental quality.\nCross-stitching . Intricate patterns, embroidery thread, sewing, fine details, precise stitches, textile artistry, symmetrical designs, varied color palette, traditional and contemporary motifs, handmade and crafted,canvas, nostalgic charm.\nEncaustic paint . Textured surfaces, translucent layers, luminous quality, wax medium, rich color saturation, fluid and organic shapes, contemporary and historical influences, mixed media elements, atmospheric depth.\nEmbroidery . Intricate stitching, embroidery thread, fine details, varied thread textures, textile artistry, embellished surfaces, diverse color palette, traditional and contemporary motifs, handmade and crafted, tactile and ornate.\nGyotaku . Fish impressions, realistic details, ink rubbings, textured surfaces, traditional Japanese art form, nature-inspired compositions, artistic representation of marine life, black and white contrasts, cultural significance.\nLuminogram . Photogram technique, ethereal and abstract effects, light and shadow interplay, luminous quality, experimental process, direct light exposure, unique and unpredictable results, artistic experimentation.\nLite Brite art . Luminous and colorful designs, pixelated compositions, retro aesthetic, glowing effects, creative patterns, interactive and playful, nostalgic charm, vibrant and dynamic arrangements.\nMokume-gane . Wood-grain patterns, mixed metal layers, intricate and organic designs, traditional Japanese metalwork, harmonious color combinations, artisanal craftsmanship, unique and layered textures, cultural and historical significance.\na sculpture made of peebles, . Pebble art style,natural materials, textured surfaces, balanced compositions, organic forms, harmonious arrangements, tactile and 3D effects, beach-inspired aesthetic, creative storytelling, artisanal craftsmanship.\nPalekh art . Miniature paintings, intricate details, vivid colors, folkloric themes, lacquer finish, storytelling compositions, symbolic elements, Russian folklore influence, cultural and historical significance.\nSuminagashi . Floating ink patterns, marbled effects, delicate and ethereal designs, water-based ink, fluid and unpredictable compositions, meditative process, monochromatic or subtle color palette, Japanese artistic tradition.\nA Scrimshaw engraving of . Intricate engravings on a spermwhale's teeth, marine motifs, detailed scenes, nautical themes, black and white contrasts, historical craftsmanship, artisanal carving, storytelling compositions, maritime heritage.\nShibori . Textured fabric, intricate patterns, resist-dyeing technique, indigo or vibrant colors, organic and flowing designs, Japanese textile art, cultural tradition, tactile and visual interest.\nA sculpture made of Vitreous enamel . Smooth and glossy surfaces, vibrant colors, glass-like finish, durable and resilient, intricate detailing, traditional and contemporary applications, artistic craftsmanship, jewelry and decorative objects, , Vitreous enamel, colored glass.\nUkiyo-e . Woodblock prints, vibrant colors, intricate details, depictions of landscapes, kabuki actors, beautiful women, cultural scenes, traditional Japanese art, artistic craftsmanship, historical significance.\nvintage airline poster  classic aviation fonts, pastel colors, elegant aircraft illustrations, scenic destinations, distressed textures, retro travel allure\nvintage travel poster  retro fonts, muted colors, scenic illustrations, iconic landmarks, distressed textures, nostalgic vibes\nBauhaus-inspired  minimalism, geometric precision, primary colors, sans-serif typography, asymmetry, functional design\nAfrofuturism illustration  vibrant colors, futuristic elements, cultural symbolism, cosmic imagery, dynamic patterns, empowering narratives\nAtompunk illustation,  retro-futuristic, atomic age aesthetics, sleek lines, metallic textures, futuristic technology, optimism, energy\nConstructivism  geometric abstraction, bold colors, industrial aesthetics, dynamic compositions, utilitarian design, revolutionary spirit\nChicano art  bold colors, cultural symbolism, muralism, lowrider aesthetics, barrio life, political messages, social activism, Mexico\nDe Stijl Art  neoplasticism, primary colors, geometric abstraction, horizontal and vertical lines, simplicity, harmony, utopian ideals\nDayak art sculpture of  intricate patterns, nature-inspired motifs, vibrant colors, traditional craftsmanship, cultural symbolism, storytelling\nFayum portrait  encaustic painting, realistic facial features, warm earth tones, serene expressions, ancient Egyptian influences\nIlluminated manuscript  intricate calligraphy, rich colors, detailed illustrations, gold leaf accents, ornate borders, religious, historical, medieval\nKalighat painting  bold lines, vibrant colors, narrative storytelling, cultural motifs, flat compositions, expressive characters\nMadhubani painting  intricate patterns, vibrant colors, nature-inspired motifs, cultural storytelling, symmetry, folk art aesthetics\nPictorialism illustration soft focus, atmospheric effects, artistic interpretation, tonality, muted colors, evocative storytelling\nPichwai painting  intricate detailing, vibrant colors, religious themes, nature motifs, devotional storytelling, gold leaf accents\nPatachitra painting  bold outlines, vibrant colors, intricate detailing, mythological themes, storytelling, traditional craftsmanship\nSamoan art-inspired wooden sculpture  traditional motifs, natural elements, bold colors, cultural symbolism, storytelling, craftsmanship\nTlingit art  formline design, natural elements, animal motifs, bold colors, cultural storytelling, traditional craftsmanship, Alaska traditional art, (totem:1.5)\nPainting by Adnate realistic portraits, street art, large-scale murals, subdued color palette, social narratives\nPainting by Ron English  pop-surrealism, cultural subversion, iconic mash-ups, vibrant and bold colors, satirical commentary\nPainting by Shepard Fairey  street art, political activism, iconic stencils, bold typography, high contrast, red, black, and white color palette",
+        0,
+        275,
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 279,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        -300,
+        -50
+      ],
+      "size": [
+        470,
+        130
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 280,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        2300,
+        -50
+      ],
+      "size": [
+        470,
+        130
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 282,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        2300,
+        1450
+      ],
+      "size": [
+        470,
+        130
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 281,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        -300,
+        1450
+      ],
+      "size": [
+        470,
+        130
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    }
+  ],
+  "links": [
+    [
+      234,
+      51,
+      0,
+      83,
+      0,
+      "IMAGE"
+    ],
+    [
+      331,
+      164,
+      1,
+      153,
+      0,
+      "STRING"
+    ],
+    [
+      332,
+      164,
+      0,
+      154,
+      0,
+      "STRING"
+    ],
+    [
+      333,
+      159,
+      1,
+      155,
+      0,
+      "CLIP"
+    ],
+    [
+      334,
+      164,
+      0,
+      155,
+      1,
+      "STRING"
+    ],
+    [
+      335,
+      155,
+      0,
+      157,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      336,
+      159,
+      1,
+      158,
+      0,
+      "CLIP"
+    ],
+    [
+      337,
+      164,
+      1,
+      158,
+      1,
+      "STRING"
+    ],
+    [
+      338,
+      159,
+      0,
+      160,
+      0,
+      "MODEL"
+    ],
+    [
+      339,
+      155,
+      0,
+      160,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      340,
+      158,
+      0,
+      160,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      341,
+      151,
+      0,
+      160,
+      3,
+      "LATENT"
+    ],
+    [
+      342,
+      160,
+      0,
+      162,
+      0,
+      "LATENT"
+    ],
+    [
+      343,
+      159,
+      2,
+      162,
+      1,
+      "VAE"
+    ],
+    [
+      345,
+      161,
+      0,
+      164,
+      0,
+      "STRING"
+    ],
+    [
+      346,
+      156,
+      0,
+      164,
+      1,
+      "STRING"
+    ],
+    [
+      347,
+      165,
+      0,
+      166,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      348,
+      167,
+      0,
+      166,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      349,
+      162,
+      0,
+      166,
+      0,
+      "IMAGE"
+    ],
+    [
+      350,
+      159,
+      0,
+      166,
+      1,
+      "MODEL"
+    ],
+    [
+      351,
+      159,
+      1,
+      166,
+      2,
+      "CLIP"
+    ],
+    [
+      352,
+      159,
+      2,
+      166,
+      3,
+      "VAE"
+    ],
+    [
+      353,
+      155,
+      0,
+      166,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      354,
+      158,
+      0,
+      166,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      355,
+      166,
+      0,
+      163,
+      0,
+      "IMAGE"
+    ],
+    [
+      356,
+      166,
+      0,
+      152,
+      0,
+      "IMAGE"
+    ],
+    [
+      381,
+      192,
+      0,
+      188,
+      0,
+      "MODEL"
+    ],
+    [
+      382,
+      204,
+      0,
+      188,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      383,
+      202,
+      0,
+      188,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      384,
+      206,
+      0,
+      188,
+      3,
+      "LATENT"
+    ],
+    [
+      387,
+      168,
+      0,
+      192,
+      1,
+      "CLIP"
+    ],
+    [
+      389,
+      201,
+      0,
+      194,
+      0,
+      "IMAGE"
+    ],
+    [
+      392,
+      197,
+      0,
+      198,
+      0,
+      "STRING"
+    ],
+    [
+      393,
+      205,
+      0,
+      198,
+      1,
+      "STRING"
+    ],
+    [
+      394,
+      197,
+      0,
+      199,
+      0,
+      "STRING"
+    ],
+    [
+      395,
+      207,
+      0,
+      199,
+      1,
+      "STRING"
+    ],
+    [
+      397,
+      198,
+      0,
+      199,
+      3,
+      "STRING"
+    ],
+    [
+      398,
+      192,
+      1,
+      200,
+      0,
+      "CLIP"
+    ],
+    [
+      399,
+      199,
+      0,
+      200,
+      1,
+      "STRING"
+    ],
+    [
+      400,
+      188,
+      0,
+      201,
+      0,
+      "LATENT"
+    ],
+    [
+      401,
+      191,
+      0,
+      201,
+      1,
+      "VAE"
+    ],
+    [
+      402,
+      168,
+      0,
+      202,
+      0,
+      "CLIP"
+    ],
+    [
+      405,
+      203,
+      0,
+      204,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      432,
+      235,
+      0,
+      226,
+      1,
+      "CLIP"
+    ],
+    [
+      433,
+      227,
+      0,
+      228,
+      0,
+      "STRING"
+    ],
+    [
+      434,
+      237,
+      0,
+      228,
+      1,
+      "STRING"
+    ],
+    [
+      435,
+      238,
+      0,
+      228,
+      3,
+      "STRING"
+    ],
+    [
+      436,
+      239,
+      0,
+      229,
+      0,
+      "LATENT"
+    ],
+    [
+      437,
+      236,
+      0,
+      229,
+      1,
+      "VAE"
+    ],
+    [
+      438,
+      235,
+      0,
+      230,
+      0,
+      "CLIP"
+    ],
+    [
+      441,
+      231,
+      0,
+      232,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      443,
+      227,
+      0,
+      238,
+      0,
+      "STRING"
+    ],
+    [
+      444,
+      233,
+      0,
+      238,
+      1,
+      "STRING"
+    ],
+    [
+      445,
+      226,
+      0,
+      239,
+      0,
+      "MODEL"
+    ],
+    [
+      446,
+      232,
+      0,
+      239,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      447,
+      230,
+      0,
+      239,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      450,
+      229,
+      0,
+      242,
+      0,
+      "IMAGE"
+    ],
+    [
+      451,
+      226,
+      1,
+      243,
+      0,
+      "CLIP"
+    ],
+    [
+      452,
+      228,
+      0,
+      243,
+      1,
+      "STRING"
+    ],
+    [
+      453,
+      244,
+      0,
+      239,
+      3,
+      "LATENT"
+    ],
+    [
+      454,
+      245,
+      0,
+      244,
+      0,
+      "IMAGE"
+    ],
+    [
+      455,
+      236,
+      0,
+      244,
+      1,
+      "VAE"
+    ],
+    [
+      457,
+      200,
+      0,
+      204,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      459,
+      200,
+      0,
+      203,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      461,
+      200,
+      0,
+      203,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      486,
+      243,
+      0,
+      232,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      488,
+      243,
+      0,
+      231,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      490,
+      243,
+      0,
+      231,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      495,
+      265,
+      0,
+      228,
+      2,
+      "STRING"
+    ],
+    [
+      496,
+      268,
+      1,
+      270,
+      0,
+      "CLIP"
+    ],
+    [
+      497,
+      268,
+      1,
+      272,
+      0,
+      "CLIP"
+    ],
+    [
+      499,
+      268,
+      0,
+      273,
+      0,
+      "MODEL"
+    ],
+    [
+      500,
+      272,
+      0,
+      273,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      503,
+      273,
+      0,
+      274,
+      0,
+      "LATENT"
+    ],
+    [
+      504,
+      268,
+      2,
+      274,
+      1,
+      "VAE"
+    ],
+    [
+      505,
+      266,
+      0,
+      51,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      506,
+      268,
+      0,
+      51,
+      1,
+      "MODEL"
+    ],
+    [
+      507,
+      268,
+      1,
+      51,
+      2,
+      "CLIP"
+    ],
+    [
+      508,
+      268,
+      2,
+      51,
+      3,
+      "VAE"
+    ],
+    [
+      509,
+      269,
+      0,
+      51,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      511,
+      272,
+      0,
+      51,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      512,
+      272,
+      0,
+      51,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      513,
+      274,
+      0,
+      51,
+      0,
+      "IMAGE"
+    ],
+    [
+      514,
+      268,
+      2,
+      275,
+      1,
+      "VAE"
+    ],
+    [
+      515,
+      276,
+      0,
+      275,
+      0,
+      "IMAGE"
+    ],
+    [
+      516,
+      275,
+      0,
+      273,
+      3,
+      "LATENT"
+    ],
+    [
+      517,
+      277,
+      0,
+      272,
+      1,
+      "STRING"
+    ],
+    [
+      518,
+      277,
+      0,
+      130,
+      0,
+      "STRING"
+    ],
+    [
+      519,
+      278,
+      0,
+      277,
+      0,
+      "STRING"
+    ],
+    [
+      520,
+      137,
+      0,
+      277,
+      1,
+      "STRING"
+    ],
+    [
+      521,
+      270,
+      0,
+      273,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      522,
+      240,
+      0,
+      226,
+      0,
+      "MODEL"
+    ],
+    [
+      523,
+      187,
+      0,
+      192,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "275 FOOOCUS STYLES SDXL IMG2IMG",
+      "bounding": [
+        -300,
+        100,
+        2500,
+        1200
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "275 FOOOCUS STYLES SDXL TXT2IMG",
+      "bounding": [
+        2300,
+        100,
+        2500,
+        1200
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "275 FOOOCUS STYLES  FLUX TXT2IMG",
+      "bounding": [
+        2300,
+        1600,
+        2500,
+        1200
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "275 FOOOCUS STYLES  FLUX IMG2IMG",
+      "bounding": [
+        -300,
+        1600,
+        2500,
+        1200
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.35.9",
+    "workflowRendererVersion": "LG",
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-09-14T15:07:37.128Z",
+      "modified": "2024-10-07T20:06:42.150Z",
+      "software": "ComfyUI"
+    },
+    "groupNodes": {},
+    "ue_links": [],
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

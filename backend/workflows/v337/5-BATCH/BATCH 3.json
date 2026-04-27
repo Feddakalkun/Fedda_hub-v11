@@ -1,0 +1,4336 @@
+{
+  "id": "9a9c45e8-cff7-46b7-8798-70eeb4e4670a",
+  "revision": 0,
+  "last_node_id": 246,
+  "last_link_id": 685,
+  "nodes": [
+    {
+      "id": 143,
+      "type": "LoadImage",
+      "pos": [
+        1650,
+        20
+      ],
+      "size": [
+        300,
+        400
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            626
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "Pose",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pose.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 148,
+      "type": "Load Styles CSV",
+      "pos": [
+        1650,
+        580
+      ],
+      "size": [
+        310,
+        80
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            605
+          ]
+        },
+        {
+          "name": "negative prompt",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": [
+            603
+          ]
+        }
+      ],
+      "title": "PRMOPT 2  STYLE",
+      "properties": {
+        "cnr_id": "comfyui-styles_csv_loader",
+        "ver": "aeee51aaa7044b456c3df081f91185f214b9472a",
+        "Node name for S&R": "Load Styles CSV"
+      },
+      "widgets_values": [
+        "Photography | Surreal"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 149,
+      "type": "easy string",
+      "pos": [
+        1650,
+        470
+      ],
+      "size": [
+        310,
+        60
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            604
+          ]
+        }
+      ],
+      "title": "PROMPT 1 SUBJECT",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy string"
+      },
+      "widgets_values": [
+        "kitana, fire, "
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 150,
+      "type": "easy string",
+      "pos": [
+        1650,
+        710
+      ],
+      "size": [
+        310,
+        60
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            602
+          ]
+        }
+      ],
+      "title": "PROMPT NEGATIVE",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy string"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159"
+    },
+    {
+      "id": 146,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1980,
+        860
+      ],
+      "size": [
+        321.568115234375,
+        226
+      ],
+      "flags": {},
+      "order": 43,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 615
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "POSITIVE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "ba22ba11e9073d45c5779d557593b2f106aac8b4",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "kitana, fire,, surreal photography, dreamlike imagery, subconscious exploration, bending reality, imaginative narratives, juxtaposing elements, evoking wonder and awe, transcending boundaries, challenging perceptions, fantastical landscapes, otherworldly atmospheres, architecture photography, striking structures, clean lines, geometric shapes, dramatic angles, play of light and shadow, capturing architectural details, showcasing design elements, evoking mood, professional lighting, precise compositions, emphasizing scale and proportion, creating depth, architectural storytelling, capturing iconic landmarks, immersive experience",
+        "kitana, fire,, surreal photography, dreamlike imagery, subconscious exploration, bending reality, imaginative narratives, juxtaposing elements, evoking wonder and awe, transcending boundaries, challenging perceptions, fantastical landscapes, otherworldly atmospheres, black and white photography, timeless elegance, classic aesthetic, dramatic contrasts, emphasizing shapes and textures, evoking nostalgia, focusing on light and shadow, monochromatic storytelling, capturing mood and emotion, artistic expression, minimalist compositions, conveying depth and atmosphere, timeless beauty",
+        "kitana, fire,, surreal photography, dreamlike imagery, subconscious exploration, bending reality, imaginative narratives, juxtaposing elements, evoking wonder and awe, transcending boundaries, challenging perceptions, fantastical landscapes, otherworldly atmospheres, Cinematic photography, movie mood, cinematic light, compelling composition, storytelling elements, conveys emotion, mood, and narrative depth, creating visually striking images that feel like still frames from a film",
+        "kitana, fire,, surreal photography, dreamlike imagery, subconscious exploration, bending reality, imaginative narratives, juxtaposing elements, evoking wonder and awe, transcending boundaries, challenging perceptions, fantastical landscapes, otherworldly atmospheres, documentary photography, capturing reality, social issues, human experiences, photojournalistic storytelling, candid moments, authentic narratives, raising awareness, documenting history, preserving cultural heritage, immersive storytelling, evoking empathy, powerful imagery, journalistic integrity"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 147,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2310,
+        860
+      ],
+      "size": [
+        410,
+        210
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 614
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "ba22ba11e9073d45c5779d557593b2f106aac8b4",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "bad anatomy, comics, cropped, cross-eyed, worst quality, low quality, painting, 3D render, drawing, crayon, sketch, graphite, impressionist, cartoon, anime, noisy, blurry, soft, deformed, ugly, lowres, low details, JPEG artifacts, airbrushed, semi-realistic, CGI, render, Blender, digital art, manga, amateur, mutilated, distorted"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 151,
+      "type": "easy promptLine",
+      "pos": [
+        1420,
+        20
+      ],
+      "size": [
+        210,
+        740
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            606
+          ]
+        },
+        {
+          "name": "COMBO",
+          "shape": 6,
+          "type": "*",
+          "slot_index": 1,
+          "links": null
+        }
+      ],
+      "title": "294 STYLES",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy promptLine"
+      },
+      "widgets_values": [
+        "aerial photography, drone photography, sweeping landscapes, unique perspectives, epic scale, capturing from above, revealing hidden beauty, showcasing vastness, immersive experience, precise compositions, expert piloting, dynamic angles, cinematic storytelling, showcasing natural wonders, aerial exploration\narchitecture photography, striking structures, clean lines, geometric shapes, dramatic angles, play of light and shadow, capturing architectural details, showcasing design elements, evoking mood, professional lighting, precise compositions, emphasizing scale and proportion, creating depth, architectural storytelling, capturing iconic landmarks, immersive experience\nblack and white photography, timeless elegance, classic aesthetic, dramatic contrasts, emphasizing shapes and textures, evoking nostalgia, focusing on light and shadow, monochromatic storytelling, capturing mood and emotion, artistic expression, minimalist compositions, conveying depth and atmosphere, timeless beauty\nCinematic photography, movie mood, cinematic light, compelling composition, storytelling elements, conveys emotion, mood, and narrative depth, creating visually striking images that feel like still frames from a film\ndocumentary photography, capturing reality, social issues, human experiences, photojournalistic storytelling, candid moments, authentic narratives, raising awareness, documenting history, preserving cultural heritage, immersive storytelling, evoking empathy, powerful imagery, journalistic integrity\nexperimental photography, pushing the boundaries of creativity, unconventional techniques, innovative concepts, artistic exploration, thought-provoking imagery, pushing the boundaries of traditional photography\nfashion photography, glamorous, stylish attire, captivating pose, dynamic composition, high-fashion aesthetic, professional studio lighting, expert styling, showcasing trend, conveying elegance, conveying attitude, evoking emotion, creating visual impact, editorial storytelling, artistic interpretation, fashion-forward visual\nfashion editorial photography, high-fashion imagery, avant-garde aesthetics, editorial storytelling, conveying fashion trends and concepts, artistic interpretation, expert styling, professional lighting, capturing fashion-forward visuals, creating visual impact, evoking emotion, pushing creative boundaries\nfine art photography, conceptual expression, evocative imagery, artistic interpretation, emotional resonance, creative composition, professional lighting, exquisite detail, immersive experience, storytelling through imagery, conveying mood,  unique perspective, thought-provoking concept, capturing beauty, transcending reality\nflower photography, capturing nature's beauty, delicate petals, vibrant colors, intricate details, showcasing botanical diversity, evoking emotions, conveying serenity, expert composition, professional lighting, immersive floral portrait, timeless elegance\nfood photography, mouthwatering dishes, vibrant colors, appetizing presentations, enticing compositions, delicious details, showcasing textures, capturing freshness, professional lighting, expert styling, culinary storytelling, enhancing food appeal\nlandscape photography, vast vistas, natural beauty, dynamic compositions, captivating scenery, immersive, serene\nlong exposure photography, streaking lights, smooth motion, dreamy landscapes, ethereal atmosphere, light painting, creative expression, time manipulation, surreal effects, captivating visuals, artistic interpretation, immersive experience, unique perspective\nlow key photography, dramatic lighting, deep shadows, rich contrast, moody atmosphere, intense emotions, cinematic feel, mysterious ambiance, emphasizing shape and form, creating depth, evoking drama, storytelling through shadows, professional technique\nmacro photography, extreme close-ups, intricate details, unseen worlds, capturing texture, emphasizing details, revealing beauty in small things, professional lighting, precise focusing, artistic expression, immersive experience, expert technique\nmicroscopic photography, magnified, molecular, unseen worlds revealed, scientific exploration, capturing molecular details, professional imaging techniques, precise focusing, revealing hidden beauty, scientific discovery, artistic interpretation, nano scale, revealing the wonders of the unseen\nminimalist photography, simplicity in composition, clean lines, uncluttered visuals, negative space, focusing on essential elements, conveying tranquility, understated beauty, elegant aesthetics, subtle storytelling, capturing the essence of minimalism\nmockup photography, professional presentation, blank, empty,  creative composition, versatile use,  professional lighting, expert styling, high-quality imagery, realistic perspective, accurate representation\nnight photography, nocturnal beauty, city lights, starry skies, celestial wonders, moonlit landscapes, urban glow, capturing the essence of darkness, ethereal atmosphere, dramatic shadows, magical ambiance, long exposure techniques, expert use of light sources\npet photography, adorable portrait, playful moment, expressive eyes, showcasing personality, professional lighting, expert composition, capturing joyful interaction, conveying emotion, creative composition, enhancing pet beauty, pet-friendly environment, storytelling through imagery\nportrait photography, capturing emotion, personality, flattering lighting, professional, engaging, compelling composition\nCinematic portrait photography, capture subject in a way that resembles a still frame from a movie, cinematic lighting, story, narrative quality, drawing viewers into the scene and evoking a sense of cinematic immersion, capturing emotion, professional, engaging, compelling composition\ncloseup portrait photography, beautiful eyes, capturing emotion, personality, flattering lighting, professional, engaging, compelling composition\nfantasy portrait photography, beautiful eyes, ethereal beauty, magical atmosphere, whimsical element, enchanting composition, mystical storytelling, professional lighting, imaginative concept, creative styling, otherworldly aesthetic, fantasy romance, surreal visual, enchanting character, captivating narrative, intricate detail, vibrant color, fantastical landscape\nproduct photography, crisp details, clean composition, attention to detail, professional lighting, precise focus, appealing aesthetics, capturing textures, high-quality imagery, commercial appeal, creative presentation\nreflection photography, mirror-like surfaces, symmetry, visual echoes, capturing dual realities, distorted perspectives, ethereal beauty, introspective imagery, mesmerizing patterns, reflecting mood and emotion, creating visual depth, playing with perception\nsport photography, action-packed moment, dynamic, intense competition, thrilling movement, showcasing skill, conveying energy, adrenaline-fueled visuals, immersive experience, storytelling through action, dramatic composition, showcasing passion, capturing decisive moments, vibrant colors, dynamic composition, powerful imagery, engaging perspective\nstill life photography, capturing tranquility, timeless beauty, meticulous arrangement, exquisite detail, professional lighting, expert composition, evocative mood, storytelling through objects, artistic interpretation, creative expression, showcasing textures, intricate patterns, enhancing atmosphere, conveying emotions, masterful technique, immersive experience\nsurreal photography, dreamlike imagery, subconscious exploration, bending reality, imaginative narratives, juxtaposing elements, evoking wonder and awe, transcending boundaries, challenging perceptions, fantastical landscapes, otherworldly atmospheres\ntime-lapse photography, dynamic motion, fluid transition, changing landscape, evolving scene, captivating visual storytelling, accelerated time\nunderwater photography, otherworldly landscape, unique perspective, ethereal lighting, dynamic composition, captivating underwater scene, immersive, serene, expert lighting technique, breathtaking moment captured\nvintage photography, nostalgic charm, timeless appeal, old-world aesthetics, classic elegance, warm tones, soft focus, aged textures, evoking nostalgia, historical ambiance, storytelling through imagery, vintage atmosphere, timeless compositions, authentic vintage look, professional technique\nwildlife photography, capturing nature's beauty, breathtaking landscapes, immersive experience, storytelling through imagery, showcasing wildlife behavior, sharp details, evocative composition, unique perspective\nAbstract Expressionism art style, emphasizes spontaneous and gestural brushwork, explores emotions and inner thoughts, non-representational and subjective, influenced by the subconscious and the act of painting itself\nAcrylic Paint art style, fast-drying paint, versatile, vibrant colors, expressive brushwork, rich textures, dynamic compositions, bold contrasts, layered depth, tactile quality, fluid movement, lively energy, immersive atmosphere, professional-grade finish\nAerosol paint art style, spray painted, vibrant colors, seamless blending, dynamic compositions, bold contrasts, urban aesthetic, professional-grade results\ndigital painting, whimsical children's book art style,  charming and inviting illustration style, soft and rounded shapes, warm and inviting color palette, creates a friendly and serene atmosphere, simplicity and clarity make it accessible and enjoyable for a wide audience, imaginative scene with fantastical elements in a storybook-like setting, encourages viewer's sense of wonder and exploration\nChinese ink brush art style, graceful brushwork, elegant compositions, traditional motifs, professional-grade execution, captures the essence of Chinese culture and aesthetics\nDigital painting art style, dynamic composition, professional-grade execution\ndigital painting art style, fantasy video game concept art style, dynamic and richly detailed composition, vibrant colors, action-packed scene, emphasizes dramatic poses and expressive faces, immersive environments with fantasy backgrounds, designed to draw viewers into fantastical worlds, typical for character and environment designs in video games\nFantasy painting art style, imaginative, dynamic composition, professional-grade execution, creates immersive world and landscape, painterly, epic, magical\nFantasy cartoon concept art style, cartoon cute digital painting, imaginative, dynamic composition, whimsical expression, adorable, playful character, professional-grade execution, creates immersive world and landscape, brush strokes\nFantasy concept art style, digital painting, imaginative, dynamic composition, professional-grade execution, creates immersive world and landscape, brush strokes, epic, magical\nFantasy game concept art on solid color background, game item design, detailed and painterly style, focus on fantasy elements, attention to texture and additional elements like, suitable for video games or animation\nFresco painting art style, ancient painting technique dating back to antiquity, rich colors and textures, timeless aesthetic, historical significance, evokes a sense of tradition and craftsmanship\ngouache painting style, gouache opaque colors, matte finish, vibrant hues, dynamic compositions, professional-grade result, adds depth and texture\ngouache painting style, gouache vibrant colors, adorable, whimsical expression, playful character, dynamic compositions, professional-grade result, adds depth and texture\nGraffiti aerosol painting art style, bold composition, vibrant colors, mural, urban aesthetic, hip hop culture\nGrimdark painting art style, dark and brooding composition, dramatic lighting, captures the sinister and macabre atmosphere\nimpasto painting art style, thick and textured brushwork, vibrant colors, tactile quality, expressive strokes, dynamic compositions, bold contrasts, dramatic lighting effects, immersive texture, professional-grade finish, adds depth and dimension, creates visual interest\nImpressionism painting art style, loose brushwork, captures the fleeting effects of light and atmosphere\nMagic realism painting art style, surreal compositions, vibrant colors, blurs the line between reality and fantasy\noil painting art style, rich colors, lush textures, expressive brushwork, blendable layers, dynamic compositions, professional-grade finish, versatile medium, timeless elegance, immersive depth, vibrant hues, intricate detailing, adds depth and dimension\npalette knife painting art style, bold textures, impasto effects, expressive strokes, vibrant colors, dynamic compositions, professional-grade finish, adds depth and dimension, creates tactile quality, immersive texture, contemporary aesthetic\nPointillism art style, uses dots of color to create images, optical blending creates vibrant and textured surfaces\noil painting art style from Renaissance period, masterful composition, Renaissance mood, renaissance oil painting, brush strokes\nRetrofuturism painting art style, nostalgic composition, combines retro aesthetics with futuristic elements\nSumi-e painting style, traditional Japanese ink wash painting, emphasizes simplicity and elegance, expressive brushwork, captures the essence of the subject with minimal strokes, meditative and reflective\nWatercolor painting art style, transparent and delicate layers, luminous and ethereal effects, spontaneous and fluid compositions, subtle gradients and blending, captures light and atmosphere, creates soft and dreamy scenes\nCartoon watercolor painting style, playful cartoon character, dynamic composition, whimsical expression, soft and fluid texture, adds charm and personality, subtle gradients and blending, captures light and atmosphere, creates soft and dreamy scenes, watercolor texture\nWatercolor painting art style, isolated on solid white background, transparent and delicate layers, luminous and ethereal effects,  subtle gradients and blending, captures light and atmosphere, creates soft and dreamy scenes\nArt Deco illustration style, elegant and geometric designs, streamlined and symmetrical compositions, embodies the glamour and sophistication of the Art Deco era, influenced by modernism and machine aesthetics\nanime art style, anime digital art, expressive anime art, dynamic composition, anime style, vibrant, studio anime, highly detailed\nChibi anime art style, cute and exaggerated characters, large heads and small bodies, expressive facial features, playful and whimsical, popular in manga and anime fandoms\nKawaii anime art style, cute, adorable characters with big eyes and small mouths, pastel colors, playful and endearing\nMecha anime art style, focuses on giant robots and mechanical suits, intricate mechanical designs, dynamic action scenes, futuristic settings, appeals to fans of science fiction and action genres\nRealistic anime art style, combines anime aesthetics with lifelike details, detailed character designs, intricate backgrounds, immersive storytelling\nCartoon illustration style, whimsical and expressive characters, exaggerated features and emotions, versatile and adaptable for various storytelling purposes\ncartoon digital painting art style, isolated on solid white background, adorable, big eyes, cute cartoon character\nChildren's book illustration style, whimsical and charming imagery, bright and playful colors, engaging characters and storytelling, cartoon\nFantasy illustration style, transports viewers to imaginative worlds, epic landscape, and heroic adventures, sparks wonder and inspiration\nWatercolor cartoon illustration on solid white background, enchanted, adorable, Digital Cartoon Illustration, a simple and charming design\nFashion illustration style, captures the latest trends and designs in clothing and accessories, elegant and stylized figures, showcases creativity and imagination in the fashion industry\nGame art illustration style, game illustration, diverse and immersive visuals, whimsical, dynamic characters and environments, rich color palettes, enhances storytelling and gameplay experience\nIlluminated manuscript art style illustration, medieval illustration, intricate and detailed illustration, vibrant colors and gold leaf accents,  showcases meticulous craftsmanship and dedication\nPop art illustration style, vibrant and bold colors, uses imagery from popular culture, incorporate elements of mass media and consumerism, celebrates the mundane and everyday objects\nRetro illustration style, nostalgic and vintage aesthetics, inspired by design elements from past decades, evokes a sense of nostalgia and charm\nModern illustration style, contemporary and cutting-edge, embraces new techniques and technologies, reflects current trends and cultural influences\nModernism illustration style, embraces experimentation and abstraction, breaks away from traditional representation, explores new forms and techniques, reflects the spirit of innovation and progress.\nSticker art style isolated on solid color background, watercolor painting art style, transparent and delicate layers, luminous and ethereal effects, spontaneous and fluid compositions, subtle gradients and blending\ndark blue color ballpoint pen drawing art style, expressive dark blue lines, dynamic compositions, professional-grade execution, captures the spontaneity and fluidity of sketching\nCaricature art style, exaggerated features, humorous interpretation, dynamic composition, professional-grade execution, adds humor and personality, captures essence in a playful manner\ncaricature art style, highly exaggerated features, humorous interpretation, bold and dynamic composition, professional-grade execution, adds humor and personality, captures essence in a exaggerated playful manner\ncharcoal drawing style, dramatic contrast, expressive strokes, rich textures, dynamic composition, professional-grade finish, classic aesthetic\nColored pencil drawing art style, vibrant colors, delicate shading, professional-grade execution, captures the richness and depth of traditional drawing techniques\ngraphite drawing art style, subtle tones, delicate shading, precise detailing, fine textures, expressive lines, intricate compositions, timeless elegance, professional-grade finish, immersive depth, classic aesthetic\nInk drawing art style, bold lines, expressive strokes, high contrast, intricate details, dynamic compositions, versatile medium, professional-grade finish, classic aesthetic, adds depth and texture, timeless elegance\npastel drawing art style, pastel colors, delicate shading, dynamic composition, soft and velvety pastel textures, amazing pastel drawing\npen drawing art style, precise lines, intricate details, high contrast, dynamic compositions, versatile medium, professional-grade finish, timeless elegance, creates bold and expressive strokes\nPencil drawing art style, delicate shading, precise lines, professional-grade execution, captures the subtlety and texture of graphite\nScratchboard drawing art style, intricate details, dramatic contrast, professional-grade execution, captures the tactile quality and depth of etching\nTechnical drawing art style, precise and detailed, emphasizes accuracy and clarity, communicates complex ideas visually\nZentangle drawing art style, clean, minimalist, meditative and relaxing, uses repetitive patterns and structured designs to create intricate and abstract artworks, precise lines, professional-grade execution, contrast, black and white\nabstract 3D render, abstract 3d art, imaginative design, dynamic lighting, immersive presentation, captivating visuals, high-quality rendering techniques, innovative concept, unique aesthetics, creative compositions, visually stunning results, volumetric, 4k\nfluid dynamics 3D art style, 3d fluid render, expressive and dynamic, vibrant contrasting colors, lively appearance, mesmerizing flow of shapes, simulation of fluid dynamics, swirling motion, bold colors blending seamlessly, abstract and captivating, fluidity and energy, mesmerizing composition, engaging viewer experience, seamless integration of colors and shapes, volumetric, 4k\nmodern abstract 3D art style, focusing on organic shapes and objects, soft colors, captivating composition, tactile qualities, smoothness, softness, contrast between matte and shiny textures, depth and interest, blend of textures, minimalistic yet complex aesthetic, volumetric, 4k\nprofessional 3D architectural rendering, realistic visualization, intricate detailing, lifelike textures, dynamic lighting, immersive environment, photorealistic representation, captivating visuals, realistic materials, professional rendering techniques, volumetric, 4k\nprofessional 3D character design,  dynamic pose, expert character design, engaging storytelling, captivating visuals, imaginative concept, high-quality rendering, volumetric, 4k\nprofessional 3D cartoon character design, whimsical animation, vibrant personality, exaggerated features, dynamic pose, expert character design, colorful textures, engaging storytelling, versatile animation styles, captivating visuals, imaginative concepts, playful interactions, high-quality rendering, volumetric, 4k\nprofessional 3D design of a cute and adorable cartoon character with big eyes, charming animation, endearing personality, exaggerated features, dynamic pose, captivating expression, expert character design, vibrant and colorful textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\n3d game item, high-quality 3D rendering of a game asset, dynamic lighting, captivating visuals, seamless integration, realistic materials, high-quality rendering techniques, versatile application, innovative concepts, optimized for gaming engines, volumetric, 4k\nprofessional hard surface 3D design modeling, hard surface expert modeling, hard surface 3d render, precise detailing, captivating visuals, professional-grade design, dynamic appearance, attention-grabbing aesthetics, high-quality rendering techniques, volumetric, 4k\n3D icon design, isolated on solid background, creative icon design, minimalist, depth and dimensionality, dynamic lighting, captivating visuals, high-quality rendering techniques, volumetric, 4k\nisometric 3D render, isometric 3D design, isometric perspective, precise perspective, clean, dynamic lighting, captivating visuals, immersive presentation, high-quality rendering techniques, volumetric, dramatic lighting, 4k\nLow poly 3D design aesthetic, minimalist and stylized appearance, expert modeling software, efficient detailing, immersive presentation, captivating visuals, professional-grade design, dynamic and clean appearance, versatile application, attention-grabbing aesthetics, efficient rendering, suitable for performance-sensitive applications such as games and simulations\n3d mechanical render, mech style, scifi, futuristic, detailed mech 3D rendering, intricate design, dynamic lighting, captivating visuals, high-quality rendering techniques, futuristic aesthetics, volumetric, 4k\ndetailed 3D model representation, 3d render, captivating visuals, professional-grade design, dynamic appearance, high-quality rendering techniques, volumetric, 4k\nprofessional 3d model, 3D product visualization, octane render, immersive presentation, photorealistic rendering, captivating visuals, realistic materials, highly detailed, volumetric, dramatic lighting, 4k\nfuturistic 3D rendering, imaginative design, dynamic lighting, immersive presentation, volumetric, futuristic elements, captivating visuals, realistic materials, high-quality rendering techniques, innovative concepts, otherworldly atmosphere, futuristic aesthetics, immersive storytelling, 4k\nprofessional 3D vehicle render, realistic representation, intricate detailing, dynamic lighting, immersive presentation, seamless integration, photorealistic rendering, captivating visuals, realistic materials, high-quality rendering techniques, octane render, highly detailed, volumetric, dramatic lighting, 4k\nVector coloring book page style, clean and crisp lines, on solid white background, scalable and editable artwork, suitable for printing and digital coloring, promotes creativity and relaxation, black and white, contrast, profesional, minimalist\nModern flat vector style art on solid color background, minimalist,  flat vector art, corporate artstyle, simplified shapes, modern color palette, modern conceptual art, clean lines, geometric forms, contemporary graphic design influence, stylized character features, playful touch, visually appealing, clear communication of ideas, suitable for modern media, web design, advertising, cheerful and engaging aesthetic, easily adaptable\nblack vector line art on solid white background, minimalist, vector line art style, clean lines, scalable graphics, professional-grade execution, stylized, professional vector, sleek, modern, graphic, vector graphics\nvector logo art style, on solid color background, vector logo symbol, stylized logo, logo icon, minimalist, clean, clean and scalable designs, precise lines, professional-grade execution, emphasizes simplicity and versatility\nblack vector silhouette on solid white background, minimalist, SVG silhouette art style, clean lines and shapes, scalable graphics, professional-grade execution, stylized, professional vector\ncute cartoon black vector silhouette on solid white background, minimalist, SVG silhouette art style, adorable, clean lines and shapes, scalable graphics, professional-grade execution, stylized cartoon, professional cartoon vector\nAvatar design style, visually appealing and distinctive avatar, professional-grade execution, represents individual or brand identity effectively, enhances online presence and engagement\nBanner design style, eye-catching and informative banner, professional-grade execution, effectively communicates message or event details, captures attention\nBrochure design style, informative and visually appealing layout, professional-grade execution, effectively communicates product or service details, enhances brand credibility\nBusiness card design style, professional and memorable card, professional-grade execution, effectively represents brand identity and contact information\nEvent invitation design style, visually appealing and informative invitation, professional-grade execution, effectively communicates event details, encourages attendance\nFavicon design style, isolated on white background, small and recognizable website icon, professional-grade execution, enhances brand recognition and website identity, complements overall design aesthetic\nFlyer design style, visually appealing and informative flyer, professional-grade execution, effectively promotes an event or product, engages audience\nIcon design style, visually clear and recognizable icon, professional-grade execution, effectively conveys concepts or actions, enhances user interface and experience\nminimalist modern black icon design on solid white background, simple stylized icon, vector graphic icon, clean and minimalist vector icon, professional-grade execution, enhances visual clarity and simplicity\nInfographic design style, visually engaging and informative graphic, professional-grade execution, effectively communicates complex information or data, enhances understanding\nLetterhead design style, professional and branded letterhead, professional-grade execution, enhances brand identity and communication\nLogo design style, custom and memorable logo, professional-grade execution, captures brand identity and values, timeless and iconic design\nMagazine layout design style, visually appealing and well-organized layout, professional-grade execution, effectively showcases content and articles, enhances reader experience\nMenu design style, visually appealing and informative menu, professional-grade execution, effectively presents food and beverage options, enhances dining experience\nPackaging Design, Brand Identity, Visual Communication, Product Presentation, Consumer Appeal, structural integrity, graphic elements, brand recognition, marketing impact, professional design\nPoster design style, poster art, visually striking and informative poster, professional-grade execution, poster graphic design\nWebsite design style, web page, user-friendly interface, visually appealing layout, professional-grade execution, responsive design, enhances user experience and engagement\nBeachwear fashion style, designed for leisure activities and relaxation, features lightweight and breezy clothing, reflects a carefree and laid-back attitude\nBikini fashion style, bikini, reflects a sense of freedom and liberation\nBoho fashion style, inspired by bohemian and hippie aesthetics, characterized by free-spirited and eclectic clothing choices, features flowing fabrics, floral prints, and ethnic-inspired details, promotes individuality and self-expression, embraces a laid-back and carefree attitude\nCosplay fashion style, allows individuals to embody their favorite fictional characters, promotes creativity and craftsmanship, features elaborate costumes and accessories, celebrates diverse interests and fandoms\nCyberpunk fashion style, inspired by futuristic dystopian settings, features high-tech and futuristic clothing, incorporates elements of technology and urban culture, promotes a bold and avant-garde aesthetic\nEmo fashion style, characterized by dark colors, layered clothing, and edgy accessories, allows individuals to express emotions and individuality, often incorporates elements of punk and gothic styles, promotes self-expression and authenticity\nGlamour fashion style, epitomizes sophistication and elegance, features luxurious fabrics like silk and satin, embellishments, promotes a polished and glamorous look, opulence and refinement\nGoth fashion style, characterized by dark and dramatic clothing choices, often includes black clothing, lace, leather, and Victorian-inspired elements, promotes a sense of mystery and theatricality, celebrates beauty in the macabre, encourages self-expression and embracing the unconventional\nMetalhead fashion style, inspired by heavy metal music culture, features black clothing, leather jackets, band t-shirts, and metal accessories, promotes individuality and rebellion, celebrates a love for music and expression through clothing\nNormcore fashion style, embraces simplicity and everyday clothing items, focuses on comfort and practicality, promotes a minimalist and unpretentious aesthetic, encourages mixing and matching basic wardrobe staples, celebrates understated elegance and timeless style\nPreppy fashion style, characterized by classic and timeless clothing choices, features tailored silhouettes, vibrant colors, and traditional patterns like plaid and stripes, promotes a polished and sophisticated look, reflects a sense of privilege and tradition associated with elite education\nPsychobilly fashion style, combines elements of rockabilly, punk, and retro influences, characterized by bold prints, vintage-inspired clothing, and edgy accessories, promotes a rebellious and retro aesthetic, encourages individuality and creativity\nRave fashion style, vibrant and colorful clothing choices, featuring neon colors, bold patterns, and futuristic designs, encourages self-expression and creativity, incorporates elements of dance culture and electronic music, promotes a sense of community and celebration\nSci-Fi Inspired fashion style, draws inspiration from science fiction movies, and futurism, features futuristic silhouettes,  and avant-garde designs, promotes imagination and innovation in fashion, explores concepts of technology\nSexy fashion style, embraces sensuality and confidence, beauty, allure, reflects a bold and seductive attitude\nSportswear fashion style, designed for athletic activities and casual wear, features comfortable and functional clothing, and performance fabrics, promotes an active lifestyle and physical fitness\nSteampunk fashion style, inspired by Victorian-era machinery and science fiction, features a mix of vintage clothing with futuristic elements, promotes creativity and craftsmanship, encourages DIY and upcycling, celebrates a love for exploration and adventure\nStreetwear fashion style, influenced by urban culture and street fashion, features casual and comfortable clothing with bold graphics, promotes self-expression and individuality, celebrates creativity and innovation in design, reflects the diverse influences of music, art, and sports\nVintage fashion style, embraces clothing and accessories from previous eras, celebrates timeless designs and craftsmanship, allows for unique and one-of-a-kind looks, evokes nostalgia and a sense of history\nWinter fashion style, designed for cold weather, features cozy and warm clothing, comfort and chicness\nAfrican traditional art style, bold patterns, vibrant colors, intricate designs, dynamic compositions, cultural heritage, adds richness and depth\nAfrofuturism art style, blend of African culture and aesthetics with futuristic elements, reimagines history and imagines alternative futures, black identity, creativity, and resilience\nAncient Egyptian mural art style, rich cultural heritage, intricate hieroglyphics, vibrant colors, symbolic motifs, depicts scenes from mythology, religion, and daily life, monumental scale, timeless beauty\nAtompunk art style, retro-futuristic, atomic age aesthetics, sleek and streamlined designs, nuclear energy motifs, optimism about technological progress\nBaroque art style, dynamic composition, dramatic lighting, rich colors, intricate details, professional-grade execution, captures the grandeur and theatricality of the Baroque period\nBiomechanical art style, Biology, Machinery, Intricate, Surreal, Organic Forms, Mechanical Structures, Futuristic, Cyberpunk, Fusion, Nature, Technology\nBiopunk art style, explores genetic engineering, biohacking, and biotechnology, organic and living elements, dystopian or utopian visions of a genetically modified future\nByzantine icon oil painting art style, intricate details, rich colors, religious symbolism, cultural significance, professional-grade execution, spiritual, religious\ncartoon art style, whimsical character, exaggerated features, vibrant colors, dynamic composition, expressive pose, professional-grade finish, adds humor and charm\nClaymation art style, tactile and three-dimensional character, dynamic animation, captures the charm and whimsy of stop-motion animation, suitable for various storytelling and advertising\ncomic book art style, comics, dynamic lines, vibrant colors, expressive characters, action-packed composition, adds energy and excitement\nConstructivism Art Style, Industrial materials, geometric abstraction, social purposes, modernity, functional art, the machine age and collective labor, fosters innovation and collaboration\ncubism art style, fragmented forms, geometric shapes, dynamic compositions, vibrant colors, innovative technique, cultural significance\nCybergoth art style, futuristic and edgy aesthetic, combines cyberpunk and gothic elements, neon colors, industrial motifs, alternative fashion and culture\nCyberpunk art style, futuristic cityscapes, neon-lit streets, high-tech and low-life, cybernetic enhancements, dystopian and gritty atmosphere\nDadaism Art Style, Anti-art, absurdity, irony, spontaneity, rejecting conventional aesthetics, collage art\nDark Academia art style, evokes the atmosphere of scholarly pursuits and literary classics, rich and moody color palettes, intricate details\nArt Deco style, Symmetry, streamlined shapes, geometric patterns, luxury, modernity, glamour, sleek lines\nDieselpunk art style, retro-futuristic, industrial aesthetics, mechanical marvels, alternative history, gritty and dystopian atmosphere\nEgyptian art style, iconic symbolism, intricate hieroglyphics, dynamic composition, Egyptian cultural significance\nFuturism art style, dynamic composition, bold geometric forms, vibrant colors, captures the spirit of technological advancement and modernity\nGilded art style, opulent, luxurious, metallic elements, divine symbolism, fine craftsmanship\nGlitch art style, embraces digital errors and glitches, distorted and fragmented imagery, experimental and abstract, challenges traditional notions of perfection and beauty\nGothic art style, gothic details, dramatic compositions, rich symbolism\nInterstellar art style, Cosmic, Space, Celestial, Galactic, Nebulae, Stars, Planets, Exploration, Unknown, Infinity, Futuristic\nJapanese traditional art style, delicate lines, subtle colors, intricate details, dynamic compositions, cultural heritage, adds elegance and sophistication\nLinocut art style, relief printing, bold and graphic imagery with striking contrasts\nLucha libre art style, dynamic and colorful compositions, exaggerated characters, captures the excitement and energy of Mexican wrestling culture\nMayan art style, rich cultural heritage, intricate geometric patterns, mayan colors,  reflects the spiritual and artistic achievements of the Maya civilization\nMinoan art style, dynamic composition, Minoan cultural significance, adds depth and richness\nNaive art style, simplistic and childlike aesthetic, spontaneous and untrained, captures innocence and purity, features bold colors, exaggerated perspectives, and whimsical themes\nNecropunk art style, dark and macabre, blending of death and technology, eerie and unsettling imagery, explores themes of mortality and decay, unique and thought-provoking concepts\nArt Nouveau art style, elegant and organic forms, intricate floral motifs, flowing lines, decorative and ornate, influenced architecture, design, and visual arts in the late 19th and early 20th centuries\npixel art style, pixelated design, flat, uses pixelated graphics reminiscent of classic video games, charming simplicity, intricate detailing despite limited resolution\nPop art style, vibrant colors, bold outlines, use of popular culture imagery, iconic and recognizable, consumerism and mass media\npropaganda art style, bold and persuasive imagery, dynamic compositions, serves as a powerful tool for communication and persuasion\nPsychedelic art style, vibrant and surreal imagery, kaleidoscopic patterns, intense colors, mind-expanding and hallucinatory, reflects the psychedelic experience and counterculture movement\nRococo art style, ornate, light-hearted, elegant, decorative, playful subjects, asymmetrical designs\nSolarpunk art style, optimistic vision of the future, sustainable technology, renewable energy sources, lush and green landscapes, community and harmony with nature\nStreet Art, Urban setting, graffiti, murals, social messages, public spaces, anonymity, vibrant visuals\nStencil art style, urban and contemporary, graphic and bold imagery\nSteampunk art style, Victorian-era aesthetics, steam-powered machinery, brass and gears, fantastical inventions, retro-futuristic adventure\nSurrealism art style, dreamlike and irrational imagery, explores the unconscious mind, juxtaposition of unlikely elements, challenges reality and logic\nSynthwave art style, retro-futuristic aesthetic, vibrant neon colors, nostalgic 80s imagery, futuristic landscapes, nostalgic and atmospheric\nUkrainian folk art style, vibrant colors, intricate patterns, dynamic compositions, traditional motifs, cultural heritage, adds richness and depth\nVaporwave art style, nostalgic and surreal aesthetic, 80s and 90s retro imagery, glitch art elements, pastel colors, dreamy and ethereal atmosphere\nWesternpunk art style, fusion of Wild West and futuristic elements, rugged landscapes, cowboy aesthetics, steam-powered technology, adventurous spirit\nCeramic craft style, versatile and durable, pottery and ceramic artwork, showcases creativity and craftsmanship\nCibulak porcelain art style, delicate and intricately detailed porcelain creations, traditional Kazakh craftsmanship, exquisite hand-painted designs, cultural heritage preservation\nCeramic glass craft style, combines ceramic and glass materials to create unique and innovative artwork, offers versatility in texture and transparency, allows for experimentation with light and color\nMoche craft style, ancient Peruvian civilization known for its intricate ceramic vessels and figurines, rich cultural and artistic heritage, showcases advanced craftsmanship and artistic skill\nCeramic porcelain craft style, utilizes porcelain clay to create delicate and translucent artworks, smooth texture and white color, allows for intricate detailing and precise forms\nCrochet craft style, versatile and creative, yarn\nAmigurumi crochet style, Japanese art, cute and whimsical designs, fosters creativity and handcrafting skills\nCross-stitching art style, traditional and timeless craft, precise and meticulous stitching technique, intricate and decorative piece\nEmbossed art style, raised and textured surfaces, adds depth and dimension to artwork, tactile and interactive\nEmbroidery art style, decorative designs on fabric, intricate stitching techniques, adds texture and dimension to artwork\nFelt art style, tactile and textural, intricate detailing and layering\nGobelin tapestry art style, intricate woven designs, rich colors and textures\nKirigami art style, combines paper cutting with origami folding techniques, creates intricate and dynamic paper sculptures, encourages creativity and precision\nKnitting art style, fabric and patterns, intricate designs and textures\nLapidary art style, intricate and precise craftsmanship in cutting and polishing gemstones, creates dazzling and unique pieces of jewelry and sculpture, showcases the natural beauty of mineral\nLaser engraving art style, precise and detailed engraving on plywood, allows for intricate designs and patterns, modern and versatile technique, flat, wood engraving art\nLeatherworking art style, craftsmanship of creating designs and patterns on leather, carving, stamping, and dyeing techniques\nMacrame art style, uses knotting techniques to create textiles or decorative items, versatile and tactile craft, allows for intricate patterns and designs\nMarquetry art style, intricate wood inlay technique, creates decorative patterns and images using veneers of different woods, showcases craftsmanship and attention to detail\nMetalwork art style, manipulation of metal to create sculptures, showcases craftsmanship and technical skill, intricate and durable designs\nmosaic art style, versatile and decorative, uses small pieces of tile, adds color and texture, glossy, sharp\nRoman mosaic art style, intricate and colorful mosaic designs, depict scenes from mythology, daily life, and nature, showcases superb craftsmanship and attention to detail, cultural and historical significance\nNeedlepoint art style, needlepoint intricate and detailed design created through stitching, rich texture and depth, intricate patterns and color variations, fosters creativity and craftsmanship\nOrigami art style, traditional Japanese paper folding technique, creates intricate sculptures and designs from  paper\nminimalist Paper cut craft style, designs cut from paper, allows for detailed and delicate artwork\nPlasticine art style, malleable and colorful modeling material, ideal for sculpting and creating 3D artwork\nPyrography art style, uses heat to burn designs onto wood, creates intricate and permanent markings, showcases craftsmanship and attention to detail\nQuilted art style, combines fabric and stitching to create intricate designs and patterns, reflects cultural traditions and personal stories, tactile and cozy, showcases craftsmanship and creativity\nScrapbooking art style, creative arrangement of photographs, memorabilia, and decorative elements in albums or displays, preserves memories and tells stories\nSculpture craft style, three-dimensional art form, allows for the creation of expressive and tactile works using various materials , embodies creativity and artistic vision\nBronze sculpture craft style, utilizes bronze as the primary material for creating three-dimensional artworks, known for its durability and timeless beauty, allows for intricate detailing and expressive forms\nAlebrije sculpture style, vibrant and fantastical Mexican folk art, intricate and whimsical animal figures, handcrafted, celebrates creativity and imagination\nBas-relief art style, sculptural technique where figures or designs are raised slightly from the background, creates depth and texture\nClay sculpture craft style, utilizes clay as the primary material for creating three-dimensional artworks, allows for versatile shaping and modeling technique\nHaniwa craft style, ancient Japanese burial sculptures, simplistic and stylized figure, cultural and historical significance, preserves traditional craftsmanship and artistry\nJade sculpture craft style, utilizes jade as the primary material for creating three-dimensional artworks, esteemed for its beauty and cultural significance, allows for intricate carving and sculpting techniques\nMarble sculpture craft style, utilizes marble as the primary material for creating three-dimensional artworks, renowned for its elegance and beauty, allows for intricate detailing and smooth finishes, timeless and enduring\nNetsuke craft style, traditional Japanese miniature sculpture, intricately carved and detailed, functional and decorative, reflects Japanese culture and craftsmanship\nOlmec craft style, ancient Mesoamerican art tradition, iconic stone sculpture and figurine, rich cultural heritage, significant influence on subsequent civilizations\nGold sculpture craft style, utilizes gold as the primary material for creating three-dimensional artworks, embodies luxury and opulence, allows for intricate detailing and fine craftsmanship\nSand sculpture art style, temporary and ephemeral art form created by shaping and carving sand, showcases creativity and skill\nStone sculpture craft style, utilizes stone as the primary material for creating three-dimensional artworks, allows for intricate carving and sculpting techniques, durable and long-lasting, embodies strength and solidity\nWooden sculpture craft style, utilizes wood as the primary material for creating three-dimensional artworks, showcases the natural beauty and texture of wood, allows for intricate detailing and expressive forms\nWood carving art style, sculptural technique that involves carving wood to create three-dimensional forms, showcases craftsmanship and precision\n3D papercut shadowbox art style, intricate paper cutting technique to create layered scenes or designs, plays with light and shadow, adds depth and dimensionality to artwork, depth, silhouette\ncat, 3D wood shadowbox art style, layers of wood cut and assembled to create dimensional scenes or designs, natural textures and tones, adds warmth and depth to artwork, depth, silhouette\n3D plywood laser cut, symmetrical, 3D layered wood wall art style,  stacked layers made from plywood, laser cut, on white painted wall, stacked, 3d layered, minimalist,  layered, dimensional, depth, silhouette, shadow, handmade, high contrast\nStained glass art style, vitrail, isolated on solid color background, vibrant colors, intricate patterns, luminous effects when hit by sunlight, traditional craftsmanship, flat\nTapestry art style, woven textile technique, intricate designs and patterns\nProfessional 3D design of a cute and quirky alien creature with big curious eyes, charming animation, endearing personality, exaggerated features, dynamic pose, captivating expression, expert character design, vibrant and otherworldly textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\nApocalyptic surrealism art style, digital painting, eerie and haunting, surreal landscapes, dystopian ruins, twisted reality, dreamlike and nightmarish scenes, vibrant and dark color palette, intricate details, professional-grade execution, evokes a sense of doom and otherworldliness\nAztec sculpture 3D art style, intricate geometric patterns, stylized figures, rich cultural symbolism, professional-grade execution, volumetric, 4k\nBio-luminous illustration style, combines biological forms with luminous effects, vibrant and glowing, dynamic composition, professional-grade execution, captures the essence of living organisms with an ethereal glow, evokes a sense of wonder and fascination\nBio-mechanical fantasy illustration style, blends organic and mechanical elements, vibrant and surreal, dynamic composition, professional-grade execution, captures the essence of fantasy and science fiction, detailed and imaginative environment\nBiomechanical Angel 3D character art style, fusion of organic and mechanical elements, ethereal and divine, metallic wings, mechanical details, dynamic pose, high-quality rendering techniques, professional-grade execution, volumetric, 4k\nProfessional 3D design of a cute cartoon animal, charming animation, endearing personality, exaggerated features, captivating expression, expert character design, vibrant and magical textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\nProfessional 3D design of a cute cartoon boy, charming animation, endearing personality, exaggerated features, captivating expression, expert character design, vibrant and magical textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\nProfessional 3D design of a cute and stealthy cyber ninja with big alert eyes, charming animation, endearing personality, exaggerated features, dynamic pose, captivating expression, expert character design, vibrant and futuristic textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\nCute Cyberpunk illustration art style, combines cyberpunk elements with cute aesthetics, vibrant and neon colors, dynamic and charming compositions, captures the essence of cute futuristic worlds, professional-grade execution, evokes a sense of futuristic cuteness\nProfessional 3D design of a cute cartoon girl, charming animation, endearing personality, exaggerated features, captivating expression, expert character design, vibrant and magical textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\nProfessional 3D design of a cute and brave medieval knight with big noble eyes, charming animation, endearing personality, exaggerated features, dynamic pose, captivating expression, expert character design, vibrant and detailed textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\nProfessional 3D design of a cute cartoon monster, adorable creature, charming animation, endearing personality, exaggerated features, captivating expression, expert character design, vibrant and magical textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\nProfessional 3D design of a cute and friendly futuristic robot with big glowing eyes, charming animation, endearing personality, sleek and exaggerated features, dynamic pose, captivating expression, expert character design, vibrant and metallic textures, engaging storytelling, versatile animation style, high-quality render, volumetric, 4k\nCute Victorian drawing art style, combines Victorian-era elegance with cute aesthetics, soft and pastel colors, dynamic and charming compositions, captures the essence of cute and historical worlds, professional-grade execution, evokes a sense of vintage charm and cuteness\nCyber couture fashion style, inspired by futuristic and cybernetic aesthetics, uses innovative materials and designs, professional-grade execution, captures the essence of high-tech fashion, emphasizes creativity and technological advancement\nCybernetic flora illustration style, blends plant life with cybernetic elements, dynamic and futuristic composition, professional-grade execution, captures the beauty of bio-mechanical fusion, evokes a sense of innovation and natural harmony\nDreamscape mapping illustration style, visualizes dreamlike landscapes and surreal environments, uses imaginative and abstract elements, dynamic composition, professional-grade execution, captures the essence of the subconscious mind, evokes a sense of wonder and mystery\nDreamwave illustration style, blends dreamy and surreal elements with vibrant and fluid composition, uses soft gradients and glowing effects, professional-grade execution, captures the essence of dreamscapes, evokes a sense of wonder and imagination\nDreamy Animal illustration art style, combines dreamy elements with adorable animals, soft and pastel colors, dynamic and charming compositions, captures the essence of cute and dreamlike animal worlds, professional-grade execution, evokes a sense of serenity and cuteness\nEldritch Minimalism painting art style, combines minimalist and eldritch horror elements, stark and haunting compositions, muted and eerie colors, captures the essence of  horror with minimalist precision, professional-grade execution, evokes a sense of existential dread and minimalist terror\nEthereal Assassin 3D character art style, ghostly and stealthy, shadowy figure, dynamic pose, glowing eyes, high-quality rendering techniques, professional-grade execution, volumetric, 4k\nEthereal fluidity painting art style, uses fluid and flowing brushstrokes, creates a sense of movement and lightness, dynamic and abstract composition, professional-grade execution, captures the beauty of fluid dynamics, evokes a sense of calm and serenity\nEthereal Steam painting art style, merges steampunk elements with ethereal, ghostly imagery, soft pastel colors, wispy forms, intricate mechanical details, combines the solidity of steampunk machinery with the lightness of ethereal beings, professional-grade execution\nFae Fantasy painting art style, blends elements of fairies and fantasy, soft lines, vibrant colors, whimsical compositions, captures the essence of magical creatures and enchanted forests, professional-grade execution, evokes a sense of fairy-tale magic and wonder\nFairy tale chronicles art style, digital painting, storybook-like illustration, charming character, vibrant and pastel colors, whimsical environments, detailed and imaginative scenes, professional-grade execution, creates an enchanting and narrative-driven world\nFairy Tale Cute painting art style, blends fairy tale elements with cute aesthetics, vibrant and pastel colors, imaginative and enchanting compositions, captures the essence of cute fairy tale worlds, professional-grade execution, evokes a sense of magic and charm\nGeomancer 3D character art style, earth magic user, intricate robes with stone patterns, glowing runes, dynamic pose, high-quality rendering techniques, professional-grade execution, volumetric, 4k\nHolographic chic fashion style, incorporates holographic and iridescent materials, futuristic and eye-catching designs, professional-grade execution, captures the essence of modern and high-tech fashion, emphasizes creativity and innovation\nlegends art style, digital painting, epic and mystical, game character with magical abilities, intricate details, rich color palette, atmospheric effects, professional-grade execution, captures the essence of ancient legends and powerful magic\nLiquid light painting art style, uses fluid and luminous colors, creates a sense of light and movement, dynamic and abstract composition, professional-grade execution, captures the beauty of illuminated art, evokes a sense of wonder and serenity\nMythical Mechanica 3D render, blend of mythical creatures with mechanical elements, dynamic lighting, vibrant colors, high-quality rendering techniques, professional-grade execution, captivating visuals, volumetric, 4k\nNebula Dreams 3D render, cosmic clouds and nebulas, vibrant colors, dynamic lighting, surreal and dreamlike, high-quality rendering techniques, professional-grade execution, captivating visuals, volumetric, 4k\nNeural dreams illustration style, inspired by neural networks and artificial intelligence, abstract and surreal, dynamic compositions, vibrant and fluid colors, professional-grade execution, captures the essence of machine learning and human creativity\nOccult Expressionism painting art style, merges abstract expressionism and occult themes, dark and chaotic compositions, vibrant and eerie colors, expressive brushwork, captures the essence of emotional turmoil and supernatural elements, professional-grade execution, evokes a sense of mystical chaos and expressive darkness\nPastel Goth Cute illustration art style, combines pastel goth elements with cute aesthetics, soft and pastel colors, dynamic and charming compositions, captures the essence of cuteness with a goth twist, professional-grade execution, evokes a sense of sweet darkness and charm\nPhantasmagoric Abstract painting art style, blends abstract expressionism with phantasmagoric elements, chaotic and dreamlike compositions, surreal colors, captures the essence of abstract horror and surreal beauty, professional-grade execution, evokes a sense of nightmarish abstraction and phantasmagoric wonder\nPhantasmal visions illustration style, blends ghostly and surreal elements with vibrant and fluid compositions, uses soft gradients and glowing effects, professional-grade execution, captures the essence of ethereal beauty, evokes a sense of wonder and mystery\nPhantom Rococo painting art style, blends rococo and ghostly elements, ornate and intricate compositions, soft and eerie colors, captures the elegance of rococo with a spectral twist, professional-grade execution, evokes a sense of haunted beauty and rococo grace\nQuantum sketching art style, abstract and dynamic, inspired by quantum physics, uses fluid lines and shapes, professional-grade execution, captures the essence of quantum mechanics, evokes a sense of mystery and complexity\nRadiant Fantasy 3D render, glowing fantasy landscapes, vibrant colors, dynamic lighting, immersive presentation, high-quality rendering techniques, professional-grade execution, captivating visuals, volumetric, 4k\nRobot Cute illustration art style, blends robotic elements with cute aesthetics, vibrant and pastel colors, dynamic and charming compositions, captures the essence of cute robots in playful scenes, professional-grade execution, evokes a sense of mechanical cuteness and whimsy\nShadow Mage 3D character art style, master of dark magic, ethereal and mysterious, glowing eyes, shadowy effects, dynamic pose, high-quality rendering techniques, professional-grade execution, volumetric, 4k\nVoodoo Surrealism painting art style, combines voodoo and surrealist elements, dark and mystical composition, vibrant and eerie colors, symbolic and dreamlike imagery, captures the essence of spiritual mysticism and surreal fantasy, professional-grade execution, evokes a sense of supernatural wonder and surreal mystery\nWhimsical Chibi painting art style, combines whimsical elements with chibi character, soft and pastel colors, dynamic and playful compositions, captures the essence of cuteness and whimsy, professional-grade execution, evokes a sense of joy and delight\n",
+        1,
+        4,
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 171,
+      "type": "ShowText|pysssss",
+      "pos": [
+        3910,
+        790
+      ],
+      "size": [
+        360,
+        450
+      ],
+      "flags": {},
+      "order": 50,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 667
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "slot_index": 0,
+          "links": []
+        }
+      ],
+      "title": "POSITIVE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "ba22ba11e9073d45c5779d557593b2f106aac8b4",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "Shang Tsung mortal combat character, long exposure photography, streaking lights, smooth motion, dreamy landscapes, ethereal atmosphere, light painting, creative expression, time manipulation, surreal effects, captivating visuals, artistic interpretation, immersive experience, unique perspective",
+        "Kitana mortal combat character, long exposure photography, streaking lights, smooth motion, dreamy landscapes, ethereal atmosphere, light painting, creative expression, time manipulation, surreal effects, captivating visuals, artistic interpretation, immersive experience, unique perspective",
+        "Mileena mortal combat character, long exposure photography, streaking lights, smooth motion, dreamy landscapes, ethereal atmosphere, light painting, creative expression, time manipulation, surreal effects, captivating visuals, artistic interpretation, immersive experience, unique perspective",
+        "Kung Lao mortal combat character, long exposure photography, streaking lights, smooth motion, dreamy landscapes, ethereal atmosphere, light painting, creative expression, time manipulation, surreal effects, captivating visuals, artistic interpretation, immersive experience, unique perspective"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 172,
+      "type": "ShowText|pysssss",
+      "pos": [
+        4280,
+        790
+      ],
+      "size": [
+        300,
+        230
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 492
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "cnr_id": "comfyui-custom-scripts",
+        "ver": "ba22ba11e9073d45c5779d557593b2f106aac8b4",
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "bad anatomy, comics, cropped, cross-eyed, worst quality, low quality, painting, 3D render, drawing, crayon, sketch, graphite, impressionist, cartoon, anime, noisy, blurry, soft, deformed, ugly, lowres, low details, JPEG artifacts, airbrushed, semi-realistic, CGI, render, Blender, digital art, manga, amateur, mutilated, distorted"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 174,
+      "type": "LoadImage",
+      "pos": [
+        3550,
+        40
+      ],
+      "size": [
+        340,
+        430
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            655
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pose2.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 198,
+      "type": "SAMLoader",
+      "pos": [
+        940,
+        520
+      ],
+      "size": [
+        350,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "slot_index": 0,
+          "links": [
+            566
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 197,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        940,
+        600
+      ],
+      "size": [
+        350,
+        78
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "slot_index": 0,
+          "links": [
+            565
+          ]
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-subpack",
+        "ver": "1.2.9",
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 206,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        2720,
+        170
+      ],
+      "size": [
+        420,
+        105
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            584,
+            588
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            589,
+            609,
+            610
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            592,
+            676
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 219,
+      "type": "LoadLotusModel",
+      "pos": [
+        3170,
+        390
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "lotus_unet",
+          "type": "LOTUSUNET",
+          "slot_index": 0,
+          "links": [
+            621
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-Lotus",
+        "ver": "dcd5bea7a418717a6e0c27a5f607058cb9c24a5e",
+        "Node name for S&R": "LoadLotusModel"
+      },
+      "widgets_values": [
+        "lotus-depth-g-v2-0.safetensors",
+        "fp16"
+      ]
+    },
+    {
+      "id": 220,
+      "type": "LotusSampler",
+      "pos": [
+        3170,
+        310
+      ],
+      "size": [
+        315,
+        150
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 44,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "lotus_unet",
+          "type": "LOTUSUNET",
+          "link": 621
+        },
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 622
+        }
+      ],
+      "outputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            624
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-Lotus",
+        "ver": "dcd5bea7a418717a6e0c27a5f607058cb9c24a5e",
+        "Node name for S&R": "LotusSampler"
+      },
+      "widgets_values": [
+        48,
+        "increment",
+        1,
+        false
+      ]
+    },
+    {
+      "id": 222,
+      "type": "VAELoader",
+      "pos": [
+        3170,
+        350
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
+          "links": [
+            623,
+            625
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 221,
+      "type": "VAEEncode",
+      "pos": [
+        3170,
+        270
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 31,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 626
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 623
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            622
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 223,
+      "type": "VAEDecode",
+      "pos": [
+        3170,
+        430
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 49,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 624
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 625
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            627,
+            628
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 224,
+      "type": "SetUnionControlNetType",
+      "pos": [
+        3170,
+        480
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 32,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 629
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "slot_index": 0,
+          "links": [
+            630
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "SetUnionControlNetType"
+      },
+      "widgets_values": [
+        "depth"
+      ]
+    },
+    {
+      "id": 209,
+      "type": "ControlNetLoader",
+      "pos": [
+        3170,
+        530
+      ],
+      "size": [
+        360,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "slot_index": 0,
+          "links": [
+            629
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "controlnet-union-sdxl-1.0.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 211,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        3170,
+        180
+      ],
+      "size": [
+        360,
+        290
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "slot_index": 0,
+          "links": [
+            612
+          ]
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-subpack",
+        "ver": "1.2.9",
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 213,
+      "type": "Text Concatenate",
+      "pos": [
+        3170,
+        150
+      ],
+      "size": [
+        360,
+        142
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 28,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "shape": 7,
+          "type": "STRING",
+          "link": 602
+        },
+        {
+          "name": "text_b",
+          "shape": 7,
+          "type": "STRING",
+          "link": 603
+        },
+        {
+          "name": "text_c",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "text_d",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            600,
+            614
+          ]
+        }
+      ],
+      "title": "NEGATIVE",
+      "properties": {
+        "cnr_id": "was-node-suite-comfyui",
+        "ver": "fe7e0884aaf0188248d9abf1e500f5116097fec1",
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 210,
+      "type": "SAMLoader",
+      "pos": [
+        3170,
+        580
+      ],
+      "size": [
+        360,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "slot_index": 0,
+          "links": [
+            611
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 217,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3170,
+        630
+      ],
+      "size": [
+        360,
+        75
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 42,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 609
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 599
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            595,
+            619
+          ]
+        }
+      ],
+      "title": "to positive ksampler",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 218,
+      "type": "CLIPTextEncode",
+      "pos": [
+        3170,
+        680
+      ],
+      "size": [
+        360,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 40,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 610
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 600
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            596,
+            620
+          ]
+        }
+      ],
+      "title": "to negative ksampler",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "professional photo, {girl} on a event, {long hair}, bokeh, superhero clothes",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 214,
+      "type": "Text Concatenate",
+      "pos": [
+        3170,
+        70
+      ],
+      "size": [
+        420,
+        142
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 29,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "shape": 7,
+          "type": "STRING",
+          "link": 604
+        },
+        {
+          "name": "text_b",
+          "shape": 7,
+          "type": "STRING",
+          "link": 605
+        },
+        {
+          "name": "text_c",
+          "shape": 7,
+          "type": "STRING",
+          "link": 606
+        },
+        {
+          "name": "text_d",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            599,
+            615
+          ]
+        }
+      ],
+      "title": "POSITIVE",
+      "properties": {
+        "cnr_id": "was-node-suite-comfyui",
+        "ver": "fe7e0884aaf0188248d9abf1e500f5116097fec1",
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 215,
+      "type": "ControlNetApplyAdvanced",
+      "pos": [
+        3170,
+        110
+      ],
+      "size": [
+        420,
+        186
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 54,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 595
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 596
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 630
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 627
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            616
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "slot_index": 1,
+          "links": [
+            617
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        0.4,
+        0,
+        0.4
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 164,
+      "type": "PreviewImage",
+      "pos": [
+        2730,
+        630
+      ],
+      "size": [
+        300,
+        290
+      ],
+      "flags": {},
+      "order": 55,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 628
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 233,
+      "type": "Text Concatenate",
+      "pos": [
+        4610,
+        640
+      ],
+      "size": [
+        315,
+        178
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 45,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_a",
+          "shape": 7,
+          "type": "STRING",
+          "link": 644
+        },
+        {
+          "name": "text_b",
+          "shape": 7,
+          "type": "STRING",
+          "link": 656
+        },
+        {
+          "name": "text_c",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "text_d",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            667
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "was-node-suite-comfyui",
+        "ver": "fe7e0884aaf0188248d9abf1e500f5116097fec1",
+        "Node name for S&R": "Text Concatenate"
+      },
+      "widgets_values": [
+        ", ",
+        "true"
+      ]
+    },
+    {
+      "id": 231,
+      "type": "UnzipPrompt //Inspire",
+      "pos": [
+        4610,
+        680
+      ],
+      "size": [
+        345,
+        66
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 34,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "zipped_prompt",
+          "type": "ZIPPED_PROMPT",
+          "link": 654
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            644,
+            645
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": [
+            646
+          ]
+        },
+        {
+          "name": "name",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-inspire-pack",
+        "ver": "ca5d942cefa0f75e3c4e778f75f71811f4abb65f",
+        "Node name for S&R": "UnzipPrompt //Inspire"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 236,
+      "type": "CLIPTextEncode",
+      "pos": [
+        4610,
+        730
+      ],
+      "size": [
+        345,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 47,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 660
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 646
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            647
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "professional photo, {girl} on a event, {long hair}, bokeh, superhero clothes",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 237,
+      "type": "CLIPTextEncode",
+      "pos": [
+        4610,
+        770
+      ],
+      "size": [
+        345,
+        266
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 35,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 661
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 662
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            650
+          ]
+        }
+      ],
+      "title": "Positive Prompt from Styles",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "rusty metal, mech, cinematic, red eyes",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 238,
+      "type": "CLIPTextEncode",
+      "pos": [
+        4610,
+        810
+      ],
+      "size": [
+        345,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 37,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 663
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 664
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            648
+          ]
+        }
+      ],
+      "title": "Negative Prompt from Styles",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "ugly, watermark",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 235,
+      "type": "CLIPTextEncode",
+      "pos": [
+        4610,
+        890
+      ],
+      "size": [
+        315,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 46,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 659
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 645
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            649
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 232,
+      "type": "DWPreprocessor",
+      "pos": [
+        4610,
+        930
+      ],
+      "size": [
+        386.32427978515625,
+        222
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 30,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 655
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            653
+          ]
+        },
+        {
+          "name": "POSE_KEYPOINT",
+          "type": "POSE_KEYPOINT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_controlnet_aux",
+        "ver": "5a049bde9cc117dafc327cded156459289097ea1",
+        "Node name for S&R": "DWPreprocessor"
+      },
+      "widgets_values": [
+        "enable",
+        "enable",
+        "enable",
+        1024,
+        "yolo_nas_l_fp16.onnx",
+        "dw-ll_ucoco_384.onnx",
+        "enable"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 240,
+      "type": "ConditioningConcat",
+      "pos": [
+        4610,
+        970
+      ],
+      "size": [
+        315,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 51,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning_to",
+          "type": "CONDITIONING",
+          "link": 649
+        },
+        {
+          "name": "conditioning_from",
+          "type": "CONDITIONING",
+          "link": 650
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            651,
+            671
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "ConditioningConcat"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 239,
+      "type": "ConditioningConcat",
+      "pos": [
+        4610,
+        1010
+      ],
+      "size": [
+        315,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 52,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning_to",
+          "type": "CONDITIONING",
+          "link": 647
+        },
+        {
+          "name": "conditioning_from",
+          "type": "CONDITIONING",
+          "link": 648
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            669,
+            670
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "ConditioningConcat"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 228,
+      "type": "SAMLoader",
+      "pos": [
+        4610,
+        1050
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 14,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "slot_index": 0,
+          "links": [
+            665
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 229,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        4610,
+        1090
+      ],
+      "size": [
+        345,
+        78
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 15,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "slot_index": 0,
+          "links": [
+            666
+          ]
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-subpack",
+        "ver": "1.2.9",
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 241,
+      "type": "ControlNetApply",
+      "pos": [
+        4610,
+        1130
+      ],
+      "size": [
+        435,
+        105
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 56,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 651
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 673
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 653
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            672
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "ControlNetApply"
+      },
+      "widgets_values": [
+        0.6
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 242,
+      "type": "SetUnionControlNetType",
+      "pos": [
+        4610,
+        1170
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 33,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 674
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "slot_index": 0,
+          "links": [
+            673
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "SetUnionControlNetType"
+      },
+      "widgets_values": [
+        "openpose"
+      ]
+    },
+    {
+      "id": 230,
+      "type": "ControlNetLoader",
+      "pos": [
+        4610,
+        1210
+      ],
+      "size": [
+        435,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 16,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "slot_index": 0,
+          "links": [
+            674
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "controlnet-union-sdxl-1.0.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 225,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        4610,
+        560
+      ],
+      "size": [
+        345,
+        105
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 17,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            631,
+            635
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            636,
+            659,
+            660,
+            661,
+            663
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            641,
+            683
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 227,
+      "type": "KSampler",
+      "pos": [
+        4600,
+        170
+      ],
+      "size": [
+        315,
+        262
+      ],
+      "flags": {},
+      "order": 59,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 631
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 672
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 670
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 632
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            682
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        66,
+        "increment",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 195,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        1400,
+        -180
+      ],
+      "size": [
+        429.8895263671875,
+        106
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 144,
+      "type": "FaceDetailer",
+      "pos": [
+        3170,
+        30
+      ],
+      "size": [
+        350,
+        900
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 63,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 677
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 588
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 589
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 592
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 619
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 620
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 612
+        },
+        {
+          "name": "sam_model_opt",
+          "shape": 7,
+          "type": "SAM_MODEL",
+          "link": 611
+        },
+        {
+          "name": "segm_detector_opt",
+          "shape": 7,
+          "type": "SEGM_DETECTOR",
+          "link": null
+        },
+        {
+          "name": "detailer_hook",
+          "shape": 7,
+          "type": "DETAILER_HOOK",
+          "link": null
+        },
+        {
+          "name": "scheduler_func_opt",
+          "shape": 7,
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            433
+          ]
+        },
+        {
+          "name": "cropped_refined",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 2,
+          "links": []
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "slot_index": 3,
+          "links": []
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null
+        },
+        {
+          "name": "cnet_images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1152,
+        true,
+        1152,
+        33,
+        "increment",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        0.6,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2,
+        false,
+        false,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 145,
+      "type": "SaveImage",
+      "pos": [
+        1980,
+        20
+      ],
+      "size": [
+        735,
+        795
+      ],
+      "flags": {},
+      "order": 65,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 433
+        }
+      ],
+      "outputs": [],
+      "title": "Saved image",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "BATCH + POSE/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 207,
+      "type": "EmptyLatentImage",
+      "pos": [
+        2720,
+        20
+      ],
+      "size": [
+        425,
+        106
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            585
+          ]
+        }
+      ],
+      "title": "Image size 512px-1504px",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1200,
+        1200,
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 243,
+      "type": "VAEDecodeTiled",
+      "pos": [
+        3170,
+        220
+      ],
+      "size": [
+        340,
+        90
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 61,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 675
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 676
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            677
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "VAEDecodeTiled"
+      },
+      "widgets_values": [
+        1024,
+        64,
+        64,
+        8
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 134,
+      "type": "FaceDetailer",
+      "pos": [
+        940,
+        560
+      ],
+      "size": [
+        350,
+        900
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 57,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 681
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 577
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 578
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 581
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 568
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 570
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 565
+        },
+        {
+          "name": "sam_model_opt",
+          "shape": 7,
+          "type": "SAM_MODEL",
+          "link": 566
+        },
+        {
+          "name": "segm_detector_opt",
+          "shape": 7,
+          "type": "SEGM_DETECTOR",
+          "link": null
+        },
+        {
+          "name": "detailer_hook",
+          "shape": 7,
+          "type": "DETAILER_HOOK",
+          "link": null
+        },
+        {
+          "name": "scheduler_func_opt",
+          "shape": 7,
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            392
+          ]
+        },
+        {
+          "name": "cropped_refined",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 2,
+          "links": []
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "slot_index": 3,
+          "links": []
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null
+        },
+        {
+          "name": "cnet_images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1152,
+        true,
+        1152,
+        14,
+        "increment",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        0.6,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2,
+        false,
+        false,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 244,
+      "type": "VAEDecodeTiled",
+      "pos": [
+        950,
+        800
+      ],
+      "size": [
+        340,
+        90
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 53,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 679
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 680
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            681
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "VAEDecodeTiled"
+      },
+      "widgets_values": [
+        1024,
+        64,
+        64,
+        8
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 194,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        380,
+        -180
+      ],
+      "size": [
+        429.8895263671875,
+        106
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 203,
+      "type": "EmptyLatentImage",
+      "pos": [
+        930,
+        50
+      ],
+      "size": [
+        350,
+        106
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            574
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1200,
+        1200,
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 208,
+      "type": "KSampler",
+      "pos": [
+        2720,
+        320
+      ],
+      "size": [
+        425,
+        262
+      ],
+      "flags": {},
+      "order": 58,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 584
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 616
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 617
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 585
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            675
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        33,
+        "increment",
+        12,
+        2,
+        "ddpm",
+        "exponential",
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 226,
+      "type": "EmptyLatentImage",
+      "pos": [
+        4600,
+        30
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            632
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1200,
+        1200,
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 173,
+      "type": "FaceDetailer",
+      "pos": [
+        4610,
+        600
+      ],
+      "size": [
+        350,
+        1120
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 64,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 684
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 635
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 636
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 641
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 671
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 669
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 666
+        },
+        {
+          "name": "sam_model_opt",
+          "shape": 7,
+          "type": "SAM_MODEL",
+          "link": 665
+        },
+        {
+          "name": "segm_detector_opt",
+          "shape": 7,
+          "type": "SEGM_DETECTOR",
+          "link": null
+        },
+        {
+          "name": "detailer_hook",
+          "shape": 7,
+          "type": "DETAILER_HOOK",
+          "link": null
+        },
+        {
+          "name": "scheduler_func_opt",
+          "shape": 7,
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            490
+          ]
+        },
+        {
+          "name": "cropped_refined",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 2,
+          "links": []
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "slot_index": 3,
+          "links": []
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null
+        },
+        {
+          "name": "cnet_images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1152,
+        true,
+        1152,
+        41,
+        "increment",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        0.6,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2,
+        false,
+        false,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 245,
+      "type": "VAEDecodeTiled",
+      "pos": [
+        4610,
+        850
+      ],
+      "size": [
+        340,
+        90
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 62,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 682
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 683
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            684
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "VAEDecodeTiled"
+      },
+      "widgets_values": [
+        1024,
+        64,
+        64,
+        8
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 168,
+      "type": "SaveImage",
+      "pos": [
+        3910,
+        30
+      ],
+      "size": [
+        670,
+        720
+      ],
+      "flags": {},
+      "order": 66,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 490
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "BATCH + STYLE + OPENPOSE/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 196,
+      "type": "Fast Groups Muter (rgthree)",
+      "pos": [
+        3530,
+        -180
+      ],
+      "size": [
+        429.8895263671875,
+        106
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 169,
+      "type": "LoadPromptsFromFile //Inspire",
+      "pos": [
+        3550,
+        510
+      ],
+      "size": [
+        343.0401916503906,
+        170
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "text_data_opt",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "zipped_prompt",
+          "shape": 6,
+          "type": "ZIPPED_PROMPT",
+          "slot_index": 0,
+          "links": [
+            654
+          ]
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "remaining_count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-inspire-pack",
+        "ver": "ca5d942cefa0f75e3c4e778f75f71811f4abb65f",
+        "Node name for S&R": "LoadPromptsFromFile //Inspire"
+      },
+      "widgets_values": [
+        "MORTAL COMBAT CHARACTERS 4.txt",
+        "",
+        false,
+        0
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 170,
+      "type": "Load Styles CSV",
+      "pos": [
+        3550,
+        730
+      ],
+      "size": [
+        345,
+        78
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 2,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "positive prompt",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": [
+            656,
+            662
+          ]
+        },
+        {
+          "name": "negative prompt",
+          "type": "STRING",
+          "slot_index": 1,
+          "links": [
+            492,
+            664
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-styles_csv_loader",
+        "ver": "aeee51aaa7044b456c3df081f91185f214b9472a",
+        "Node name for S&R": "Load Styles CSV"
+      },
+      "widgets_values": [
+        "Photography | Long exposure"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 205,
+      "type": "KSampler",
+      "pos": [
+        930,
+        200
+      ],
+      "size": [
+        350,
+        275
+      ],
+      "flags": {},
+      "order": 48,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 573
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 575
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 576
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 574
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            679
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        14,
+        "increment",
+        12,
+        2,
+        "ddpm",
+        "exponential",
+        1
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 204,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        940,
+        640
+      ],
+      "size": [
+        350,
+        100
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 26,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            573,
+            577
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            578,
+            579,
+            580
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            581,
+            680
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 201,
+      "type": "CLIPTextEncode",
+      "pos": [
+        950,
+        840
+      ],
+      "size": [
+        350,
+        81
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 580
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            570,
+            576
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 200,
+      "type": "CLIPTextEncode",
+      "pos": [
+        950,
+        890
+      ],
+      "size": [
+        350,
+        81
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 579
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 685
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            568,
+            575
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 246,
+      "type": "easy promptLine",
+      "pos": [
+        -130,
+        20
+      ],
+      "size": [
+        500,
+        430
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            685
+          ]
+        },
+        {
+          "name": "COMBO",
+          "shape": 6,
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy promptLine"
+      },
+      "widgets_values": [
+        "prompt 1\nprompt 2",
+        0,
+        1000,
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#233",
+      "bgcolor": "#355"
+    },
+    {
+      "id": 138,
+      "type": "SaveImage",
+      "pos": [
+        410,
+        50
+      ],
+      "size": [
+        500,
+        525
+      ],
+      "flags": {},
+      "order": 60,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 392
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.49",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "BATCH/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      392,
+      134,
+      0,
+      138,
+      0,
+      "IMAGE"
+    ],
+    [
+      433,
+      144,
+      0,
+      145,
+      0,
+      "IMAGE"
+    ],
+    [
+      490,
+      173,
+      0,
+      168,
+      0,
+      "IMAGE"
+    ],
+    [
+      492,
+      170,
+      1,
+      172,
+      0,
+      "STRING"
+    ],
+    [
+      565,
+      197,
+      0,
+      134,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      566,
+      198,
+      0,
+      134,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      568,
+      200,
+      0,
+      134,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      570,
+      201,
+      0,
+      134,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      573,
+      204,
+      0,
+      205,
+      0,
+      "MODEL"
+    ],
+    [
+      574,
+      203,
+      0,
+      205,
+      3,
+      "LATENT"
+    ],
+    [
+      575,
+      200,
+      0,
+      205,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      576,
+      201,
+      0,
+      205,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      577,
+      204,
+      0,
+      134,
+      1,
+      "MODEL"
+    ],
+    [
+      578,
+      204,
+      1,
+      134,
+      2,
+      "CLIP"
+    ],
+    [
+      579,
+      204,
+      1,
+      200,
+      0,
+      "CLIP"
+    ],
+    [
+      580,
+      204,
+      1,
+      201,
+      0,
+      "CLIP"
+    ],
+    [
+      581,
+      204,
+      2,
+      134,
+      3,
+      "VAE"
+    ],
+    [
+      584,
+      206,
+      0,
+      208,
+      0,
+      "MODEL"
+    ],
+    [
+      585,
+      207,
+      0,
+      208,
+      3,
+      "LATENT"
+    ],
+    [
+      588,
+      206,
+      0,
+      144,
+      1,
+      "MODEL"
+    ],
+    [
+      589,
+      206,
+      1,
+      144,
+      2,
+      "CLIP"
+    ],
+    [
+      592,
+      206,
+      2,
+      144,
+      3,
+      "VAE"
+    ],
+    [
+      595,
+      217,
+      0,
+      215,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      596,
+      218,
+      0,
+      215,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      599,
+      214,
+      0,
+      217,
+      1,
+      "STRING"
+    ],
+    [
+      600,
+      213,
+      0,
+      218,
+      1,
+      "STRING"
+    ],
+    [
+      602,
+      150,
+      0,
+      213,
+      0,
+      "STRING"
+    ],
+    [
+      603,
+      148,
+      1,
+      213,
+      1,
+      "STRING"
+    ],
+    [
+      604,
+      149,
+      0,
+      214,
+      0,
+      "STRING"
+    ],
+    [
+      605,
+      148,
+      0,
+      214,
+      1,
+      "STRING"
+    ],
+    [
+      606,
+      151,
+      0,
+      214,
+      2,
+      "STRING"
+    ],
+    [
+      609,
+      206,
+      1,
+      217,
+      0,
+      "CLIP"
+    ],
+    [
+      610,
+      206,
+      1,
+      218,
+      0,
+      "CLIP"
+    ],
+    [
+      611,
+      210,
+      0,
+      144,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      612,
+      211,
+      0,
+      144,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      614,
+      213,
+      0,
+      147,
+      0,
+      "STRING"
+    ],
+    [
+      615,
+      214,
+      0,
+      146,
+      0,
+      "STRING"
+    ],
+    [
+      616,
+      215,
+      0,
+      208,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      617,
+      215,
+      1,
+      208,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      619,
+      217,
+      0,
+      144,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      620,
+      218,
+      0,
+      144,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      621,
+      219,
+      0,
+      220,
+      0,
+      "LOTUSUNET"
+    ],
+    [
+      622,
+      221,
+      0,
+      220,
+      1,
+      "LATENT"
+    ],
+    [
+      623,
+      222,
+      0,
+      221,
+      1,
+      "VAE"
+    ],
+    [
+      624,
+      220,
+      0,
+      223,
+      0,
+      "LATENT"
+    ],
+    [
+      625,
+      222,
+      0,
+      223,
+      1,
+      "VAE"
+    ],
+    [
+      626,
+      143,
+      0,
+      221,
+      0,
+      "IMAGE"
+    ],
+    [
+      627,
+      223,
+      0,
+      215,
+      3,
+      "IMAGE"
+    ],
+    [
+      628,
+      223,
+      0,
+      164,
+      0,
+      "IMAGE"
+    ],
+    [
+      629,
+      209,
+      0,
+      224,
+      0,
+      "CONTROL_NET"
+    ],
+    [
+      630,
+      224,
+      0,
+      215,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      631,
+      225,
+      0,
+      227,
+      0,
+      "MODEL"
+    ],
+    [
+      632,
+      226,
+      0,
+      227,
+      3,
+      "LATENT"
+    ],
+    [
+      635,
+      225,
+      0,
+      173,
+      1,
+      "MODEL"
+    ],
+    [
+      636,
+      225,
+      1,
+      173,
+      2,
+      "CLIP"
+    ],
+    [
+      641,
+      225,
+      2,
+      173,
+      3,
+      "VAE"
+    ],
+    [
+      644,
+      231,
+      0,
+      233,
+      0,
+      "STRING"
+    ],
+    [
+      645,
+      231,
+      0,
+      235,
+      1,
+      "STRING"
+    ],
+    [
+      646,
+      231,
+      1,
+      236,
+      1,
+      "STRING"
+    ],
+    [
+      647,
+      236,
+      0,
+      239,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      648,
+      238,
+      0,
+      239,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      649,
+      235,
+      0,
+      240,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      650,
+      237,
+      0,
+      240,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      651,
+      240,
+      0,
+      241,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      653,
+      232,
+      0,
+      241,
+      2,
+      "IMAGE"
+    ],
+    [
+      654,
+      169,
+      0,
+      231,
+      0,
+      "ZIPPED_PROMPT"
+    ],
+    [
+      655,
+      174,
+      0,
+      232,
+      0,
+      "IMAGE"
+    ],
+    [
+      656,
+      170,
+      0,
+      233,
+      1,
+      "STRING"
+    ],
+    [
+      659,
+      225,
+      1,
+      235,
+      0,
+      "CLIP"
+    ],
+    [
+      660,
+      225,
+      1,
+      236,
+      0,
+      "CLIP"
+    ],
+    [
+      661,
+      225,
+      1,
+      237,
+      0,
+      "CLIP"
+    ],
+    [
+      662,
+      170,
+      0,
+      237,
+      1,
+      "STRING"
+    ],
+    [
+      663,
+      225,
+      1,
+      238,
+      0,
+      "CLIP"
+    ],
+    [
+      664,
+      170,
+      1,
+      238,
+      1,
+      "STRING"
+    ],
+    [
+      665,
+      228,
+      0,
+      173,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      666,
+      229,
+      0,
+      173,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      667,
+      233,
+      0,
+      171,
+      0,
+      "STRING"
+    ],
+    [
+      669,
+      239,
+      0,
+      173,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      670,
+      239,
+      0,
+      227,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      671,
+      240,
+      0,
+      173,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      672,
+      241,
+      0,
+      227,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      673,
+      242,
+      0,
+      241,
+      1,
+      "CONTROL_NET"
+    ],
+    [
+      674,
+      230,
+      0,
+      242,
+      0,
+      "CONTROL_NET"
+    ],
+    [
+      675,
+      208,
+      0,
+      243,
+      0,
+      "LATENT"
+    ],
+    [
+      676,
+      206,
+      2,
+      243,
+      1,
+      "VAE"
+    ],
+    [
+      677,
+      243,
+      0,
+      144,
+      0,
+      "IMAGE"
+    ],
+    [
+      679,
+      205,
+      0,
+      244,
+      0,
+      "LATENT"
+    ],
+    [
+      680,
+      204,
+      2,
+      244,
+      1,
+      "VAE"
+    ],
+    [
+      681,
+      244,
+      0,
+      134,
+      0,
+      "IMAGE"
+    ],
+    [
+      682,
+      227,
+      0,
+      245,
+      0,
+      "LATENT"
+    ],
+    [
+      683,
+      225,
+      2,
+      245,
+      1,
+      "VAE"
+    ],
+    [
+      684,
+      245,
+      0,
+      173,
+      0,
+      "IMAGE"
+    ],
+    [
+      685,
+      246,
+      0,
+      200,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "BATCH + POSE",
+      "bounding": [
+        1410,
+        -50,
+        2080,
+        1290
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "BATCH",
+      "bounding": [
+        390,
+        -50,
+        980,
+        1290
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "BATCH + STYLE + OPENPOSE",
+      "bounding": [
+        3530,
+        -50,
+        1394,
+        1294
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.26.13",
+    "groupNodes": {},
+    "ue_links": [],
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

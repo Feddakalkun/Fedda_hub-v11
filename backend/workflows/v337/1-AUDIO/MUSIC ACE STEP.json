@@ -1,0 +1,507 @@
+{
+  "id": "13730a65-c2be-48d7-a16e-67e131ef99ee",
+  "revision": 0,
+  "last_node_id": 80,
+  "last_link_id": 119,
+  "nodes": [
+    {
+      "id": 73,
+      "type": "KSampler",
+      "pos": [
+        880,
+        670
+      ],
+      "size": [
+        500,
+        262
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 110
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 111
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 112
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 113
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            108
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        910709486803563,
+        "randomize",
+        50,
+        4,
+        "res_multistep",
+        "simple",
+        1
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 77,
+      "type": "ModelSamplingSD3",
+      "pos": [
+        880,
+        970
+      ],
+      "size": [
+        500,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 115
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            110
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "ModelSamplingSD3"
+      },
+      "widgets_values": [
+        4.000000000000001
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 74,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        890,
+        1240
+      ],
+      "size": [
+        197.712890625,
+        26
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 114
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            112
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "widgets_values": [],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 76,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        450,
+        1290
+      ],
+      "size": [
+        420,
+        98
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            115
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            116
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            109
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "CheckpointLoaderSimple",
+        "models": [
+          {
+            "name": "ace_step_v1_3.5b.safetensors",
+            "url": "https://huggingface.co/Comfy-Org/ACE-Step_ComfyUI_repackaged/resolve/main/all_in_one/ace_step_v1_3.5b.safetensors?download=true",
+            "directory": "checkpoints"
+          }
+        ]
+      },
+      "widgets_values": [
+        "ace_step_v1_3.5b.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 79,
+      "type": "SaveAudio",
+      "pos": [
+        880,
+        1070
+      ],
+      "size": [
+        500,
+        112
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 117
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "SaveAudio"
+      },
+      "widgets_values": [
+        "audio/ComfyUI"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 72,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        890,
+        1280
+      ],
+      "size": [
+        158.71542358398438,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 108
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 109
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            117
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "VAEDecodeAudio"
+      },
+      "widgets_values": [],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 78,
+      "type": "TextEncodeAceStepAudio",
+      "pos": [
+        450,
+        800
+      ],
+      "size": [
+        413.60076904296875,
+        447.163330078125
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 116
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            111,
+            114
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "TextEncodeAceStepAudio"
+      },
+      "widgets_values": [
+        "disco",
+        "[verse]\nBright lights flashing in the city sky\nRunning fast and we don't know why\nElectric nights got our hearts on fire\nChasing dreams we'll never tire\n\n[verse]\nGrit in our eyes wind in our hair\nBreaking rules we don't even care\nShouting loud above the crowd\nLiving life like we're unbowed\n\n[chorus]\nRunning wild in the night so free\nFeel the beat pumping endlessly\nHearts collide in the midnight air\nWe belong we don't have a care\n\n[verse]\nPiercing through like a lightning strike\nEvery moment feels like a hike\nDaring bold never backing down\nKings and queens without a crown\n\n[chorus]\nRunning wild in the night so free\nFeel the beat pumping endlessly\nHearts collide in the midnight air\nWe belong we don't have a care\n\n[bridge]\nClose your eyes let your spirit soar\nWe are the ones who wanted more\nBreaking chains of the mundane\nIn this world we'll make our claim",
+        1,
+        [
+          false,
+          true
+        ],
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 75,
+      "type": "EmptyAceStepLatentAudio",
+      "pos": [
+        450,
+        670
+      ],
+      "size": [
+        410,
+        82
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            113
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.32",
+        "Node name for S&R": "EmptyAceStepLatentAudio"
+      },
+      "widgets_values": [
+        180,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 80,
+      "type": "MarkdownNote",
+      "pos": [
+        -120,
+        590
+      ],
+      "size": [
+        490,
+        350
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "About ACE Step",
+      "properties": {},
+      "widgets_values": [
+        "[READ ME TUTORIAL](https://docs.comfy.org/tutorials/audio/ace-step/ace-step-v1)\n\n[PROMPT EXAMPLES](https://ace-step.github.io/)\n\n### Model Download\n\nDownload the following model and save it to the **ComfyUI/models/checkpoints** folder.\n[ace_step_v1_3.5b.safetensors](https://huggingface.co/Comfy-Org/ACE-Step_ComfyUI_repackaged/blob/main/all_in_one/ace_step_v1_3.5b.safetensors)\n\n\n### Multilingual Support\n\nCurrently, ACE-Step V1 supports multiple languages. When running, the ACE-Step model will obtain the English letters after the conversion of the corresponding different languages, and then generate music.\n\nHowever, currently in ComfyUI, we have not fully implemented the conversion from multiple languages to English letters (Japanese has been implemented at present). Therefore, if you need to use multiple languages for relevant music generation, you need to first convert the corresponding language into English letters, and then input the abbreviation of the corresponding language code at the beginning of the corresponding `lyrics`.\n\nFor example, Chinese `[zh]`, Japanese `[ja]`, Korean `[ko]`, etc.\nFor example:\n```\n[zh]ni hao\n[ja]kon ni chi wa\n[ko]an nyeong\n```\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      108,
+      73,
+      0,
+      72,
+      0,
+      "LATENT"
+    ],
+    [
+      109,
+      76,
+      2,
+      72,
+      1,
+      "VAE"
+    ],
+    [
+      110,
+      77,
+      0,
+      73,
+      0,
+      "MODEL"
+    ],
+    [
+      111,
+      78,
+      0,
+      73,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      112,
+      74,
+      0,
+      73,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      113,
+      75,
+      0,
+      73,
+      3,
+      "LATENT"
+    ],
+    [
+      114,
+      78,
+      0,
+      74,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      115,
+      76,
+      0,
+      77,
+      0,
+      "MODEL"
+    ],
+    [
+      116,
+      76,
+      1,
+      78,
+      0,
+      "CLIP"
+    ],
+    [
+      117,
+      72,
+      0,
+      79,
+      0,
+      "AUDIO"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 4,
+      "title": "MUSIC ACE STEP",
+      "bounding": [
+        400,
+        560,
+        1300,
+        860
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.19.9",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "ue_links": []
+  },
+  "version": 0.4
+}

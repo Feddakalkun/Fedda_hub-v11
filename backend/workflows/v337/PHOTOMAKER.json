@@ -1,0 +1,1673 @@
+{
+  "id": "a418253d-7018-4c92-b8d9-7f24f968b2e8",
+  "revision": 0,
+  "last_node_id": 83,
+  "last_link_id": 222,
+  "nodes": [
+    {
+      "id": 36,
+      "type": "Note",
+      "pos": [
+        -360,
+        30
+      ],
+      "size": [
+        345,
+        510
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "PROMPTS",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "chibi style, clay figure, fantasy land, pastel colors, sunset bokeh, fairy, img\n\nKawaii Anime Chibi, Soft Pastel Colors, Adorable Knight, Cute Vector Character, Sticker Design img\n\nMinimalist Chibi Sticker, Monochrome Art, Samurai with Big Eyes, Simple Line Art, Cartoon Figure img\n\nRetro Cartoon Chibi, 80s Style, Cute Astronaut, Vibrant Colors, Vector Character for Stickers img\n\nWatercolor Chibi Sticker, Gentle Pastel Shades, Sweet Pirate, Soft Brushstrokes, Hand-Painted Look img\n \nPixel Art Chibi, 16-Bit Style, Cute Robot, Retro Gaming Aesthetic, Vector Sticker Character img\n\nFantasy Chibi Sticker, Magical Elements, Adorable Elf, Vibrant Colors, Cartoon Character img\n\nCyberpunk Chibi, Neon Lights, Futuristic Ninja, Edgy Vector Art, Cute Sticker Design img\n\nSteampunk Chibi Sticker, Vintage Gears and Goggles, Victorian Inventor, Brown and Copper Tones img\n\nGothic Chibi, Dark Color Palette, Adorable Vampire, Spooky Twist, Detailed Vector Character img\n\nFloral Chibi Sticker, Nature-Inspired, Cute Fairy with Flower Crown, Bright and Cheerful Vector Art img\n\n\npolice img\nchef img\ndoctor img\nfirefighter img\nartist img\nteacher img\npilot img\nengineer img\nmusician img\nscientist img\nathlete img"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 62,
+      "type": "CLIPTextEncode",
+      "pos": [
+        30,
+        880
+      ],
+      "size": [
+        370,
+        88
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 185
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            166,
+            167,
+            181
+          ]
+        }
+      ],
+      "title": "NEGATIVE PROMPT",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "low quality, blurry",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 70,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1130,
+        540
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            178
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 72,
+      "type": "KSampler",
+      "pos": [
+        1130,
+        230
+      ],
+      "size": [
+        315,
+        262
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 218
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 180
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 181
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 178
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            189
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        112,
+        "fixed",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 1,
+      "type": "PhotoMakerEncodePlus",
+      "pos": [
+        30,
+        90
+      ],
+      "size": [
+        370,
+        230
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 183
+        },
+        {
+          "name": "photomaker",
+          "type": "PHOTOMAKER",
+          "link": 164
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 175
+        },
+        {
+          "name": "insightface_opt",
+          "shape": 7,
+          "type": "INSIGHTFACE",
+          "link": 165
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            23,
+            122,
+            180
+          ]
+        }
+      ],
+      "title": "POSITIVE PROMPT",
+      "properties": {
+        "cnr_id": "photomaker-plus",
+        "ver": "459f5c009e8bc3fe76bd63a7f302ddf3406c7062",
+        "Node name for S&R": "PhotoMakerEncodePlus"
+      },
+      "widgets_values": [
+        "img",
+        "A small, happy adorable smiling chibi clay figure with a round face and big sparkling eyes, designed in a kawaii style, playing guitar, sitting in chair, bokeh bg, sport clothes, pro photo  img",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 28,
+      "type": "Image Comparer (rgthree)",
+      "pos": [
+        420,
+        90
+      ],
+      "size": [
+        690,
+        740
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "dir": 3,
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 40
+        },
+        {
+          "dir": 3,
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 170
+        }
+      ],
+      "outputs": [],
+      "title": "1024px vs 2000px",
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "70756c044d805ffc260568ca3fe9eafaed5e6363",
+        "comparer_mode": "Slide"
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_uopgf_00007_.png&type=temp&subfolder=&rand=0.35008074096719444"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_uopgf_00008_.png&type=temp&subfolder=&rand=0.13914522646934824"
+          }
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 17,
+      "type": "FaceDetailer",
+      "pos": [
+        1470,
+        90
+      ],
+      "size": [
+        350,
+        960
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 132
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 219
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 184
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 186
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 23
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 167
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 163
+        },
+        {
+          "name": "sam_model_opt",
+          "shape": 7,
+          "type": "SAM_MODEL",
+          "link": 161
+        },
+        {
+          "name": "segm_detector_opt",
+          "shape": 7,
+          "type": "SEGM_DETECTOR",
+          "link": null
+        },
+        {
+          "name": "detailer_hook",
+          "shape": 7,
+          "type": "DETAILER_HOOK",
+          "link": null
+        },
+        {
+          "name": "scheduler_func_opt",
+          "shape": 7,
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            40,
+            214
+          ]
+        },
+        {
+          "name": "cropped_refined",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "shape": 6,
+          "type": "IMAGE",
+          "slot_index": 2,
+          "links": []
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "slot_index": 3,
+          "links": []
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null
+        },
+        {
+          "name": "cnet_images",
+          "shape": 6,
+          "type": "IMAGE",
+          "links": null
+        }
+      ],
+      "title": "FaceDetailer (Output)",
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        1024,
+        true,
+        1024,
+        178,
+        "increment",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        0.6,
+        4,
+        "enabled",
+        false,
+        0.5,
+        8,
+        1.5,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        2,
+        [
+          false,
+          true
+        ],
+        false,
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 78,
+      "type": "Note",
+      "pos": [
+        0,
+        -100
+      ],
+      "size": [
+        362.9540100097656,
+        88
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "all prompts must end with the trigger word \"img\""
+      ],
+      "color": "#ffffff",
+      "bgcolor": "#ffffff"
+    },
+    {
+      "id": 63,
+      "type": "VAEDecode",
+      "pos": [
+        2280,
+        180
+      ],
+      "size": [
+        315,
+        75
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 189
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 188
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            169,
+            170,
+            215
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 66,
+      "type": "ImageResizeKJ",
+      "pos": [
+        2280,
+        260
+      ],
+      "size": [
+        315,
+        286
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 174
+        },
+        {
+          "name": "get_image_size",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            175,
+            176
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "d126b62cebee81ea14ec06ea7cd7526999cb0554",
+        "Node name for S&R": "ImageResizeKJ"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "nearest-exact",
+        true,
+        2,
+        0
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 67,
+      "type": "PreviewImage",
+      "pos": [
+        2280,
+        300
+      ],
+      "size": [
+        205.59396362304688,
+        202.24142456054688
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 176
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 57,
+      "type": "SAMLoader",
+      "pos": [
+        2280,
+        340
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "slot_index": 0,
+          "links": [
+            161
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-pack",
+        "ver": "0e3e6a193a68748b5e68cfd19fb6c7d92b2fac57",
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "AUTO"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 60,
+      "type": "PhotoMakerLoaderPlus",
+      "pos": [
+        2280,
+        100
+      ],
+      "size": [
+        390,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "PHOTOMAKER",
+          "type": "PHOTOMAKER",
+          "slot_index": 0,
+          "links": [
+            155,
+            164
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "photomaker-plus",
+        "ver": "459f5c009e8bc3fe76bd63a7f302ddf3406c7062",
+        "Node name for S&R": "PhotoMakerLoaderPlus"
+      },
+      "widgets_values": [
+        "photomaker-v2.bin"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 53,
+      "type": "UltimateSDUpscale",
+      "pos": [
+        1840,
+        90
+      ],
+      "size": [
+        390,
+        615
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 169
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 220
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 122
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 166
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 187
+        },
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 162
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            132,
+            160
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_ultimatesdupscale",
+        "ver": "e617ff20e7ef5baf6526c5ff4eb46a35d24ecbba",
+        "Node name for S&R": "UltimateSDUpscale"
+      },
+      "widgets_values": [
+        2,
+        811643076077592,
+        "randomize",
+        10,
+        2,
+        "ddpm",
+        "exponential",
+        0.5,
+        "Linear",
+        1024,
+        1024,
+        8,
+        32,
+        "None",
+        1,
+        64,
+        8,
+        16,
+        true,
+        false
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [
+        30,
+        370
+      ],
+      "size": [
+        375,
+        465
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            174,
+            217
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "slot_index": 1,
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "2000PX LATENT UPSCALE_00004_.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 61,
+      "type": "PhotoMakerInsightFaceLoader",
+      "pos": [
+        2280,
+        220
+      ],
+      "size": [
+        390,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INSIGHTFACE",
+          "type": "INSIGHTFACE",
+          "links": [
+            165
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "photomaker-plus",
+        "ver": "459f5c009e8bc3fe76bd63a7f302ddf3406c7062",
+        "Node name for S&R": "PhotoMakerInsightFaceLoader"
+      },
+      "widgets_values": [
+        "CPU"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 81,
+      "type": "IPAdapterAdvanced",
+      "pos": [
+        1130,
+        690
+      ],
+      "size": [
+        315,
+        278
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 216
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": 221
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 217
+        },
+        {
+          "name": "image_negative",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "attn_mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "clip_vision",
+          "shape": 7,
+          "type": "CLIP_VISION",
+          "link": 222
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            218,
+            219,
+            220
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_ipadapter_plus",
+        "ver": "b188a6cb39b512a9c6da7235b880af42c78ccd0d",
+        "Node name for S&R": "IPAdapterAdvanced"
+      },
+      "widgets_values": [
+        0.2,
+        "linear",
+        "concat",
+        0,
+        1,
+        "V only"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 64,
+      "type": "PhotoMakerLoraLoaderPlus",
+      "pos": [
+        1130,
+        90
+      ],
+      "size": [
+        320,
+        80
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 182
+        },
+        {
+          "name": "photomaker",
+          "type": "PHOTOMAKER",
+          "link": 155
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            216
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "photomaker-plus",
+        "ver": "459f5c009e8bc3fe76bd63a7f302ddf3406c7062",
+        "Node name for S&R": "PhotoMakerLoraLoaderPlus"
+      },
+      "widgets_values": [
+        0.2
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 58,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        2280,
+        380
+      ],
+      "size": [
+        375,
+        60
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            162
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "4x_foolhardy_Remacri.pth"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 59,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        2280,
+        420
+      ],
+      "size": [
+        315,
+        78
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "slot_index": 0,
+          "links": [
+            163
+          ]
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-impact-subpack",
+        "ver": "1.2.9",
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 82,
+      "type": "IPAdapterModelLoader",
+      "pos": [
+        2280,
+        460
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IPADAPTER",
+          "type": "IPADAPTER",
+          "slot_index": 0,
+          "links": [
+            221
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_ipadapter_plus",
+        "ver": "b188a6cb39b512a9c6da7235b880af42c78ccd0d",
+        "Node name for S&R": "IPAdapterModelLoader"
+      },
+      "widgets_values": [
+        "ip-adapter-plus-face_sdxl_vit-h.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 79,
+      "type": "SaveImage",
+      "pos": [
+        2280,
+        540
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 214
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "PHOTOMAKER/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 65,
+      "type": "SaveImage",
+      "pos": [
+        2280,
+        580
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 160
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "PHOTOMAKER/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 80,
+      "type": "SaveImage",
+      "pos": [
+        2280,
+        620
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 215
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "PHOTOMAKER/0"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 71,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        2280,
+        140
+      ],
+      "size": [
+        375,
+        105
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            182
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": [
+            183,
+            184,
+            185
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            186,
+            187,
+            188
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "realvisxlV40_v40LightningBakedvae.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 83,
+      "type": "CLIPVisionLoader",
+      "pos": [
+        2280,
+        500
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "links": [
+            222
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "CLIPVisionLoader"
+      },
+      "widgets_values": [
+        "clip_vision_h.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      23,
+      1,
+      0,
+      17,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      40,
+      17,
+      0,
+      28,
+      0,
+      "IMAGE"
+    ],
+    [
+      122,
+      1,
+      0,
+      53,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      132,
+      53,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      155,
+      60,
+      0,
+      64,
+      1,
+      "PHOTOMAKER"
+    ],
+    [
+      160,
+      53,
+      0,
+      65,
+      0,
+      "IMAGE"
+    ],
+    [
+      161,
+      57,
+      0,
+      17,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      162,
+      58,
+      0,
+      53,
+      5,
+      "UPSCALE_MODEL"
+    ],
+    [
+      163,
+      59,
+      0,
+      17,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      164,
+      60,
+      0,
+      1,
+      1,
+      "PHOTOMAKER"
+    ],
+    [
+      165,
+      61,
+      0,
+      1,
+      3,
+      "INSIGHTFACE"
+    ],
+    [
+      166,
+      62,
+      0,
+      53,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      167,
+      62,
+      0,
+      17,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      169,
+      63,
+      0,
+      53,
+      0,
+      "IMAGE"
+    ],
+    [
+      170,
+      63,
+      0,
+      28,
+      1,
+      "IMAGE"
+    ],
+    [
+      174,
+      2,
+      0,
+      66,
+      0,
+      "IMAGE"
+    ],
+    [
+      175,
+      66,
+      0,
+      1,
+      2,
+      "IMAGE"
+    ],
+    [
+      176,
+      66,
+      0,
+      67,
+      0,
+      "IMAGE"
+    ],
+    [
+      178,
+      70,
+      0,
+      72,
+      3,
+      "LATENT"
+    ],
+    [
+      180,
+      1,
+      0,
+      72,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      181,
+      62,
+      0,
+      72,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      182,
+      71,
+      0,
+      64,
+      0,
+      "MODEL"
+    ],
+    [
+      183,
+      71,
+      1,
+      1,
+      0,
+      "CLIP"
+    ],
+    [
+      184,
+      71,
+      1,
+      17,
+      2,
+      "CLIP"
+    ],
+    [
+      185,
+      71,
+      1,
+      62,
+      0,
+      "CLIP"
+    ],
+    [
+      186,
+      71,
+      2,
+      17,
+      3,
+      "VAE"
+    ],
+    [
+      187,
+      71,
+      2,
+      53,
+      4,
+      "VAE"
+    ],
+    [
+      188,
+      71,
+      2,
+      63,
+      1,
+      "VAE"
+    ],
+    [
+      189,
+      72,
+      0,
+      63,
+      0,
+      "LATENT"
+    ],
+    [
+      214,
+      17,
+      0,
+      79,
+      0,
+      "IMAGE"
+    ],
+    [
+      215,
+      63,
+      0,
+      80,
+      0,
+      "IMAGE"
+    ],
+    [
+      216,
+      64,
+      0,
+      81,
+      0,
+      "MODEL"
+    ],
+    [
+      217,
+      2,
+      0,
+      81,
+      2,
+      "IMAGE"
+    ],
+    [
+      218,
+      81,
+      0,
+      72,
+      0,
+      "MODEL"
+    ],
+    [
+      219,
+      81,
+      0,
+      17,
+      1,
+      "MODEL"
+    ],
+    [
+      220,
+      81,
+      0,
+      53,
+      1,
+      "MODEL"
+    ],
+    [
+      221,
+      82,
+      0,
+      81,
+      1,
+      "IPADAPTER"
+    ],
+    [
+      222,
+      83,
+      0,
+      81,
+      5,
+      "CLIP_VISION"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "PHOTOMAKER",
+      "bounding": [
+        0,
+        0,
+        2590,
+        1020
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "info": {
+      "name": "workflow",
+      "author": "",
+      "description": "",
+      "version": "1",
+      "created": "2024-09-14T19:10:11.076Z",
+      "modified": "2024-11-27T18:14:01.090Z",
+      "software": "ComfyUI"
+    },
+    "groupNodes": {},
+    "ue_links": [],
+    "frontendVersion": "1.26.13",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

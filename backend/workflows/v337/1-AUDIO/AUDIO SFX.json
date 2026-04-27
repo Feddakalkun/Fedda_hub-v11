@@ -1,0 +1,511 @@
+{
+  "id": "6bebfbf9-c40f-4adb-94a0-39c772cb4fc3",
+  "revision": 0,
+  "last_node_id": 96,
+  "last_link_id": 182,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        40,
+        130
+      ],
+      "size": [
+        420.080078125,
+        122.67131042480469
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "BIRDS IN FOREST SFX\n",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        480,
+        130
+      ],
+      "size": [
+        320,
+        290
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 18
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 6
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 178
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        712640187966109,
+        "randomize",
+        25,
+        4.5,
+        "dpmpp_3m_sde_gpu",
+        "exponential",
+        0.98
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 12,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        830,
+        280
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "slot_index": 0,
+          "links": [
+            172
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "VAEDecodeAudio"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        40,
+        300
+      ],
+      "size": [
+        420,
+        120
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "distorted, low quality",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 95,
+      "type": "EmptyLatentAudio",
+      "pos": [
+        480,
+        470
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            178
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "EmptyLatentAudio"
+      },
+      "widgets_values": [
+        47.6,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 93,
+      "type": "PreviewAudio",
+      "pos": [
+        820,
+        130
+      ],
+      "size": [
+        344.9685974121094,
+        88
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 172
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "PreviewAudio"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 41,
+      "type": "Note",
+      "pos": [
+        -830,
+        50
+      ],
+      "size": [
+        439.3000183105469,
+        395.3994445800781
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "prompt examples",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Stable Audio Prompt Library (these prompts work well, they are from StableAudio website)\n\n\nTrance\n\nTrance, Ibiza, Beach, Sun, 4 AM, Progressive, Synthesizer, 909, Dramatic Chords, Choir, Euphoric, Nostalgic, Dynamic, Flowing\n\nUpbeat\n\n3/4, in 3, 3 beat, guitar, drums, bright, happy, claps\n\nSynthpop\n\nSynthpop, Big Reverbed Synthesizer Pad Chords, Driving Gated Drum Machine, Atmospheric, Moody, Nostalgic, Cool, Club, Striped-back, Pop Instrumental, 100 BPM\n\nEpic Rock\n\nPost-Rock, Guitars, Drum Kit, Bass, Strings, Euphoric, Up-Lifting, Moody, Flowing, Raw, Epic, Sentimental, 125 BPM\n\n\nAmbient\n\nAmbient Techno, meditation, Scandinavian Forest, 808 drum machine, 808 kick, claps, shaker, synthesizer, synth bass, Synth Drones, beautiful, peaceful, Ethereal, Natural, 122 BPM, Instrumental\n\n\nPop\n\nPop, Pop-Electronic, Ballad, Billboard, Drum Machine, Bass, Lush Synthesizer Pads, Synthesizer Arp, Synth Bass, Vocal Sample Chops, Percussion, Honest, Heart-Felt, Melancholic, Vibe, Cool, Modern, Atmospheric, 115 BPM\n\n\nChillhop\n\nLofi hip hop beat, chillhop\n\nTechno\n\nTechno, Berlin Techno, Rave, Tresnor, Drum Machine, Thumping Kick, Rumble Kick, Synthesizer Arp, Modular Synthesis, Reverbed Percussion Hits, Percussion, Dark, Moody, Serious, Vibe, Hypnotic, Evolving, 135 BPM\n\nDisco\n\nDisco, Driving Drum Machine, Synthesizer, Bass, Piano, Guitars, Instrumental, Clubby, Euphoric, Chicago, New York, 115 BPM\n\nModern\n\nAmbient house, new age, meditation, advertisement, 808 drum machine, 808 kick, claps, shaker, synthesizer, synth bass, soaring lead heavily reverbed, modern, sleek, beautiful, inspiring, futuristic\n\nCalmn\n\nCalm meditation music to play in a spa lobby\n\nHouse\n\nHouse, Ibiza, Drum Machine, Synthesizer, Percussion, Synth Bass, Synthesizer Arp, Clubby, Dancy, Euphoric, Feel-Good, Vibey, Cool, Clean, 125 BPM\n\nClassic Rock\n\nClassic Rock, Drum Kit, Electric Guitar, Bass, Raw, Uplifting, Anthem, Moody, Melancholic, Melodic, 130 BPM\n\nTrip Hop\n\nTrip Hop, Cinematic, soundtrack, Bristol, Drum Kit, Bass, Rhodes, Choir, Cool, Moody, Melancholic, Atmospheric, Dreamy, groovy, introspective, thoughtful, beautiful, 85 BPM\n\nNew Age\n\nNew-Age Electronic, Synthesizer, Choir, Bass, Ambient, Atmospheric, Peaceful, Meditative, Relaxing, Laid-Back, 50 BPM\n\nPop\n\nPop, Pop-Electronic, Ballad, Billboard, Drum Machine, Bass, Lush Synthesizer Pads, Synthesizer Arp, Synth Bass, Vocal Sample Chops, Percussion, Honest, Heart-Felt, Melancholic, Vibe, Cool, Modern, Atmospheric, 115 BPM\n\n\n"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 10,
+      "type": "CLIPLoader",
+      "pos": [
+        -330,
+        130
+      ],
+      "size": [
+        350,
+        110
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
+          "links": [
+            25,
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "AUDIO-clip.safetensors",
+        "stable_audio",
+        "default"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -330,
+        300
+      ],
+      "size": [
+        350,
+        120
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            18
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.27",
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "AUDIO-model.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 96,
+      "type": "Note",
+      "pos": [
+        -370,
+        -180
+      ],
+      "size": [
+        610,
+        180
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "MODEL LINKS",
+      "properties": {},
+      "widgets_values": [
+        "Login to huggingface, open this link.\nhttps://huggingface.co/stabilityai/stable-audio-open-1.0/tree/main\n\nhttps://huggingface.co/stabilityai/stable-audio-open-1.0/tree/main/text_encoder\nDownload from the link above the \"text encoder\" model 439MB, and rename it to \"AUDIO-clip.safetensors\"\nand place the file in \"models/clip\" folder.\n\nDownload the model.safetensors 4.7GB file, and place it in Checkpoints folder, rename it to \"AUDIO-model.safetensors\""
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      4,
+      6,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      6,
+      7,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      3,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      14,
+      4,
+      2,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      18,
+      4,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      25,
+      10,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      26,
+      10,
+      0,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      172,
+      12,
+      0,
+      93,
+      0,
+      "AUDIO"
+    ],
+    [
+      178,
+      95,
+      0,
+      3,
+      3,
+      "LATENT"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 2,
+      "title": "Generate New BGM",
+      "bounding": [
+        -370,
+        20,
+        1570,
+        580
+      ],
+      "color": "#8AA",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "frontendVersion": "1.18.1"
+  },
+  "version": 0.4
+}

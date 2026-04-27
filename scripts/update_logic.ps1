@@ -418,6 +418,29 @@ if (Test-Path $EnsureZImageScript) {
 
 
 # ============================================================================
+# 2d. SYNC WORKFLOWS TO COMFYUI USER DIRECTORY
+# ============================================================================
+Write-Host "`n[2d/3] Syncing workflows to ComfyUI User directory..." -ForegroundColor Yellow
+$FeddaWorkflowsSource = Join-Path $RootPath "backend\workflows"
+$ComfyUserWorkflowsDir = Join-Path $ComfyDir "user\default\workflows\FEDDA"
+
+if (Test-Path $FeddaWorkflowsSource) {
+    if (-not (Test-Path $ComfyUserWorkflowsDir)) {
+        New-Item -ItemType Directory -Path $ComfyUserWorkflowsDir -Force | Out-Null
+    }
+    
+    # Copy all JSON workflows recursively
+    Get-ChildItem -Path $FeddaWorkflowsSource -Filter *.json -Recurse | ForEach-Object {
+        $DestFile = Join-Path $ComfyUserWorkflowsDir $_.Name
+        Copy-Item $_.FullName $DestFile -Force
+    }
+    Write-Host "  Workflows synced to ComfyUI (user/default/workflows/FEDDA)." -ForegroundColor Green
+} else {
+    Write-Host "  [WARNING] backend/workflows not found, skipping sync." -ForegroundColor Yellow
+}
+
+
+# ============================================================================
 # DONE
 # ============================================================================
 if (-not $SilentMode) {

@@ -1,0 +1,986 @@
+{
+  "id": "13ec9b05-13e3-4ce0-a274-dfe796b6c75d",
+  "revision": 0,
+  "last_node_id": 99,
+  "last_link_id": 217,
+  "nodes": [
+    {
+      "id": 89,
+      "type": "VHS_VideoInfoLoaded",
+      "pos": [
+        290,
+        390
+      ],
+      "size": [
+        246.615234375,
+        106
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "link": 201
+        }
+      ],
+      "outputs": [
+        {
+          "name": "fps🟦",
+          "type": "FLOAT",
+          "links": [
+            202,
+            203
+          ]
+        },
+        {
+          "name": "frame_count🟦",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "duration🟦",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "width🟦",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height🟦",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_VideoInfoLoaded"
+      },
+      "widgets_values": {},
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 98,
+      "type": "VHS_VideoInfoLoaded",
+      "pos": [
+        -70,
+        1290
+      ],
+      "size": [
+        246.615234375,
+        106
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "link": 215
+        }
+      ],
+      "outputs": [
+        {
+          "name": "fps🟦",
+          "type": "FLOAT",
+          "links": [
+            211,
+            214
+          ]
+        },
+        {
+          "name": "frame_count🟦",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "duration🟦",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "width🟦",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height🟦",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_VideoInfoLoaded"
+      },
+      "widgets_values": {},
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 46,
+      "type": "VHS_LoadVideo",
+      "pos": [
+        -350,
+        -110
+      ],
+      "size": [
+        252.056640625,
+        262
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            200
+          ]
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "slot_index": 2,
+          "links": []
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "links": [
+            201
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_LoadVideo"
+      },
+      "widgets_values": {
+        "video": "chiara_sing.mp4",
+        "force_rate": 0,
+        "force_size": "Disabled",
+        "custom_width": 0,
+        "custom_height": 0,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 1,
+        "choose video to upload": "image",
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "frame_load_cap": 0,
+            "skip_first_frames": 0,
+            "force_rate": 0,
+            "filename": "chiara_sing.mp4",
+            "type": "input",
+            "format": "video/mp4",
+            "select_every_nth": 1
+          }
+        }
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 95,
+      "type": "Apply Whisper",
+      "pos": [
+        -80,
+        790
+      ],
+      "size": [
+        315,
+        122
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 217
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": null
+        },
+        {
+          "name": "segments_alignment",
+          "type": "whisper_alignment",
+          "links": null
+        },
+        {
+          "name": "words_alignment",
+          "type": "whisper_alignment",
+          "slot_index": 2,
+          "links": [
+            210
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-Whisper",
+        "ver": "aef1699679c763ce9ddcfbfbf1118d82e4da94f0",
+        "Node name for S&R": "Apply Whisper"
+      },
+      "widgets_values": [
+        "large",
+        "auto"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 92,
+      "type": "LoadAudio",
+      "pos": [
+        -80,
+        -110
+      ],
+      "size": [
+        340,
+        136
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "slot_index": 0,
+          "links": [
+            206,
+            207
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.22",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "AUDIO WOMAN.MP3",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 47,
+      "type": "Apply Whisper",
+      "pos": [
+        280,
+        -110
+      ],
+      "size": [
+        315,
+        122
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 206
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "slot_index": 0,
+          "links": null
+        },
+        {
+          "name": "segments_alignment",
+          "type": "whisper_alignment",
+          "links": null
+        },
+        {
+          "name": "words_alignment",
+          "type": "whisper_alignment",
+          "slot_index": 2,
+          "links": [
+            126
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-Whisper",
+        "ver": "aef1699679c763ce9ddcfbfbf1118d82e4da94f0",
+        "Node name for S&R": "Apply Whisper"
+      },
+      "widgets_values": [
+        "large",
+        "auto"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 61,
+      "type": "Add Subtitles To Frames",
+      "pos": [
+        280,
+        60
+      ],
+      "size": [
+        315,
+        286
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 200
+        },
+        {
+          "name": "alignment",
+          "type": "whisper_alignment",
+          "link": 126
+        },
+        {
+          "name": "video_fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "video_fps"
+          },
+          "link": 202
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            128
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "cropped_subtitles",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "subtitle_coord",
+          "type": "subtitle_coord",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-Whisper",
+        "ver": "aef1699679c763ce9ddcfbfbf1118d82e4da94f0",
+        "Node name for S&R": "Add Subtitles To Frames"
+      },
+      "widgets_values": [
+        "red",
+        "Roboto-Bold.ttf",
+        50,
+        0,
+        100,
+        true,
+        false,
+        24
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 49,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        620,
+        -110
+      ],
+      "size": [
+        219.3603515625,
+        678.4183959960938
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 128
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 207
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "frame_rate",
+          "type": "FLOAT",
+          "widget": {
+            "name": "frame_rate"
+          },
+          "link": 203
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "SUBTITLES/0",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "0_00001-audio.mp4",
+            "subfolder": "SUBTITLES",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 30,
+            "workflow": "AnimateDiff_00014.png",
+            "fullpath": "/workspace/ComfyUI/output/AnimateDiff_00014-audio.mp4"
+          }
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 97,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        260,
+        790
+      ],
+      "size": [
+        219.3603515625,
+        310
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 212
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 216
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "frame_rate",
+          "type": "FLOAT",
+          "widget": {
+            "name": "frame_rate"
+          },
+          "link": 214
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "SUBTITLES/0",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "AnimateDiff_00006-audio.mp4",
+            "subfolder": "",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 30,
+            "workflow": "AnimateDiff_00014.png",
+            "fullpath": "/workspace/ComfyUI/output/AnimateDiff_00014-audio.mp4"
+          }
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 96,
+      "type": "Add Subtitles To Frames",
+      "pos": [
+        -80,
+        960
+      ],
+      "size": [
+        315,
+        286
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 209
+        },
+        {
+          "name": "alignment",
+          "type": "whisper_alignment",
+          "link": 210
+        },
+        {
+          "name": "video_fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "video_fps"
+          },
+          "link": 211
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            212
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "cropped_subtitles",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "name": "subtitle_coord",
+          "type": "subtitle_coord",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-Whisper",
+        "ver": "aef1699679c763ce9ddcfbfbf1118d82e4da94f0",
+        "Node name for S&R": "Add Subtitles To Frames"
+      },
+      "widgets_values": [
+        "red",
+        "Roboto-Bold.ttf",
+        50,
+        0,
+        100,
+        true,
+        false,
+        24
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 99,
+      "type": "Note",
+      "pos": [
+        -750,
+        -170
+      ],
+      "size": [
+        330,
+        100
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "This workflow creates subtitles for your video, using the uploaded audio as the input source.\nThe other workflow uses the video's audio to create subtitles."
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 93,
+      "type": "VHS_LoadVideo",
+      "pos": [
+        -350,
+        790
+      ],
+      "size": [
+        252.056640625,
+        262
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            209
+          ]
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "slot_index": 1,
+          "links": []
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "slot_index": 2,
+          "links": [
+            216,
+            217
+          ]
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "links": [
+            215
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_LoadVideo"
+      },
+      "widgets_values": {
+        "video": "chiara_sing.mp4",
+        "force_rate": 0,
+        "force_size": "Disabled",
+        "custom_width": 0,
+        "custom_height": 0,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 1,
+        "choose video to upload": "image",
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "frame_load_cap": 0,
+            "skip_first_frames": 0,
+            "force_rate": 0,
+            "filename": "chiara_sing.mp4",
+            "type": "input",
+            "format": "video/mp4",
+            "select_every_nth": 1
+          }
+        }
+      },
+      "color": "#232",
+      "bgcolor": "#353"
+    }
+  ],
+  "links": [
+    [
+      126,
+      47,
+      2,
+      61,
+      1,
+      "whisper_alignment"
+    ],
+    [
+      128,
+      61,
+      0,
+      49,
+      0,
+      "IMAGE"
+    ],
+    [
+      200,
+      46,
+      0,
+      61,
+      0,
+      "IMAGE"
+    ],
+    [
+      201,
+      46,
+      3,
+      89,
+      0,
+      "VHS_VIDEOINFO"
+    ],
+    [
+      202,
+      89,
+      0,
+      61,
+      2,
+      "FLOAT"
+    ],
+    [
+      203,
+      89,
+      0,
+      49,
+      4,
+      "FLOAT"
+    ],
+    [
+      206,
+      92,
+      0,
+      47,
+      0,
+      "AUDIO"
+    ],
+    [
+      207,
+      92,
+      0,
+      49,
+      1,
+      "AUDIO"
+    ],
+    [
+      209,
+      93,
+      0,
+      96,
+      0,
+      "IMAGE"
+    ],
+    [
+      210,
+      95,
+      2,
+      96,
+      1,
+      "whisper_alignment"
+    ],
+    [
+      211,
+      98,
+      0,
+      96,
+      2,
+      "FLOAT"
+    ],
+    [
+      212,
+      96,
+      0,
+      97,
+      0,
+      "IMAGE"
+    ],
+    [
+      214,
+      98,
+      0,
+      97,
+      4,
+      "FLOAT"
+    ],
+    [
+      215,
+      93,
+      3,
+      98,
+      0,
+      "VHS_VIDEOINFO"
+    ],
+    [
+      216,
+      93,
+      2,
+      97,
+      1,
+      "AUDIO"
+    ],
+    [
+      217,
+      93,
+      2,
+      95,
+      0,
+      "AUDIO"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "SUBTITLES separate-audio",
+      "bounding": [
+        -400,
+        -200,
+        1300,
+        800
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "SUBTITLES video-audio",
+      "bounding": [
+        -400,
+        700,
+        1300,
+        800
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        395.20810106089607,
+        137.39790459873603
+      ]
+    },
+    "frontendVersion": "1.23.4",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "ue_links": []
+  },
+  "version": 0.4
+}

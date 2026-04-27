@@ -1,0 +1,420 @@
+{
+  "id": "24139a50-af2d-476b-93d9-2743285fab1b",
+  "revision": 0,
+  "last_node_id": 13,
+  "last_link_id": 29,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "PrimitiveFloat",
+      "pos": [
+        410.1903381347656,
+        210.4737548828125
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            28,
+            29
+          ]
+        }
+      ],
+      "title": "FPS",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.34",
+        "Node name for S&R": "PrimitiveFloat"
+      },
+      "widgets_values": [
+        25
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 1,
+      "type": "LoadFloatModels",
+      "pos": [
+        690,
+        530
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "float_pipe",
+          "type": "FLOAT_PIPE",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "yuvraj108c/ComfyUI-FLOAT",
+        "ver": "88f8675a4d34d6ad1e6ecd56df99981b6ab31256",
+        "Node name for S&R": "LoadFloatModels"
+      },
+      "widgets_values": [
+        "float.pth"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 6,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        970,
+        210
+      ],
+      "size": [
+        270,
+        598
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 26
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 6
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "frame_rate",
+          "type": "FLOAT",
+          "widget": {
+            "name": "frame_rate"
+          },
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "f4b4764694abe8002a2c1601f56403c1a7128bdc",
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 25,
+        "loop_count": 0,
+        "filename_prefix": "AUDIO/0",
+        "format": "video/nvenc_h264-mp4",
+        "pix_fmt": "yuv420p",
+        "bitrate": 10,
+        "megabit": true,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "0_00023-audio.mp4",
+            "subfolder": "AUDIO",
+            "type": "output",
+            "format": "video/nvenc_h264-mp4",
+            "frame_rate": 25,
+            "workflow": "AnimateDiff_00027.png",
+            "fullpath": "/workspace/ComfyUI/output/AnimateDiff_00027-audio.mp4"
+          }
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 4,
+      "type": "LoadAudio",
+      "pos": [
+        403.0230712890625,
+        690.6533203125
+      ],
+      "size": [
+        274.080078125,
+        136
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            6,
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.34",
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": [
+        "AUDIO WOMAN.MP3",
+        null,
+        null
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        408.3001403808594,
+        327.2937927246094
+      ],
+      "size": [
+        274.080078125,
+        314.0000305175781
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            24
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.34",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pose2.png",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 10,
+      "type": "FloatProcess",
+      "pos": [
+        690,
+        210
+      ],
+      "size": [
+        270,
+        266
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "ref_image",
+          "type": "IMAGE",
+          "link": 24
+        },
+        {
+          "name": "ref_audio",
+          "type": "AUDIO",
+          "link": 25
+        },
+        {
+          "name": "float_pipe",
+          "type": "FLOAT_PIPE",
+          "link": 23
+        },
+        {
+          "name": "fps",
+          "type": "FLOAT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "yuvraj108c/ComfyUI-FLOAT",
+        "ver": "88f8675a4d34d6ad1e6ecd56df99981b6ab31256",
+        "Node name for S&R": "FloatProcess"
+      },
+      "widgets_values": [
+        1,
+        1,
+        1,
+        25,
+        "happy",
+        true,
+        972561516630750,
+        "randomize"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 13,
+      "type": "MarkdownNote",
+      "pos": [
+        70,
+        170
+      ],
+      "size": [
+        300,
+        220
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "This is the fastest workflow for creating lipsync videos from images. \n\nThe output video size is limited to 512x512 pixels. \n\nModels are downloaded automatically.\n\nFor best results the background on the image must be solid color.\n\nGIT CLONE \n\n[GIT WEBPAGE](https://github.com/yuvraj108c/ComfyUI-FLOAT)"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      6,
+      4,
+      0,
+      6,
+      1,
+      "AUDIO"
+    ],
+    [
+      23,
+      1,
+      0,
+      10,
+      2,
+      "FLOAT_PIPE"
+    ],
+    [
+      24,
+      3,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      4,
+      0,
+      10,
+      1,
+      "AUDIO"
+    ],
+    [
+      26,
+      10,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      28,
+      11,
+      0,
+      10,
+      3,
+      "FLOAT"
+    ],
+    [
+      29,
+      11,
+      0,
+      6,
+      4,
+      "FLOAT"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "LIPSYNC FLOAT",
+      "bounding": [
+        390,
+        140,
+        856.9769287109375,
+        700.2532958984375
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.19.9",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "ue_links": []
+  },
+  "version": 0.4
+}

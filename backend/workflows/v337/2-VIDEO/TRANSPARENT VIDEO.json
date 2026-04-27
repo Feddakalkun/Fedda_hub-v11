@@ -1,0 +1,1487 @@
+{
+  "id": "ec7da562-7e21-4dac-a0d2-f4441e1efd3b",
+  "revision": 0,
+  "last_node_id": 189,
+  "last_link_id": 350,
+  "nodes": [
+    {
+      "id": 154,
+      "type": "CLIPLoader",
+      "pos": [
+        -800,
+        1620
+      ],
+      "size": [
+        410,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "slot_index": 0,
+          "links": [
+            318
+          ]
+        }
+      ],
+      "title": "Load Text Encoder",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "wan",
+        "default"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 159,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -370,
+        2030
+      ],
+      "size": [
+        425.27801513671875,
+        180.6060791015625
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 320
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            299
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode (Negative Prompt) Useless s",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 165,
+      "type": "VAELoader",
+      "pos": [
+        -800,
+        1870
+      ],
+      "size": [
+        410,
+        60
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
+          "links": [
+            307
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "wan_alpha_2.1_vae_alpha_channel.safetensors.safetensors"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 169,
+      "type": "Power Lora Loader (rgthree)",
+      "pos": [
+        -800,
+        1970
+      ],
+      "size": [
+        410,
+        166
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 317
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 318
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "shape": 3,
+          "type": "MODEL",
+          "links": [
+            322
+          ]
+        },
+        {
+          "name": "CLIP",
+          "shape": 3,
+          "type": "CLIP",
+          "links": [
+            319,
+            320
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "70756c044d805ffc260568ca3fe9eafaed5e6363",
+        "Show Strengths": "Single Strength"
+      },
+      "widgets_values": [
+        null,
+        {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        {
+          "on": true,
+          "lora": "wan\\lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank32_bf16.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {
+          "on": true,
+          "lora": "wan\\epoch-13-1500_changed.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        null,
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 172,
+      "type": "easy showAnything",
+      "pos": [
+        -1180,
+        1990
+      ],
+      "size": [
+        350,
+        88
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 326
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "=== DOWNLOAD HISTORY ===\n2025-10-06 21:55:40 | wan_alpha_2.1_vae_rgb_channel.safetensors.safetensors | 242.05 MB | vae/\n2025-10-06 21:55:37 | epoch-13-1500_changed.safetensors | 297.21 MB | loras/wan/\n2025-10-06 21:55:21 | wan_alpha_2.1_vae_alpha_channel.safetensors.safetensors | 242.05 MB | vae/\n2025-10-06 20:30:59 | humo_17B_fp8_e4m3fn.safetensors | 15.89 GB | diffusion_models/\n2025-10-06 20:10:03 | whisper_large_v3_fp16.safetensors | 2.88 GB | audio_encoders/\n2025-10-06 00:24:11 | Wan2.2-Lightning_I2V-A14B-4steps-lora_HIGH_fp16.safetensors | 585.14 MB | loras/wan/\n2025-10-05 20:18:49 | low_noise_model.safetensors | 1.14 GB | loras/wan/\n2025-10-05 16:24:40 | vitpose-l-wholebody.onnx | 1.15 GB | detection/\n2025-10-05 16:21:37 | yolov10m.onnx | 58.80 MB | detection/\n2025-10-05 16:02:48 | Wan2.2%20-%20T2V%20-%20Doggy%20Style%20-%20LOW%2014B.safetensors | 585.10 MB | loras/\n2025-10-05 16:02:19 | lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank32_bf16.safetensors | 304.33 MB | loras/\n2025-10-05 16:01:34 | Wan2.2%20-%20T2V%20-%20Dildo%20Ride%20-%20LOW%2014B.safetensors | 585.10 MB | loras/\n2025-10-05 16:01:23 | Wan2.2%20-%20T2V%20-%20Doggy%20Style%20%20-%20HIGH%2014B.safetensors | 585.10 MB | loras/\n2025-10-05 16:01:22 | Wan2.2%20-%20T2V%20-%20Dildo%20Ride%20-%20HIGH%2014B.safetensors | 585.10 MB | loras/\n2025-10-05 15:33:22 | vitpose_h_wholebody_data.bin | 2.37 GB | onnx/\n2025-10-05 15:31:21 | Wan2.2-T2V-A14B-4steps-lora-250928.safetensors | 1.14 GB | loras/wan/\n2025-10-05 15:27:43 | vitpose_h_wholebody_model.onnx | 410.40 KB | onnx/\n2025-09-29 16:33:34 | high_noise_model.safetensors | 2.29 GB | loras/\n2025-09-29 16:31:49 | low_noise_model.safetensors | 1.14 GB | loras/\n2025-09-29 15:25:38 | flux_vae.safetensors | 319.77 MB | vae222522/\n2025-09-29 15:14:21 | flux_vae.safetensors | 319.77 MB | vae22222/\n2025-09-29 15:10:21 | flux_vae.safetensors | 319.77 MB | vae2222/\n2025-09-29 15:07:34 | flux_vae.safetensors | 319.77 MB | vae222/\n2025-09-29 15:03:56 | flux_vae.safetensors | 319.77 MB | vae22/\n2025-09-29 13:58:37 | lotus-depth-g-v2-0-disparity.safetensors | 3.23 GB | unet/\n2025-09-29 13:53:30 | comfyui_local_lora16.safetensors | 146.17 MB | loras/\n2025-09-29 13:53:14 | Hyper-FLUX.1-dev-8steps-lora.safetensors | 1.29 GB | loras/\n2025-09-29 13:51:08 | uncensored-flux-lora | 655.63 MB | loras/FLUX/\n2025-09-29 13:50:08 | flux_vae.safetensors | 319.77 MB | vae/\n2025-09-29 13:49:38 | clip_l.safetensors | 234.74 MB | clip/\n2025-09-28 16:51:11 | IndexTTS-2 | 79.33 KB | TTTTTTSSSSS/\n2025-09-28 15:56:28 | flux_vae1.safetensors | 319.77 MB | vae/\n2025-09-28 15:44:48 | fff2 | 319.77 MB | vae/\n2025-09-28 15:43:49 | fff | 319.77 MB | vae/\n\nTotal downloaded: 34 files (40.32 GB)"
+      ]
+    },
+    {
+      "id": 171,
+      "type": "easy showAnything",
+      "pos": [
+        -1590,
+        1990
+      ],
+      "size": [
+        350,
+        88
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "shape": 7,
+          "type": "*",
+          "link": 327
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "=== DOWNLOAD REPORT ===\nTotal files: 6\nSuccessful downloads: 0\nAlready existed: 6\nInterrupted: 0\nFailed: 0\nMax concurrent: 3\nSpeed limit: Unlimited\nResume enabled: True\nValidation enabled: False\nAuto-organize: False\n\nDetails:\n✓ epoch-13-1500_changed.safetensors: Already exists (297.21 MB)\n✓ wan_alpha_2.1_vae_alpha_channel.safetensors.safetensors: Already exists (242.05 MB)\n✓ wan_alpha_2.1_vae_rgb_channel.safetensors.safetensors: Already exists (242.05 MB)\n✓ wan2.1_t2v_14B_fp8_e4m3fn.safetensors: Already exists (13.31 GB)\n✓ umt5_xxl_fp8_e4m3fn_scaled.safetensors: Already exists (6.27 GB)\n✓ lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank32_bf16.safetensors: Already exists (304.33 MB)"
+      ]
+    },
+    {
+      "id": 175,
+      "type": "Note",
+      "pos": [
+        -370,
+        2250
+      ],
+      "size": [
+        430,
+        440
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "User Manual",
+      "properties": {},
+      "widgets_values": [
+        "---------------------------------------\nPROMPT TEMPLATE FOR TRANSPARENT VIDEOS\n---------------------------------------\n\nInstruction:\nKeep the first and last sentences.\nEdit only the middle part of each prompt.\n\nFormat:\nThis video has a transparent background.  \n[Describe what happens in the video here.]  \nThe background of this video is transparent. Realistic style.\n\n---------------------------------------\nEXAMPLE PROMPTS\n---------------------------------------\n\n1.\nThis video has a transparent background.  \nA glowing magic circle appears and spins in the air.  \nThe background of this video is transparent. Realistic style.\n\n2.\nThis video has a transparent background.  \nGolden confetti explodes and falls from above.  \nThe background of this video is transparent. Realistic style.\n\n3.\nThis video has a transparent background.  \nA dancing robot waves at the viewer with metallic reflections.  \nThe background of this video is transparent. Realistic style.\n\n4.\nThis video has a transparent background.  \nA splash of colorful paint bursts and slowly disperses.  \nThe background of this video is transparent. Realistic style.\n\n5.\nThis video has a transparent background.  \nA butterfly flaps its wings and lands softly on an invisible surface.  \nThe background of this video is transparent. Realistic style.\n\n6.\nThis video has a transparent background.  \nA neon lightning bolt strikes down and fades into smoke.  \nThe background of this video is transparent. Realistic style.\n\n7.\nThis video has a transparent background.  \nA superhero lands on the ground causing a dust explosion.  \nThe background of this video is transparent. Realistic style.\n\n8.\nThis video has a transparent background.  \nA gentle wave of glowing particles moves across the screen.  \nThe background of this video is transparent. Realistic style.\n\n9.\nThis video has a transparent background.  \nA holographic interface opens and rotates in mid-air.  \nThe background of this video is transparent. Realistic style.\n\n10.\nThis video has a transparent background.  \nA burst of pink smoke rises and swirls upward.  \nThe background of this video is transparent. Realistic style.\n\n11.\nThis video has a transparent background.  \nA camera flash effect shines with lens reflections.  \nThe background of this video is transparent. Realistic style.\n\n12.\nThis video has a transparent background.  \nA realistic hand draws a glowing heart in the air.  \nThe background of this video is transparent. Realistic style.\n\n13.\nThis video has a transparent background.  \nA businesswoman gives a friendly wave and smile.  \nThe background of this video is transparent. Realistic style.\n\n14.\nThis video has a transparent background.  \nA colorful 3D text saying “Subscribe Now!” animates into view.  \nThe background of this video is transparent. Realistic style.\n\n15.\nThis video has a transparent background.  \nA realistic cat jumps and lands gracefully.  \nThe background of this video is transparent. Realistic style.\n\n16.\nThis video has a transparent background.  \nA golden ring of fire spins in the air before fading out.  \nThe background of this video is transparent. Realistic style.\n\n17.\nThis video has a transparent background.  \nSparkling stars form a trail that curves across the frame.  \nThe background of this video is transparent. Realistic style.\n\n18.\nThis video has a transparent background.  \nA futuristic drone flies by and disappears.  \nThe background of this video is transparent. Realistic style.\n\n19.\nThis video has a transparent background.  \nA splash of water slowly forms the shape of a logo.  \nThe background of this video is transparent. Realistic style.\n\n20.\nThis video has a transparent background.  \nAn abstract energy wave moves smoothly across the screen.  \nThe background of this video is transparent. Realistic style.\n\n---------------------------------------\nEnd of file\n---------------------------------------\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 174,
+      "type": "TransparentVideoSave",
+      "pos": [
+        400,
+        1490
+      ],
+      "size": [
+        890,
+        1056
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images_rgb",
+          "type": "IMAGE",
+          "link": 329
+        },
+        {
+          "name": "images_alpha",
+          "type": "IMAGE",
+          "link": 330
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "5248f2c1b709c186a12e47cd66fec8269ac56a38",
+        "Node name for S&R": "TransparentVideoSave"
+      },
+      "widgets_values": [
+        "VIDEO/TRANSPARENT/0",
+        16,
+        true,
+        80,
+        "default"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 181,
+      "type": "LayerUtility: ColorImage V2",
+      "pos": [
+        80,
+        1970
+      ],
+      "size": [
+        270.2994079589844,
+        130
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "size_as",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "custom_width",
+          "type": "INT",
+          "widget": {
+            "name": "custom_width"
+          },
+          "link": 347
+        },
+        {
+          "name": "custom_height",
+          "type": "INT",
+          "widget": {
+            "name": "custom_height"
+          },
+          "link": 348
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            340
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_layerstyle",
+        "ver": "2b9f510eaf7b2dd968cd57919ce4c1ac97cc067a",
+        "Node name for S&R": "LayerUtility: ColorImage V2"
+      },
+      "widgets_values": [
+        "custom",
+        720,
+        720,
+        "#00FF00"
+      ],
+      "color": "rgba(38, 73, 116, 0.7)"
+    },
+    {
+      "id": 183,
+      "type": "Image To Mask",
+      "pos": [
+        80,
+        2010
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 338
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            341
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "masquerade-nodes-comfyui",
+        "ver": "432cb4d146a391b387a0cd25ace824328b5b61cf",
+        "Node name for S&R": "Image To Mask"
+      },
+      "widgets_values": [
+        "intensity"
+      ]
+    },
+    {
+      "id": 180,
+      "type": "ImageCompositeFromMaskBatch+",
+      "pos": [
+        80,
+        2050
+      ],
+      "size": [
+        286.3081970214844,
+        66
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_from",
+          "type": "IMAGE",
+          "link": 334
+        },
+        {
+          "name": "image_to",
+          "type": "IMAGE",
+          "link": 340
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 342
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            343
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_essentials",
+        "ver": "5a4e5cd5750515d76f3a3363b7d2a0f362507796",
+        "Node name for S&R": "ImageCompositeFromMaskBatch+"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 184,
+      "type": "InvertMask",
+      "pos": [
+        80,
+        2090
+      ],
+      "size": [
+        140,
+        26
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 341
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            342
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.63",
+        "Node name for S&R": "InvertMask"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 156,
+      "type": "ModelSamplingSD3",
+      "pos": [
+        80,
+        1890
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 322
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            297
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "ModelSamplingSD3"
+      },
+      "widgets_values": [
+        5
+      ]
+    },
+    {
+      "id": 168,
+      "type": "EmptyHunyuanLatentVideo",
+      "pos": [
+        80,
+        1930
+      ],
+      "size": [
+        420,
+        130
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 345
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 346
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": 344
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            300
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "EmptyHunyuanLatentVideo"
+      },
+      "widgets_values": [
+        720,
+        720,
+        25,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 158,
+      "type": "VAELoader",
+      "pos": [
+        -800,
+        1770
+      ],
+      "size": [
+        410,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "slot_index": 0,
+          "links": [
+            305
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "wan_alpha_2.1_vae_rgb_channel.safetensors.safetensors"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 177,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1310,
+        1490
+      ],
+      "size": [
+        730,
+        1058
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 343
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "8e4d79471bf1952154768e8435a9300077b534fa",
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 16,
+        "loop_count": 0,
+        "filename_prefix": "VIDEO/TRANSPARENT/0",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "0_00009.mp4",
+            "subfolder": "VIDEO\\TRANSPARENT",
+            "type": "output",
+            "format": "video/h264-mp4",
+            "frame_rate": 16,
+            "workflow": "0_00009.png",
+            "fullpath": "F:\\v327\\App\\ComfyUI\\output\\VIDEO\\TRANSPARENT\\0_00009.mp4"
+          }
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 167,
+      "type": "HuggingFaceDownloader",
+      "pos": [
+        -1590,
+        1490
+      ],
+      "size": [
+        760,
+        450
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "status_report",
+          "type": "STRING",
+          "links": [
+            327
+          ]
+        },
+        {
+          "name": "download_history",
+          "type": "STRING",
+          "links": [
+            326
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "5248f2c1b709c186a12e47cd66fec8269ac56a38",
+        "Node name for S&R": "HuggingFaceDownloader"
+      },
+      "widgets_values": [
+        "https://huggingface.co/htdong/Wan-Alpha_ComfyUI/resolve/main/epoch-13-1500_changed.safetensors loras/wan\nhttps://huggingface.co/htdong/Wan-Alpha_ComfyUI/resolve/main/wan_alpha_2.1_vae_alpha_channel.safetensors.safetensors vae\nhttps://huggingface.co/htdong/Wan-Alpha_ComfyUI/resolve/main/wan_alpha_2.1_vae_rgb_channel.safetensors.safetensors vae\nhttps://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/diffusion_models/wan2.1_t2v_14B_fp8_e4m3fn.safetensors diffusion_models \nhttps://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors clip\nhttps://huggingface.co/Kijai/WanVideo_comfy/resolve/main/Lightx2v/lightx2v_T2V_14B_cfg_step_distill_v2_lora_rank32_bf16.safetensors loras/wan",
+        true,
+        3,
+        0,
+        true,
+        false,
+        true,
+        false,
+        "",
+        [
+          false,
+          true
+        ]
+      ]
+    },
+    {
+      "id": 185,
+      "type": "AspectRatioImageSize",
+      "pos": [
+        -370,
+        1600
+      ],
+      "size": [
+        420,
+        170
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            345,
+            347
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            346,
+            348
+          ]
+        },
+        {
+          "name": "resolution_label",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "comfyuistudio/ComfyUI-Studio-nodes",
+        "ver": "bf895c75df55a2e14bd4c34a3fa82826d4b19d71",
+        "Node name for S&R": "AspectRatioImageSize"
+      },
+      "widgets_values": [
+        720,
+        720,
+        "1:1",
+        "Horizontal"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 160,
+      "type": "VAEDecode",
+      "pos": [
+        80,
+        1810
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 304
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 305
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            329,
+            334,
+            350
+          ]
+        }
+      ],
+      "title": "RGB VAE Decode",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 161,
+      "type": "VAEDecode",
+      "pos": [
+        80,
+        1850
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 306
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 307
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            330,
+            338,
+            349
+          ]
+        }
+      ],
+      "title": "Alpha VAE Decode",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 187,
+      "type": "easy int",
+      "pos": [
+        -370,
+        1490
+      ],
+      "size": [
+        420,
+        58
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "int",
+          "type": "INT",
+          "links": [
+            344
+          ]
+        }
+      ],
+      "title": "VIDEO LENGTH (frames)",
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "66143b0e2077021253246500043f1b79da295399",
+        "Node name for S&R": "easy int"
+      },
+      "widgets_values": [
+        25
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 163,
+      "type": "UNETLoader",
+      "pos": [
+        -800,
+        1490
+      ],
+      "size": [
+        410,
+        82
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            317
+          ]
+        }
+      ],
+      "title": "Load Wan 2.1 t2v 14B",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "wan2.1_t2v_14B_fp8_e4m3fn.safetensors",
+        "default"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 155,
+      "type": "KSampler",
+      "pos": [
+        70,
+        1490
+      ],
+      "size": [
+        315,
+        262
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 297
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 298
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 299
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 300
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "slot_index": 0,
+          "links": [
+            304,
+            306
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        232907553047721,
+        "fixed",
+        4,
+        1,
+        "uni_pc",
+        "simple",
+        1
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 157,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -370,
+        1820
+      ],
+      "size": [
+        422.84503173828125,
+        164.31304931640625
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 319
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            298
+          ]
+        }
+      ],
+      "title": "CLIP Text Encode (Positive Prompt)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.60",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "This video has a transparent background \n\nThe robot greets with its hand.\n\nThe background of this video is transparent. Realistic style.\n",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 188,
+      "type": "PreviewImage",
+      "pos": [
+        -800,
+        2190
+      ],
+      "size": [
+        410,
+        258
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 349
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.63",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 189,
+      "type": "PreviewImage",
+      "pos": [
+        -800,
+        2490
+      ],
+      "size": [
+        410,
+        258
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 350
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.63",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      297,
+      156,
+      0,
+      155,
+      0,
+      "MODEL"
+    ],
+    [
+      298,
+      157,
+      0,
+      155,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      299,
+      159,
+      0,
+      155,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      300,
+      168,
+      0,
+      155,
+      3,
+      "LATENT"
+    ],
+    [
+      304,
+      155,
+      0,
+      160,
+      0,
+      "LATENT"
+    ],
+    [
+      305,
+      158,
+      0,
+      160,
+      1,
+      "VAE"
+    ],
+    [
+      306,
+      155,
+      0,
+      161,
+      0,
+      "LATENT"
+    ],
+    [
+      307,
+      165,
+      0,
+      161,
+      1,
+      "VAE"
+    ],
+    [
+      317,
+      163,
+      0,
+      169,
+      0,
+      "MODEL"
+    ],
+    [
+      318,
+      154,
+      0,
+      169,
+      1,
+      "CLIP"
+    ],
+    [
+      319,
+      169,
+      1,
+      157,
+      0,
+      "CLIP"
+    ],
+    [
+      320,
+      169,
+      1,
+      159,
+      0,
+      "CLIP"
+    ],
+    [
+      322,
+      169,
+      0,
+      156,
+      0,
+      "MODEL"
+    ],
+    [
+      326,
+      167,
+      1,
+      172,
+      0,
+      "*"
+    ],
+    [
+      327,
+      167,
+      0,
+      171,
+      0,
+      "*"
+    ],
+    [
+      329,
+      160,
+      0,
+      174,
+      0,
+      "IMAGE"
+    ],
+    [
+      330,
+      161,
+      0,
+      174,
+      1,
+      "IMAGE"
+    ],
+    [
+      334,
+      160,
+      0,
+      180,
+      0,
+      "IMAGE"
+    ],
+    [
+      338,
+      161,
+      0,
+      183,
+      0,
+      "IMAGE"
+    ],
+    [
+      340,
+      181,
+      0,
+      180,
+      1,
+      "IMAGE"
+    ],
+    [
+      341,
+      183,
+      0,
+      184,
+      0,
+      "MASK"
+    ],
+    [
+      342,
+      184,
+      0,
+      180,
+      2,
+      "MASK"
+    ],
+    [
+      343,
+      180,
+      0,
+      177,
+      0,
+      "IMAGE"
+    ],
+    [
+      344,
+      187,
+      0,
+      168,
+      2,
+      "INT"
+    ],
+    [
+      345,
+      185,
+      0,
+      168,
+      0,
+      "INT"
+    ],
+    [
+      346,
+      185,
+      1,
+      168,
+      1,
+      "INT"
+    ],
+    [
+      347,
+      185,
+      0,
+      181,
+      1,
+      "INT"
+    ],
+    [
+      348,
+      185,
+      1,
+      181,
+      2,
+      "INT"
+    ],
+    [
+      349,
+      161,
+      0,
+      188,
+      0,
+      "IMAGE"
+    ],
+    [
+      350,
+      160,
+      0,
+      189,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "TRANSPARENT VIDEO",
+      "bounding": [
+        -810,
+        1420,
+        2870,
+        1350
+      ],
+      "color": "#ffffff",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7314025588351514,
+      "offset": [
+        -1394.0096407490312,
+        858.4216838931542
+      ]
+    },
+    "frontendVersion": "1.27.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "ue_links": [],
+    "links_added_by_ue": []
+  },
+  "version": 0.4
+}
