@@ -42,6 +42,12 @@ interface CatalogItem {
     preview_url?: string | null;
 }
 
+interface UploadTarget {
+    key: string;
+    label: string;
+    path: string;
+}
+
 const FAMILY_PACKS: Record<LoRAFamily, PackConfig[]> = {
     'z-image':    [
         { key: 'zimage_turbo', title: 'Z-Image Turbo Celeb Pack', subtitle: 'pmczip/Z-Image-Turbo_Models' },
@@ -154,10 +160,43 @@ export const LoRADownloader = ({ family = 'z-image' }: LoRADownloaderProps) => {
     const [packStatus, setPackStatus]         = useState<Record<string, any>>({});
     const [packCatalog, setPackCatalog]       = useState<Record<string, any>>({});
     const [previewSearch, setPreviewSearch]   = useState('');
+    const [uploadTargets, setUploadTargets]   = useState<UploadTarget[]>([]);
+    const [selectedTarget, setSelectedTarget] = useState('zimage_turbo');
+    const [uploading, setUploading]           = useState(false);
+    const [uploadStatus, setUploadStatus]     = useState('');
+    const [dragActive, setDragActive]         = useState(false);
 
     const isZImage = family === 'z-image';
     const packs    = FAMILY_PACKS[family] || [];
     const title    = FAMILY_LABELS[family] || 'Library';
+
+    useEffect(() => {
+        const targetByFamily: Record<string, string> = {
+            'z-image': 'zimage_turbo',
+            flux2klein: 'flux2klein',
+            flux1dev: 'flux1dev',
+            qwen: 'qwen',
+            wan: 'wan22',
+            sd15: 'sd15',
+            sd15_lycoris: 'sd15_lycoris',
+            sdxl: 'sdxl',
+            ltx: 'ltx',
+        };
+        setSelectedTarget(targetByFamily[family] || 'imported');
+    }, [family]);
+
+    useEffect(() => {
+        const fetchTargets = async () => {
+            try {
+                const r = await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.LORA_UPLOAD_TARGETS}`);
+                const d = await r.json();
+                if (d?.success && Array.isArray(d.targets)) {
+                    setUploadTargets(d.targets);
+                }
+            } catch {}
+        };
+        fetchTargets();
+    }, []);
 
     // ─── Status polling ───────────────────────────────────────────────────
     const checkStatus = useCallback(async () => {
@@ -245,7 +284,7 @@ export const LoRADownloader = ({ family = 'z-image' }: LoRADownloaderProps) => {
             const r = await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.LORA_IMPORT_URL}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: importUrl.trim() }),
+                body: JSON.stringify({ url: importUrl.trim(), target: selectedTarget }),
             });
             const d = await r.json();
             if (d.success) setImportJobId(d.job_id);
@@ -307,6 +346,41 @@ export const LoRADownloader = ({ family = 'z-image' }: LoRADownloaderProps) => {
     const filteredPreview = previewSearch.trim()
         ? previewItems.filter(i => i.name.toLowerCase().includes(previewSearch.toLowerCase()))
         : previewItems;
+
+    const uploadFile = async (file: File) => {
+        if (!file) return;
+        const name = file.name.toLowerCase();
+        if (!name.endsWith('.safetensors') && !name.endsWith('.json')) {
+            setUploadStatus('Unsupported file type. Use .safetensors or .json');
+            return;
+        }
+        setUploading(true);
+        setUploadStatus(`Uploading ${file.name}...`);
+        try {
+            const form = new FormData();
+            form.append('file', file);
+            form.append('target', selectedTarget);
+            const resp = await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.LORA_UPLOAD}`, {
+                method: 'POST',
+                body: form,
+            });
+            const data = await resp.json();
+            if (data?.success) {
+                if (name.endsWith('.json')) {
+                    setUploadStatus(`Manifest queued: ${data.queued_count || 0} item(s)`);
+                } else {
+                    setUploadStatus(`Uploaded: ${data.filename || file.name}`);
+                }
+                setTimeout(checkStatus, 500);
+            } else {
+                setUploadStatus(data?.error || 'Upload failed');
+            }
+        } catch (e: any) {
+            setUploadStatus(e?.message || 'Upload failed');
+        } finally {
+            setUploading(false);
+        }
+    };
 
     return (
         <CatalogShell
@@ -383,6 +457,71 @@ export const LoRADownloader = ({ family = 'z-image' }: LoRADownloaderProps) => {
                     >
                         {importJobId ? 'Processing...' : 'Import'}
                     </button>
+                </div>
+
+                {/* ── Drag/drop upload ── */}
+                <div
+                    className={`bg-white/[0.02] border rounded-3xl p-6 flex flex-col gap-4 transition-all ${
+                        dragActive ? 'border-cyan-400/60 bg-cyan-500/10' : 'border-white/10'
+                    }`}
+                    onDragOver={(e) => {
+                        e.preventDefault();
+                        setDragActive(true);
+                    }}
+                    onDragLeave={(e) => {
+                        e.preventDefault();
+                        setDragActive(false);
+                    }}
+                    onDrop={(e) => {
+                        e.preventDefault();
+                        setDragActive(false);
+                        const dropped = e.dataTransfer.files?.[0];
+                        if (dropped) void uploadFile(dropped);
+                    }}
+                >
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+                            {uploading ? <Loader2 className="w-5 h-5 text-cyan-300 animate-spin" /> : <DownloadCloud className="w-5 h-5 text-cyan-300" />}
+                        </div>
+                        <div>
+                            <h3 className="text-sm font-bold text-white/80">Drag & Drop LoRA / Manifest</h3>
+                            <p className="text-[10px] text-white/40 uppercase tracking-widest">.safetensors or .json</p>
+                        </div>
+                    </div>
+
+                    <label className="text-[10px] font-black uppercase tracking-widest text-white/40">Destination Folder</label>
+                    <select
+                        value={selectedTarget}
+                        onChange={(e) => setSelectedTarget(e.target.value)}
+                        className="w-full bg-[#0a0a0f] border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white/80 focus:outline-none focus:border-cyan-500/40"
+                    >
+                        {(uploadTargets.length ? uploadTargets : [{ key: 'imported', label: 'Imported', path: 'imported' }]).map((t) => (
+                            <option key={t.key} value={t.key}>
+                                {t.label} ({t.path})
+                            </option>
+                        ))}
+                    </select>
+
+                    <div className="border border-dashed border-white/20 rounded-2xl px-4 py-6 text-center text-xs text-white/50">
+                        Drop file here, or
+                        <label className="ml-1 underline text-cyan-300 cursor-pointer">
+                            browse
+                            <input
+                                type="file"
+                                accept=".safetensors,.json"
+                                className="hidden"
+                                onChange={(e) => {
+                                    const f = e.target.files?.[0];
+                                    if (f) void uploadFile(f);
+                                    e.currentTarget.value = '';
+                                }}
+                            />
+                        </label>
+                    </div>
+
+                    {uploadStatus && (
+                        <p className="text-[10px] text-slate-400 font-bold tracking-widest">{uploadStatus}</p>
+                    )}
                 </div>
 
             </div>

@@ -707,6 +707,27 @@ if (Test-Path $FrontendDir) {
 # ============================================================================
 Write-Header "STEP 6/7 - Assets & Configuration"
 
+# Ensure predictable LoRA subfolder structure for drag/drop import in UI.
+$LoRABase = Join-Path $ComfyDir "models\loras"
+$LoRATargets = @(
+    "zimage_turbo",
+    "zimage_custom",
+    "flux2klein",
+    "flux1dev",
+    "qwen",
+    "wan22",
+    "ltx",
+    "sd15",
+    "sd15-lycoris",
+    "sdxl",
+    "imported"
+)
+foreach ($target in $LoRATargets) {
+    $path = Join-Path $LoRABase $target
+    if (-not (Test-Path $path)) { New-Item -ItemType Directory -Path $path -Force | Out-Null }
+}
+Write-Step "LoRA folder structure ensured." "Green"
+
 # styles.csv
 $StylesSrc = Join-Path $RootPath "assets\styles.csv"
 if (Test-Path $StylesSrc) {

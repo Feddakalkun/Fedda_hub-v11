@@ -2012,6 +2012,10 @@ async def ensure_zimage_core_models(payload: Optional[Dict[str, Any]] = None):
 # ─────────────────────────────────────────────
 # LoRA Library
 # ─────────────────────────────────────────────
+try:
+    lora_service.ensure_folder_structure()
+except Exception:
+    pass
 
 @app.get("/api/lora/list")
 async def lora_list(prefix: str = ""):
@@ -2074,10 +2078,51 @@ class ImportUrlRequest(BaseModel):
     url: str
     hf_token: Optional[str] = None
     civitai_token: Optional[str] = None
+    target: Optional[str] = None
 
 @app.post("/api/lora/import-url")
 async def lora_import_url(req: ImportUrlRequest):
-    return lora_service.import_from_url(req.url, req.hf_token, req.civitai_token)
+    return lora_service.import_from_url(req.url, req.hf_token, req.civitai_token, req.target)
+
+
+@app.get("/api/lora/upload-targets")
+async def lora_upload_targets():
+    return lora_service.get_upload_targets()
+
+
+@app.post("/api/lora/upload")
+async def lora_upload(
+    file: UploadFile = File(...),
+    target: str = Form("imported"),
+    hf_token: Optional[str] = Form(None),
+    civitai_token: Optional[str] = Form(None),
+):
+    """
+    Drag/drop LoRA import:
+    - .safetensors: saved directly to selected target subfolder
+    - .json: treated as manifest, queues URL downloads into target subfolder
+    """
+    try:
+        filename = file.filename or "upload.bin"
+        content = await file.read()
+        lower = filename.lower()
+
+        if lower.endswith(".safetensors"):
+            return lora_service.upload_lora_file(filename, content, target_key=target)
+
+        if lower.endswith(".json"):
+            text = content.decode("utf-8", errors="replace")
+            return lora_service.import_from_json_manifest(
+                filename=filename,
+                content=text,
+                default_target_key=target,
+                hf_token=hf_token,
+                civitai_token=civitai_token,
+            )
+
+        return {"success": False, "error": "Unsupported upload type. Use .safetensors or .json manifest."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.post("/api/download/video")

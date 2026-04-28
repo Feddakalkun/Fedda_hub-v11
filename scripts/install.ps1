@@ -974,6 +974,27 @@ Pause-Step
 # 8. Install Custom Assets (styles.csv only - workflows excluded in free version)
 Write-Log "`n[ComfyUI 8/9] Installing Custom Assets..."
 
+# Ensure predictable LoRA subfolder structure for UI upload/import.
+$LoRABase = Join-Path $ComfyDir "models\loras"
+$LoRATargets = @(
+    "zimage_turbo",
+    "zimage_custom",
+    "flux2klein",
+    "flux1dev",
+    "qwen",
+    "wan22",
+    "ltx",
+    "sd15",
+    "sd15-lycoris",
+    "sdxl",
+    "imported"
+)
+foreach ($target in $LoRATargets) {
+    $path = Join-Path $LoRABase $target
+    if (-not (Test-Path $path)) { New-Item -ItemType Directory -Path $path -Force | Out-Null }
+}
+Write-Log "LoRA folder structure ensured."
+
 # Install styles.csv to ComfyUI root
 $StylesSrc = Join-Path $RootPath "assets\styles.csv"
 if (Test-Path $StylesSrc) {

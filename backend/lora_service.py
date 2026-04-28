@@ -7,6 +7,7 @@ Preview images: prefers /lora-previews/<pack_key>/<Basename>.jpg stored in GitHu
 falls back to the HuggingFace-hosted image if not present locally.
 """
 
+import json
 import threading
 import time
 import uuid
@@ -115,6 +116,19 @@ class LoRAService:
         # Import jobs: job_id → { status, progress, filename, message? }
         self._import_jobs: Dict[str, Dict[str, Any]] = {}
         self._lock = threading.Lock()
+        self.upload_targets: Dict[str, Dict[str, str]] = {
+            "zimage_turbo": {"label": "Z-Image Turbo", "path": "zimage_turbo"},
+            "zimage_custom": {"label": "Z-Image Custom", "path": "zimage_custom"},
+            "flux2klein": {"label": "FLUX2KLEIN", "path": "flux2klein"},
+            "flux1dev": {"label": "FLUX.1-dev", "path": "flux1dev"},
+            "qwen": {"label": "Qwen", "path": "qwen"},
+            "wan22": {"label": "WAN 2.2", "path": "wan22"},
+            "ltx": {"label": "LTX", "path": "ltx"},
+            "sd15": {"label": "SD1.5", "path": "sd15"},
+            "sd15_lycoris": {"label": "SD1.5 LyCORIS", "path": "sd15-lycoris"},
+            "sdxl": {"label": "SDXL", "path": "sdxl"},
+            "imported": {"label": "Imported", "path": "imported"},
+        }
 
     # ─── Runtime token helpers ─────────────────────────────────────────────
 
@@ -243,6 +257,30 @@ class LoRAService:
     def list_lora_names(self) -> List[str]:
         """Return relative paths of installed LoRAs for use in ComfyUI (relative to loras dir)."""
         return [info["path"] for info in self.get_installed().values()]
+
+    def ensure_folder_structure(self) -> Dict[str, Any]:
+        created: List[str] = []
+        for key, cfg in self.upload_targets.items():
+            p = self.lora_dir / cfg["path"]
+            if not p.exists():
+                p.mkdir(parents=True, exist_ok=True)
+                created.append(str(p.relative_to(self.lora_dir)))
+        return {"success": True, "created": created, "total_targets": len(self.upload_targets)}
+
+    def get_upload_targets(self) -> Dict[str, Any]:
+        return {
+            "success": True,
+            "targets": [
+                {"key": key, "label": cfg["label"], "path": cfg["path"]}
+                for key, cfg in self.upload_targets.items()
+            ],
+        }
+
+    def _resolve_target_path(self, target_key: Optional[str], fallback_key: str = "imported") -> Path:
+        key = (target_key or "").strip().lower()
+        if key in self.upload_targets:
+            return self.lora_dir / self.upload_targets[key]["path"]
+        return self.lora_dir / self.upload_targets[fallback_key]["path"]
 
     # ─── Pack catalog & status ──────────────────────────────────────────────
 
@@ -435,11 +473,13 @@ class LoRAService:
         url: str,
         hf_token: Optional[str] = None,
         civitai_token: Optional[str] = None,
+        target_key: Optional[str] = None,
     ) -> Dict[str, Any]:
         raw_name = url.split("?")[0].split("/")[-1]
         filename = raw_name if raw_name.endswith(".safetensors") else raw_name + ".safetensors"
         job_id   = str(uuid.uuid4())[:8]
-        dest     = self.lora_dir / "imported" / filename
+        dest_dir = self._resolve_target_path(target_key, fallback_key="imported")
+        dest     = dest_dir / filename
 
         with self._lock:
             self._import_jobs[job_id] = {"status": "queued", "progress": 0, "filename": filename}
@@ -481,6 +521,90 @@ class LoRAService:
 
         threading.Thread(target=_task, daemon=True).start()
         return {"success": True, "job_id": job_id, "filename": filename}
+
+    def upload_lora_file(self, filename: str, content: bytes, target_key: Optional[str] = None) -> Dict[str, Any]:
+        if not filename:
+            return {"success": False, "error": "Missing filename"}
+        if not filename.lower().endswith(".safetensors"):
+            return {"success": False, "error": "Only .safetensors files are supported for direct upload"}
+        if not content or len(content) < 1024:
+            return {"success": False, "error": "Uploaded file is empty or invalid"}
+
+        safe_name = Path(filename).name
+        dest_dir = self._resolve_target_path(target_key, fallback_key="imported")
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        dest = dest_dir / safe_name
+
+        with open(dest, "wb") as fh:
+            fh.write(content)
+
+        return {
+            "success": True,
+            "status": "uploaded",
+            "filename": safe_name,
+            "path": str(dest.relative_to(self.lora_dir)).replace("\\", "/"),
+        }
+
+    def import_from_json_manifest(
+        self,
+        filename: str,
+        content: str,
+        default_target_key: Optional[str] = None,
+        hf_token: Optional[str] = None,
+        civitai_token: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        try:
+            payload = json.loads(content)
+        except Exception as exc:
+            return {"success": False, "error": f"Invalid JSON manifest: {exc}"}
+
+        entries: List[Dict[str, Any]] = []
+        if isinstance(payload, dict) and isinstance(payload.get("loras"), list):
+            for item in payload.get("loras", []):
+                if isinstance(item, dict):
+                    entries.append(item)
+        elif isinstance(payload, dict):
+            entries.append(payload)
+        elif isinstance(payload, list):
+            for item in payload:
+                if isinstance(item, dict):
+                    entries.append(item)
+
+        if not entries:
+            return {"success": False, "error": "Manifest has no LoRA entries"}
+
+        queued: List[Dict[str, Any]] = []
+        errors: List[str] = []
+
+        for entry in entries:
+            url = str(entry.get("url") or entry.get("download_url") or "").strip()
+            if not url:
+                errors.append(f"Missing url/download_url in entry: {entry}")
+                continue
+            target_key = str(entry.get("target") or entry.get("family") or default_target_key or "imported").strip().lower()
+            result = self.import_from_url(
+                url=url,
+                hf_token=hf_token,
+                civitai_token=civitai_token,
+                target_key=target_key,
+            )
+            if result.get("success"):
+                queued.append({
+                    "url": url,
+                    "job_id": result.get("job_id"),
+                    "filename": result.get("filename"),
+                    "target": target_key,
+                })
+            else:
+                errors.append(str(result.get("error") or f"Failed to queue {url}"))
+
+        return {
+            "success": len(queued) > 0,
+            "manifest": filename,
+            "queued_count": len(queued),
+            "queued": queued,
+            "errors": errors,
+        }
 
     def get_import_status(self, job_id: str) -> Dict[str, Any]:
         with self._lock:

@@ -68,6 +68,28 @@ if (-not (Test-Path $ComfyDir)) {
     exit 1
 }
 
+# Ensure predictable LoRA folder structure used by UI upload/import.
+$LoRADir = Join-Path $ComfyDir "models\loras"
+$LoRATargets = @(
+    "zimage_turbo",
+    "zimage_custom",
+    "flux2klein",
+    "flux1dev",
+    "qwen",
+    "wan22",
+    "ltx",
+    "sd15",
+    "sd15-lycoris",
+    "sdxl",
+    "imported"
+)
+foreach ($target in $LoRATargets) {
+    $p = Join-Path $LoRADir $target
+    if (-not (Test-Path $p)) {
+        New-Item -ItemType Directory -Path $p -Force | Out-Null
+    }
+}
+
 # ============================================================================
 # 0. UPDATE COMFYUI CORE
 # ============================================================================
