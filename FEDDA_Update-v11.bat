@@ -51,11 +51,18 @@ if not exist "%TARGET_DIR%\scripts\install_lite.ps1" (
     exit /b 1
 )
 
-call :cleanup_install_root_launchers
 call :ensure_root_run_launcher
 
 echo  [INFO] Updating %TARGET_NAME%...
 pushd "%TARGET_DIR%" >nul
+
+for /f %%u in ('git diff --name-only --diff-filter=U 2^>nul ^| find /c /v ""') do set "HAS_UNMERGED=%%u"
+if not "!HAS_UNMERGED!"=="0" (
+    echo  [WARN] Previous git conflict state detected. Attempting auto-recovery...
+    git merge --abort >nul 2>&1
+    git rebase --abort >nul 2>&1
+    git reset --merge >nul 2>&1
+)
 
 set "ORIGIN_URL="
 for /f "delims=" %%r in ('git remote get-url origin 2^>nul') do set "ORIGIN_URL=%%r"
@@ -105,10 +112,14 @@ if %errorlevel% neq 0 (
 
 git checkout %REPO_BRANCH% >nul 2>&1
 if %errorlevel% neq 0 (
-    echo  [ERROR] git checkout %REPO_BRANCH% failed.
-    popd >nul
-    pause
-    exit /b 1
+    echo  [WARN] git checkout %REPO_BRANCH% failed, attempting branch repair...
+    git checkout -B %REPO_BRANCH% origin/%REPO_BRANCH% >nul 2>&1
+    if %errorlevel% neq 0 (
+        echo  [ERROR] Could not switch to %REPO_BRANCH%.
+        popd >nul
+        pause
+        exit /b 1
+    )
 )
 
 git pull --ff-only origin %REPO_BRANCH%
@@ -186,12 +197,6 @@ echo  Run app:
 echo    "%ROOT_DIR%\FEDDA_run-v11.bat"
 echo.
 pause
-exit /b 0
-
-:cleanup_install_root_launchers
-if exist "%TARGET_DIR%\FEDDA_OneClick_Installer-v11.bat" del /f /q "%TARGET_DIR%\FEDDA_OneClick_Installer-v11.bat" >nul 2>nul
-if exist "%TARGET_DIR%\FEDDA_Update-v11.bat" del /f /q "%TARGET_DIR%\FEDDA_Update-v11.bat" >nul 2>nul
-if exist "%TARGET_DIR%\FEDDA_Push-v11.bat" del /f /q "%TARGET_DIR%\FEDDA_Push-v11.bat" >nul 2>nul
 exit /b 0
 
 :ensure_root_run_launcher
