@@ -781,12 +781,23 @@ Write-Log "Installing PyTorch (CUDA 12.4)..."
 # CUDA 12.4 has latest PyTorch builds and supports GPUs from GTX 1060 to RTX 5090
 Run-Pip "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124"
 if ($LASTEXITCODE -ne 0) {
-    Write-Log "CUDA PyTorch failed, trying CPU fallback..."
-    Run-Pip "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu"
+    Write-Log "CUDA 12.4 torch failed, trying CUDA 12.1 fallback..."
+    Run-Pip "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Log "ERROR: CUDA torch install failed on both cu124 and cu121."
+        throw "PyTorch CUDA install failed"
+    }
 }
 
 Write-Log "Installing Xformers..."
 Run-Pip "install xformers --index-url https://download.pytorch.org/whl/cu124"
+if ($LASTEXITCODE -ne 0) {
+    Write-Log "xformers cu124 wheel failed, trying generic xformers wheel..."
+    Run-Pip "install xformers"
+    if ($LASTEXITCODE -ne 0) {
+        Write-Log "WARNING: xformers unavailable for this GPU/driver combo. Continuing with SDPA fallback."
+    }
+}
 
 Write-Log "Installing ComfyUI requirements..."
 $ReqFile = Join-Path $ComfyDir "requirements.txt"

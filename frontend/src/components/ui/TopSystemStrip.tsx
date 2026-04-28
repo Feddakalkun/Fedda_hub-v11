@@ -233,11 +233,11 @@ export const TopSystemStrip = () => {
   };
 
   return (
-    <div className="flex items-center gap-1.5 py-1">
+    <div className="w-full flex flex-wrap items-center gap-2 py-1">
 
       {/* Execution Progress Bar */}
       {state === 'executing' && (
-        <div className="h-7 px-3 rounded-lg border border-cyan-500/30 bg-cyan-500/10 flex items-center gap-2 min-w-[200px]">
+        <div className="h-8 px-3 rounded-lg border border-cyan-500/30 bg-cyan-500/10 flex items-center gap-2 min-w-[240px] flex-1">
            {isDownloaderNode ? (
              <DownloadCloud className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
            ) : (
@@ -272,7 +272,7 @@ export const TopSystemStrip = () => {
       )}
 
       {/* GPU VRAM pill */}
-      <div className="h-7 px-2.5 rounded-lg border border-white/10 bg-white/5 flex items-center gap-1.5 text-xs">
+      <div className="h-8 px-2.5 rounded-lg border border-white/10 bg-white/5 flex items-center gap-1.5 text-xs min-w-[220px]">
         <Zap className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
         {gpu ? (
           <>
@@ -305,7 +305,7 @@ export const TopSystemStrip = () => {
       </div>
 
       {/* System RAM pill */}
-      <div className="h-7 px-2.5 rounded-lg border border-white/10 bg-white/5 flex items-center gap-1.5 text-xs">
+      <div className="h-8 px-2.5 rounded-lg border border-white/10 bg-white/5 flex items-center gap-1.5 text-xs min-w-[200px]">
         <span className="text-slate-300 font-medium">RAM</span>
         {systemRam ? (
           <>
@@ -334,7 +334,7 @@ export const TopSystemStrip = () => {
       </div>
 
       {/* Ollama model selectors */}
-      <div className="h-7 px-2 rounded-lg border border-white/10 bg-white/5 flex items-center gap-1.5">
+      <div className="h-8 px-2 rounded-lg border border-white/10 bg-white/5 flex items-center gap-1.5 min-w-[300px]">
         <span className="text-[10px] uppercase tracking-wider text-slate-400">LLM</span>
         <select
           value={selectedTextModel}
@@ -344,7 +344,7 @@ export const TopSystemStrip = () => {
             void persistModelSelection(next, selectedVisionModel);
           }}
           disabled={!ollama.isConnected || savingModelSelection || (ollamaTextModels.length === 0 && ollamaModels.length === 0)}
-          className="h-6 min-w-[170px] bg-black/40 border border-white/10 rounded px-2 text-[11px] text-slate-200 disabled:opacity-50"
+          className="h-6 w-[230px] max-w-[230px] bg-black/40 border border-white/10 rounded px-2 text-[11px] text-slate-200 disabled:opacity-50"
           title="Model used for Enhance/Generate prompt operations"
         >
           <option value="">Auto</option>
@@ -354,7 +354,7 @@ export const TopSystemStrip = () => {
         </select>
       </div>
 
-      <div className="h-8 px-2 rounded-lg border border-white/10 bg-white/5 flex items-center gap-2">
+      <div className="h-8 px-2 rounded-lg border border-white/10 bg-white/5 flex items-center gap-1.5 min-w-[300px]">
         <span className="text-[10px] uppercase tracking-wider text-slate-400">Caption</span>
         <select
           value={selectedVisionModel}
@@ -364,7 +364,7 @@ export const TopSystemStrip = () => {
             void persistModelSelection(selectedTextModel, next);
           }}
           disabled={!ollama.isConnected || savingModelSelection || (ollamaVisionModels.length === 0 && ollamaModels.length === 0)}
-          className="h-6 min-w-[170px] bg-black/40 border border-white/10 rounded px-2 text-[11px] text-slate-200 disabled:opacity-50"
+          className="h-6 w-[230px] max-w-[230px] bg-black/40 border border-white/10 rounded px-2 text-[11px] text-slate-200 disabled:opacity-50"
           title="Vision model used for image-to-caption prompt assist"
         >
           <option value="">Auto</option>
@@ -380,7 +380,7 @@ export const TopSystemStrip = () => {
         onClick={handlePurge}
         disabled={purging || !comfy.isConnected}
         title="Purge VRAM — unload all models"
-        className="h-7 px-2.5 rounded-lg border border-red-500/25 bg-red-500/8 hover:bg-red-500/18 text-red-300 text-[10px] font-bold transition-all disabled:opacity-40 flex items-center gap-1"
+        className="h-8 px-2.5 rounded-lg border border-red-500/25 bg-red-500/8 hover:bg-red-500/18 text-red-300 text-[10px] font-bold transition-all disabled:opacity-40 flex items-center gap-1 whitespace-nowrap"
       >
         {purging ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
         {purging ? 'Purging' : 'Purge VRAM'}
@@ -390,7 +390,7 @@ export const TopSystemStrip = () => {
         onClick={handleCivitaiKey}
         disabled={civitaiSaving}
         title="Save Civitai API key for Civitai model downloads"
-        className={`h-7 px-2.5 rounded-lg border text-[10px] font-bold transition-all flex items-center gap-1 disabled:opacity-40 ${
+        className={`h-8 px-2.5 rounded-lg border text-[10px] font-bold transition-all flex items-center gap-1 disabled:opacity-40 whitespace-nowrap ${
           civitaiConfigured
             ? 'border-sky-500/30 bg-sky-500/10 text-sky-300 hover:bg-sky-500/18'
             : 'border-amber-500/30 bg-amber-500/10 text-amber-300 hover:bg-amber-500/18'
@@ -404,7 +404,7 @@ export const TopSystemStrip = () => {
         onClick={handleHfToken}
         disabled={hfSaving}
         title="Save Hugging Face token for gated model downloads"
-        className={`h-7 px-2.5 rounded-lg border text-[10px] font-bold transition-all flex items-center gap-1 disabled:opacity-40 ${
+        className={`h-8 px-2.5 rounded-lg border text-[10px] font-bold transition-all flex items-center gap-1 disabled:opacity-40 whitespace-nowrap ${
           hfConfigured
             ? 'border-sky-500/30 bg-sky-500/10 text-sky-300 hover:bg-sky-500/18'
             : 'border-amber-500/30 bg-amber-500/10 text-amber-300 hover:bg-amber-500/18'
@@ -415,7 +415,7 @@ export const TopSystemStrip = () => {
       </button>
 
       {/* ComfyUI status */}
-      <div className={`h-7 px-2.5 rounded-lg border text-[10px] font-bold flex items-center gap-1 ${
+      <div className={`h-8 px-2.5 rounded-lg border text-[10px] font-bold flex items-center gap-1 whitespace-nowrap ${
         comfy.isConnected
           ? 'border-emerald-500/30 bg-emerald-500/8 text-emerald-300'
           : 'border-white/10 bg-white/5 text-slate-500'
@@ -428,7 +428,7 @@ export const TopSystemStrip = () => {
       </div>
 
       {/* Ollama status */}
-      <div className={`h-7 px-2.5 rounded-lg border text-[10px] font-bold flex items-center gap-1 ${
+      <div className={`h-8 px-2.5 rounded-lg border text-[10px] font-bold flex items-center gap-1 whitespace-nowrap ${
         ollama.isConnected
           ? 'border-emerald-500/30 bg-emerald-500/8 text-emerald-300'
           : 'border-white/10 bg-white/5 text-slate-500'

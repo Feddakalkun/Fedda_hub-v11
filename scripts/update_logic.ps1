@@ -348,7 +348,7 @@ if (Test-Path $FrontendDir) {
                 Write-Host "  Frontend dependencies updated." -ForegroundColor Green
             }
             else {
-    Write-Host "  [WARNING] npm not found - run FEDDA_OneClick_Installer-v11.bat first" -ForegroundColor Yellow
+    Write-Host "  [WARNING] npm not found in PATH - skipping frontend npm refresh (app can still run)." -ForegroundColor Yellow
             }
         }
     } else {
@@ -449,3 +449,4 @@ if (-not $SilentMode) {
     Write-Host "===================================================" -ForegroundColor Green
     Write-Host "Run RUN.bat to start FEDDA."
 }
+

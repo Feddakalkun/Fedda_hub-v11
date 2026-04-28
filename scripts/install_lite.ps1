@@ -443,6 +443,64 @@ function Venv-Pip {
     }
 }
 
+function Get-NvidiaGpuProfile {
+    $profile = [ordered]@{
+        Name = "Unknown NVIDIA GPU"
+        Driver = "Unknown"
+        VramMB = 0
+        Series = "unknown"
+        HasNvidiaSmi = $false
+    }
+
+    $smi = Get-Command "nvidia-smi" -ErrorAction SilentlyContinue
+    if (-not $smi) {
+        return [pscustomobject]$profile
+    }
+
+    $profile.HasNvidiaSmi = $true
+    try {
+        $query = & nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader,nounits 2>$null | Select-Object -First 1
+        if ($query) {
+            $parts = $query -split ","
+            if ($parts.Count -ge 3) {
+                $profile.Name = $parts[0].Trim()
+                $profile.Driver = $parts[1].Trim()
+                $profile.VramMB = [int]($parts[2].Trim())
+            }
+        }
+    } catch {}
+
+    if ($profile.Name -match "RTX 50\d\d") {
+        $profile.Series = "50"
+    } elseif ($profile.Name -match "RTX 40\d\d") {
+        $profile.Series = "40"
+    } elseif ($profile.Name -match "RTX 30\d\d") {
+        $profile.Series = "30"
+    } elseif ($profile.Name -match "RTX 20\d\d|GTX 16\d\d|GTX 10\d\d") {
+        $profile.Series = "legacy"
+    }
+
+    return [pscustomobject]$profile
+}
+
+function Install-PipWithFallback {
+    param(
+        [string]$PrimaryArgs,
+        [string]$FallbackArgs,
+        [string]$Label
+    )
+    Write-Step "$Label (primary)..."
+    & $VenvPy -m pip $PrimaryArgs --no-warn-script-location
+    if ($LASTEXITCODE -eq 0) { return $true }
+
+    Write-Step "$Label primary failed, trying fallback..." "Yellow"
+    & $VenvPy -m pip $FallbackArgs --no-warn-script-location
+    if ($LASTEXITCODE -eq 0) { return $true }
+
+    Write-Step "$Label failed after fallback." "Red"
+    return $false
+}
+
 # ============================================================================
 # 2. COMFYUI
 # ============================================================================
@@ -471,11 +529,32 @@ if (-not (Test-Path $ComfyDir)) {
 # ============================================================================
 Write-Header "STEP 3/7 - PyTorch + Dependencies"
 
-Write-Step "Installing PyTorch (CUDA 12.4)... this takes a few minutes"
-Venv-Pip "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124"
+$GpuProfile = Get-NvidiaGpuProfile
+Write-Step "GPU profile: $($GpuProfile.Name) | Driver $($GpuProfile.Driver) | VRAM $([math]::Round($GpuProfile.VramMB / 1024,1)) GB"
 
-Write-Step "Installing xformers..."
-Venv-Pip "install xformers --index-url https://download.pytorch.org/whl/cu124"
+Write-Step "Installing PyTorch CUDA stack (cu124)... this takes a few minutes"
+$TorchOk = Install-PipWithFallback `
+    -PrimaryArgs "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124" `
+    -FallbackArgs "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121" `
+    -Label "PyTorch CUDA"
+
+if (-not $TorchOk) {
+    throw "PyTorch CUDA installation failed for this system."
+}
+
+Write-Step "Installing xformers (optional performance package)..."
+& $VenvPy -m pip install xformers --index-url https://download.pytorch.org/whl/cu124 --no-warn-script-location
+if ($LASTEXITCODE -ne 0) {
+    Write-Step "xformers install failed on cu124, trying default wheel..." "Yellow"
+    & $VenvPy -m pip install xformers --no-warn-script-location
+    if ($LASTEXITCODE -ne 0) {
+        Write-Step "xformers unavailable for this GPU/driver combo. Continuing with PyTorch SDPA fallback." "Yellow"
+    } else {
+        Write-Step "xformers installed via fallback wheel." "Green"
+    }
+} else {
+    Write-Step "xformers installed (cu124)." "Green"
+}
 
 Write-Step "Installing ComfyUI requirements..."
 $ComfyReq = Join-Path $ComfyDir "requirements.txt"
@@ -509,11 +588,10 @@ $Deps = @(
 )
 Venv-Pip "install $($Deps -join ' ')"
 
-# SageAttention for 40/50-series
+# SageAttention for 40/50-series (best effort only)
 try {
-    $GPUName = (Get-CimInstance Win32_VideoController | Where-Object { $_.Name -match "NVIDIA" } | Select-Object -First 1).Name
-    if ($GPUName -match "RTX 40\d\d" -or $GPUName -match "RTX 50\d\d") {
-        Write-Step "RTX 40/50 series detected - installing SageAttention..."
+    if ($GpuProfile.Series -eq "40" -or $GpuProfile.Series -eq "50") {
+        Write-Step "RTX 40/50-series detected - attempting SageAttention install..."
         Venv-Pip "install sageattention"
     }
 } catch {}

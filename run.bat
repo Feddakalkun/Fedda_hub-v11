@@ -283,6 +283,7 @@ set "COMFYUI_DIR=%BASE_DIR%\ComfyUI"
 
 :: Detect Python (call detect_env subroutine)
 call :detect_env
+call :set_comfy_gpu_profile
 
 set COMFYUI_OFFLINE=1
 set TORIO_USE_FFMPEG=0
@@ -321,10 +322,62 @@ if exist "%MANAGER_REQ%" (
 )
 
 echo [%date% %time%] Starting ComfyUI...
-"%PYTHON%" -W ignore::FutureWarning -s -u main.py %COMFY_EXTRA_FLAGS% --port 8199 --listen 127.0.0.1 --reserve-vram 4 --disable-cuda-malloc --enable-cors-header * --preview-method auto --disable-auto-launch --enable-manager --enable-manager-legacy-ui
+echo [%date% %time%] Comfy profile: GPU=%FEDDA_GPU_NAME% ^| VRAM=%FEDDA_GPU_VRAM_GB%GB ^| reserve=%COMFY_VRAM_RESERVE% ^| cudaMalloc=%COMFY_CUDA_MALLOC_MODE%
+"%PYTHON%" -W ignore::FutureWarning -s -u main.py %COMFY_EXTRA_FLAGS% --port 8199 --listen 127.0.0.1 --reserve-vram %COMFY_VRAM_RESERVE% %COMFY_CUDA_MALLOC_FLAG% --enable-cors-header * --preview-method auto --disable-auto-launch --enable-manager --enable-manager-legacy-ui
 
 if %errorlevel% neq 0 (
     echo [%date% %time%] [ERROR] ComfyUI crashed with error code %errorlevel%
+)
+exit /b
+
+:: ============================================================================
+:: SUBROUTINE: GPU-ADAPTIVE COMFY PROFILE
+:: ============================================================================
+:set_comfy_gpu_profile
+set "FEDDA_GPU_NAME=unknown"
+set "FEDDA_GPU_VRAM_MB=0"
+set "FEDDA_GPU_VRAM_GB=0"
+set "COMFY_VRAM_RESERVE=4"
+set "COMFY_CUDA_MALLOC_FLAG=--disable-cuda-malloc"
+set "COMFY_CUDA_MALLOC_MODE=disabled"
+
+for /f "usebackq delims=" %%L in (`powershell -NoProfile -ExecutionPolicy Bypass -Command "try { $o = & nvidia-smi --query-gpu=name,memory.total --format=csv,noheader,nounits 2>$null | Select-Object -First 1; if($o){ $p=$o -split ','; $name=$p[0].Trim(); $mem=[int]($p[1].Trim()); Write-Output ($name + '|' + $mem) } } catch {}"`) do (
+    for /f "tokens=1,2 delims=|" %%A in ("%%L") do (
+        set "FEDDA_GPU_NAME=%%A"
+        set "FEDDA_GPU_VRAM_MB=%%B"
+    )
+)
+
+if not "%FEDDA_GPU_VRAM_MB%"=="0" (
+    set /a FEDDA_GPU_VRAM_GB=%FEDDA_GPU_VRAM_MB%/1024
+)
+
+echo %FEDDA_GPU_NAME% | findstr /R /C:"RTX 50[0-9][0-9]" >nul
+if not errorlevel 1 (
+    set "COMFY_VRAM_RESERVE=2"
+    set "COMFY_CUDA_MALLOC_FLAG="
+    set "COMFY_CUDA_MALLOC_MODE=enabled"
+    exit /b
+)
+
+echo %FEDDA_GPU_NAME% | findstr /R /C:"RTX 40[0-9][0-9]" >nul
+if not errorlevel 1 (
+    if %FEDDA_GPU_VRAM_MB% GEQ 20000 (
+        set "COMFY_VRAM_RESERVE=2"
+    ) else (
+        set "COMFY_VRAM_RESERVE=3"
+    )
+    set "COMFY_CUDA_MALLOC_FLAG="
+    set "COMFY_CUDA_MALLOC_MODE=enabled"
+    exit /b
+)
+
+if %FEDDA_GPU_VRAM_MB% LEQ 9000 (
+    set "COMFY_VRAM_RESERVE=6"
+) else if %FEDDA_GPU_VRAM_MB% LEQ 13000 (
+    set "COMFY_VRAM_RESERVE=5"
+) else (
+    set "COMFY_VRAM_RESERVE=4"
 )
 exit /b
 

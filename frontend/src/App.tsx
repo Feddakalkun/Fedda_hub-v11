@@ -247,33 +247,6 @@ function FeddaApp() {
     description: 'Active workspace view.',
     Icon: Sparkles,
   };
-  const tabSectionMap: Record<string, Exclude<RootSection, 'hub'>> = {
-    image: 'image',
-    'z-image': 'image',
-    'z-image-txt2img': 'image',
-    'z-image-dual-lora': 'image',
-    flux: 'image',
-    'flux-txt2img': 'image',
-    qwen: 'image',
-    'qwen-txt2img': 'image',
-    'qwen-image-ref': 'image',
-    'qwen-multi-angle': 'image',
-    'image-other': 'image',
-    'image-influencer': 'image',
-    video: 'video',
-    'wan21-steady-dancer': 'video',
-    'wan22-vid2vid': 'video',
-    'wan22-img2vid': 'video',
-    'wan22-img2vid-6frames': 'video',
-    ltx: 'video',
-    'ltx-flf': 'video',
-    'ltx-img-audio': 'video',
-    audio: 'video',
-    gallery: 'explore',
-    videos: 'explore',
-    library: 'explore',
-    chat: 'explore',
-  };
   const sectionHeaderMeta: Record<Exclude<RootSection, 'hub'>, { label: string; description: string; Icon: typeof Sparkles }> = {
     image: {
       label: 'Image Studio',
@@ -302,9 +275,6 @@ function FeddaApp() {
             description: 'Cards-first navigation shell',
             Icon: Sparkles,
           };
-  const workspaceSection =
-    view === 'workspace' ? sectionHeaderMeta[tabSectionMap[activeTab] ?? 'explore'].label : null;
-
   const openWorkspace = (tab: string, origin: 'hub' | 'section') => {
     if (!VALID_TABS.has(tab)) return;
     setActiveTab(tab);
@@ -387,13 +357,7 @@ function FeddaApp() {
                 <p className="text-sm font-bold tracking-tight text-white/90">{headerMeta.label}</p>
                 {/* description hidden on small headers or moved to hover if needed, but for now we keep it clean */}
               </div>
-              {workspaceSection && (
-                <div className="hidden lg:flex items-center gap-2 ml-3 text-[10px] uppercase font-black tracking-widest text-white/20">
-                  <span className="px-2 py-0.5 rounded border border-white/5 bg-white/[0.02]">{workspaceSection}</span>
-                  <span className="text-[8px] opacity-50">/</span>
-                  <span className="text-white/40">{headerMeta.label}</span>
-                </div>
-              )}
+              
             </div>
             
             <div className="flex items-center gap-4">
@@ -406,7 +370,7 @@ function FeddaApp() {
           </div>
 
           {/* Row 2: Technical System Strip */}
-          <div className="h-10 px-4 md:px-6 border-t border-white/[0.04] flex items-center bg-black/20 overflow-x-auto no-scrollbar">
+          <div className="px-4 md:px-6 py-1 border-t border-white/[0.04] bg-black/20">
             <TopSystemStrip />
           </div>
         </header>
