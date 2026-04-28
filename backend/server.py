@@ -8,6 +8,7 @@ import os
 import json
 import ast
 import base64
+import shutil
 import subprocess
 import sys
 import sqlite3
@@ -2123,6 +2124,33 @@ async def lora_upload(
         return {"success": False, "error": "Unsupported upload type. Use .safetensors or .json manifest."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/image/promote-output")
+async def promote_output_image(payload: Dict[str, Any]):
+    """
+    Copy an image from Comfy output to Comfy input so it can be reused by
+    workflows that consume input images (e.g. steady dancer subject image).
+    """
+    try:
+        filename = str(payload.get("filename") or "").strip()
+        subfolder = str(payload.get("subfolder") or "").strip()
+        if not filename:
+            return {"success": False, "error": "Missing filename"}
+
+        src = OUTPUT_DIR / subfolder / filename if subfolder else OUTPUT_DIR / filename
+        if not src.exists() or not src.is_file():
+            return {"success": False, "error": f"Output image not found: {src}"}
+
+        stem = Path(filename).stem
+        suffix = Path(filename).suffix or ".png"
+        promoted_name = f"sd_subject_{stem}_{uuid.uuid4().hex[:8]}{suffix}"
+        dst = COMFY_DIR / "input" / promoted_name
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dst)
+        return {"success": True, "filename": promoted_name}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
 
 
 @app.post("/api/download/video")

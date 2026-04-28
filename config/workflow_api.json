@@ -59,6 +59,60 @@
       }
     }
   },
+  "z-image-img2img": {
+    "name": "Z-Image Img2Img",
+    "filename": "z-image/img2img-api.json",
+    "description": "Image-to-image refinement using Z-Image Turbo with optional LoRA stack.",
+    "inputs": {
+      "prompt": {
+        "node_id": "50",
+        "input_key": "string",
+        "type": "string",
+        "label": "Positive Prompt"
+      },
+      "negative": {
+        "node_id": "38",
+        "input_key": "string",
+        "type": "string",
+        "label": "Negative Prompt"
+      },
+      "image": {
+        "node_id": "52",
+        "input_key": "image",
+        "type": "string",
+        "label": "Input Image"
+      },
+      "seed": {
+        "node_id": "49",
+        "input_key": "seed",
+        "type": "number",
+        "label": "Seed"
+      },
+      "steps": {
+        "node_id": "49",
+        "input_key": "steps",
+        "type": "number",
+        "label": "Steps"
+      },
+      "cfg": {
+        "node_id": "49",
+        "input_key": "cfg",
+        "type": "number",
+        "label": "CFG Scale"
+      },
+      "denoise": {
+        "node_id": "49",
+        "input_key": "denoise",
+        "type": "number",
+        "label": "Denoise"
+      },
+      "loras": {
+        "node_id": "127",
+        "type": "loras",
+        "label": "LoRAs"
+      }
+    }
+  },
   "z-image-dual-base": {
     "name": "Z-Image Dual LoRA (Base + Detect)",
     "filename": "z-image/z-image-dual-lora-base.json",
@@ -1134,4 +1188,4 @@
       }
     }
   }
-}
+}

@@ -117,6 +117,7 @@ export const Wan21SteadyDancerPage = () => {
   // Frame Capture
   const [isCapturing, setIsCapturing] = useState(false);
   const [syncingPose, setSyncingPose] = useState(false);
+  const [autoBuildingSubject, setAutoBuildingSubject] = useState(false);
 
   const syncPoseFromVideo = async () => {
     if (!motionVideoFile) {
@@ -150,11 +151,11 @@ export const Wan21SteadyDancerPage = () => {
     }
   };
 
-  const sendToZImage = (filename: string, promptOverride?: string) => {
+  const sendToImageReference = (filename: string, promptOverride?: string) => {
     if (!filename) return;
     try {
       window.localStorage.setItem(
-        'fedda_zimage_handoff',
+        'fedda_zimage_img2img_handoff',
         JSON.stringify({
           source: 'steady-dancer',
           filename,
@@ -163,10 +164,73 @@ export const Wan21SteadyDancerPage = () => {
           created_at: Date.now(),
         }),
       );
-      window.dispatchEvent(new CustomEvent('fedda:navigate', { detail: { tab: 'z-image-txt2img' } }));
-      toast('Sent to Z-Image', 'success');
+      window.dispatchEvent(new CustomEvent('fedda:navigate', { detail: { tab: 'z-image-img2img' } }));
+      toast('Sent to Z-Image Img2Img', 'success');
     } catch {
-      toast('Failed to send handoff to Z-Image', 'error');
+      toast('Failed to send handoff to Z-Image Img2Img', 'error');
+    }
+  };
+
+  const runAutoBuildSubject = async () => {
+    if (!motionVideoFile || autoBuildingSubject) return;
+    setAutoBuildingSubject(true);
+    try {
+      const captured = await handleCaptureFrame();
+      if (!captured) throw new Error('Failed to capture first frame');
+
+      const seedForImg2Img = seed === -1 ? Math.floor(Math.random() * 10_000_000_000) : seed;
+      const gen = await fetchJson<any>(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.GENERATE}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          workflow_id: 'z-image-img2img',
+          params: {
+            prompt: (syncPrompt || prompt || '').trim(),
+            negative: syncNegativePrompt.trim(),
+            image: captured,
+            seed: seedForImg2Img,
+            steps: 9,
+            cfg: 1,
+            denoise: 0.55,
+            ...(loraName ? { loras: [{ name: loraName, strength: syncLoraStrength }] } : {}),
+            client_id: (comfyService as any).clientId,
+          },
+        }),
+      });
+      if (!gen?.success || !gen?.prompt_id) {
+        throw new Error(gen?.detail || 'Failed to start img2img');
+      }
+
+      const promptId = String(gen.prompt_id);
+      let promotedInput: string | null = null;
+
+      for (let i = 0; i < 180; i++) {
+        await new Promise((r) => setTimeout(r, 1000));
+        const st = await fetchJson<any>(`${BACKEND_API.BASE_URL}/api/generate/status/${encodeURIComponent(promptId)}`);
+        const imgs = (st?.images || []) as Array<{ filename: string; subfolder?: string; type?: string }>;
+        if (!imgs.length) continue;
+        const latest = imgs[imgs.length - 1];
+        const promote = await fetchJson<any>(`${BACKEND_API.BASE_URL}/api/image/promote-output`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filename: latest.filename,
+            subfolder: latest.subfolder || '',
+          }),
+        });
+        if (promote?.success && promote?.filename) {
+          promotedInput = String(promote.filename);
+          break;
+        }
+      }
+
+      if (!promotedInput) throw new Error('Timed out waiting for img2img output');
+      setSubjectImageFile(promotedInput);
+      toast('Auto subject ready: capture + img2img complete', 'success');
+    } catch (e: any) {
+      toast(e?.message || 'Auto subject build failed', 'error');
+    } finally {
+      setAutoBuildingSubject(false);
     }
   };
 
@@ -516,22 +580,31 @@ export const Wan21SteadyDancerPage = () => {
                 <div className="grid grid-cols-1 gap-2">
                   {motionVideoFile && (
                     <button
+                      onClick={runAutoBuildSubject}
+                      disabled={isCapturing || autoBuildingSubject || isGenerating}
+                      className="px-3 py-2 rounded-lg border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-[10px] font-black uppercase tracking-wider hover:bg-cyan-500/20 disabled:opacity-40 transition-all"
+                    >
+                      {autoBuildingSubject ? 'Auto Building Subject...' : 'Auto Build Subject (Capture + Img2Img)'}
+                    </button>
+                  )}
+                  {motionVideoFile && (
+                    <button
                       onClick={async () => {
                         const captured = await handleCaptureFrame();
-                        if (captured) sendToZImage(captured, syncPrompt);
+                        if (captured) sendToImageReference(captured, syncPrompt);
                       }}
                       disabled={isCapturing}
                       className="px-3 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-[10px] font-black uppercase tracking-wider hover:bg-emerald-500/20 disabled:opacity-40 transition-all"
                     >
-                      {isCapturing ? 'Capturing...' : 'Capture Frame + Open Z-Image'}
+                      {isCapturing ? 'Capturing...' : 'Capture Frame + Open Z-Image Img2Img'}
                     </button>
                   )}
                   {subjectImageFile && (
                     <button
-                      onClick={() => sendToZImage(subjectImageFile, syncPrompt)}
+                      onClick={() => sendToImageReference(subjectImageFile, syncPrompt)}
                       className="px-3 py-2 rounded-lg border border-violet-500/30 bg-violet-500/10 text-violet-300 text-[10px] font-black uppercase tracking-wider hover:bg-violet-500/20 transition-all"
                     >
-                      Open Current Subject In Z-Image
+                      Open Current Subject In Z-Image Img2Img
                     </button>
                   )}
                 </div>

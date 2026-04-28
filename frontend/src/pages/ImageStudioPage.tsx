@@ -7,6 +7,7 @@ import { QwenImageReferencePage } from './qwen/QwenImageReferencePage';
 import { QwenMultiAnglesPage } from './qwen/QwenMultiAnglesPage';
 import { ZImageDualLoraPage } from './zimage/ZImageDualLoraPage';
 import { InfluencerPage } from './influencer/InfluencerPage';
+import { ZImageImg2ImgPage } from './zimage/ZImageImg2ImgPage';
 
 interface ImageStudioPageProps {
   activeTab?: string;
@@ -20,6 +21,10 @@ export const ImageStudioPage = ({ activeTab = 'z-image' }: ImageStudioPageProps)
 
   if (activeTab === 'z-image-dual-lora') {
     return <ZImageDualLoraPage />;
+  }
+
+  if (activeTab === 'z-image-img2img') {
+    return <ZImageImg2ImgPage />;
   }
 
   // Placeholder for the other sub-tabs we haven't implemented yet

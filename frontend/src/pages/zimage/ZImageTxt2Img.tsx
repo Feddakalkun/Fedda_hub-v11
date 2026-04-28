@@ -260,7 +260,10 @@ export const Txt2ImgPage = ({
 
   useEffect(() => {
     try {
-      const raw = window.localStorage.getItem('fedda_zimage_handoff');
+      const handoffKey = workflowId === 'z-image-img2img'
+        ? 'fedda_zimage_img2img_handoff'
+        : (requireImageUpload ? 'fedda_image_ref_handoff' : 'fedda_zimage_handoff');
+      const raw = window.localStorage.getItem(handoffKey);
       if (!raw) return;
       const handoff = JSON.parse(raw) as FeddaZImageHandoff;
       if (!handoff || handoff.source !== 'steady-dancer') return;
@@ -276,16 +279,18 @@ export const Txt2ImgPage = ({
           return copy;
         });
       }
-      if (handoff.filename && handoff.filename.trim()) {
-        setUploadedImageName(handoff.filename.trim());
+      if (handoff.filename && handoff.filename.trim() && requireImageUpload) {
+        const fname = handoff.filename.trim();
+        setUploadedImageName(fname);
+        setUploadedImage(`/comfy/view?filename=${encodeURIComponent(fname)}&type=input`);
       }
 
-      window.localStorage.removeItem('fedda_zimage_handoff');
+      window.localStorage.removeItem(handoffKey);
       toast('Loaded from Steady Dancer handoff', 'success');
     } catch {
       // ignore malformed handoff
     }
-  }, [setPrompt, setLoraEntries, toast]);
+  }, [requireImageUpload, setPrompt, setLoraEntries, toast]);
 
   // Also consume real-time executed output events so the strip updates immediately.
   useEffect(() => {
