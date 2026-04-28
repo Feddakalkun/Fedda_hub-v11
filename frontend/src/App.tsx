@@ -321,10 +321,11 @@ function FeddaApp() {
       case 'chat':
         return <AgentChatPage />;
       case 'image':
-      case 'z-image':
-      case 'z-image-txt2img':
-      case 'z-image-dual-lora':
-      case 'flux':
+        case 'z-image':
+        case 'z-image-txt2img':
+        case 'z-image-img2img':
+        case 'z-image-dual-lora':
+        case 'flux':
       case 'flux-txt2img':
       case 'qwen':
       case 'qwen-txt2img':
