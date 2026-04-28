@@ -501,6 +501,22 @@ function Install-PipWithFallback {
     return $false
 }
 
+function Install-TorchStack {
+    param(
+        [string[]]$Indexes
+    )
+    foreach ($idx in $Indexes) {
+        Write-Step "Trying torch stack from $idx ..."
+        & $VenvPy -m pip install --upgrade --force-reinstall torch torchvision torchaudio --index-url $idx --no-warn-script-location
+        if ($LASTEXITCODE -eq 0) {
+            Write-Step "Torch stack installed from $idx." "Green"
+            return @{ ok = $true; index = $idx }
+        }
+        Write-Step "Torch stack failed on $idx" "Yellow"
+    }
+    return @{ ok = $false; index = "" }
+}
+
 # ============================================================================
 # 2. COMFYUI
 # ============================================================================
@@ -532,13 +548,22 @@ Write-Header "STEP 3/7 - PyTorch + Dependencies"
 $GpuProfile = Get-NvidiaGpuProfile
 Write-Step "GPU profile: $($GpuProfile.Name) | Driver $($GpuProfile.Driver) | VRAM $([math]::Round($GpuProfile.VramMB / 1024,1)) GB"
 
-Write-Step "Installing PyTorch CUDA stack (cu124)... this takes a few minutes"
-$TorchOk = Install-PipWithFallback `
-    -PrimaryArgs "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124" `
-    -FallbackArgs "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121" `
-    -Label "PyTorch CUDA"
+if ($GpuProfile.Series -eq "50") {
+    Write-Step "RTX 50-series detected. Using newer CUDA wheel priority."
+    $torchResult = Install-TorchStack -Indexes @(
+        "https://download.pytorch.org/whl/cu128",
+        "https://download.pytorch.org/whl/cu126",
+        "https://download.pytorch.org/whl/cu124",
+        "https://download.pytorch.org/whl/cu121"
+    )
+} else {
+    $torchResult = Install-TorchStack -Indexes @(
+        "https://download.pytorch.org/whl/cu124",
+        "https://download.pytorch.org/whl/cu121"
+    )
+}
 
-if (-not $TorchOk) {
+if (-not $torchResult.ok) {
     throw "PyTorch CUDA installation failed for this system."
 }
 
@@ -559,6 +584,13 @@ if ($LASTEXITCODE -ne 0) {
 Write-Step "Installing ComfyUI requirements..."
 $ComfyReq = Join-Path $ComfyDir "requirements.txt"
 Venv-Pip "install -r `"$ComfyReq`""
+
+# Re-assert matching torch/torchvision/torchaudio after Comfy reqs to avoid binary mismatch.
+Write-Step "Re-validating torch stack consistency..."
+& $VenvPy -m pip install --upgrade --force-reinstall torch torchvision torchaudio --index-url $($torchResult.index) --no-warn-script-location
+if ($LASTEXITCODE -ne 0) {
+    Write-Step "WARNING: Could not re-assert torch stack after requirements install." "Yellow"
+}
 
 Write-Step "Installing build tools..."
 Venv-Pip "install cmake ninja Cython"
