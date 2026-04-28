@@ -84,6 +84,16 @@ export const Wan21SteadyDancerPage = () => {
   const [poseTemporal, setPoseTemporal] = usePersistentState('wan21_sd_pose_temporal', 1);
   const [loraName, setLoraName] = usePersistentState('wan21_sd_lora_name', '');
   const [loraStrength, setLoraStrength] = usePersistentState('wan21_sd_lora_strength', 1);
+  const [syncPrompt, setSyncPrompt] = usePersistentState(
+    'wan21_sd_sync_prompt',
+    'same body pose as reference, full body portrait, z-image style, clean face, high detail',
+  );
+  const [syncNegativePrompt, setSyncNegativePrompt] = usePersistentState(
+    'wan21_sd_sync_neg_prompt',
+    'blurry, low quality, deformed, extra limbs, bad anatomy',
+  );
+  const [syncPoseStrength, setSyncPoseStrength] = usePersistentState('wan21_sd_sync_pose_strength', 1);
+  const [syncLoraStrength, setSyncLoraStrength] = usePersistentState('wan21_sd_sync_lora_strength', 1);
 
   // Quality Presets
   const [quality, setQuality] = usePersistentState<'fast' | 'balanced' | 'high'>('wan21_sd_quality', 'balanced');
@@ -119,14 +129,17 @@ export const Wan21SteadyDancerPage = () => {
         method: 'POST',
         body: JSON.stringify({
           video_filename: motionVideoFile,
-          prompt: prompt,
+          prompt: syncPrompt.trim() || prompt,
+          negative_prompt: syncNegativePrompt.trim(),
           lora_name: loraName,
+          lora_strength: syncLoraStrength,
+          pose_strength: syncPoseStrength,
         }),
       });
 
       if (res.success && res.filename) {
         setSubjectImageFile(res.filename);
-        toast('Subject character generated from video pose!', 'success');
+        toast('Pose-locked subject generated. Ready for Steady Dancer.', 'success');
       } else {
         toast(res.error || 'Failed to sync pose', 'error');
       }
@@ -134,6 +147,26 @@ export const Wan21SteadyDancerPage = () => {
       toast('Error syncing pose', 'error');
     } finally {
       setSyncingPose(false);
+    }
+  };
+
+  const sendToZImage = (filename: string, promptOverride?: string) => {
+    if (!filename) return;
+    try {
+      window.localStorage.setItem(
+        'fedda_zimage_handoff',
+        JSON.stringify({
+          source: 'steady-dancer',
+          filename,
+          prompt: (promptOverride || syncPrompt || prompt || '').trim(),
+          lora_name: loraName || '',
+          created_at: Date.now(),
+        }),
+      );
+      window.dispatchEvent(new CustomEvent('fedda:navigate', { detail: { tab: 'z-image-txt2img' } }));
+      toast('Sent to Z-Image', 'success');
+    } catch {
+      toast('Failed to send handoff to Z-Image', 'error');
     }
   };
 
@@ -232,8 +265,8 @@ export const Wan21SteadyDancerPage = () => {
     }
   };
 
-  const handleCaptureFrame = async () => {
-    if (!motionVideoFile || isCapturing) return;
+  const handleCaptureFrame = async (): Promise<string | null> => {
+    if (!motionVideoFile || isCapturing) return null;
     setIsCapturing(true);
     try {
       const data = await fetchJson<any>(`${BACKEND_API.BASE_URL}/api/video/extract-frame?filename=${encodeURIComponent(motionVideoFile)}`, {
@@ -242,11 +275,13 @@ export const Wan21SteadyDancerPage = () => {
       if (data.success) {
         setSubjectImageFile(data.filename);
         toast('Captured first frame as subject', 'success');
+        return data.filename as string;
       } else {
         throw new Error(data.error || 'Capture failed');
       }
     } catch (e: any) {
       toast(e.message || 'Capture failed', 'error');
+      return null;
     } finally {
       setIsCapturing(false);
     }
@@ -382,10 +417,51 @@ export const Wan21SteadyDancerPage = () => {
                 uploading={uploadingSubject}
                 onFile={(file) => uploadFile(file, (name) => setSubjectImageFile(name), setUploadingSubject)}
               />
-              <div className="space-y-3">
-                <div className="relative group">
-                  <UploadCard
-                    label="Step 2: Upload Motion"
+          <div className="space-y-3">
+            <div className="p-3 rounded-xl bg-violet-500/8 border border-violet-500/20 space-y-3">
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-200/80">Pose-lock Subject Builder</div>
+              <textarea
+                value={syncPrompt}
+                onChange={(e) => setSyncPrompt(e.target.value)}
+                rows={2}
+                placeholder="Prompt for the subject image generated from captured pose..."
+                className="w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] text-white/90 outline-none"
+              />
+              <input
+                value={syncNegativePrompt}
+                onChange={(e) => setSyncNegativePrompt(e.target.value)}
+                placeholder="Negative prompt (optional)"
+                className="w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] text-white/80 outline-none"
+              />
+              <div className="grid grid-cols-2 gap-2">
+                <label className="text-[10px] text-white/45">Pose Strength
+                  <input
+                    type="number"
+                    value={syncPoseStrength}
+                    step={0.1}
+                    min={0}
+                    max={2}
+                    onChange={(e) => setSyncPoseStrength(Number(e.target.value) || 1)}
+                    className="mt-1 w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] font-mono"
+                  />
+                </label>
+                <label className="text-[10px] text-white/45">Sync LoRA Strength
+                  <input
+                    type="number"
+                    value={syncLoraStrength}
+                    step={0.1}
+                    min={0}
+                    max={2}
+                    onChange={(e) => setSyncLoraStrength(Number(e.target.value) || 1)}
+                    className="mt-1 w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] font-mono"
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div className="relative group">
+              <UploadCard
+                label="Step 2: Upload Motion"
                     accept="video/*"
                     previewUrl={motionPreview}
                     uploading={uploadingMotion}
@@ -436,6 +512,28 @@ export const Wan21SteadyDancerPage = () => {
                       <Download className="w-4 h-4" />
                     )}
                   </button>
+                </div>
+                <div className="grid grid-cols-1 gap-2">
+                  {motionVideoFile && (
+                    <button
+                      onClick={async () => {
+                        const captured = await handleCaptureFrame();
+                        if (captured) sendToZImage(captured, syncPrompt);
+                      }}
+                      disabled={isCapturing}
+                      className="px-3 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-[10px] font-black uppercase tracking-wider hover:bg-emerald-500/20 disabled:opacity-40 transition-all"
+                    >
+                      {isCapturing ? 'Capturing...' : 'Capture Frame + Open Z-Image'}
+                    </button>
+                  )}
+                  {subjectImageFile && (
+                    <button
+                      onClick={() => sendToZImage(subjectImageFile, syncPrompt)}
+                      className="px-3 py-2 rounded-lg border border-violet-500/30 bg-violet-500/10 text-violet-300 text-[10px] font-black uppercase tracking-wider hover:bg-violet-500/20 transition-all"
+                    >
+                      Open Current Subject In Z-Image
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

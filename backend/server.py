@@ -2146,6 +2146,9 @@ async def sync_pose_character(payload: Dict[str, Any]):
     video_filename = payload.get("video_filename")
     prompt = payload.get("prompt", "cinematic portrait of a person, high quality, 8k")
     lora_name = payload.get("lora_name", "zimage_turbo\\Angela_Sun_PMv1a_ZImage.safetensors")
+    negative_prompt = payload.get("negative_prompt", "blurry, low quality, distorted, ugly")
+    lora_strength = float(payload.get("lora_strength", 1.0))
+    pose_strength = float(payload.get("pose_strength", 1.0))
     
     if not video_filename:
         return {"success": False, "error": "Missing video_filename"}
@@ -2196,11 +2199,44 @@ async def sync_pose_character(payload: Dict[str, Any]):
         z_workflow_path = ROOT_DIR / "backend" / "workflows" / "z-image" / "z-image-pose-subject.json"
         with open(z_workflow_path, "r", encoding="utf-8") as f:
             z_workflow = json.load(f)
-        
-        # Inject inputs
-        z_workflow["6"]["inputs"]["text"] = prompt
-        z_workflow["185"]["inputs"]["lora_name"] = lora_name
-        z_workflow["187"]["inputs"]["image"] = pose_filename
+
+        # Build node index by class type so workflow is resilient if node ids change.
+        class_index: Dict[str, List[str]] = {}
+        for node_id, node in z_workflow.items():
+            ctype = str(node.get("class_type", "")).strip()
+            if not ctype:
+                continue
+            class_index.setdefault(ctype, []).append(str(node_id))
+
+        def first_node_id(class_type: str, required: bool = True) -> Optional[str]:
+            ids = class_index.get(class_type, [])
+            if ids:
+                return ids[0]
+            if required:
+                raise RuntimeError(f"Required node '{class_type}' not found in z-image-pose-subject workflow")
+            return None
+
+        pos_id = first_node_id("CLIPTextEncode")
+        if pos_id is not None:
+            z_workflow[pos_id]["inputs"]["text"] = prompt
+
+        # Use second CLIPTextEncode as negative when present.
+        neg_ids = class_index.get("CLIPTextEncode", [])
+        if len(neg_ids) > 1:
+            z_workflow[neg_ids[1]]["inputs"]["text"] = negative_prompt
+
+        lora_id = first_node_id("LoraLoaderModelOnly")
+        if lora_id is not None:
+            z_workflow[lora_id]["inputs"]["lora_name"] = lora_name
+            z_workflow[lora_id]["inputs"]["strength_model"] = lora_strength
+
+        load_pose_id = first_node_id("LoadImage")
+        if load_pose_id is not None:
+            z_workflow[load_pose_id]["inputs"]["image"] = pose_filename
+
+        control_id = first_node_id("ControlNetApply", required=False)
+        if control_id is not None:
+            z_workflow[control_id]["inputs"]["strength"] = pose_strength
         
         # Trigger Character Gen
         z_resp = requests.post(f"{COMFY_URL}/prompt", json={"prompt": z_workflow}, timeout=10)
@@ -2227,7 +2263,16 @@ async def sync_pose_character(payload: Dict[str, Any]):
         if not char_filename:
             return {"success": False, "error": "Character generation timed out"}
             
-        return {"success": True, "filename": char_filename}
+        return {
+            "success": True,
+            "filename": char_filename,
+            "source_pose_filename": frame_name,
+            "detected_pose_filename": pose_filename,
+            "used_prompt": prompt,
+            "used_lora": lora_name,
+            "used_lora_strength": lora_strength,
+            "used_pose_strength": pose_strength,
+        }
 
     except Exception as e:
         return {"success": False, "error": str(e)}

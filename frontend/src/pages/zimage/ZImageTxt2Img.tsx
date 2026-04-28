@@ -44,6 +44,14 @@ type LoraCatalogItem = {
   preview_url?: string;
 };
 
+type FeddaZImageHandoff = {
+  source?: 'steady-dancer';
+  filename?: string;
+  prompt?: string;
+  lora_name?: string;
+  created_at?: number;
+};
+
 const normLora = (v: string) => v.replace(/\\/g, '/').toLowerCase().trim();
 const loraFileName = (path: string) => path.replace(/\\/g, '/').split('/').pop()?.toLowerCase() ?? '';
 
@@ -249,6 +257,35 @@ export const Txt2ImgPage = ({
       setUploadingImage(false);
     }
   };
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem('fedda_zimage_handoff');
+      if (!raw) return;
+      const handoff = JSON.parse(raw) as FeddaZImageHandoff;
+      if (!handoff || handoff.source !== 'steady-dancer') return;
+
+      if (handoff.prompt && handoff.prompt.trim()) {
+        setPrompt(handoff.prompt.trim());
+      }
+      if (handoff.lora_name && handoff.lora_name.trim()) {
+        setLoraEntries((prev) => {
+          if (!prev.length) return [{ name: handoff.lora_name as string, strength: 1 }];
+          const copy = [...prev];
+          copy[0] = { ...copy[0], name: handoff.lora_name as string };
+          return copy;
+        });
+      }
+      if (handoff.filename && handoff.filename.trim()) {
+        setUploadedImageName(handoff.filename.trim());
+      }
+
+      window.localStorage.removeItem('fedda_zimage_handoff');
+      toast('Loaded from Steady Dancer handoff', 'success');
+    } catch {
+      // ignore malformed handoff
+    }
+  }, [setPrompt, setLoraEntries, toast]);
 
   // Also consume real-time executed output events so the strip updates immediately.
   useEffect(() => {

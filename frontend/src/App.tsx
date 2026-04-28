@@ -244,6 +244,28 @@ function FeddaApp() {
     } catch {}
   }, [activeTab]);
 
+  useEffect(() => {
+    const onNavigate = (event: Event) => {
+      const custom = event as CustomEvent<{ tab?: string }>;
+      const tab = custom.detail?.tab;
+      if (!tab || !VALID_TABS.has(tab)) return;
+      setActiveTab(tab);
+      setView('workspace');
+      setWorkspaceOrigin('section');
+      if (tab.startsWith('z-image') || tab.startsWith('flux') || tab.startsWith('qwen') || tab.startsWith('image-')) {
+        setActiveSection('image');
+      } else if (tab.startsWith('wan') || tab.startsWith('ltx') || tab === 'video') {
+        setActiveSection('video');
+      } else if (tab === 'gallery' || tab === 'videos' || tab === 'library') {
+        setActiveSection('explore');
+      } else {
+        setActiveSection(null);
+      }
+    };
+    window.addEventListener('fedda:navigate', onNavigate as EventListener);
+    return () => window.removeEventListener('fedda:navigate', onNavigate as EventListener);
+  }, []);
+
   const meta = PAGE_META[activeTab] ?? {
     label: 'Workspace',
     description: 'Active workspace view.',
