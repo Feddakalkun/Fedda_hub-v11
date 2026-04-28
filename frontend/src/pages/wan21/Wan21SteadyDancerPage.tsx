@@ -94,6 +94,7 @@ export const Wan21SteadyDancerPage = () => {
   );
   const [syncPoseStrength, setSyncPoseStrength] = usePersistentState('wan21_sd_sync_pose_strength', 1);
   const [syncLoraStrength, setSyncLoraStrength] = usePersistentState('wan21_sd_sync_lora_strength', 1);
+  const [syncDenoise, setSyncDenoise] = usePersistentState('wan21_sd_sync_denoise', 0.35);
 
   // Quality Presets
   const [quality, setQuality] = usePersistentState<'fast' | 'balanced' | 'high'>('wan21_sd_quality', 'balanced');
@@ -133,8 +134,8 @@ export const Wan21SteadyDancerPage = () => {
           prompt: syncPrompt.trim() || prompt,
           negative_prompt: syncNegativePrompt.trim(),
           lora_name: loraName,
-          lora_strength: syncLoraStrength,
-          pose_strength: syncPoseStrength,
+            lora_strength: syncLoraStrength,
+            pose_strength: syncPoseStrength,
         }),
       });
 
@@ -191,7 +192,7 @@ export const Wan21SteadyDancerPage = () => {
             seed: seedForImg2Img,
             steps: 9,
             cfg: 1,
-            denoise: 0.55,
+            denoise: syncDenoise,
             ...(loraName ? { loras: [{ name: loraName, strength: syncLoraStrength }] } : {}),
             client_id: (comfyService as any).clientId,
           },
@@ -517,6 +518,17 @@ export const Wan21SteadyDancerPage = () => {
                     min={0}
                     max={2}
                     onChange={(e) => setSyncLoraStrength(Number(e.target.value) || 1)}
+                    className="mt-1 w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] font-mono"
+                  />
+                </label>
+                <label className="text-[10px] text-white/45">Img2Img Denoise
+                  <input
+                    type="number"
+                    value={syncDenoise}
+                    step={0.05}
+                    min={0.15}
+                    max={0.8}
+                    onChange={(e) => setSyncDenoise(Number(e.target.value) || 0.35)}
                     className="mt-1 w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] font-mono"
                   />
                 </label>
