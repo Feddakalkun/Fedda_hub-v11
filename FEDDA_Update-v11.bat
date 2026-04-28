@@ -12,6 +12,7 @@ set "TARGET_NAME=FEDDA v11"
 set "FORCE_NODE_ARG="
 set "NO_STASH=0"
 set "AUTO_STASHED=0"
+set "AUTO_FULL_NODE_UPDATE=0"
 if /I "%~1"=="--full-nodes" set "FORCE_NODE_ARG=-ForceNodeUpdate"
 if /I "%~1"=="--no-stash" set "NO_STASH=1"
 
@@ -93,6 +94,7 @@ if not "!DIRTY!"=="0" (
 )
 
 echo  [INFO] Fetching latest from %REPO_BRANCH%...
+for /f "delims=" %%h in ('git rev-parse HEAD 2^>nul') do set "OLD_HEAD=%%h"
 git fetch origin %REPO_BRANCH%
 if %errorlevel% neq 0 (
     echo  [ERROR] git fetch failed.
@@ -122,7 +124,22 @@ if %errorlevel% neq 0 (
 )
 
 for /f "delims=" %%h in ('git rev-parse --short HEAD 2^>nul') do set "HEAD_SHORT=%%h"
+for /f "delims=" %%h in ('git rev-parse HEAD 2^>nul') do set "NEW_HEAD=%%h"
 echo  [OK] Updated to commit !HEAD_SHORT!
+
+if defined OLD_HEAD if defined NEW_HEAD (
+    if /I not "!OLD_HEAD!"=="!NEW_HEAD!" (
+        for /f %%c in ('git diff --name-only "!OLD_HEAD!..!NEW_HEAD!" ^| findstr /R /I /C:"^config/nodes\.json$" /C:"^scripts/update_logic\.ps1$" /C:"^scripts/install_lite\.ps1$" /C:"^scripts/install\.ps1$" /C:"^backend/workflows/" ^| find /c /v ""') do set "CHANGED_NODE_RELATED=%%c"
+        if not "!CHANGED_NODE_RELATED!"=="0" (
+            set "AUTO_FULL_NODE_UPDATE=1"
+            if not defined FORCE_NODE_ARG (
+                set "FORCE_NODE_ARG=-ForceNodeUpdate"
+            )
+            echo  [INFO] Update touched node/workflow-critical files.
+            echo         Enabling FULL node sync automatically.
+        )
+    )
+)
 
 echo  [INFO] Running post-update repair/sync...
 if exist "scripts\update_logic.ps1" (

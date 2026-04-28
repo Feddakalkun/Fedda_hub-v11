@@ -289,7 +289,7 @@
   },
   {
     "name": "ComfyUI-WanVideoWrapper",
-    "url": "https://github.com/ZHO-ZHO-ZHO/ComfyUI-WanVideoWrapper.git",
+    "url": "https://github.com/kijai/ComfyUI-WanVideoWrapper.git",
     "folder": "ComfyUI-WanVideoWrapper",
     "note": "Essential: Wan 2.1 video nodes (Steady Dancer, I2V, T2V)"
   }

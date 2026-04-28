@@ -108,7 +108,7 @@ if errorlevel 1 (
 ) else (
     start "FEDDA ComfyUI Console" cmd /k ""%~f0" :svc_comfy"
 )
-call :wait_for_port 8199 60 ComfyUI
+call :wait_for_port 8199 180 ComfyUI
 call :wait_for_http "http://127.0.0.1:8199/system_stats" 30 ComfyUI-HTTP
 
 :: 5. Start FastAPI Backend

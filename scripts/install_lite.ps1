@@ -531,6 +531,44 @@ if (-not (Test-Path $CustomNodesDir)) { New-Item -ItemType Directory -Path $Cust
 
 $Installed = 0; $Skipped = 0; $Failed = 0
 
+function Clone-NodeWithFallback {
+    param(
+        [Parameter(Mandatory = $true)][pscustomobject]$Node,
+        [Parameter(Mandatory = $true)][string]$NodeDir
+    )
+
+    $allUrls = @()
+    if ($Node.url) { $allUrls += [string]$Node.url }
+    if ($Node.PSObject.Properties.Name -contains "fallback_urls" -and $Node.fallback_urls) {
+        foreach ($u in $Node.fallback_urls) {
+            if ($u) { $allUrls += [string]$u }
+        }
+    }
+    $allUrls = $allUrls | Select-Object -Unique
+
+    foreach ($url in $allUrls) {
+        for ($attempt = 1; $attempt -le 3; $attempt++) {
+            if (Test-Path $NodeDir) {
+                Remove-Item -Path $NodeDir -Recurse -Force -ErrorAction SilentlyContinue
+            }
+
+            Write-Step "  [$($Node.name)] Clone attempt $attempt/3 from $url" "Gray"
+            $ErrorActionPreference = "Continue"
+            $null = & git clone --depth 1 $url "$NodeDir" 2>&1 | Out-String
+            $exitCode = $LASTEXITCODE
+            $ErrorActionPreference = "Stop"
+
+            if ($exitCode -eq 0 -and (Test-Path $NodeDir)) {
+                return $true
+            }
+
+            Start-Sleep -Seconds 2
+        }
+    }
+
+    return $false
+}
+
 foreach ($Node in $NodesConfig) {
     if ($Node.local -eq $true) {
         Write-Step "  [$($Node.name)] Local - skipped" "Gray"
@@ -540,11 +578,9 @@ foreach ($Node in $NodesConfig) {
     $NodeDir = Join-Path $CustomNodesDir $Node.folder
     if (-not (Test-Path $NodeDir)) {
         Write-Step "  [$($Node.name)] Cloning..." "White"
-        $ErrorActionPreference = "Continue"
-        $out = & git clone --depth 1 $Node.url "$NodeDir" 2>&1 | Out-String
-        $ErrorActionPreference = "Stop"
+        $cloned = Clone-NodeWithFallback -Node $Node -NodeDir $NodeDir
 
-        if ($LASTEXITCODE -eq 0) {
+        if ($cloned) {
             $Installed++
             # Install node requirements
             $ReqFile = Join-Path $NodeDir "requirements.txt"
