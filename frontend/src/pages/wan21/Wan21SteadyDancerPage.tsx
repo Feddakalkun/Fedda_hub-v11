@@ -94,7 +94,7 @@ export const Wan21SteadyDancerPage = () => {
   );
   const [syncPoseStrength, setSyncPoseStrength] = usePersistentState('wan21_sd_sync_pose_strength', 1);
   const [syncLoraStrength, setSyncLoraStrength] = usePersistentState('wan21_sd_sync_lora_strength', 1);
-  const [syncDenoise, setSyncDenoise] = usePersistentState('wan21_sd_sync_denoise', 0.35);
+  const [syncDenoise, setSyncDenoise] = usePersistentState('wan21_sd_sync_denoise', 0.7);
 
   // Quality Presets
   const [quality, setQuality] = usePersistentState<'fast' | 'balanced' | 'high'>('wan21_sd_quality', 'balanced');
@@ -528,7 +528,7 @@ export const Wan21SteadyDancerPage = () => {
                     step={0.05}
                     min={0.15}
                     max={0.8}
-                    onChange={(e) => setSyncDenoise(Number(e.target.value) || 0.35)}
+                    onChange={(e) => setSyncDenoise(Number(e.target.value) || 0.7)}
                     className="mt-1 w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] font-mono"
                   />
                 </label>

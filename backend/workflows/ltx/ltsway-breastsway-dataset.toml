@@ -1,0 +1,13 @@
+[general]
+caption_extension = ".txt"
+batch_size = 1
+enable_bucket = true
+bucket_no_upscale = true 
+
+[[datasets]]
+cache_directory  = "/home/ubuntu/hunyuan-lora-training/musubi-tuner/cache/cache_4"
+video_directory  = "/home/ubuntu/AI/lora-training/breast-sway/train_ltx"
+resolution       = [640,640]
+frame_extraction = "full"       # Use "slide"
+source_fps       = 25.0
+max_frames       = 161
