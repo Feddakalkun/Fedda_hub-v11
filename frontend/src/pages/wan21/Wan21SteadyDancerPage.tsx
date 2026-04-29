@@ -95,6 +95,7 @@ export const Wan21SteadyDancerPage = () => {
   const [syncPoseStrength, setSyncPoseStrength] = usePersistentState('wan21_sd_sync_pose_strength', 1);
   const [syncLoraStrength, setSyncLoraStrength] = usePersistentState('wan21_sd_sync_lora_strength', 1);
   const [syncDenoise, setSyncDenoise] = usePersistentState('wan21_sd_sync_denoise', 0.7);
+  const [syncWorkflowAccurate, setSyncWorkflowAccurate] = usePersistentState('wan21_sd_sync_workflow_accurate', true);
 
   // Quality Presets
   const [quality, setQuality] = usePersistentState<'fast' | 'balanced' | 'high'>('wan21_sd_quality', 'balanced');
@@ -180,6 +181,9 @@ export const Wan21SteadyDancerPage = () => {
       if (!captured) throw new Error('Failed to capture first frame');
 
       const seedForImg2Img = seed === -1 ? Math.floor(Math.random() * 10_000_000_000) : seed;
+      const autoSteps = syncWorkflowAccurate ? 9 : Math.max(1, Math.min(25, steps || 9));
+      const autoCfg = syncWorkflowAccurate ? 1 : Math.max(0.5, Math.min(3, cfg || 1));
+      const autoDenoise = Math.max(0.15, Math.min(0.8, syncDenoise || 0.7));
       const gen = await fetchJson<any>(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.GENERATE}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -190,9 +194,9 @@ export const Wan21SteadyDancerPage = () => {
             negative: syncNegativePrompt.trim(),
             image: captured,
             seed: seedForImg2Img,
-            steps: 9,
-            cfg: 1,
-            denoise: syncDenoise,
+            steps: autoSteps,
+            cfg: autoCfg,
+            denoise: autoDenoise,
             ...(loraName ? { loras: [{ name: loraName, strength: syncLoraStrength }] } : {}),
             client_id: (comfyService as any).clientId,
           },
@@ -533,6 +537,28 @@ export const Wan21SteadyDancerPage = () => {
                   />
                 </label>
               </div>
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setSyncDenoise(0.35)}
+                  className="px-2 py-1 rounded-md border border-white/15 bg-white/5 text-[10px] text-white/70 hover:bg-white/10"
+                >
+                  Identity Keep (0.35)
+                </button>
+                <button
+                  onClick={() => setSyncDenoise(0.7)}
+                  className="px-2 py-1 rounded-md border border-white/15 bg-white/5 text-[10px] text-white/70 hover:bg-white/10"
+                >
+                  Identity Shift (0.70)
+                </button>
+              </div>
+              <label className="flex items-center gap-2 text-[10px] text-white/55">
+                <input
+                  type="checkbox"
+                  checked={!!syncWorkflowAccurate}
+                  onChange={(e) => setSyncWorkflowAccurate(e.target.checked)}
+                />
+                Workflow-accurate mode (steps=9, cfg=1.0, euler/simple)
+              </label>
             </div>
 
             <div className="relative group">
