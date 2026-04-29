@@ -37,6 +37,8 @@ interface Txt2ImgPageConfig {
   requireImageUpload?: boolean;
   imageParamKey?: string;
   imageLabel?: string;
+  showDenoiseControl?: boolean;
+  defaultDenoise?: number;
 }
 
 type LoraCatalogItem = {
@@ -94,6 +96,8 @@ export const Txt2ImgPage = ({
   requireImageUpload = false,
   imageParamKey = 'image',
   imageLabel = 'Reference Image',
+  showDenoiseControl = false,
+  defaultDenoise = 0.5,
 }: Txt2ImgPageConfig) => {
   const key = (name: string) => `${storageKey}_${name}`;
   const [prompt, setPrompt]                   = usePersistentState(key('prompt'), '');
@@ -101,6 +105,7 @@ export const Txt2ImgPage = ({
   const [width, setWidth]                     = usePersistentState(key('width'), 1024);
   const [height, setHeight]                   = usePersistentState(key('height'), 1024);
   const [steps, setSteps]                     = usePersistentState(key('steps'), 11);
+  const [denoise, setDenoise]                 = usePersistentState(key('denoise'), defaultDenoise);
   const cfg                                   = 1.0;
   const [seed, setSeed]                       = usePersistentState(key('seed'), -1);
   const [loraEntries, setLoraEntries]         = usePersistentState<ZImageLoraEntry[]>(key('loras'), []);
@@ -324,6 +329,7 @@ export const Txt2ImgPage = ({
         seed: seed === -1 ? Math.floor(Math.random() * 10_000_000_000) : seed,
         steps, cfg, client_id: (comfyService as any).clientId,
       };
+      if (showDenoiseControl) params.denoise = denoise;
       if (requireImageUpload && uploadedImageName) {
         params[imageParamKey] = uploadedImageName;
       }
@@ -587,6 +593,27 @@ export const Txt2ImgPage = ({
               <span>1</span><span>25</span>
             </div>
           </div>
+
+          {showDenoiseControl && (
+            <div className="space-y-2">
+              <div className="flex justify-between text-[9px] font-black uppercase tracking-[0.2em] text-white/25">
+                <span>Denoise</span>
+                <span className="text-emerald-400/70 font-mono">{Number(denoise).toFixed(2)}</span>
+              </div>
+              <input
+                type="range"
+                min="0.15"
+                max="0.85"
+                step="0.01"
+                value={denoise}
+                onChange={(e) => setDenoise(Number(e.target.value))}
+                className="w-full h-1 rounded-full appearance-none outline-none accent-emerald-500 cursor-pointer"
+              />
+              <div className="flex justify-between text-[8px] font-mono text-white/10">
+                <span>0.15</span><span>0.85</span>
+              </div>
+            </div>
+          )}
 
           {/* Seed */}
           <div className="flex gap-2">

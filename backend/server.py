@@ -1774,7 +1774,17 @@ async def upload_file(file: UploadFile = File(...)):
         )
         resp.raise_for_status()
         data = resp.json()
-        return {"success": True, "filename": data.get("name", file.filename)}
+        filename = data.get("name") or data.get("filename") or file.filename
+        subfolder = data.get("subfolder", "")
+        file_type = data.get("type", "input")
+        view_params = f"filename={requests.utils.quote(str(filename), safe='')}&subfolder={requests.utils.quote(str(subfolder), safe='')}&type={requests.utils.quote(str(file_type), safe='')}"
+        return {
+            "success": True,
+            "filename": filename,
+            "subfolder": subfolder,
+            "type": file_type,
+            "view_url": f"/comfy/view?{view_params}",
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -1851,14 +1861,35 @@ async def generate(req: GenerateRequest):
         client_id = req.params.get("client_id", "fedda_hub_v2")
         comfy_payload = {"prompt": payload, "client_id": client_id}
         resp = requests.post(f"{COMFY_URL}/prompt", json=comfy_payload, timeout=5)
-        
+
         if not resp.ok:
-            error_text = resp.text
+            error_msg = f"ComfyUI error ({resp.status_code})"
             try:
-                error_data = resp.json()
-                error_msg = error_data.get("error", {}).get("message", "ComfyUI API error")
-            except:
-                error_msg = error_text
+                payload = resp.json()
+                err = payload.get("error") if isinstance(payload, dict) else None
+                if isinstance(err, dict):
+                    err_type = str(err.get("type") or "").strip()
+                    err_message = str(err.get("message") or "").strip()
+                    err_details = str(err.get("details") or "").strip()
+                    if err_type == "prompt_outputs_failed_validation":
+                        parts = ["Prompt outputs failed validation"]
+                        if err_message:
+                            parts.append(err_message)
+                        if err_details:
+                            parts.append(err_details)
+                        error_msg = " | ".join(parts)
+                    else:
+                        pieces = [p for p in [err_type, err_message, err_details] if p]
+                        if pieces:
+                            error_msg = " | ".join(pieces)
+                elif isinstance(payload, dict):
+                    detail = str(payload.get("detail") or payload.get("message") or "").strip()
+                    if detail:
+                        error_msg = detail
+            except Exception:
+                text = (resp.text or "").strip()
+                if text:
+                    error_msg = text[:1200]
             raise HTTPException(status_code=resp.status_code, detail=error_msg)
             
         return {

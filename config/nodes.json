@@ -292,5 +292,11 @@
     "url": "https://github.com/kijai/ComfyUI-WanVideoWrapper.git",
     "folder": "ComfyUI-WanVideoWrapper",
     "note": "Essential: Wan 2.1 video nodes (Steady Dancer, I2V, T2V)"
+  },
+  {
+    "name": "ComfyUI-tbox",
+    "url": "https://github.com/er1cw00/ComfyUI-tbox.git",
+    "folder": "ComfyUI-tbox",
+    "note": "Tbox utility/upscale-related nodes"
   }
 ]

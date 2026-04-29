@@ -16,6 +16,7 @@ class ComfyUIService {
         onPreview?: (blobUrl: string) => void;
         onStatus?: (data: any) => void;
     } | null = null;
+    private _precheckTimer: number | null = null;
 
     constructor() {
         this.clientId = `fedda_web_${Math.random().toString(36).substring(2, 10)}`;
@@ -34,14 +35,32 @@ class ComfyUIService {
     public connectWebSocket(callbacks: any) {
         this._callbacks = callbacks;
         this.reconnectAttempts = 0;
-        this._connect();
+        this._connectWhenComfyReady();
         return () => {
             this._callbacks = null;
+            if (this._precheckTimer) {
+                window.clearTimeout(this._precheckTimer);
+                this._precheckTimer = null;
+            }
             if (this.ws) {
                 this.ws.close();
                 this.ws = null;
             }
         };
+    }
+
+    private async _connectWhenComfyReady() {
+        try {
+            const alive = await this.isAlive();
+            if (!alive) {
+                this._precheckTimer = window.setTimeout(() => this._connectWhenComfyReady(), 1500);
+                return;
+            }
+        } catch {
+            this._precheckTimer = window.setTimeout(() => this._connectWhenComfyReady(), 1500);
+            return;
+        }
+        this._connect();
     }
 
     private _connect() {
@@ -96,7 +115,7 @@ class ComfyUIService {
             if (this._callbacks) {
                 this.reconnectAttempts++;
                 const delay = Math.min(1000 * Math.pow(1.5, this.reconnectAttempts), 10000);
-                setTimeout(() => this._connect(), delay);
+                setTimeout(() => this._connectWhenComfyReady(), delay);
             }
         };
 

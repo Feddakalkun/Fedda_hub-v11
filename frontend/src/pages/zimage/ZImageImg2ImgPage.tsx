@@ -13,7 +13,8 @@ export const ZImageImg2ImgPage = () => {
       requireImageUpload
       imageParamKey="image"
       imageLabel="Input Image"
+      showDenoiseControl
+      defaultDenoise={0.7}
     />
   );
 };
-

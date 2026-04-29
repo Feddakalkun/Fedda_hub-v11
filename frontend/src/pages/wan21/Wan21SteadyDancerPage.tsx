@@ -94,7 +94,6 @@ export const Wan21SteadyDancerPage = () => {
   );
   const [syncPoseStrength, setSyncPoseStrength] = usePersistentState('wan21_sd_sync_pose_strength', 1);
   const [syncLoraStrength, setSyncLoraStrength] = usePersistentState('wan21_sd_sync_lora_strength', 1);
-  const [syncDenoise, setSyncDenoise] = usePersistentState('wan21_sd_sync_denoise', 0.7);
   const [syncWorkflowAccurate, setSyncWorkflowAccurate] = usePersistentState('wan21_sd_sync_workflow_accurate', true);
 
   // Quality Presets
@@ -183,7 +182,17 @@ export const Wan21SteadyDancerPage = () => {
       const seedForImg2Img = seed === -1 ? Math.floor(Math.random() * 10_000_000_000) : seed;
       const autoSteps = syncWorkflowAccurate ? 9 : Math.max(1, Math.min(25, steps || 9));
       const autoCfg = syncWorkflowAccurate ? 1 : Math.max(0.5, Math.min(3, cfg || 1));
-      const autoDenoise = Math.max(0.15, Math.min(0.8, syncDenoise || 0.7));
+      let img2imgDenoise = 0.7;
+      try {
+        const raw = window.localStorage.getItem('zimage_img2img_denoise');
+        if (raw != null) {
+          const parsed = Number(JSON.parse(raw));
+          if (Number.isFinite(parsed)) img2imgDenoise = parsed;
+        }
+      } catch {
+        // ignore parse/storage issues and keep default
+      }
+      const autoDenoise = Math.max(0.15, Math.min(0.8, img2imgDenoise));
       const gen = await fetchJson<any>(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.GENERATE}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -525,31 +534,9 @@ export const Wan21SteadyDancerPage = () => {
                     className="mt-1 w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] font-mono"
                   />
                 </label>
-                <label className="text-[10px] text-white/45">Img2Img Denoise
-                  <input
-                    type="number"
-                    value={syncDenoise}
-                    step={0.05}
-                    min={0.15}
-                    max={0.8}
-                    onChange={(e) => setSyncDenoise(Number(e.target.value) || 0.7)}
-                    className="mt-1 w-full bg-black/30 border border-white/10 rounded-lg px-2 py-2 text-[11px] font-mono"
-                  />
-                </label>
               </div>
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => setSyncDenoise(0.35)}
-                  className="px-2 py-1 rounded-md border border-white/15 bg-white/5 text-[10px] text-white/70 hover:bg-white/10"
-                >
-                  Identity Keep (0.35)
-                </button>
-                <button
-                  onClick={() => setSyncDenoise(0.7)}
-                  className="px-2 py-1 rounded-md border border-white/15 bg-white/5 text-[10px] text-white/70 hover:bg-white/10"
-                >
-                  Identity Shift (0.70)
-                </button>
+              <div className="text-[10px] text-white/45">
+                Denoise styres i Z-Image (Img2Img). Auto-build bruker samme verdi.
               </div>
               <label className="flex items-center gap-2 text-[10px] text-white/55">
                 <input

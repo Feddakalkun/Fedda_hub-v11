@@ -70,8 +70,10 @@ export const LtxFlfPage = () => {
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   const [firstFilename, setFirstFilename] = usePersistentState<string | null>('ltx_flf_first_file', null);
+  const [firstViewUrl, setFirstViewUrl] = usePersistentState<string | null>('ltx_flf_first_view', null);
   const [firstUploading, setFirstUploading] = useState(false);
   const [lastFilename,  setLastFilename]  = usePersistentState<string | null>('ltx_flf_last_file', null);
+  const [lastViewUrl, setLastViewUrl] = usePersistentState<string | null>('ltx_flf_last_view', null);
   const [lastUploading, setLastUploading] = useState(false);
 
   const [isGenerating,    setIsGenerating]    = useState(false);
@@ -79,8 +81,8 @@ export const LtxFlfPage = () => {
   const [currentVideo,    setCurrentVideo]    = usePersistentState<string | null>('ltx_flf_current_video', null);
   const [history, setHistory] = usePersistentState<string[]>('ltx_flf_history', []);
   const [availableLoras, setAvailableLoras] = useState<string[]>([]);
-  const firstPreview = firstFilename ? `/comfy/view?filename=${encodeURIComponent(firstFilename)}&type=input` : null;
-  const lastPreview = lastFilename ? `/comfy/view?filename=${encodeURIComponent(lastFilename)}&type=input` : null;
+  const firstPreview = firstViewUrl || (firstFilename ? `/comfy/view?filename=${encodeURIComponent(firstFilename)}&type=input` : null);
+  const lastPreview = lastViewUrl || (lastFilename ? `/comfy/view?filename=${encodeURIComponent(lastFilename)}&type=input` : null);
 
   const sessionRef   = useRef<string[]>([]);
   const prevCountRef = useRef(0);
@@ -101,6 +103,7 @@ export const LtxFlfPage = () => {
   const uploadFrame = async (
     file: File,
     setFn: (s: string) => void,
+    setView: (s: string | null) => void,
     setUpl: (b: boolean) => void,
   ) => {
     setUpl(true);
@@ -111,6 +114,13 @@ export const LtxFlfPage = () => {
       const data = await res.json();
       if (!data.success) throw new Error(data.detail || 'Upload failed');
       setFn(data.filename);
+      if (typeof data.view_url === 'string' && data.view_url.trim()) {
+        setView(data.view_url);
+      } else {
+        const sf = data.subfolder ? `&subfolder=${encodeURIComponent(data.subfolder)}` : '';
+        const tp = data.type ? encodeURIComponent(data.type) : 'input';
+        setView(`/comfy/view?filename=${encodeURIComponent(data.filename)}${sf}&type=${tp}`);
+      }
     } catch (err: any) { toast(err.message || 'Upload failed', 'error'); }
     finally { setUpl(false); }
   };
@@ -190,7 +200,8 @@ export const LtxFlfPage = () => {
 
   const canGenerate = !!firstFilename && !!lastFilename && !!prompt.trim() && !isGenerating;
 
-  const RATIOS = ['1:1', '4:3', '3:4', '16:9', '9:16', '21:9', '3:2', '2:3'];
+  // Must match AspectRatioImageSize node accepted values.
+  const RATIOS = ['1:1', '16:9', '5:4', '4:3', '3:2', '2.39:1', '21:9', '18:9', '17:9', '1.85:1'];
 
   return (
     <div className="flex h-full bg-[#080808] overflow-hidden">
@@ -204,9 +215,9 @@ export const LtxFlfPage = () => {
             <FeddaSectionTitle className="text-white/20">Keyframes</FeddaSectionTitle>
             <div className="flex gap-2">
               <FrameSlot label="First" preview={firstPreview} uploading={firstUploading}
-                onFile={f => uploadFrame(f, setFirstFilename, setFirstUploading)} />
+                onFile={f => uploadFrame(f, setFirstFilename, setFirstViewUrl, setFirstUploading)} />
               <FrameSlot label="Last" preview={lastPreview} uploading={lastUploading}
-                onFile={f => uploadFrame(f, setLastFilename, setLastUploading)} />
+                onFile={f => uploadFrame(f, setLastFilename, setLastViewUrl, setLastUploading)} />
             </div>
             {firstFilename && lastFilename && (
               <p className="text-[8px] text-violet-400/40 font-mono">Both frames ready</p>
