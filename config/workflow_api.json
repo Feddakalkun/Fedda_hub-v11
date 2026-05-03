@@ -1087,7 +1087,7 @@
   },
   "wan21-steady-dancer": {
     "name": "WAN 2.1 - Steady Dancer",
-    "filename": "wan21/WAN-21-STEADY-DANCER.json",
+    "filename": "ltx/steadydancerapi.json",
     "description": "Transfer motion from a reference video to a subject image using WAN 2.1 SteadyDancer.",
     "inputs": {
       "image": {
@@ -1108,41 +1108,83 @@
         "type": "string",
         "label": "Prompt"
       },
-      "width": {
-        "node_id": "143",
-        "input_key": "value",
-        "type": "number",
-        "label": "Width"
-      },
-      "height": {
-        "node_id": "144",
-        "input_key": "value",
-        "type": "number",
-        "label": "Height"
-      },
-      "video_length_seconds": {
-        "node_id": "147",
-        "input_key": "value",
-        "type": "number",
-        "label": "Video Length (s)"
-      },
-      "fps": {
-        "node_id": "137",
-        "input_key": "value",
-        "type": "number",
-        "label": "FPS"
-      },
-      "steps": {
-        "node_id": "119",
-        "input_key": "steps",
-        "type": "number",
-        "label": "Steps"
-      },
-      "cfg": {
-        "node_id": "119",
-        "input_key": "cfg",
-        "type": "number",
-        "label": "CFG"
+        "width": {
+          "node_id": "143",
+          "input_key": "Number",
+          "type": "number",
+          "label": "Width"
+        },
+        "height": {
+          "node_id": "144",
+          "input_key": "Number",
+          "type": "number",
+          "label": "Height"
+        },
+        "video_length_seconds": {
+          "node_id": "147",
+          "input_key": "Number",
+          "type": "number",
+          "label": "Video Length (s)"
+        },
+        "fps": {
+          "node_id": "137",
+          "input_key": "Number",
+          "type": "number",
+          "label": "FPS"
+        },
+        "steps": {
+          "node_id": "119",
+          "input_key": "steps",
+          "type": "number",
+          "label": "Steps"
+        },
+        "context_frames": {
+          "node_id": "87",
+          "input_key": "context_frames",
+          "type": "number",
+          "label": "Context Frames"
+        },
+        "attention_mode": {
+          "node_id": "22",
+          "input_key": "attention_mode",
+          "type": "string",
+          "label": "Attention Mode"
+        },
+        "load_device": {
+          "node_id": "22",
+          "input_key": "load_device",
+          "type": "string",
+          "label": "Model Load Device"
+        },
+        "text_device": {
+          "node_id": "92",
+          "input_key": "device",
+          "type": "string",
+          "label": "Text Encode Device"
+        },
+        "use_disk_cache": {
+          "node_id": "92",
+          "input_key": "use_disk_cache",
+          "type": "boolean",
+          "label": "Text Disk Cache"
+        },
+        "sampler_force_offload": {
+          "node_id": "119",
+          "input_key": "force_offload",
+          "type": "boolean",
+          "label": "Sampler Force Offload"
+        },
+        "interpolation_multiplier": {
+          "node_id": "133",
+          "input_key": "multiplier",
+          "type": "number",
+          "label": "Interpolation Multiplier"
+        },
+        "cfg": {
+          "node_id": "119",
+          "input_key": "cfg",
+          "type": "number",
+          "label": "CFG"
       },
       "pose_strength_spatial": {
         "node_id": "71",
@@ -1150,12 +1192,12 @@
         "type": "number",
         "label": "Pose Strength Spatial"
       },
-      "pose_strength_temporal": {
-        "node_id": "90",
-        "input_key": "strength",
-        "type": "number",
-        "label": "Pose Strength Temporal"
-      },
+        "pose_strength_temporal": {
+          "node_id": "71",
+          "input_key": "pose_strength_temporal",
+          "type": "number",
+          "label": "Pose Strength Temporal"
+        },
       "skip_frames": {
         "node_id": "75",
         "input_key": "skip_first_frames",

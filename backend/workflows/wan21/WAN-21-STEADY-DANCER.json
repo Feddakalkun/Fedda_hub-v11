@@ -550,6 +550,54 @@
           "shape": 7,
           "type": "VAE",
           "link": null
+        },
+        {
+          "name": "frame_rate",
+          "type": "*",
+          "widget": {
+            "name": "frame_rate"
+          },
+          "link": null
+        },
+        {
+          "name": "loop_count",
+          "type": "*",
+          "widget": {
+            "name": "loop_count"
+          },
+          "link": null
+        },
+        {
+          "name": "filename_prefix",
+          "type": "*",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "name": "format",
+          "type": "*",
+          "widget": {
+            "name": "format"
+          },
+          "link": null
+        },
+        {
+          "name": "pingpong",
+          "type": "*",
+          "widget": {
+            "name": "pingpong"
+          },
+          "link": null
+        },
+        {
+          "name": "save_output",
+          "type": "*",
+          "widget": {
+            "name": "save_output"
+          },
+          "link": null
         }
       ],
       "outputs": [
@@ -1944,7 +1992,6 @@
       "flags": {},
       "order": 6,
       "mode": 0,
-      "inputs": [],
       "outputs": [
         {
           "name": "status_report",
@@ -1978,7 +2025,8 @@
           false,
           true
         ]
-      ]
+      ],
+      "inputs": []
     },
     {
       "id": 147,
@@ -2239,6 +2287,46 @@
             "name": "frame_rate"
           },
           "link": 219
+        },
+        {
+          "name": "loop_count",
+          "type": "*",
+          "widget": {
+            "name": "loop_count"
+          },
+          "link": null
+        },
+        {
+          "name": "filename_prefix",
+          "type": "*",
+          "widget": {
+            "name": "filename_prefix"
+          },
+          "link": null
+        },
+        {
+          "name": "format",
+          "type": "*",
+          "widget": {
+            "name": "format"
+          },
+          "link": null
+        },
+        {
+          "name": "pingpong",
+          "type": "*",
+          "widget": {
+            "name": "pingpong"
+          },
+          "link": null
+        },
+        {
+          "name": "save_output",
+          "type": "*",
+          "widget": {
+            "name": "save_output"
+          },
+          "link": null
         }
       ],
       "outputs": [

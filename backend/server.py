@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Optional, Dict, Any, List
 import re
 import time
+import uuid
 
 try:
     import psutil  # type: ignore
@@ -2112,6 +2113,11 @@ class ImportUrlRequest(BaseModel):
     civitai_token: Optional[str] = None
     target: Optional[str] = None
 
+
+class ProfileDownloadRequest(BaseModel):
+    url: str
+    max_items: Optional[int] = 30
+
 @app.post("/api/lora/import-url")
 async def lora_import_url(req: ImportUrlRequest):
     return lora_service.import_from_url(req.url, req.hf_token, req.civitai_token, req.target)
@@ -2171,15 +2177,138 @@ async def promote_output_image(payload: Dict[str, Any]):
 
         src = OUTPUT_DIR / subfolder / filename if subfolder else OUTPUT_DIR / filename
         if not src.exists() or not src.is_file():
-            return {"success": False, "error": f"Output image not found: {src}"}
+            # Fallback: some workflows store outputs in unexpected/nested subfolders.
+            matches = []
+            try:
+                for p in OUTPUT_DIR.rglob(filename):
+                    if p.is_file():
+                        matches.append(p)
+            except Exception:
+                matches = []
+            if matches:
+                matches.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+                src = matches[0]
+            else:
+                return {"success": False, "error": f"Output image not found: {src}"}
 
+        fixed_name = str(payload.get("target_name") or "").strip()
         stem = Path(filename).stem
         suffix = Path(filename).suffix or ".png"
-        promoted_name = f"sd_subject_{stem}_{uuid.uuid4().hex[:8]}{suffix}"
+        promoted_name = fixed_name if fixed_name else f"sd_subject_{stem}_{uuid.uuid4().hex[:8]}{suffix}"
         dst = COMFY_DIR / "input" / promoted_name
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
-        return {"success": True, "filename": promoted_name}
+        return {"success": True, "filename": promoted_name, "source_path": str(src)}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@app.post("/api/image/promote-latest-zimage")
+async def promote_latest_zimage_image():
+    """
+    Promote the newest image from ComfyUI output/IMAGE/ZIMAGE into ComfyUI input.
+    This is a hard fallback when frontend metadata is stale.
+    """
+    try:
+        zimage_dir = OUTPUT_DIR / "IMAGE" / "ZIMAGE"
+        candidates: list[Path] = []
+        if zimage_dir.exists() and zimage_dir.is_dir():
+            for p in zimage_dir.rglob("*"):
+                if p.is_file() and p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}:
+                    candidates.append(p)
+
+        if not candidates:
+            # fallback: find likely zimage files anywhere in output
+            for p in OUTPUT_DIR.rglob("*"):
+                if not p.is_file():
+                    continue
+                if p.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp"}:
+                    continue
+                low = str(p).lower()
+                if "zimage" in low and "compare" not in low and "rgthree" not in low and "_temp_" not in low:
+                    candidates.append(p)
+
+        if not candidates:
+            return {"success": False, "error": "No Z-Image output found"}
+
+        candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+        src = candidates[0]
+        promoted_name = "sd_subject_latest.png"
+        dst = COMFY_DIR / "input" / promoted_name
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dst)
+        return {
+            "success": True,
+            "filename": promoted_name,
+            "source_path": str(src),
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+@app.post("/api/image/prepare-zimage-input")
+async def prepare_zimage_input(payload: Dict[str, Any]):
+    """
+    Upscale/normalize an input image for Z-Image only.
+    Keeps aspect ratio, sets short side to target_short_side, caps long side,
+    and snaps to divisible size for stable latent behavior.
+    """
+    try:
+        import cv2
+
+        filename = str(payload.get("filename") or "").strip()
+        if not filename:
+            return {"success": False, "error": "Missing filename"}
+
+        input_path = (COMFY_DIR / "input" / filename).resolve()
+        comfy_input_root = (COMFY_DIR / "input").resolve()
+        if not str(input_path).startswith(str(comfy_input_root)) or not input_path.exists():
+            return {"success": False, "error": f"Input image not found: {filename}"}
+
+        target_short_side = int(payload.get("target_short_side", 1024))
+        max_long_side = int(payload.get("max_long_side", 1536))
+        divisible = int(payload.get("divisible", 64))
+        target_short_side = max(512, min(1536, target_short_side))
+        max_long_side = max(target_short_side, min(2048, max_long_side))
+        divisible = 64 if divisible <= 0 else min(128, max(8, divisible))
+
+        img = cv2.imread(str(input_path), cv2.IMREAD_COLOR)
+        if img is None:
+            return {"success": False, "error": "Failed to read input image"}
+
+        h, w = img.shape[:2]
+        if h <= 0 or w <= 0:
+            return {"success": False, "error": "Invalid input image dimensions"}
+
+        short_side = min(w, h)
+        long_side = max(w, h)
+        scale = float(target_short_side) / float(short_side)
+        if long_side * scale > max_long_side:
+            scale = float(max_long_side) / float(long_side)
+
+        out_w = max(divisible, int(round((w * scale) / divisible) * divisible))
+        out_h = max(divisible, int(round((h * scale) / divisible) * divisible))
+
+        # keep sane bounds
+        out_w = min(2048, out_w)
+        out_h = min(2048, out_h)
+        if out_w <= 0 or out_h <= 0:
+            return {"success": False, "error": "Resolved invalid output size"}
+
+        resized = cv2.resize(img, (out_w, out_h), interpolation=cv2.INTER_CUBIC)
+        out_name = str(payload.get("target_name") or "zimage_input_latest.png").strip() or "zimage_input_latest.png"
+        out_path = COMFY_DIR / "input" / out_name
+        ok = cv2.imwrite(str(out_path), resized)
+        if not ok:
+            return {"success": False, "error": "Failed to write prepared image"}
+
+        return {
+            "success": True,
+            "filename": out_name,
+            "width": out_w,
+            "height": out_h,
+            "source": filename,
+        }
     except Exception as e:
         return {"success": False, "error": str(e)}
 
@@ -2187,6 +2316,16 @@ async def promote_output_image(payload: Dict[str, Any]):
 @app.post("/api/download/video")
 async def download_video(req: ImportUrlRequest):
     return model_downloader.download_media_url(req.url)
+
+
+@app.post("/api/download/profile")
+async def download_profile(req: ProfileDownloadRequest):
+    return model_downloader.download_profile_url(req.url, req.max_items or 30)
+
+
+@app.get("/api/download/profile-info")
+async def download_profile_info(url: str):
+    return model_downloader.get_profile_info(url)
 
 
 @app.get("/api/download/status/{job_id}")
@@ -2338,8 +2477,8 @@ async def sync_pose_character(payload: Dict[str, Any]):
 
 
 @app.post("/api/video/extract-frame")
-async def extract_frame(filename: str):
-    """Extract first frame from a video in ComfyUI input using OpenCV."""
+async def extract_frame(filename: str, frame_index: int = 0, frame_second: Optional[float] = None):
+    """Extract selected frame from a video in ComfyUI input using OpenCV."""
     try:
         import cv2
         input_dir = model_downloader.comfy_input_dir
@@ -2348,17 +2487,41 @@ async def extract_frame(filename: str):
             return {"success": False, "error": "File not found"}
         
         cap = cv2.VideoCapture(str(video_path))
+        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
+        video_fps = float(cap.get(cv2.CAP_PROP_FPS) or 0.0)
+
+        if frame_second is not None:
+            second = max(0.0, float(frame_second))
+            if video_fps > 0:
+                target_index = int(round(second * video_fps))
+            else:
+                target_index = max(0, int(frame_index or 0))
+        else:
+            target_index = max(0, int(frame_index or 0))
+        if total_frames > 0:
+            target_index = min(target_index, total_frames - 1)
+
+        if target_index > 0:
+            cap.set(cv2.CAP_PROP_POS_FRAMES, target_index)
+
         ret, frame = cap.read()
         cap.release()
         
         if not ret:
             return {"success": False, "error": "Could not read frame"}
         
-        out_name = f"ext_{Path(filename).stem}.jpg"
+        out_name = f"ext_{Path(filename).stem}_f{target_index}.jpg"
         out_path = input_dir / out_name
         cv2.imwrite(str(out_path), frame, [int(cv2.IMWRITE_JPEG_QUALITY), 95])
         
-        return {"success": True, "filename": out_name}
+        return {
+            "success": True,
+            "filename": out_name,
+            "frame_index": target_index,
+            "total_frames": total_frames,
+            "video_fps": video_fps,
+            "frame_second": frame_second,
+        }
     except Exception as e:
         return {"success": False, "error": str(e)}
 
