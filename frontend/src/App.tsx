@@ -13,7 +13,7 @@ import { GalleryPage } from './pages/GalleryPage';
 import { VideosPage } from './pages/VideosPage';
 import { SectionGroup, StudioCard, ToolCard } from './components/layout/V11Cards';
 
-type RootSection = 'hub' | 'image' | 'video' | 'xxx' | 'explore';
+type RootSection = 'hub' | 'image' | 'video' | 'explore';
 
 type ToolItem = { tab: string; label: string; description: string };
 
@@ -37,7 +37,6 @@ const CARD_IMAGE_BY_TAB: Record<string, string> = {
   'wan22-img2vid-6frames': '/cards/wan22-story.png',
   'ltx-flf': '/cards/ltx-flf.png',
   'ltx-img-audio': '/cards/ltx-audio.png',
-  xxx: '/cards/xxx.jpg',
   gallery: '/cards/gallery.png',
   videos: '/cards/videos.png',
   library: '/cards/lora-library.png',
@@ -63,7 +62,6 @@ const CARD_VIDEO_BY_TAB: Record<string, string> = {
   'wan22-img2vid-6frames': '/cards/clips/tools/wan22-story.mp4',
   'ltx-flf': '/cards/clips/tools/ltx-first-last.mp4',
   'ltx-img-audio': '/cards/clips/tools/ltx-img-audio.mp4',
-  xxx: '/cards/clips/hub/video-studio.mp4',
   gallery: '/cards/clips/tools/gallery.mp4',
   videos: '/cards/clips/tools/videos.mp4',
   library: '/cards/clips/tools/lora-library.mp4',
@@ -102,14 +100,6 @@ const HUB_CARDS: Array<{
     Icon: Video,
     image: CARD_IMAGE_BY_TAB.video,
     video: CARD_VIDEO_BY_TAB.video,
-  },
-  {
-    id: 'xxx',
-    label: 'XXX',
-    description: 'Private workflow collection.',
-    Icon: Film,
-    image: CARD_IMAGE_BY_TAB.xxx,
-    video: CARD_VIDEO_BY_TAB.xxx,
   },
   {
     id: 'explore',
@@ -166,7 +156,6 @@ const TOOL_GROUPS: Record<Exclude<RootSection, 'hub'>, Array<{ title: string; to
       ],
     },
   ],
-  xxx: [],
   explore: [
     {
       title: 'Explore',
@@ -202,7 +191,6 @@ const VALID_TABS = new Set([
   'ltx',
   'ltx-flf',
   'ltx-img-audio',
-  'xxx',
   'audio',
   'gallery',
   'videos',
@@ -232,7 +220,6 @@ const PAGE_META: Record<string, { label: string; description: string; Icon: type
   ltx: { label: 'LTX Video', description: 'LTX video workflows.', Icon: Film },
   'ltx-flf': { label: 'LTX - First / Last Frame', description: 'Generate between keyframes.', Icon: Film },
   'ltx-img-audio': { label: 'LTX - Img + Audio Lipsync', description: 'Image + audio lipsync workflow.', Icon: Film },
-  xxx: { label: 'XXX', description: 'Private workflow section.', Icon: Film },
   audio: { label: 'Audio / SFX', description: 'Generate music, voice and sound effects.', Icon: Music },
   gallery: { label: 'Gallery', description: 'Browse generated images.', Icon: Images },
   videos: { label: 'Videos', description: 'Browse generated videos.', Icon: Film },
@@ -272,8 +259,6 @@ function FeddaApp() {
       setWorkspaceOrigin('section');
       if (tab.startsWith('z-image') || tab.startsWith('flux') || tab.startsWith('qwen') || tab.startsWith('image-')) {
         setActiveSection('image');
-      } else if (tab.startsWith('xxx')) {
-        setActiveSection('xxx');
       } else if (tab.startsWith('wan') || tab.startsWith('ltx') || tab === 'video') {
         setActiveSection('video');
       } else if (tab === 'gallery' || tab === 'videos' || tab === 'library') {
@@ -301,11 +286,6 @@ function FeddaApp() {
       label: 'Video Studio',
       description: 'Cards navigation for video workflows.',
       Icon: Video,
-    },
-    xxx: {
-      label: 'XXX',
-      description: 'Cards navigation for private workflows.',
-      Icon: Film,
     },
     explore: {
       label: 'Explore',
@@ -363,8 +343,6 @@ function FeddaApp() {
       case 'ltx-flf':
       case 'ltx-img-audio':
         return <VideoStudioPage activeTab={activeTab} />;
-      case 'xxx':
-        return <PlaceholderPage label="XXX" description="Private workflow section." icon={<Film className="w-8 h-8" />} />;
       case 'library':
         return <LibraryPage />;
       case 'gallery':
@@ -383,8 +361,6 @@ function FeddaApp() {
       ? 'Image Studio'
       : activeSection === 'video'
         ? 'Video Studio'
-        : activeSection === 'xxx'
-          ? 'XXX'
         : 'Explore';
 
   return (
