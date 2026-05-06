@@ -293,7 +293,7 @@ body {
 
 .v11-hub-row {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0;
   width: 100%;
   height: 100%;
@@ -398,10 +398,21 @@ body {
   }
 }
 
+@media (max-width: 1500px) {
+  .v11-hub-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto;
+    height: auto;
+    min-height: 100%;
+  }
+}
+
 @media (max-width: 1360px) {
   .v11-hub-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    height: auto;
+    min-height: 100%;
   }
 
   .v11-hub-card {
