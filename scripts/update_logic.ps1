@@ -438,6 +438,24 @@ if (Test-Path $EnsureZImageScript) {
     Write-Host "  [WARNING] ensure_zimage_core_models.ps1 not found, skipping." -ForegroundColor Yellow
 }
 
+# Ensure Steady Dancer pose detection ONNX files exist so workflow validates.
+Write-Host "`n[2c.1/3] Ensuring Steady Dancer detection models..." -ForegroundColor Yellow
+$EnsureSteadyDetectionScript = Join-Path $RootPath "scripts\ensure_steady_dancer_detection_models.ps1"
+if (Test-Path $EnsureSteadyDetectionScript) {
+    try {
+        & powershell -ExecutionPolicy Bypass -File "$EnsureSteadyDetectionScript" -SilentMode
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "  Steady Dancer detection models ready." -ForegroundColor Green
+        } else {
+            Write-Host "  [WARNING] Steady Dancer detection model check returned code $LASTEXITCODE (non-fatal)." -ForegroundColor Yellow
+        }
+    } catch {
+        Write-Host "  [WARNING] Steady Dancer detection model ensure failed (non-fatal): $_" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  [WARNING] ensure_steady_dancer_detection_models.ps1 not found, skipping." -ForegroundColor Yellow
+}
+
 
 # ============================================================================
 # 2d. SYNC WORKFLOWS TO COMFYUI USER DIRECTORY

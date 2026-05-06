@@ -928,6 +928,22 @@ if (Test-Path $EnsureZImageScript) {
     }
 }
 
+# Ensure Steady Dancer ONNX detection models exist so workflow validates.
+$EnsureSteadyDetectionScript = Join-Path $ScriptPath "ensure_steady_dancer_detection_models.ps1"
+if (Test-Path $EnsureSteadyDetectionScript) {
+    try {
+        Write-Step "Ensuring Steady Dancer detection models..." "Yellow"
+        & powershell -ExecutionPolicy Bypass -File "$EnsureSteadyDetectionScript" -SilentMode
+        if ($LASTEXITCODE -eq 0) {
+            Write-Step "Steady Dancer detection models ready." "Green"
+        } else {
+            Write-Step "WARNING: Steady Dancer detection model ensure returned code $LASTEXITCODE (non-fatal)." "Yellow"
+        }
+    } catch {
+        Write-Step "WARNING: Steady Dancer detection model ensure failed (non-fatal)." "Yellow"
+    }
+}
+
 # ============================================================================
 # 7. SMOKE TEST
 # ============================================================================

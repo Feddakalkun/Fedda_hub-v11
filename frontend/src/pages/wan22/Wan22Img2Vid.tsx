@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import {
-  Video, Upload, RefreshCw, Film, Loader2,
+  Video, Upload, RefreshCw, Loader2,
   ChevronDown, ChevronUp, Check, FlameKindling, Settings,
 } from 'lucide-react';
 import { useToast } from '../../components/ui/Toast';

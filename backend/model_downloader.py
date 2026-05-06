@@ -217,5 +217,79 @@ class ModelDownloader:
         threading.Thread(target=_task, daemon=True).start()
         return {"success": True, "job_id": job_id}
 
+    def download_profile_url(self, url: str, max_items: int = 30):
+        """Use yt-dlp to download a full profile/feed (up to max_items) into ComfyUI input."""
+        job_id = f"dprof_{int(time.time())}"
+        max_items = max(1, min(int(max_items or 30), 500))
+
+        def _task():
+            try:
+                self._update_progress(job_id, "downloading", 0)
+
+                downloaded_count = 0
+
+                def progress_hook(d):
+                    nonlocal downloaded_count
+                    if d.get('status') == 'downloading':
+                        p = str(d.get('_percent_str', '0%')).replace('%', '').strip()
+                        try:
+                            self._update_progress(job_id, "downloading", int(float(p)))
+                        except Exception:
+                            pass
+                    elif d.get('status') == 'finished':
+                        downloaded_count += 1
+
+                ydl_opts = {
+                    'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+                    'outtmpl': str(self.comfy_input_dir / 'tkprof_%(uploader_id|uploader)s_%(id)s.%(ext)s'),
+                    'progress_hooks': [progress_hook],
+                    'noplaylist': False,
+                    'playlistend': max_items,
+                    'ignoreerrors': True,
+                    'quiet': True,
+                    'no_warnings': True,
+                }
+
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    info = ydl.extract_info(url, download=True)
+                    if not info:
+                        raise RuntimeError("No profile info returned")
+
+                self._update_progress(job_id, "completed", 100, error=f"Downloaded {downloaded_count} videos")
+            except Exception as e:
+                self._update_progress(job_id, "error", 0, str(e))
+
+        threading.Thread(target=_task, daemon=True).start()
+        return {"success": True, "job_id": job_id}
+
+    def get_profile_info(self, url: str) -> Dict[str, Any]:
+        """Fetch profile/playlist metadata without downloading."""
+        try:
+            ydl_opts = {
+                'quiet': True,
+                'no_warnings': True,
+                'extract_flat': True,
+                'skip_download': True,
+                'ignoreerrors': True,
+            }
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(url, download=False)
+                if not info:
+                    return {"success": False, "error": "No profile info returned"}
+
+            entries = info.get('entries') or []
+            valid_entries = [e for e in entries if e]
+            count = len(valid_entries)
+            uploader = info.get('uploader') or info.get('uploader_id') or info.get('channel') or ''
+            title = info.get('title') or uploader or 'Profile'
+            return {
+                "success": True,
+                "title": title,
+                "uploader": uploader,
+                "video_count": count,
+            }
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+
 # Instance for shared use
 model_downloader = ModelDownloader(Path(__file__).parent.parent)

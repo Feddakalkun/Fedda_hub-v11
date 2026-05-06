@@ -69,6 +69,8 @@ function UploadCard({
 
 export const Wan21SteadyDancerPage = () => {
   const startVideoRef = useRef<HTMLVideoElement | null>(null);
+  const manualImageInputRef = useRef<HTMLInputElement | null>(null);
+  const manualVideoInputRef = useRef<HTMLInputElement | null>(null);
   const [prompt] = usePersistentState(
     'wan21_sd_prompt',
     'full-body dancer, clean anatomy, stable identity, dynamic choreography, cinematic camera tracking, detailed wardrobe textures, realistic skin, high motion coherence, high quality',
@@ -723,6 +725,54 @@ export const Wan21SteadyDancerPage = () => {
               </div>
 
               <div className="rounded-2xl border border-white/[0.08] bg-[#0a0b0f] p-3.5 space-y-3 shadow-[0_0_0_1px_rgba(255,255,255,0.01)]">
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => manualImageInputRef.current?.click()}
+                    className="px-3 py-2 rounded-lg border border-white/[0.12] bg-white/[0.03] hover:bg-white/[0.07] text-[10px] font-black uppercase tracking-[0.12em] text-white/80"
+                  >
+                    Upload Image
+                  </button>
+                  <button
+                    onClick={() => manualVideoInputRef.current?.click()}
+                    className="px-3 py-2 rounded-lg border border-white/[0.12] bg-white/[0.03] hover:bg-white/[0.07] text-[10px] font-black uppercase tracking-[0.12em] text-white/80"
+                  >
+                    Upload Video
+                  </button>
+                  <input
+                    ref={manualImageInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      uploadFile(
+                        file,
+                        (name) => {
+                          setSubjectImageFile(name);
+                          setSubjectImageNonce(Date.now());
+                          setZimageReferenceFile(null);
+                          setRunImageUsed(name);
+                          setPromotedInputFile(name);
+                        },
+                        setUploadingSubject,
+                      );
+                      e.currentTarget.value = '';
+                    }}
+                  />
+                  <input
+                    ref={manualVideoInputRef}
+                    type="file"
+                    accept="video/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      uploadFile(file, (name) => setMotionVideoFile(name), setUploadingMotion);
+                      e.currentTarget.value = '';
+                    }}
+                  />
+                </div>
                 <div className="grid md:grid-cols-2 gap-3">
                   <div className="rounded-xl border border-white/[0.08] bg-black/25 p-2 space-y-2">
                     <div className="text-[10px] text-white/65">Paste TikTok/YouTube URL for single video download</div>
