@@ -1,0 +1,273 @@
+{
+  "226": {
+    "inputs": {
+      "_widget_0": "No Style"
+    },
+    "class_type": "Load Styles CSV"
+  },
+  "224": {
+    "inputs": {
+      "text_c": ", ",
+      "text_a": [
+        "446",
+        0
+      ],
+      "text_b": [
+        "226",
+        0
+      ],
+      "text_d": "true"
+    },
+    "class_type": "Text Concatenate"
+  },
+  "225": {
+    "inputs": {
+      "text": [
+        "224",
+        0
+      ],
+      "clip": [
+        "425",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "216": {
+    "inputs": {
+      "negative": [
+        "230",
+        1
+      ],
+      "positive": [
+        "230",
+        0
+      ],
+      "mask": [
+        "447",
+        2
+      ],
+      "image": [
+        "447",
+        1
+      ],
+      "control_net": [
+        "231",
+        0
+      ],
+      "vae": [
+        "218",
+        2
+      ]
+    },
+    "class_type": "ControlNetInpaintingAliMamaApply"
+  },
+  "229": {
+    "inputs": {
+      "images": [
+        "447",
+        1
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "448": {
+    "inputs": {
+      "inpainted_image": [
+        "214",
+        0
+      ],
+      "stitcher": [
+        "447",
+        0
+      ]
+    },
+    "class_type": "InpaintStitchImproved"
+  },
+  "425": {
+    "inputs": {
+      "clip": [
+        "218",
+        1
+      ],
+      "model": [
+        "218",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)"
+  },
+  "218": {
+    "inputs": {
+      "_widget_0": "realvisxlV40_v40LightningBakedvae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "223": {
+    "inputs": {
+      "image_b": [
+        "212",
+        0
+      ],
+      "image_a": [
+        "448",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)"
+  },
+  "213": {
+    "inputs": {
+      "images": [
+        "448",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "212": {
+    "inputs": {
+      "_widget_1": "image",
+      "_widget_0": "clipspace/clipspace-mask-26728064.png [input]"
+    },
+    "class_type": "LoadImage"
+  },
+  "217": {
+    "inputs": {
+      "_widget_0": "controlnet-union-sdxl-1.0.safetensors"
+    },
+    "class_type": "ControlNetLoader"
+  },
+  "221": {
+    "inputs": {
+      "clip": [
+        "425",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "219": {
+    "inputs": {
+      "negative": [
+        "216",
+        1
+      ],
+      "positive": [
+        "216",
+        0
+      ],
+      "model": [
+        "425",
+        0
+      ],
+      "latent_image": [
+        "230",
+        2
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "215": {
+    "inputs": {
+      "images": [
+        "214",
+        0
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "222": {
+    "inputs": {
+      "mask": [
+        "447",
+        2
+      ]
+    },
+    "class_type": "MaskPreview+"
+  },
+  "230": {
+    "inputs": {
+      "vae": [
+        "218",
+        2
+      ],
+      "pixels": [
+        "447",
+        1
+      ],
+      "negative": [
+        "221",
+        0
+      ],
+      "positive": [
+        "225",
+        0
+      ],
+      "mask": [
+        "447",
+        2
+      ]
+    },
+    "class_type": "InpaintModelConditioning"
+  },
+  "231": {
+    "inputs": {
+      "control_net": [
+        "217",
+        0
+      ]
+    },
+    "class_type": "SetUnionControlNetType"
+  },
+  "447": {
+    "inputs": {
+      "optional_context_mask": "bilinear",
+      "image": [
+        "212",
+        0
+      ],
+      "mask": [
+        "212",
+        1
+      ]
+    },
+    "class_type": "InpaintCropImproved"
+  },
+  "446": {
+    "inputs": {
+      "_widget_1": [
+        false,
+        true
+      ],
+      "_widget_0": "WOMAN"
+    },
+    "class_type": "String Literal"
+  },
+  "214": {
+    "inputs": {
+      "vae": [
+        "218",
+        2
+      ],
+      "samples": [
+        "219",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "220": {
+    "inputs": {
+      "vae": [
+        "218",
+        2
+      ],
+      "pixels": [
+        "447",
+        1
+      ]
+    },
+    "class_type": "VAEEncode"
+  }
+}

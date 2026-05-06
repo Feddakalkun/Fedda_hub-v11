@@ -1,0 +1,145 @@
+{
+  "435": {
+    "inputs": {
+      "_widget_0": "bbox/face_yolov8m.pt"
+    },
+    "class_type": "UltralyticsDetectorProvider"
+  },
+  "434": {
+    "inputs": {
+      "_widget_1": "AUTO",
+      "_widget_0": "sam_vit_b_01ec64.pth"
+    },
+    "class_type": "SAMLoader"
+  },
+  "356": {
+    "inputs": {
+      "images": [
+        "433",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "358": {
+    "inputs": {
+      "clip": [
+        "362",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "433": {
+    "inputs": {
+      "clip": [
+        "362",
+        1
+      ],
+      "sam_model_opt": [
+        "434",
+        0
+      ],
+      "detailer_hook": true,
+      "image": [
+        "363",
+        0
+      ],
+      "positive": [
+        "357",
+        0
+      ],
+      "segm_detector_opt": 1024,
+      "model": [
+        "362",
+        0
+      ],
+      "negative": [
+        "358",
+        0
+      ],
+      "scheduler_func_opt": 1024,
+      "vae": [
+        "362",
+        2
+      ],
+      "bbox_detector": [
+        "435",
+        0
+      ]
+    },
+    "class_type": "FaceDetailer"
+  },
+  "357": {
+    "inputs": {
+      "clip": [
+        "362",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "361": {
+    "inputs": {
+      "_widget_0": "4x_foolhardy_Remacri.pth"
+    },
+    "class_type": "UpscaleModelLoader"
+  },
+  "362": {
+    "inputs": {
+      "_widget_0": "realvisxlV40_v40LightningBakedvae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "359": {
+    "inputs": {
+      "_widget_1": "image",
+      "_widget_0": "pose.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "360": {
+    "inputs": {
+      "image_b": [
+        "359",
+        0
+      ],
+      "image_a": [
+        "433",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)"
+  },
+  "363": {
+    "inputs": {
+      "upscale_model": [
+        "361",
+        0
+      ],
+      "custom_sigmas": 129262929056833,
+      "image": [
+        "359",
+        0
+      ],
+      "positive": [
+        "357",
+        0
+      ],
+      "model": [
+        "362",
+        0
+      ],
+      "negative": [
+        "358",
+        0
+      ],
+      "vae": [
+        "362",
+        2
+      ],
+      "custom_sampler": 2
+    },
+    "class_type": "UltimateSDUpscaleCustomSample"
+  }
+}

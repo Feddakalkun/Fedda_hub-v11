@@ -1,0 +1,248 @@
+{
+  "364": {
+    "inputs": {
+      "_widget_1": "image",
+      "_widget_0": "CUTEYOUPOSE.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "381": {
+    "inputs": {
+      "text": [
+        "377",
+        0
+      ],
+      "clip": [
+        "422",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "375": {
+    "inputs": {
+      "images": [
+        "379",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "382": {
+    "inputs": {
+      "_widget_0": "controlnet-union-sdxl-1.0.safetensors"
+    },
+    "class_type": "ControlNetLoader"
+  },
+  "442": {
+    "inputs": {
+      "_widget_1": [
+        false,
+        true
+      ],
+      "_widget_0": "WOMAN"
+    },
+    "class_type": "String Literal"
+  },
+  "374": {
+    "inputs": {
+      "negative": [
+        "383",
+        1
+      ],
+      "positive": [
+        "383",
+        0
+      ],
+      "model": [
+        "422",
+        0
+      ],
+      "latent_image": [
+        "378",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "365": {
+    "inputs": {
+      "image": [
+        "364",
+        0
+      ],
+      "height_input": 2000,
+      "get_image_size": 2000
+    },
+    "class_type": "ImageResizeKJ"
+  },
+  "369": {
+    "inputs": {
+      "text": [
+        "367",
+        1
+      ]
+    },
+    "class_type": "ShowText|pysssss"
+  },
+  "383": {
+    "inputs": {
+      "vae": [
+        "373",
+        2
+      ],
+      "negative": [
+        "381",
+        0
+      ],
+      "positive": [
+        "380",
+        0
+      ],
+      "control_net": [
+        "384",
+        0
+      ],
+      "image": [
+        "365",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced"
+  },
+  "384": {
+    "inputs": {
+      "control_net": [
+        "382",
+        0
+      ]
+    },
+    "class_type": "SetUnionControlNetType"
+  },
+  "373": {
+    "inputs": {
+      "_widget_0": "realvisxlV40_v40LightningBakedvae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "377": {
+    "inputs": {
+      "text_c": ", ",
+      "text_a": [
+        "449",
+        0
+      ],
+      "text_b": [
+        "367",
+        1
+      ],
+      "text_d": "true"
+    },
+    "class_type": "Text Concatenate"
+  },
+  "366": {
+    "inputs": {
+      "image_b": [
+        "364",
+        0
+      ],
+      "image_a": [
+        "379",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)"
+  },
+  "380": {
+    "inputs": {
+      "text": [
+        "376",
+        0
+      ],
+      "clip": [
+        "422",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "378": {
+    "inputs": {
+      "vae": [
+        "373",
+        2
+      ],
+      "pixels": [
+        "365",
+        0
+      ]
+    },
+    "class_type": "VAEEncode"
+  },
+  "449": {
+    "inputs": {
+      "_widget_1": [
+        false,
+        true
+      ],
+      "_widget_0": ""
+    },
+    "class_type": "String Literal"
+  },
+  "367": {
+    "inputs": {
+      "_widget_0": "No Style"
+    },
+    "class_type": "Load Styles CSV"
+  },
+  "368": {
+    "inputs": {
+      "text": [
+        "376",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss"
+  },
+  "422": {
+    "inputs": {
+      "clip": [
+        "373",
+        1
+      ],
+      "model": [
+        "373",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)"
+  },
+  "379": {
+    "inputs": {
+      "vae": [
+        "373",
+        2
+      ],
+      "samples": [
+        "374",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "376": {
+    "inputs": {
+      "text_c": ", ",
+      "text_a": [
+        "442",
+        0
+      ],
+      "text_b": [
+        "367",
+        0
+      ],
+      "text_d": "true"
+    },
+    "class_type": "Text Concatenate"
+  }
+}

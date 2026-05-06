@@ -1,0 +1,478 @@
+{
+  "252": {
+    "inputs": {
+      "styles": "Photography | Low key"
+    },
+    "class_type": "Load Styles CSV",
+    "_meta": {
+      "title": "CHOOSE STYLE"
+    }
+  },
+  "253": {
+    "inputs": {
+      "text_0": "pocahontas and tarzan jungle sex  big ass big tits boobs huge monster thick dick pussy 10mm focal,  wide shot, UHD, 8k, film grain, film still, macro photography, extreme close-ups, intricate details, unseen worlds, capturing texture, emphasizing details, revealing beauty in small things, professional lighting, precise focusing, artistic expression, immersive experience, expert technique, low key photography, dramatic lighting, deep shadows, rich contrast, moody atmosphere, intense emotions, cinematic feel, mysterious ambiance, emphasizing shape and form, creating depth, evoking drama, storytelling through shadows, professional technique",
+      "text": [
+        "265",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "POSITIVE"
+    }
+  },
+  "254": {
+    "inputs": {
+      "text_0": "bad anatomy, comics, cropped, cross-eyed, worst quality, low quality, painting, 3D render, drawing, crayon, sketch, graphite, impressionist, cartoon, anime, noisy, blurry, soft, deformed, ugly, lowres, low details, JPEG artifacts, airbrushed, semi-realistic, CGI, render, Blender, digital art, manga, amateur, mutilated, distorted",
+      "text": [
+        "264",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "NEGATIVE"
+    }
+  },
+  "258": {
+    "inputs": {
+      "guide_size": 1024,
+      "guide_size_for": true,
+      "max_size": 1024,
+      "seed": 24,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "lcm",
+      "scheduler": "karras",
+      "denoise": 0.4,
+      "feather": 4,
+      "noise_mask": "enabled",
+      "force_inpaint": false,
+      "bbox_threshold": 0.5,
+      "bbox_dilation": 8,
+      "bbox_crop_factor": 1.5,
+      "sam_detection_hint": "center-1",
+      "sam_dilation": 0,
+      "sam_threshold": 0.93,
+      "sam_bbox_expansion": 0,
+      "sam_mask_hint_threshold": 0.7,
+      "sam_mask_hint_use_negative": "False",
+      "drop_size": 10,
+      "wildcard": "",
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 2,
+      "tiled_encode": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "tiled_decode": false,
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "image": [
+        "414",
+        0
+      ],
+      "model": [
+        "421",
+        0
+      ],
+      "clip": [
+        "270",
+        1
+      ],
+      "vae": [
+        "270",
+        2
+      ],
+      "positive": [
+        "267",
+        0
+      ],
+      "negative": [
+        "268",
+        0
+      ],
+      "bbox_detector": [
+        "263",
+        0
+      ],
+      "sam_model_opt": [
+        "262",
+        0
+      ]
+    },
+    "class_type": "FaceDetailer",
+    "_meta": {
+      "title": "FaceDetailer (Output)"
+    }
+  },
+  "262": {
+    "inputs": {
+      "model_name": "sam_vit_b_01ec64.pth",
+      "device_mode": "AUTO"
+    },
+    "class_type": "SAMLoader",
+    "_meta": {
+      "title": "SAMLoader (Impact)"
+    }
+  },
+  "263": {
+    "inputs": {
+      "model_name": "bbox/face_yolov8m.pt"
+    },
+    "class_type": "UltralyticsDetectorProvider",
+    "_meta": {
+      "title": "UltralyticsDetectorProvider"
+    }
+  },
+  "264": {
+    "inputs": {
+      "delimiter": ", ",
+      "clean_whitespace": "true",
+      "text_a": [
+        "450",
+        0
+      ],
+      "text_b": [
+        "252",
+        1
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "265": {
+    "inputs": {
+      "delimiter": ", ",
+      "clean_whitespace": "true",
+      "text_a": [
+        "441",
+        0
+      ],
+      "text_b": [
+        "252",
+        0
+      ]
+    },
+    "class_type": "Text Concatenate",
+    "_meta": {
+      "title": "Text Concatenate"
+    }
+  },
+  "267": {
+    "inputs": {
+      "text": [
+        "265",
+        0
+      ],
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "clip": [
+        "421",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positive Prompt from Styles"
+    }
+  },
+  "268": {
+    "inputs": {
+      "text": [
+        "264",
+        0
+      ],
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "clip": [
+        "421",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negative Prompt from Styles"
+    }
+  },
+  "269": {
+    "inputs": {
+      "width": 1080,
+      "height": 1080,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "270": {
+    "inputs": {
+      "ckpt_name": "realism-sdxl.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "271": {
+    "inputs": {
+      "seed": 353,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "lcm",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "421",
+        0
+      ],
+      "positive": [
+        "267",
+        0
+      ],
+      "negative": [
+        "268",
+        0
+      ],
+      "latent_image": [
+        "269",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "412": {
+    "inputs": {
+      "anything": [
+        "265",
+        0
+      ]
+    },
+    "class_type": "easy showAnything",
+    "_meta": {
+      "title": "GENERATED PROMPT"
+    }
+  },
+  "414": {
+    "inputs": {
+      "samples": [
+        "271",
+        0
+      ],
+      "vae": [
+        "270",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "421": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "➕ Add Lora": "",
+      "model": [
+        "270",
+        0
+      ],
+      "clip": [
+        "270",
+        1
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "430": {
+    "inputs": {
+      "rgthree_comparer": {
+        "images": [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_bpjee_00603_.png&type=temp&subfolder=&rand=0.8503877673463981"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_bpjee_00604_.png&type=temp&subfolder=&rand=0.029898439503220686"
+          }
+        ]
+      },
+      "image_a": [
+        "258",
+        0
+      ],
+      "image_b": [
+        "414",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)",
+    "_meta": {
+      "title": "Image Comparer (rgthree)"
+    }
+  },
+  "431": {
+    "inputs": {
+      "filename_prefix": "IMAGE/XXX/0",
+      "images": [
+        "258",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "441": {
+    "inputs": {
+      "string": "pocahontas and tarzan jungle sex  big ass big tits boobs huge monster thick dick pussy 10mm focal,  wide shot, UHD, 8k, film grain, film still, macro photography, extreme close-ups, intricate details, unseen worlds, capturing texture, emphasizing details, revealing beauty in small things, professional lighting, precise focusing, artistic expression, immersive experience, expert technique",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "String Literal",
+    "_meta": {
+      "title": "POSITIVE PROMPT"
+    }
+  },
+  "450": {
+    "inputs": {
+      "string": "",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "String Literal",
+    "_meta": {
+      "title": "NEGATIVE PROMPT"
+    }
+  },
+  "452": {
+    "inputs": {
+      "seed": 518334699694984
+    },
+    "class_type": "Seed",
+    "_meta": {
+      "title": "Seed"
+    }
+  },
+  "454": {
+    "inputs": {
+      "guide_size": 1024,
+      "guide_size_for": true,
+      "max_size": 1024,
+      "seed": 78,
+      "steps": 20,
+      "cfg": 2,
+      "sampler_name": "ddpm",
+      "scheduler": "exponential",
+      "denoise": 0.6,
+      "feather": 4,
+      "noise_mask": "enabled",
+      "force_inpaint": false,
+      "bbox_threshold": 0.5,
+      "bbox_dilation": 8,
+      "bbox_crop_factor": 1.5,
+      "sam_detection_hint": "center-1",
+      "sam_dilation": 0,
+      "sam_threshold": 0.93,
+      "sam_bbox_expansion": 0,
+      "sam_mask_hint_threshold": 0.7,
+      "sam_mask_hint_use_negative": "False",
+      "drop_size": 10,
+      "wildcard": "",
+      "cycle": 1,
+      "inpaint_model": false,
+      "noise_mask_feather": 2,
+      "tiled_encode": {
+        "__value__": [
+          false,
+          true
+        ]
+      },
+      "tiled_decode": false,
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "FaceDetailer",
+    "_meta": {
+      "title": "FaceDetailer (Output)"
+    }
+  },
+  "466": {
+    "inputs": {
+      "download_links": "https://huggingface.co/comfyuistudio/realism-sdxl/resolve/main/realism-sdxl.safetensors checkpoints\nhttps://huggingface.co/xinsir/controlnet-union-sdxl-1.0/resolve/main/diffusion_pytorch_model_promax.safetensors controlnet controlnet-union-sdxl-1.0.safetensors\nhttps://huggingface.co/alexgenovese/reica_models/resolve/021e192bd744c48a85f8ae1832662e77beb9aac7/realvisxlV40_v40LightningBakedvae.safetensors checkpoints\nhttps://huggingface.co/MaziyarPanahi/Mistral-7B-Instruct-v0.3-GGUF/resolve/main/Mistral-7B-Instruct-v0.3.Q4_K_M.gguf llm_gguf\nhttps://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth sams\nhttps://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors vae\nhttps://huggingface.co/jingheya/lotus-depth-g-v2-0-disparity/resolve/main/unet/diffusion_pytorch_model.safetensors unet lotus-depth-g-v2-0.safetensors\nhttps://huggingface.co/lllyasviel/fooocus_inpaint/resolve/main/fooocus_inpaint_head.pth inpaint\nhttps://huggingface.co/lllyasviel/fooocus_inpaint/resolve/main/inpaint_v26.fooocus.patch inpaint\nhttps://huggingface.co/outfly/face_yolov8m/resolve/main/face_yolov8m.pt ultralytics/bbox",
+      "auto_download": true,
+      "max_concurrent_downloads": 1,
+      "max_download_speed_mbps": 0,
+      "enable_resume": true,
+      "validate_files": false,
+      "enable_notifications": true,
+      "auto_organize": false,
+      "hf_token": "",
+      "speak_and_recognation": {
+        "__value__": [
+          false,
+          true
+        ]
+      }
+    },
+    "class_type": "HuggingFaceDownloader",
+    "_meta": {
+      "title": "🤗 HuggingFace Model Downloader Pro"
+    }
+  },
+  "516": {
+    "inputs": {
+      "text_0": "=== DOWNLOAD REPORT ===\nTotal files: 10\nSuccessful downloads: 0\nAlready existed: 10\nInterrupted: 0\nFailed: 0\nMax concurrent: 1\nSpeed limit: Unlimited\nResume enabled: True\nValidation enabled: False\nAuto-organize: False\n\nDetails:\n✓ realism-sdxl.safetensors: Already exists (6.46 GB)\n✓ controlnet-union-sdxl-1.0.safetensors: Already exists (2.34 GB)\n✓ realvisxlV40_v40LightningBakedvae.safetensors: Already exists (6.46 GB)\n✓ Mistral-7B-Instruct-v0.3.Q4_K_M.gguf: Already exists (4.07 GB)\n✓ sam_vit_b_01ec64.pth: Already exists (357.67 MB)\n✓ vae-ft-mse-840000-ema-pruned.safetensors: Already exists (319.14 MB)\n✓ lotus-depth-g-v2-0.safetensors: Already exists (3.23 GB)\n✓ fooocus_inpaint_head.pth: Already exists (51.37 KB)\n✓ inpaint_v26.fooocus.patch: Already exists (1.23 GB)\n✓ face_yolov8m.pt: Already exists (49.62 MB)",
+      "text": [
+        "466",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  }
+}

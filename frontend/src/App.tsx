@@ -11,9 +11,10 @@ import { LibraryPage } from './pages/LibraryPage';
 import { AgentChatPage } from './pages/AgentChatPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { VideosPage } from './pages/VideosPage';
+import { XxxStudioPage } from './pages/XxxStudioPage';
 import { SectionGroup, StudioCard, ToolCard } from './components/layout/V11Cards';
 
-type RootSection = 'hub' | 'image' | 'video' | 'explore';
+type RootSection = 'hub' | 'image' | 'video' | 'xxx' | 'explore';
 
 type ToolItem = { tab: string; label: string; description: string };
 
@@ -31,12 +32,39 @@ const CARD_IMAGE_BY_TAB: Record<string, string> = {
   'qwen-image-ref': '/cards/image-ref.png',
   'qwen-multi-angle': '/cards/multi-angles.png',
   'image-influencer': '/cards/influencer.png',
+  'sdxl-default': '/cards/v3/sdxl-default.jpg',
+  'sdxl-controlnet': '/cards/v3/sdxl-controlnet.jpg',
+  'sdxl-batch-processor': '/cards/v3/sdxl-batch-processor.jpg',
+  'sdxl-ip-adapter-2x-img2img': '/cards/v3/sdxl-ip-adapter-2x-img2img.jpg',
+  'sdxl-2000px-latent-upscale': '/cards/v3/sdxl-2000px-latent-upscale.jpg',
+  'sdxl-remove-background': '/cards/v3/sdxl-remove-background.jpg',
+  'sdxl-cn-openpose': '/cards/v3/sdxl-cn-openpose.jpg',
+  'sdxl-ip-adapter-style-transfer': '/cards/v3/sdxl-ip-adapter-style-transfer.jpg',
+  'sdxl-ip-adapter-img2img': '/cards/v3/sdxl-ip-adapter-img2img.jpg',
+  'sdxl-inpaint-pro': '/cards/v3/sdxl-inpaint-pro.jpg',
+  'sdxl-cn-canny': '/cards/v3/sdxl-cn-canny.jpg',
+  'sdxl-sd-upscale': '/cards/v3/sdxl-sd-upscale.jpg',
+  'sdxl-cn-depth': '/cards/v3/sdxl-cn-depth.jpg',
+  'sdxl-outpaint': '/cards/v3/sdxl-outpaint.jpg',
+  'sdxl-sd-image': '/cards/v3/sdxl-sd-image.jpg',
   'wan21-steady-dancer': '/cards/wan21.png',
   'wan22-vid2vid': '/cards/wan22-vid2vid.png',
   'wan22-img2vid': '/cards/wan22-img2vid.png',
   'wan22-img2vid-6frames': '/cards/wan22-story.png',
   'ltx-flf': '/cards/ltx-flf.png',
   'ltx-img-audio': '/cards/ltx-audio.png',
+  xxx: '/cards/v3/xxx.jpg',
+  'xxx-influencer': '/cards/v3/influencer.jpg',
+  'xxx-realism-sdxl': '/cards/v3/realism-sdxl.jpg',
+  'xxx-sdxl-batch': '/cards/v3/sdxl-xxx-batch.jpg',
+  'xxx-klein-nsfw': '/cards/v3/klein-nsfw.jpg',
+  'xxx-flux': '/cards/v3/flux-xxx.jpg',
+  'xxx-wan22': '/cards/v3/wan-22-xxx.jpg',
+  'xxx-wan-img2vid': '/cards/v3/wan-22-xxx.jpg',
+  'xxx-bouncy-walk': '/cards/v3/bouncy-walk.jpg',
+  'xxx-infinite-video': '/cards/v3/infinite-sex-video.jpg',
+  'xxx-blowjob-img2vid': '/cards/v3/blowjob-img2vid.jpg',
+  'xxx-blowjob-vid2vid': '/cards/v3/blowjob-vid2vid.jpg',
   gallery: '/cards/gallery.png',
   videos: '/cards/videos.png',
   library: '/cards/lora-library.png',
@@ -62,6 +90,7 @@ const CARD_VIDEO_BY_TAB: Record<string, string> = {
   'wan22-img2vid-6frames': '/cards/clips/tools/wan22-story.mp4',
   'ltx-flf': '/cards/clips/tools/ltx-first-last.mp4',
   'ltx-img-audio': '/cards/clips/tools/ltx-img-audio.mp4',
+  xxx: '/cards/clips/hub/video-studio.mp4',
   gallery: '/cards/clips/tools/gallery.mp4',
   videos: '/cards/clips/tools/videos.mp4',
   library: '/cards/clips/tools/lora-library.mp4',
@@ -102,6 +131,14 @@ const HUB_CARDS: Array<{
     video: CARD_VIDEO_BY_TAB.video,
   },
   {
+    id: 'xxx',
+    label: 'XXX',
+    description: 'Private workflow collection.',
+    Icon: Film,
+    image: CARD_IMAGE_BY_TAB.xxx,
+    video: CARD_VIDEO_BY_TAB.xxx,
+  },
+  {
     id: 'explore',
     label: 'Explore',
     description: 'Gallery, videos and LoRA library.',
@@ -137,6 +174,25 @@ const TOOL_GROUPS: Record<Exclude<RootSection, 'hub'>, Array<{ title: string; to
       title: 'Other',
       tools: [{ tab: 'image-influencer', label: 'Influencer', description: 'Guided influencer creation flow.' }],
     },
+    {
+      title: 'SD IMAGE',
+      tools: [
+        { tab: 'sdxl-default', label: 'Default SDXL', description: 'Core SDXL text-to-image generation.' },
+        { tab: 'sdxl-controlnet', label: 'ControlNet', description: 'ControlNet guided generation.' },
+        { tab: 'sdxl-batch-processor', label: 'Batch Processor', description: 'Batch-oriented SDXL processing.' },
+        { tab: 'sdxl-ip-adapter-2x-img2img', label: 'IP Adapter 2x Img2Img', description: 'Dual-pass IP Adapter img2img.' },
+        { tab: 'sdxl-2000px-latent-upscale', label: '2000PX Latent Upscale', description: 'Latent upscale quality pipeline.' },
+        { tab: 'sdxl-remove-background', label: 'Remove BG', description: 'Background removal workflow.' },
+        { tab: 'sdxl-cn-openpose', label: 'CN OpenPose', description: 'OpenPose-conditioned ControlNet.' },
+        { tab: 'sdxl-ip-adapter-style-transfer', label: 'IP Adapter Style Transfer', description: 'Style transfer with IP Adapter.' },
+        { tab: 'sdxl-ip-adapter-img2img', label: 'IP Adapter Img2Img', description: 'IP Adapter image-to-image flow.' },
+        { tab: 'sdxl-inpaint-pro', label: 'Inpaint Pro', description: 'Advanced inpainting workflow.' },
+        { tab: 'sdxl-cn-canny', label: 'CN Canny', description: 'Canny-conditioned ControlNet.' },
+        { tab: 'sdxl-sd-upscale', label: 'SD Upscale', description: 'Super-resolution upscale flow.' },
+        { tab: 'sdxl-cn-depth', label: 'CN Depth', description: 'Depth-conditioned ControlNet.' },
+        { tab: 'sdxl-outpaint', label: 'Outpaint', description: 'Canvas extension workflow.' },
+      ],
+    },
   ],
   video: [
     {
@@ -153,6 +209,29 @@ const TOOL_GROUPS: Record<Exclude<RootSection, 'hub'>, Array<{ title: string; to
       tools: [
         { tab: 'ltx-flf', label: 'First / Last Frame', description: 'Generate in-between sequence from keyframes.' },
         { tab: 'ltx-img-audio', label: 'Img + Audio Lipsync', description: 'Lipsync from image + audio.' },
+      ],
+    },
+  ],
+  xxx: [
+    {
+      title: 'XXX Image',
+      tools: [
+        { tab: 'xxx-influencer', label: 'Influencer', description: 'Influencer workflow variant.' },
+        { tab: 'xxx-realism-sdxl', label: 'Realism SDXL', description: 'Realism SDXL workflow.' },
+        { tab: 'xxx-sdxl-batch', label: 'SDXL Batch', description: 'Batch SDXL generation.' },
+        { tab: 'xxx-klein-nsfw', label: 'Klein NSFW', description: 'FLUX/Klein variant.' },
+        { tab: 'xxx-flux', label: 'Flux XXX', description: 'Flux image workflow.' },
+      ],
+    },
+    {
+      title: 'XXX Video',
+      tools: [
+        { tab: 'xxx-wan22', label: 'WAN 22 XXX', description: 'WAN 2.2 variant.' },
+        { tab: 'xxx-wan-img2vid', label: 'WAN Img2Vid XXX', description: 'WAN image to video variant.' },
+        { tab: 'xxx-bouncy-walk', label: 'Bouncy Walk', description: 'Motion video workflow.' },
+        { tab: 'xxx-infinite-video', label: 'Infinite Video', description: 'Long-form video workflow.' },
+        { tab: 'xxx-blowjob-img2vid', label: 'BJ Img2Vid', description: 'Image to video variant.' },
+        { tab: 'xxx-blowjob-vid2vid', label: 'BJ Vid2Vid', description: 'Video to video variant.' },
       ],
     },
   ],
@@ -183,6 +262,21 @@ const VALID_TABS = new Set([
   'qwen-multi-angle',
   'image-other',
   'image-influencer',
+  'sdxl-default',
+  'sdxl-controlnet',
+  'sdxl-batch-processor',
+  'sdxl-ip-adapter-2x-img2img',
+  'sdxl-2000px-latent-upscale',
+  'sdxl-remove-background',
+  'sdxl-cn-openpose',
+  'sdxl-ip-adapter-style-transfer',
+  'sdxl-ip-adapter-img2img',
+  'sdxl-inpaint-pro',
+  'sdxl-cn-canny',
+  'sdxl-sd-upscale',
+  'sdxl-cn-depth',
+  'sdxl-outpaint',
+  'sdxl-sd-image',
   'video',
   'wan21-steady-dancer',
   'wan22-vid2vid',
@@ -191,6 +285,18 @@ const VALID_TABS = new Set([
   'ltx',
   'ltx-flf',
   'ltx-img-audio',
+  'xxx',
+  'xxx-influencer',
+  'xxx-realism-sdxl',
+  'xxx-sdxl-batch',
+  'xxx-klein-nsfw',
+  'xxx-flux',
+  'xxx-wan22',
+  'xxx-wan-img2vid',
+  'xxx-bouncy-walk',
+  'xxx-infinite-video',
+  'xxx-blowjob-img2vid',
+  'xxx-blowjob-vid2vid',
   'audio',
   'gallery',
   'videos',
@@ -212,6 +318,21 @@ const PAGE_META: Record<string, { label: string; description: string; Icon: type
   'qwen-multi-angle': { label: 'Qwen (Multi Angles)', description: 'Generate camera-angle variants.', Icon: Sparkles },
   'image-other': { label: 'Other Workflows', description: 'Uncategorized image workflows.', Icon: Sparkles },
   'image-influencer': { label: 'Influencer', description: 'Identity-locked creator workflow.', Icon: Sparkles },
+  'sdxl-default': { label: 'Default SDXL', description: 'Core SDXL text-to-image workflow.', Icon: Sparkles },
+  'sdxl-controlnet': { label: 'ControlNet', description: 'SDXL ControlNet workflow.', Icon: Sparkles },
+  'sdxl-batch-processor': { label: 'Batch Processor', description: 'SDXL batch processor workflow.', Icon: Sparkles },
+  'sdxl-ip-adapter-2x-img2img': { label: 'IP Adapter 2x Img2Img', description: 'Dual IP Adapter image-to-image flow.', Icon: Sparkles },
+  'sdxl-2000px-latent-upscale': { label: '2000PX Latent Upscale', description: 'High-quality latent upscale workflow.', Icon: Sparkles },
+  'sdxl-remove-background': { label: 'Remove BG', description: 'Background removal workflow.', Icon: Sparkles },
+  'sdxl-cn-openpose': { label: 'CN OpenPose', description: 'OpenPose ControlNet workflow.', Icon: Sparkles },
+  'sdxl-ip-adapter-style-transfer': { label: 'IP Adapter Style Transfer', description: 'Style-transfer workflow with IP Adapter.', Icon: Sparkles },
+  'sdxl-ip-adapter-img2img': { label: 'IP Adapter Img2Img', description: 'IP Adapter image-guided workflow.', Icon: Sparkles },
+  'sdxl-inpaint-pro': { label: 'Inpaint Pro', description: 'Advanced inpainting workflow.', Icon: Sparkles },
+  'sdxl-cn-canny': { label: 'CN Canny', description: 'Canny edge ControlNet workflow.', Icon: Sparkles },
+  'sdxl-sd-upscale': { label: 'SD Upscale', description: 'Upscale workflow.', Icon: Sparkles },
+  'sdxl-cn-depth': { label: 'CN Depth', description: 'Depth ControlNet workflow.', Icon: Sparkles },
+  'sdxl-outpaint': { label: 'Outpaint', description: 'Canvas extension workflow.', Icon: Sparkles },
+  'sdxl-sd-image': { label: 'SD IMAGE', description: 'SDXL workflow family.', Icon: Sparkles },
   video: { label: 'Video Studio', description: 'Create and animate video sequences with WAN.', Icon: Video },
   'wan21-steady-dancer': { label: 'WAN 2.1 Steady Dancer', description: 'Reference-motion transfer.', Icon: Video },
   'wan22-vid2vid': { label: 'WAN 2.2 Vid2Vid', description: 'Extend and transform video with WAN 2.2.', Icon: Video },
@@ -220,6 +341,18 @@ const PAGE_META: Record<string, { label: string; description: string; Icon: type
   ltx: { label: 'LTX Video', description: 'LTX video workflows.', Icon: Film },
   'ltx-flf': { label: 'LTX - First / Last Frame', description: 'Generate between keyframes.', Icon: Film },
   'ltx-img-audio': { label: 'LTX - Img + Audio Lipsync', description: 'Image + audio lipsync workflow.', Icon: Film },
+  xxx: { label: 'XXX', description: 'Private workflow section.', Icon: Film },
+  'xxx-influencer': { label: 'XXX Influencer', description: 'Influencer variant.', Icon: Sparkles },
+  'xxx-realism-sdxl': { label: 'XXX Realism SDXL', description: 'Realism SDXL variant.', Icon: Sparkles },
+  'xxx-sdxl-batch': { label: 'XXX SDXL Batch', description: 'Batch SDXL workflow.', Icon: Sparkles },
+  'xxx-klein-nsfw': { label: 'XXX Klein NSFW', description: 'Klein workflow variant.', Icon: Sparkles },
+  'xxx-flux': { label: 'XXX Flux', description: 'Flux workflow variant.', Icon: Sparkles },
+  'xxx-wan22': { label: 'XXX WAN 2.2', description: 'WAN 2.2 variant.', Icon: Video },
+  'xxx-wan-img2vid': { label: 'XXX WAN Img2Vid', description: 'WAN Img2Vid variant.', Icon: Video },
+  'xxx-bouncy-walk': { label: 'XXX Bouncy Walk', description: 'Motion video workflow.', Icon: Video },
+  'xxx-infinite-video': { label: 'XXX Infinite Video', description: 'Long-form video workflow.', Icon: Video },
+  'xxx-blowjob-img2vid': { label: 'XXX BJ Img2Vid', description: 'Image-to-video workflow.', Icon: Video },
+  'xxx-blowjob-vid2vid': { label: 'XXX BJ Vid2Vid', description: 'Video-to-video workflow.', Icon: Video },
   audio: { label: 'Audio / SFX', description: 'Generate music, voice and sound effects.', Icon: Music },
   gallery: { label: 'Gallery', description: 'Browse generated images.', Icon: Images },
   videos: { label: 'Videos', description: 'Browse generated videos.', Icon: Film },
@@ -257,8 +390,10 @@ function FeddaApp() {
       setActiveTab(tab);
       setView('workspace');
       setWorkspaceOrigin('section');
-      if (tab.startsWith('z-image') || tab.startsWith('flux') || tab.startsWith('qwen') || tab.startsWith('image-')) {
+      if (tab.startsWith('z-image') || tab.startsWith('flux') || tab.startsWith('qwen') || tab.startsWith('image-') || tab.startsWith('sdxl-')) {
         setActiveSection('image');
+      } else if (tab.startsWith('xxx')) {
+        setActiveSection('xxx');
       } else if (tab.startsWith('wan') || tab.startsWith('ltx') || tab === 'video') {
         setActiveSection('video');
       } else if (tab === 'gallery' || tab === 'videos' || tab === 'library') {
@@ -286,6 +421,11 @@ function FeddaApp() {
       label: 'Video Studio',
       description: 'Cards navigation for video workflows.',
       Icon: Video,
+    },
+    xxx: {
+      label: 'XXX',
+      description: 'Cards navigation for private workflows.',
+      Icon: Film,
     },
     explore: {
       label: 'Explore',
@@ -333,6 +473,21 @@ function FeddaApp() {
       case 'qwen-multi-angle':
       case 'image-other':
       case 'image-influencer':
+      case 'sdxl-default':
+      case 'sdxl-controlnet':
+      case 'sdxl-batch-processor':
+      case 'sdxl-ip-adapter-2x-img2img':
+      case 'sdxl-2000px-latent-upscale':
+      case 'sdxl-remove-background':
+      case 'sdxl-cn-openpose':
+      case 'sdxl-ip-adapter-style-transfer':
+      case 'sdxl-ip-adapter-img2img':
+      case 'sdxl-inpaint-pro':
+      case 'sdxl-cn-canny':
+      case 'sdxl-sd-upscale':
+      case 'sdxl-cn-depth':
+      case 'sdxl-outpaint':
+      case 'sdxl-sd-image':
         return <ImageStudioPage activeTab={activeTab} />;
       case 'video':
       case 'wan21-steady-dancer':
@@ -343,6 +498,19 @@ function FeddaApp() {
       case 'ltx-flf':
       case 'ltx-img-audio':
         return <VideoStudioPage activeTab={activeTab} />;
+      case 'xxx':
+      case 'xxx-influencer':
+      case 'xxx-realism-sdxl':
+      case 'xxx-sdxl-batch':
+      case 'xxx-klein-nsfw':
+      case 'xxx-flux':
+      case 'xxx-wan22':
+      case 'xxx-wan-img2vid':
+      case 'xxx-bouncy-walk':
+      case 'xxx-infinite-video':
+      case 'xxx-blowjob-img2vid':
+      case 'xxx-blowjob-vid2vid':
+        return <XxxStudioPage activeTab={activeTab} />;
       case 'library':
         return <LibraryPage />;
       case 'gallery':
@@ -361,7 +529,9 @@ function FeddaApp() {
       ? 'Image Studio'
       : activeSection === 'video'
         ? 'Video Studio'
-        : 'Explore';
+        : activeSection === 'xxx'
+          ? 'XXX'
+          : 'Explore';
 
   return (
     <div className="flex h-screen theme-bg-app text-white overflow-hidden font-sans">

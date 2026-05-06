@@ -1,0 +1,408 @@
+{
+  "302": {
+    "inputs": {
+      "vae": [
+        "300",
+        2
+      ],
+      "samples": [
+        "299",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "310": {
+    "inputs": {
+      "_widget_0": "realvisxlV40_v40LightningBakedvae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "309": {
+    "inputs": {
+      "negative": [
+        "319",
+        0
+      ],
+      "positive": [
+        "318",
+        0
+      ],
+      "model": [
+        "314",
+        0
+      ],
+      "latent_image": [
+        "311",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "304": {
+    "inputs": {
+      "_widget_1": "image",
+      "_widget_0": "art.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "401": {
+    "inputs": {
+      "_widget_1": "fp16",
+      "_widget_0": "lotus-depth-g-v2-0.safetensors"
+    },
+    "class_type": "LoadLotusModel"
+  },
+  "306": {
+    "inputs": {
+      "_widget_0": "ip-adapter-plus_sdxl_vit-h.safetensors"
+    },
+    "class_type": "IPAdapterModelLoader"
+  },
+  "326": {
+    "inputs": {
+      "text": [
+        "453",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss"
+  },
+  "452": {
+    "inputs": {
+      "text_c": ", ",
+      "text_a": [
+        "320",
+        0
+      ],
+      "text_b": [
+        "451",
+        0
+      ],
+      "text_d": "true"
+    },
+    "class_type": "Text Concatenate"
+  },
+  "323": {
+    "inputs": {
+      "_widget_0": "controlnet-union-sdxl-1.0.safetensors"
+    },
+    "class_type": "ControlNetLoader"
+  },
+  "324": {
+    "inputs": {
+      "control_net": [
+        "351",
+        0
+      ],
+      "conditioning": [
+        "318",
+        0
+      ],
+      "image": [
+        "399",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply"
+  },
+  "396": {
+    "inputs": {
+      "lotus_unet": [
+        "401",
+        0
+      ],
+      "samples": [
+        "397",
+        0
+      ]
+    },
+    "class_type": "LotusSampler"
+  },
+  "428": {
+    "inputs": {
+      "clip": [
+        "310",
+        1
+      ],
+      "model": [
+        "310",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)"
+  },
+  "301": {
+    "inputs": {
+      "_widget_0": 1024,
+      "_widget_2": 1,
+      "_widget_1": 1024
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "315": {
+    "inputs": {
+      "_widget_0": "ip-adapter-plus_sdxl_vit-h.safetensors"
+    },
+    "class_type": "IPAdapterModelLoader"
+  },
+  "312": {
+    "inputs": {
+      "vae": [
+        "310",
+        2
+      ],
+      "samples": [
+        "309",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "308": {
+    "inputs": {
+      "image": [
+        "304",
+        0
+      ]
+    },
+    "class_type": "PrepImageForClipVision"
+  },
+  "321": {
+    "inputs": {
+      "_widget_1": [
+        false,
+        true
+      ],
+      "_widget_0": ""
+    },
+    "class_type": "CR Prompt Text"
+  },
+  "303": {
+    "inputs": {
+      "images": [
+        "302",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "451": {
+    "inputs": {
+      "_widget_0": "Photography | Fashion Editorial"
+    },
+    "class_type": "Load Styles CSV"
+  },
+  "317": {
+    "inputs": {
+      "image": [
+        "304",
+        0
+      ]
+    },
+    "class_type": "PrepImageForClipVision"
+  },
+  "318": {
+    "inputs": {
+      "text": [
+        "452",
+        0
+      ],
+      "clip": [
+        "300",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "300": {
+    "inputs": {
+      "_widget_0": "realvisxlV40_v40LightningBakedvae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "397": {
+    "inputs": {
+      "vae": [
+        "398",
+        0
+      ],
+      "pixels": [
+        "304",
+        0
+      ]
+    },
+    "class_type": "VAEEncode"
+  },
+  "351": {
+    "inputs": {
+      "control_net": [
+        "323",
+        0
+      ]
+    },
+    "class_type": "SetUnionControlNetType"
+  },
+  "307": {
+    "inputs": {
+      "_widget_0": "clipvision-for-ip-adapter.safetensors"
+    },
+    "class_type": "CLIPVisionLoader"
+  },
+  "398": {
+    "inputs": {
+      "_widget_0": "vae-ft-mse-840000-ema-pruned.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "311": {
+    "inputs": {
+      "_widget_0": 1024,
+      "_widget_2": 1,
+      "_widget_1": 1024
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "316": {
+    "inputs": {
+      "_widget_0": "clip_vision_h.safetensors"
+    },
+    "class_type": "CLIPVisionLoader"
+  },
+  "319": {
+    "inputs": {
+      "text": [
+        "451",
+        1
+      ],
+      "clip": [
+        "310",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "313": {
+    "inputs": {
+      "images": [
+        "312",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "320": {
+    "inputs": {
+      "_widget_1": [
+        false,
+        true
+      ],
+      "_widget_0": "woman red hair"
+    },
+    "class_type": "CR Prompt Text"
+  },
+  "453": {
+    "inputs": {
+      "text_c": ", ",
+      "text_a": [
+        "321",
+        0
+      ],
+      "text_b": [
+        "451",
+        1
+      ],
+      "text_d": "true"
+    },
+    "class_type": "Text Concatenate"
+  },
+  "325": {
+    "inputs": {
+      "text": [
+        "452",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss"
+  },
+  "314": {
+    "inputs": {
+      "ipadapter": [
+        "315",
+        0
+      ],
+      "image_negative": 0.3,
+      "attn_mask": "linear",
+      "image": [
+        "317",
+        0
+      ],
+      "model": [
+        "428",
+        0
+      ],
+      "clip_vision": [
+        "316",
+        0
+      ]
+    },
+    "class_type": "IPAdapterAdvanced"
+  },
+  "399": {
+    "inputs": {
+      "vae": [
+        "398",
+        0
+      ],
+      "samples": [
+        "396",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "305": {
+    "inputs": {
+      "ipadapter": [
+        "306",
+        0
+      ],
+      "image_negative": 0.5,
+      "attn_mask": "linear",
+      "image": [
+        "308",
+        0
+      ],
+      "model": [
+        "428",
+        0
+      ],
+      "clip_vision": [
+        "307",
+        0
+      ]
+    },
+    "class_type": "IPAdapterAdvanced"
+  },
+  "299": {
+    "inputs": {
+      "negative": [
+        "319",
+        0
+      ],
+      "positive": [
+        "324",
+        0
+      ],
+      "model": [
+        "305",
+        0
+      ],
+      "latent_image": [
+        "301",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  }
+}

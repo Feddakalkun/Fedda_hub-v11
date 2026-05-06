@@ -1,0 +1,247 @@
+{
+  "264": {
+    "inputs": {
+      "text_c": ", ",
+      "text_a": [
+        "450",
+        0
+      ],
+      "text_b": [
+        "252",
+        1
+      ],
+      "text_d": "true"
+    },
+    "class_type": "Text Concatenate"
+  },
+  "414": {
+    "inputs": {
+      "vae": [
+        "270",
+        2
+      ],
+      "samples": [
+        "271",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "431": {
+    "inputs": {
+      "images": [
+        "258",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "421": {
+    "inputs": {
+      "clip": [
+        "270",
+        1
+      ],
+      "model": [
+        "270",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)"
+  },
+  "270": {
+    "inputs": {
+      "_widget_0": "realvisxlV40_v40LightningBakedvae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "252": {
+    "inputs": {
+      "_widget_0": "Photography | Fashion Editorial"
+    },
+    "class_type": "Load Styles CSV"
+  },
+  "254": {
+    "inputs": {
+      "text": [
+        "264",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss"
+  },
+  "439": {
+    "inputs": {
+      "adv_options_config": "nymph portrait fantasy"
+    },
+    "class_type": "Searge_LLM_Node"
+  },
+  "269": {
+    "inputs": {
+      "_widget_0": 1080,
+      "_widget_2": 1,
+      "_widget_1": 1080
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "265": {
+    "inputs": {
+      "text_c": [
+        "439",
+        0
+      ],
+      "text_a": [
+        "441",
+        0
+      ],
+      "text_b": [
+        "252",
+        0
+      ],
+      "text_d": ", "
+    },
+    "class_type": "Text Concatenate"
+  },
+  "253": {
+    "inputs": {
+      "text": [
+        "265",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss"
+  },
+  "262": {
+    "inputs": {
+      "_widget_1": "AUTO",
+      "_widget_0": "sam_vit_b_01ec64.pth"
+    },
+    "class_type": "SAMLoader"
+  },
+  "441": {
+    "inputs": {
+      "_widget_1": [
+        false,
+        true
+      ],
+      "_widget_0": "WOMAN"
+    },
+    "class_type": "String Literal"
+  },
+  "267": {
+    "inputs": {
+      "text": [
+        "265",
+        0
+      ],
+      "clip": [
+        "421",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "258": {
+    "inputs": {
+      "clip": [
+        "270",
+        1
+      ],
+      "sam_model_opt": [
+        "262",
+        0
+      ],
+      "detailer_hook": true,
+      "image": [
+        "414",
+        0
+      ],
+      "positive": [
+        "267",
+        0
+      ],
+      "segm_detector_opt": 1024,
+      "model": [
+        "421",
+        0
+      ],
+      "negative": [
+        "268",
+        0
+      ],
+      "scheduler_func_opt": 1024,
+      "vae": [
+        "270",
+        2
+      ],
+      "bbox_detector": [
+        "263",
+        0
+      ]
+    },
+    "class_type": "FaceDetailer"
+  },
+  "268": {
+    "inputs": {
+      "text": [
+        "264",
+        0
+      ],
+      "clip": [
+        "421",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "271": {
+    "inputs": {
+      "negative": [
+        "268",
+        0
+      ],
+      "positive": [
+        "267",
+        0
+      ],
+      "model": [
+        "421",
+        0
+      ],
+      "latent_image": [
+        "269",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "450": {
+    "inputs": {
+      "_widget_1": [
+        false,
+        true
+      ],
+      "_widget_0": ""
+    },
+    "class_type": "String Literal"
+  },
+  "430": {
+    "inputs": {
+      "image_b": [
+        "414",
+        0
+      ],
+      "image_a": [
+        "258",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)"
+  },
+  "263": {
+    "inputs": {
+      "_widget_0": "bbox/face_yolov8m.pt"
+    },
+    "class_type": "UltralyticsDetectorProvider"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "201": {
+    "inputs": {
+      "text_c": ", ",
+      "text_a": [
+        "196",
+        0
+      ],
+      "text_b": [
+        "195",
+        0
+      ],
+      "text_d": "true"
+    },
+    "class_type": "Text Concatenate"
+  },
+  "207": {
+    "inputs": {
+      "model": [
+        "206",
+        0
+      ]
+    },
+    "class_type": "DifferentialDiffusion"
+  },
+  "196": {
+    "inputs": {
+      "_widget_0": "BRICK WALL"
+    },
+    "class_type": "easy string"
+  },
+  "198": {
+    "inputs": {
+      "_widget_0": "realvisxlV40_v40LightningBakedvae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "203": {
+    "inputs": {
+      "text": [
+        "201",
+        0
+      ],
+      "clip": [
+        "198",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "202": {
+    "inputs": {
+      "mask": [
+        "193",
+        1
+      ],
+      "image": [
+        "193",
+        0
+      ]
+    },
+    "class_type": "INPAINT_MaskedFill"
+  },
+  "200": {
+    "inputs": {
+      "text": [
+        "195",
+        1
+      ],
+      "clip": [
+        "198",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "204": {
+    "inputs": {
+      "mask": [
+        "193",
+        1
+      ],
+      "image": [
+        "202",
+        0
+      ]
+    },
+    "class_type": "INPAINT_MaskedBlur"
+  },
+  "193": {
+    "inputs": {
+      "mask": 512,
+      "image": [
+        "192",
+        0
+      ]
+    },
+    "class_type": "ImagePadForOutpaintMasked"
+  },
+  "195": {
+    "inputs": {
+      "_widget_0": "Painting | Renaissance"
+    },
+    "class_type": "Load Styles CSV"
+  },
+  "206": {
+    "inputs": {
+      "patch": [
+        "199",
+        0
+      ],
+      "model": [
+        "198",
+        0
+      ],
+      "latent": [
+        "205",
+        2
+      ]
+    },
+    "class_type": "INPAINT_ApplyFooocusInpaint"
+  },
+  "194": {
+    "inputs": {
+      "images": [
+        "209",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "199": {
+    "inputs": {
+      "_widget_1": "inpaint_v26.fooocus.patch",
+      "_widget_0": "fooocus_inpaint_head.pth"
+    },
+    "class_type": "INPAINT_LoadFooocusInpaint"
+  },
+  "205": {
+    "inputs": {
+      "vae": [
+        "198",
+        2
+      ],
+      "pixels": [
+        "204",
+        0
+      ],
+      "negative": [
+        "200",
+        0
+      ],
+      "positive": [
+        "203",
+        0
+      ],
+      "mask": [
+        "193",
+        1
+      ]
+    },
+    "class_type": "INPAINT_VAEEncodeInpaintConditioning"
+  },
+  "209": {
+    "inputs": {
+      "vae": [
+        "198",
+        2
+      ],
+      "samples": [
+        "208",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "192": {
+    "inputs": {
+      "_widget_1": "image",
+      "_widget_0": "art.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "197": {
+    "inputs": {
+      "text": [
+        "201",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss"
+  },
+  "208": {
+    "inputs": {
+      "negative": [
+        "205",
+        1
+      ],
+      "positive": [
+        "205",
+        0
+      ],
+      "model": [
+        "207",
+        0
+      ],
+      "latent_image": [
+        "205",
+        3
+      ]
+    },
+    "class_type": "KSampler"
+  }
+}

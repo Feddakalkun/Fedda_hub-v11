@@ -1,0 +1,38 @@
+{
+  "177": {
+    "inputs": {
+      "image": "pose.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "201": {
+    "inputs": {
+      "folder": "C:\\Users\\User\\Desktop\\IMAGE",
+      "width": 1024,
+      "height": 1024,
+      "keep_aspect_ratio": "crop",
+      "image_load_cap": 0,
+      "start_index": [
+        "202",
+        3
+      ],
+      "include_subfolders": false
+    },
+    "class_type": "LoadImagesFromFolderKJ",
+    "_meta": {
+      "title": "Load Images From Folder (KJ)"
+    }
+  },
+  "202": {
+    "inputs": {
+      "seed": 0
+    },
+    "class_type": "Seed",
+    "_meta": {
+      "title": "START INDEX"
+    }
+  }
+}

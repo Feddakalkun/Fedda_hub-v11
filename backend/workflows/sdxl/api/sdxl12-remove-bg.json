@@ -1,0 +1,33 @@
+{
+  "417": {
+    "inputs": {
+      "image": [
+        "419",
+        0
+      ]
+    },
+    "class_type": "RMBG"
+  },
+  "416": {
+    "inputs": {
+      "_widget_0": "Choose background color if needed"
+    },
+    "class_type": "Note"
+  },
+  "415": {
+    "inputs": {
+      "images": [
+        "417",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "419": {
+    "inputs": {
+      "_widget_1": "image",
+      "_widget_0": "pose2.png"
+    },
+    "class_type": "LoadImage"
+  }
+}

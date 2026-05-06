@@ -1,0 +1,161 @@
+{
+  "334": {
+    "inputs": {
+      "_widget_0": 1024,
+      "_widget_2": 1,
+      "_widget_1": 1024
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "389": {
+    "inputs": {
+      "_widget_0": "realvisxlV40_v40LightningBakedvae.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "333": {
+    "inputs": {
+      "clip": [
+        "426",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "426": {
+    "inputs": {
+      "clip": [
+        "389",
+        1
+      ],
+      "model": [
+        "389",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)"
+  },
+  "330": {
+    "inputs": {
+      "_widget_1": "image",
+      "_widget_0": "pose.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "328": {
+    "inputs": {
+      "ipadapter": [
+        "388",
+        0
+      ],
+      "image_composition": [
+        "390",
+        0
+      ],
+      "image_negative": 1,
+      "attn_mask": 1,
+      "model": [
+        "426",
+        0
+      ],
+      "image_style": [
+        "391",
+        0
+      ],
+      "clip_vision": [
+        "387",
+        0
+      ]
+    },
+    "class_type": "IPAdapterStyleComposition"
+  },
+  "392": {
+    "inputs": {
+      "vae": [
+        "389",
+        2
+      ],
+      "samples": [
+        "331",
+        0
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "335": {
+    "inputs": {
+      "images": [
+        "392",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "331": {
+    "inputs": {
+      "negative": [
+        "332",
+        0
+      ],
+      "positive": [
+        "333",
+        0
+      ],
+      "model": [
+        "328",
+        0
+      ],
+      "latent_image": [
+        "334",
+        0
+      ]
+    },
+    "class_type": "KSampler"
+  },
+  "388": {
+    "inputs": {
+      "_widget_0": "ip-adapter_sdxl_vit-h.safetensors"
+    },
+    "class_type": "IPAdapterModelLoader"
+  },
+  "387": {
+    "inputs": {
+      "_widget_0": "clip_vision_h.safetensors"
+    },
+    "class_type": "CLIPVisionLoader"
+  },
+  "391": {
+    "inputs": {
+      "image": [
+        "329",
+        0
+      ]
+    },
+    "class_type": "PrepImageForClipVision"
+  },
+  "329": {
+    "inputs": {
+      "_widget_1": "image",
+      "_widget_0": "pose10.png"
+    },
+    "class_type": "LoadImage"
+  },
+  "390": {
+    "inputs": {
+      "image": [
+        "330",
+        0
+      ]
+    },
+    "class_type": "PrepImageForClipVision"
+  },
+  "332": {
+    "inputs": {
+      "clip": [
+        "426",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  }
+}
