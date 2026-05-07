@@ -490,12 +490,8 @@ Write-Host "`n[2c/3] Ensuring Z-Image core models..." -ForegroundColor Yellow
 $EnsureZImageScript = Join-Path $RootPath "scripts\ensure_zimage_core_models.ps1"
 if (Test-Path $EnsureZImageScript) {
     try {
-        & powershell -ExecutionPolicy Bypass -File "$EnsureZImageScript" -SilentMode
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "  Z-Image core models ready." -ForegroundColor Green
-        } else {
-            Write-Host "  [WARNING] Z-Image core model check returned code $LASTEXITCODE (non-fatal)." -ForegroundColor Yellow
-        }
+        & $EnsureZImageScript -SilentMode
+        Write-Host "  Z-Image core models ready." -ForegroundColor Green
     } catch {
         Write-Host "  [WARNING] Z-Image core model ensure failed (non-fatal): $_" -ForegroundColor Yellow
     }
@@ -508,12 +504,8 @@ Write-Host "`n[2c.1/3] Ensuring Steady Dancer detection models..." -ForegroundCo
 $EnsureSteadyDetectionScript = Join-Path $RootPath "scripts\ensure_steady_dancer_detection_models.ps1"
 if (Test-Path $EnsureSteadyDetectionScript) {
     try {
-        & powershell -ExecutionPolicy Bypass -File "$EnsureSteadyDetectionScript" -SilentMode
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "  Steady Dancer detection models ready." -ForegroundColor Green
-        } else {
-            Write-Host "  [WARNING] Steady Dancer detection model check returned code $LASTEXITCODE (non-fatal)." -ForegroundColor Yellow
-        }
+        & $EnsureSteadyDetectionScript -SilentMode
+        Write-Host "  Steady Dancer detection models ready." -ForegroundColor Green
     } catch {
         Write-Host "  [WARNING] Steady Dancer detection model ensure failed (non-fatal): $_" -ForegroundColor Yellow
     }

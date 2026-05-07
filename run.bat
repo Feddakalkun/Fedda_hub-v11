@@ -5,6 +5,17 @@ title FEDDA Launcher
 
 set "BASE_DIR=%~dp0"
 if "%BASE_DIR:~-1%"=="\" set "BASE_DIR=%BASE_DIR:~0,-1%"
+set "PS_EXE="
+where pwsh >nul 2>&1 && set "PS_EXE=pwsh"
+if not defined PS_EXE set "PS_EXE=powershell"
+where %PS_EXE% >nul 2>&1
+if errorlevel 1 (
+    echo.
+    echo [ERROR] PowerShell runtime not found. Install PowerShell 7 or Windows PowerShell.
+    echo.
+    pause
+    exit /b 1
+)
 
 :: Keep all ML caches inside install folder (never write to %USERPROFILE%\.cache)
 set "HF_HOME=%BASE_DIR%\cache\huggingface"
@@ -161,7 +172,7 @@ exit /b 0
 :cleanup_stale_services
 if not exist "%BASE_DIR%\logs" mkdir "%BASE_DIR%\logs"
 echo     Cleaning stale FEDDA service processes...
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+%PS_EXE% -NoProfile -ExecutionPolicy Bypass -Command ^
   "$base = [IO.Path]::GetFullPath('%BASE_DIR%');" ^
   "$procs = Get-CimInstance Win32_Process | Where-Object {" ^
   "  $_.CommandLine -and (" ^
@@ -212,7 +223,7 @@ set "WAIT_NAME=%~3"
 set /a WAIT_ELAPSED=0
 
 :wait_http_loop
-powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+%PS_EXE% -NoProfile -ExecutionPolicy Bypass -Command ^
   "$u='%WAIT_URL%'; try { $r=Invoke-WebRequest -Uri $u -UseBasicParsing -TimeoutSec 2; if($r.StatusCode -ge 200 -and $r.StatusCode -lt 500){ exit 0 } else { exit 1 } } catch { exit 1 }" >nul 2>&1
 if !errorlevel! EQU 0 (
     endlocal
@@ -349,7 +360,7 @@ set "COMFY_VRAM_RESERVE=4"
 set "COMFY_CUDA_MALLOC_FLAG=--disable-cuda-malloc"
 set "COMFY_CUDA_MALLOC_MODE=disabled"
 
-for /f "usebackq delims=" %%L in (`powershell -NoProfile -ExecutionPolicy Bypass -Command "try { $o = & nvidia-smi --query-gpu=name,memory.total --format=csv,noheader,nounits 2>$null | Select-Object -First 1; if($o){ $p=$o -split ','; $name=$p[0].Trim(); $mem=[int]($p[1].Trim()); Write-Output ($name + '|' + $mem) } } catch {}"`) do (
+for /f "usebackq delims=" %%L in (`%PS_EXE% -NoProfile -ExecutionPolicy Bypass -Command "try { $o = & nvidia-smi --query-gpu=name,memory.total --format=csv,noheader,nounits 2>$null | Select-Object -First 1; if($o){ $p=$o -split ','; $name=$p[0].Trim(); $mem=[int]($p[1].Trim()); Write-Output ($name + '|' + $mem) } } catch {}"`) do (
     for /f "tokens=1,2 delims=|" %%A in ("%%L") do (
         set "FEDDA_GPU_NAME=%%A"
         set "FEDDA_GPU_VRAM_MB=%%B"
@@ -465,7 +476,7 @@ echo [%date% %time%] Waiting for Mockingbird on port 8020...
 call :wait_for_port 8020 45 Mockingbird
 
 echo [%date% %time%] Prewarming Mockingbird voice cache...
-powershell -NoProfile -Command "$body = @{ text = 'Hello! How can I assist you today?'; speaker_wav = 'charlotte'; language = 'en' } | ConvertTo-Json; try { Invoke-RestMethod -Uri 'http://127.0.0.1:8020/tts_to_audio/' -Method Post -ContentType 'application/json' -Body $body -TimeoutSec 120 | Out-Null; Write-Host '[Warmup] Mockingbird prewarm complete.' } catch { Write-Host ('[Warmup] Mockingbird prewarm failed: ' + $_.Exception.Message); exit 1 }"
+%PS_EXE% -NoProfile -Command "$body = @{ text = 'Hello! How can I assist you today?'; speaker_wav = 'charlotte'; language = 'en' } | ConvertTo-Json; try { Invoke-RestMethod -Uri 'http://127.0.0.1:8020/tts_to_audio/' -Method Post -ContentType 'application/json' -Body $body -TimeoutSec 120 | Out-Null; Write-Host '[Warmup] Mockingbird prewarm complete.' } catch { Write-Host ('[Warmup] Mockingbird prewarm failed: ' + $_.Exception.Message); exit 1 }"
 exit /b
 
 :: ============================================================================

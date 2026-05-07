@@ -10,6 +10,9 @@ if "%ROOT:~-1%"=="\" set "ROOT=%ROOT:~0,-1%"
 set "INSTALL_DIR=%ROOT%\comfyuifeddafront"
 set "LOG_DIR=%ROOT%\logs"
 set "LOG_FILE=%LOG_DIR%\oneclick_setup.log"
+set "PS_EXE="
+where pwsh >nul 2>&1 && set "PS_EXE=pwsh"
+if not defined PS_EXE set "PS_EXE=powershell"
 
 if not exist "%LOG_DIR%" mkdir "%LOG_DIR%" >nul 2>nul
 
@@ -39,6 +42,7 @@ pause >nul
 where git >nul 2>nul || goto :err_git
 where node >nul 2>nul || goto :err_node
 where npm >nul 2>nul || goto :err_npm
+where %PS_EXE% >nul 2>nul || goto :err_ps
 
 echo  [OK] Tool checks passed.
 echo [%date% %time%] Tool checks passed >> "%LOG_FILE%"
@@ -56,7 +60,7 @@ if /I not "%ORIGIN_URL%"=="%REPO_URL%" goto :err_remote
 
 git diff --quiet --ignore-submodules HEAD
 if not "%ERRORLEVEL%"=="0" (
-  for /f "delims=" %%t in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "STASH_TS=%%t"
+  for /f "delims=" %%t in ('%PS_EXE% -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "STASH_TS=%%t"
   set "STASH_MSG=FEDDA auto-stash before installer update !STASH_TS!"
   echo  [INFO] Local changes detected. Auto-stashing...
   git stash push -u -m "!STASH_MSG!" >> "%LOG_FILE%" 2>&1 || goto :err_stash
@@ -93,7 +97,7 @@ echo  [INFO] Running FEDDA installer...
 echo [%date% %time%] Running scripts\install_lite.ps1 stable profile >> "%LOG_FILE%"
 
 pushd "%INSTALL_DIR%" || goto :err_pushd
-powershell -ExecutionPolicy Bypass -File ".\scripts\install_lite.ps1"
+%PS_EXE% -ExecutionPolicy Bypass -File ".\scripts\install_lite.ps1"
 set "INSTALL_EXIT=%ERRORLEVEL%"
 popd
 
@@ -138,6 +142,14 @@ echo.
 echo  [ERROR] npm not found.
 echo  Reinstall Node.js LTS so npm is included.
 echo [%date% %time%] ERROR: npm missing >> "%LOG_FILE%"
+pause
+exit /b 1
+
+:err_ps
+echo.
+echo  [ERROR] PowerShell runtime not found.
+echo  Install PowerShell 7 or enable Windows PowerShell.
+echo [%date% %time%] ERROR: powershell runtime missing >> "%LOG_FILE%"
 pause
 exit /b 1
 

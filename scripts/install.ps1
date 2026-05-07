@@ -1083,12 +1083,8 @@ $EnsureZImageScript = Join-Path $ScriptPath "ensure_zimage_core_models.ps1"
 if (Test-Path $EnsureZImageScript) {
     try {
         Write-Log "Ensuring Z-Image core models..."
-        & powershell -ExecutionPolicy Bypass -File "$EnsureZImageScript" -SilentMode
-        if ($LASTEXITCODE -eq 0) {
-            Write-Log "Z-Image core models ready."
-        } else {
-            Write-Log "WARNING: Z-Image core model ensure returned code $LASTEXITCODE (non-fatal)."
-        }
+        & $EnsureZImageScript -SilentMode
+        Write-Log "Z-Image core models ready."
     }
     catch {
         Write-Log "WARNING: Z-Image core model ensure failed (non-fatal): $_"

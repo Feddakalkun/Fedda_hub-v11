@@ -13,8 +13,11 @@ set "FORCE_NODE_ARG="
 set "NO_STASH=0"
 set "AUTO_STASHED=0"
 set "AUTO_FULL_NODE_UPDATE=0"
+set "PS_EXE="
 if /I "%~1"=="--full-nodes" set "FORCE_NODE_ARG=-ForceNodeUpdate"
 if /I "%~1"=="--no-stash" set "NO_STASH=1"
+where pwsh >nul 2>&1 && set "PS_EXE=pwsh"
+if not defined PS_EXE set "PS_EXE=powershell"
 
 echo.
 echo  =========================================
@@ -35,6 +38,14 @@ where git >nul 2>&1
 if %errorlevel% neq 0 (
     echo  [ERROR] Git is not installed or not in PATH.
     echo  Download: https://git-scm.com/downloads
+    echo.
+    pause
+    exit /b 1
+)
+
+where %PS_EXE% >nul 2>&1
+if %errorlevel% neq 0 (
+    echo  [ERROR] PowerShell runtime not found. Install PowerShell 7 or Windows PowerShell.
     echo.
     pause
     exit /b 1
@@ -104,7 +115,7 @@ if not "!DIRTY!"=="0" (
         pause
         exit /b 0
     )
-    for /f "delims=" %%t in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "STASH_TS=%%t"
+    for /f "delims=" %%t in ('%PS_EXE% -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "STASH_TS=%%t"
     set "STASH_MSG=FEDDA auto-stash before update !STASH_TS!"
     echo  [INFO] Local changes detected. Auto-stashing before pull...
     git stash push -u -m "!STASH_MSG!" >nul 2>&1
@@ -172,7 +183,7 @@ if defined OLD_HEAD if defined NEW_HEAD (
 
 echo  [INFO] Running post-update repair/sync...
 if exist "scripts\update_logic.ps1" (
-    powershell -ExecutionPolicy Bypass -File ".\scripts\update_logic.ps1" -SilentMode %FORCE_NODE_ARG%
+    %PS_EXE% -ExecutionPolicy Bypass -File ".\scripts\update_logic.ps1" -SilentMode %FORCE_NODE_ARG%
     if %errorlevel% neq 0 (
         echo  [WARN] update_logic.ps1 returned non-zero.
     ) else (
@@ -180,7 +191,7 @@ if exist "scripts\update_logic.ps1" (
     )
 ) else if exist "scripts\update_code.ps1" (
     echo  [WARN] update_logic.ps1 missing, falling back to update_code.ps1...
-    powershell -ExecutionPolicy Bypass -File ".\scripts\update_code.ps1" -SilentMode
+    %PS_EXE% -ExecutionPolicy Bypass -File ".\scripts\update_code.ps1" -SilentMode
     if %errorlevel% neq 0 (
         echo  [WARN] update_code.ps1 returned non-zero.
     ) else (
