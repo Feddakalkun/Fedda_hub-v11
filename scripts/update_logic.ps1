@@ -150,7 +150,7 @@ $FailedCount = 0
 # Known unstable/optional nodes that can crash startup on some installs.
 # Can be overridden with: $env:FEDDA_ALLOW_UNSTABLE_NODES=1
 $UnstableNodeFolders = @("ComfyUI-F5-TTS")
-$AllowUnstableNodes = (($env:FEDDA_ALLOW_UNSTABLE_NODES ?? "").Trim() -eq "1")
+$AllowUnstableNodes = (([string]$env:FEDDA_ALLOW_UNSTABLE_NODES).Trim() -eq "1")
 
 function Sync-NodeSubmodules {
     param([string]$NodeDir)
