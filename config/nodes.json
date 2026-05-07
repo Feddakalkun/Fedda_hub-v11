@@ -258,12 +258,6 @@
     "note": "Audio crop and separation nodes used in transcription and voice workflows"
   },
   {
-    "name": "ComfyUI-F5-TTS",
-    "url": "https://github.com/niknah/ComfyUI-F5-TTS.git",
-    "folder": "ComfyUI-F5-TTS",
-    "note": "F5-TTS local voice synthesis and cloning nodes"
-  },
-  {
     "name": "ComfyUI-Whisper",
     "url": "https://github.com/yuvraj108c/ComfyUI-Whisper.git",
     "folder": "ComfyUI-Whisper",

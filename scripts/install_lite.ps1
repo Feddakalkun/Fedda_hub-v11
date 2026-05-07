@@ -470,7 +470,9 @@ function Get-NvidiaGpuProfile {
         }
     } catch {}
 
-    if ($profile.Name -match "RTX 50\d\d") {
+    if ($profile.Name -match "RTX 60\d\d") {
+        $profile.Series = "60"
+    } elseif ($profile.Name -match "RTX 50\d\d") {
         $profile.Series = "50"
     } elseif ($profile.Name -match "RTX 40\d\d") {
         $profile.Series = "40"
@@ -548,8 +550,8 @@ Write-Header "STEP 3/7 - PyTorch + Dependencies"
 $GpuProfile = Get-NvidiaGpuProfile
 Write-Step "GPU profile: $($GpuProfile.Name) | Driver $($GpuProfile.Driver) | VRAM $([math]::Round($GpuProfile.VramMB / 1024,1)) GB"
 
-if ($GpuProfile.Series -eq "50") {
-    Write-Step "RTX 50-series detected. Using newer CUDA wheel priority."
+if ($GpuProfile.Series -eq "60" -or $GpuProfile.Series -eq "50") {
+    Write-Step "RTX 50/60-series detected. Using newer CUDA wheel priority."
     $torchResult = Install-TorchStack -Indexes @(
         "https://download.pytorch.org/whl/cu128",
         "https://download.pytorch.org/whl/cu126",
@@ -620,10 +622,10 @@ $Deps = @(
 )
 Venv-Pip "install $($Deps -join ' ')"
 
-# SageAttention for 40/50-series (best effort only)
+# SageAttention for 40/50/60-series (best effort only)
 try {
-    if ($GpuProfile.Series -eq "40" -or $GpuProfile.Series -eq "50") {
-        Write-Step "RTX 40/50-series detected - attempting SageAttention install..."
+    if ($GpuProfile.Series -eq "40" -or $GpuProfile.Series -eq "50" -or $GpuProfile.Series -eq "60") {
+        Write-Step "RTX 40/50/60-series detected - attempting SageAttention install..."
         Venv-Pip "install sageattention"
     }
 } catch {}

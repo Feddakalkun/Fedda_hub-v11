@@ -297,6 +297,14 @@ timeout /t 1 /nobreak >nul
 
 cd /d "%COMFYUI_DIR%"
 
+:: ComfyLiterals can fail symlink creation without elevated privileges on Windows.
+:: Mirror the extension folder directly to avoid startup warnings/failures.
+if exist "%COMFYUI_DIR%\custom_nodes\ComfyLiterals\js" (
+    if not exist "%COMFYUI_DIR%\web\extensions\ComfyLiterals" (
+        xcopy /E /I /Y "%COMFYUI_DIR%\custom_nodes\ComfyLiterals\js" "%COMFYUI_DIR%\web\extensions\ComfyLiterals" >nul 2>&1
+    )
+)
+
 set "MANAGER_REQ=%COMFYUI_DIR%\manager_requirements.txt"
 set "MANAGER_MARKER=%BASE_DIR%\logs\.manager_deps_installed"
 if exist "%MANAGER_REQ%" (

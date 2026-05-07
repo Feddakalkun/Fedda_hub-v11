@@ -778,7 +778,7 @@ Write-Log "Upgrading pip..."
 Run-Pip "install --upgrade pip wheel setuptools"
 
 Write-Log "Installing PyTorch (CUDA 12.4)..."
-# CUDA 12.4 has latest PyTorch builds and supports GPUs from GTX 1060 to RTX 5090
+# CUDA 12.4 has latest PyTorch builds and supports GPUs from GTX 1060 to RTX 60xx
 Run-Pip "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124"
 if ($LASTEXITCODE -ne 0) {
     Write-Log "CUDA 12.4 torch failed, trying CUDA 12.1 fallback..."
@@ -1125,7 +1125,7 @@ function Install-SageAttention {
         $GPUName = $GPUObject.Name
         Write-Log "GPU Detected: $GPUName"
     
-        if ($GPUName -match "RTX 40\d\d" -or $GPUName -match "RTX 50\d\d") {
+        if ($GPUName -match "RTX 40\d\d" -or $GPUName -match "RTX 50\d\d" -or $GPUName -match "RTX 60\d\d") {
             Write-Log "Modern NVIDIA GPU detected. Installing SageAttention for maximum performance..."
             # Try installing sageattention, but don't fail the whole install if it errors
             try {

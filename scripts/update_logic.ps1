@@ -194,21 +194,26 @@ foreach ($CritNode in $CriticalNodes) {
     }
 }
 
-# Always disable known unstable nodes unless explicitly allowed.
+# Always remove known unstable nodes unless explicitly allowed.
 if (-not $AllowUnstableNodes) {
     foreach ($UnstableFolder in $UnstableNodeFolders) {
         $ActivePath = Join-Path $CustomNodesDir $UnstableFolder
         $DisabledPath = Join-Path $CustomNodesDir ($UnstableFolder + ".disabled")
-        if (Test-Path $ActivePath) {
-            try {
-                if (Test-Path $DisabledPath) {
-                    Remove-Item -Recurse -Force -LiteralPath $DisabledPath -ErrorAction SilentlyContinue
-                }
-                Rename-Item -LiteralPath $ActivePath -NewName ($UnstableFolder + ".disabled") -Force
-                Write-Host "  [$UnstableFolder] Disabled by default (startup hardening)." -ForegroundColor Yellow
-            } catch {
-                Write-Host "  [WARNING] Could not disable $UnstableFolder: $_" -ForegroundColor Yellow
+        try {
+            $RemovedAny = $false
+            if (Test-Path $ActivePath) {
+                Remove-Item -Recurse -Force -LiteralPath $ActivePath -ErrorAction SilentlyContinue
+                $RemovedAny = $true
             }
+            if (Test-Path $DisabledPath) {
+                Remove-Item -Recurse -Force -LiteralPath $DisabledPath -ErrorAction SilentlyContinue
+                $RemovedAny = $true
+            }
+            if ($RemovedAny) {
+                Write-Host "  [$UnstableFolder] Removed by default (startup hardening)." -ForegroundColor Yellow
+            }
+        } catch {
+            Write-Host "  [WARNING] Could not remove ${UnstableFolder}: $_" -ForegroundColor Yellow
         }
     }
 }
@@ -227,7 +232,7 @@ if ($NeedNodeUpdate -or $HasMissing) {
         }
 
         if ((-not $AllowUnstableNodes) -and ($UnstableNodeFolders -contains [string]$Node.folder)) {
-            Write-Host "  [$($Node.name)] Skipped (disabled by default for stability)." -ForegroundColor DarkYellow
+            Write-Host "  [$($Node.name)] Skipped (removed by default for stability)." -ForegroundColor DarkYellow
             $SkippedCount++
             continue
         }
