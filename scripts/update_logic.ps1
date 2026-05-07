@@ -147,6 +147,11 @@ $UpdatedCount = 0
 $SkippedCount = 0
 $FailedCount = 0
 
+# Known unstable/optional nodes that can crash startup on some installs.
+# Can be overridden with: $env:FEDDA_ALLOW_UNSTABLE_NODES=1
+$UnstableNodeFolders = @("ComfyUI-F5-TTS")
+$AllowUnstableNodes = (($env:FEDDA_ALLOW_UNSTABLE_NODES ?? "").Trim() -eq "1")
+
 function Sync-NodeSubmodules {
     param([string]$NodeDir)
     $GitmodulesFile = Join-Path $NodeDir ".gitmodules"
@@ -189,6 +194,25 @@ foreach ($CritNode in $CriticalNodes) {
     }
 }
 
+# Always disable known unstable nodes unless explicitly allowed.
+if (-not $AllowUnstableNodes) {
+    foreach ($UnstableFolder in $UnstableNodeFolders) {
+        $ActivePath = Join-Path $CustomNodesDir $UnstableFolder
+        $DisabledPath = Join-Path $CustomNodesDir ($UnstableFolder + ".disabled")
+        if (Test-Path $ActivePath) {
+            try {
+                if (Test-Path $DisabledPath) {
+                    Remove-Item -Recurse -Force -LiteralPath $DisabledPath -ErrorAction SilentlyContinue
+                }
+                Rename-Item -LiteralPath $ActivePath -NewName ($UnstableFolder + ".disabled") -Force
+                Write-Host "  [$UnstableFolder] Disabled by default (startup hardening)." -ForegroundColor Yellow
+            } catch {
+                Write-Host "  [WARNING] Could not disable $UnstableFolder: $_" -ForegroundColor Yellow
+            }
+        }
+    }
+}
+
 if ($NeedNodeUpdate -or $HasMissing) {
     if ($NeedNodeUpdate) {
         Write-Host "`n[1/3] Syncing custom nodes from config/nodes.json..." -ForegroundColor Yellow
@@ -199,6 +223,12 @@ if ($NeedNodeUpdate -or $HasMissing) {
     foreach ($Node in $NodesConfig) {
         if ($Node.local -eq $true) {
             Write-Host "  [$($Node.name)] Local node - skipped" -ForegroundColor Gray
+            continue
+        }
+
+        if ((-not $AllowUnstableNodes) -and ($UnstableNodeFolders -contains [string]$Node.folder)) {
+            Write-Host "  [$($Node.name)] Skipped (disabled by default for stability)." -ForegroundColor DarkYellow
+            $SkippedCount++
             continue
         }
 
@@ -322,7 +352,37 @@ Write-Host "`n[1b/3] Patching Python dependencies..." -ForegroundColor Yellow
 
 # Ensure OpenCV is installed for video frame extraction
 Write-Host "  Ensuring opencv-python is installed..." -ForegroundColor White
-& $PyExe -m pip install opencv-python --no-warn-script-location 2>&1 | Out-Null
+try {
+    $ErrorActionPreference = "Continue"
+    & $PyExe -m pip install opencv-python --no-warn-script-location 2>&1 | Out-Null
+    $OpenCvExit = $LASTEXITCODE
+    $ErrorActionPreference = "Stop"
+    if ($OpenCvExit -eq 0) {
+        Write-Host "  opencv-python OK" -ForegroundColor Green
+    } else {
+        Write-Host "  [WARNING] opencv-python install returned code $OpenCvExit (non-fatal)." -ForegroundColor Yellow
+    }
+} catch {
+    $ErrorActionPreference = "Stop"
+    Write-Host "  [WARNING] opencv-python install failed (non-fatal): $_" -ForegroundColor Yellow
+}
+
+# Keep NumPy pinned to 1.x for ONNX Runtime / ControlNet Aux binary compatibility.
+Write-Host "  Enforcing NumPy < 2 for ONNX compatibility..." -ForegroundColor White
+try {
+    $ErrorActionPreference = "Continue"
+    & $PyExe -m pip install "numpy<2" --no-warn-script-location 2>&1 | Out-Null
+    $NumpyExit = $LASTEXITCODE
+    $ErrorActionPreference = "Stop"
+    if ($NumpyExit -eq 0) {
+        Write-Host "  numpy<2 OK" -ForegroundColor Green
+    } else {
+        Write-Host "  [WARNING] numpy pin returned code $NumpyExit (non-fatal)." -ForegroundColor Yellow
+    }
+} catch {
+    $ErrorActionPreference = "Stop"
+    Write-Host "  [WARNING] numpy pin failed (non-fatal): $_" -ForegroundColor Yellow
+}
 
 # Florence2 requires transformers >= 4.45
 $TransformersVersion = & $PyExe -c "import transformers; print(transformers.__version__)" 2>$null

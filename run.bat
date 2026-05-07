@@ -360,6 +360,14 @@ if not errorlevel 1 (
     exit /b
 )
 
+echo %FEDDA_GPU_NAME% | findstr /R /C:"RTX 60[0-9][0-9]" >nul
+if not errorlevel 1 (
+    set "COMFY_VRAM_RESERVE=2"
+    set "COMFY_CUDA_MALLOC_FLAG="
+    set "COMFY_CUDA_MALLOC_MODE=enabled"
+    exit /b
+)
+
 echo %FEDDA_GPU_NAME% | findstr /R /C:"RTX 40[0-9][0-9]" >nul
 if not errorlevel 1 (
     if %FEDDA_GPU_VRAM_MB% GEQ 20000 (
@@ -369,6 +377,32 @@ if not errorlevel 1 (
     )
     set "COMFY_CUDA_MALLOC_FLAG="
     set "COMFY_CUDA_MALLOC_MODE=enabled"
+    exit /b
+)
+
+echo %FEDDA_GPU_NAME% | findstr /R /C:"RTX 30[0-9][0-9]" >nul
+if not errorlevel 1 (
+    if %FEDDA_GPU_VRAM_MB% GEQ 20000 (
+        set "COMFY_VRAM_RESERVE=3"
+    ) else if %FEDDA_GPU_VRAM_MB% GEQ 12000 (
+        set "COMFY_VRAM_RESERVE=4"
+    ) else (
+        set "COMFY_VRAM_RESERVE=5"
+    )
+    set "COMFY_CUDA_MALLOC_FLAG="
+    set "COMFY_CUDA_MALLOC_MODE=enabled"
+    exit /b
+)
+
+echo %FEDDA_GPU_NAME% | findstr /R /C:"RTX 20[0-9][0-9]" >nul
+if not errorlevel 1 (
+    if %FEDDA_GPU_VRAM_MB% GEQ 10000 (
+        set "COMFY_VRAM_RESERVE=5"
+    ) else (
+        set "COMFY_VRAM_RESERVE=6"
+    )
+    set "COMFY_CUDA_MALLOC_FLAG=--disable-cuda-malloc"
+    set "COMFY_CUDA_MALLOC_MODE=disabled"
     exit /b
 )
 
