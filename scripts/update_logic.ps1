@@ -544,6 +544,66 @@ if (Test-Path $FeddaWorkflowsSource) {
     Write-Host "  [WARNING] backend/workflows not found, skipping sync." -ForegroundColor Yellow
 }
 
+# ============================================================================
+# 2e. SYNC ROOT WRAPPER LAUNCHERS (for installer root folder)
+# ============================================================================
+$RootLeaf = Split-Path $RootPath -Leaf
+if ($RootLeaf -ieq "comfyuifeddafront") {
+    $OuterRoot = Split-Path -Parent $RootPath
+    Write-Host "`n[2e/3] Syncing root wrapper launchers..." -ForegroundColor Yellow
+
+    $RootRunBat = Join-Path $OuterRoot "FEDDA_run-v11.bat"
+    $RootUpdateBat = Join-Path $OuterRoot "FEDDA_Update-v11.bat"
+
+    $RunWrapper = @'
+@echo off
+setlocal EnableExtensions
+set "ROOT_DIR=%~dp0"
+if "%ROOT_DIR:~-1%"=="\" set "ROOT_DIR=%ROOT_DIR:~0,-1%"
+set "TARGET_DIR=%ROOT_DIR%\comfyuifeddafront"
+if not exist "%TARGET_DIR%\run.bat" (
+  echo.
+  echo  [ERROR] FEDDA install not found at:
+  echo          %TARGET_DIR%
+  echo.
+  echo  Run FEDDA_OneClick_Installer-v11.bat first.
+  echo.
+  pause
+  exit /b 1
+)
+call "%TARGET_DIR%\run.bat"
+exit /b %errorlevel%
+'@
+
+    $UpdateWrapper = @'
+@echo off
+setlocal EnableExtensions
+set "ROOT_DIR=%~dp0"
+if "%ROOT_DIR:~-1%"=="\" set "ROOT_DIR=%ROOT_DIR:~0,-1%"
+set "TARGET_DIR=%ROOT_DIR%\comfyuifeddafront"
+if not exist "%TARGET_DIR%\FEDDA_Update-v11.bat" (
+  echo.
+  echo  [ERROR] FEDDA install not found at:
+  echo          %TARGET_DIR%
+  echo.
+  echo  Run FEDDA_OneClick_Installer-v11.bat first.
+  echo.
+  pause
+  exit /b 1
+)
+call "%TARGET_DIR%\FEDDA_Update-v11.bat" %*
+exit /b %errorlevel%
+'@
+
+    try {
+        Set-Content -Path $RootRunBat -Value $RunWrapper -Encoding ASCII -Force
+        Set-Content -Path $RootUpdateBat -Value $UpdateWrapper -Encoding ASCII -Force
+        Write-Host "  Root wrappers refreshed." -ForegroundColor Green
+    } catch {
+        Write-Host "  [WARNING] Could not refresh root wrappers: $_" -ForegroundColor Yellow
+    }
+}
+
 
 # ============================================================================
 # DONE
