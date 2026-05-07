@@ -2,12 +2,14 @@
 setlocal EnableDelayedExpansion
 title FEDDA AI Studio - Update Tool v11
 
-set "ROOT_DIR=%~dp0"
-if "%ROOT_DIR:~-1%"=="\" set "ROOT_DIR=%ROOT_DIR:~0,-1%"
+set "SCRIPT_DIR=%~dp0"
+if "%SCRIPT_DIR:~-1%"=="\" set "SCRIPT_DIR=%SCRIPT_DIR:~0,-1%"
+set "ROOT_DIR=%SCRIPT_DIR%"
 
 set "REPO_URL=https://github.com/Feddakalkun/Fedda_hub-v11"
 set "REPO_BRANCH=v11-main"
-set "TARGET_DIR=%ROOT_DIR%\comfyuifeddafront"
+set "TARGET_DIR=%SCRIPT_DIR%\comfyuifeddafront"
+set "ROOT_WRAP_DIR=%SCRIPT_DIR%"
 set "TARGET_NAME=FEDDA v11"
 set "FORCE_NODE_ARG="
 set "NO_STASH=0"
@@ -18,6 +20,13 @@ if /I "%~1"=="--full-nodes" set "FORCE_NODE_ARG=-ForceNodeUpdate"
 if /I "%~1"=="--no-stash" set "NO_STASH=1"
 where pwsh >nul 2>&1 && set "PS_EXE=pwsh"
 if not defined PS_EXE set "PS_EXE=powershell"
+
+if exist "%SCRIPT_DIR%\scripts\install_lite.ps1" (
+    set "TARGET_DIR=%SCRIPT_DIR%"
+    set "ROOT_WRAP_DIR=%SCRIPT_DIR%\.."
+    for %%I in ("%ROOT_WRAP_DIR%") do set "ROOT_WRAP_DIR=%%~fI"
+    set "ROOT_DIR=%ROOT_WRAP_DIR%"
+)
 
 echo.
 echo  =========================================
@@ -80,7 +89,7 @@ echo   exit /b 1
 echo ^)
 echo call "%%TARGET_DIR%%\run.bat"
 echo exit /b %%errorlevel%%
-) > "%ROOT_DIR%\FEDDA_run-v11.bat"
+) > "%ROOT_WRAP_DIR%\FEDDA_run-v11.bat"
 
 echo  [INFO] Updating %TARGET_NAME%...
 pushd "%TARGET_DIR%" >nul
@@ -223,7 +232,7 @@ echo    Update completed
 echo  =========================================
 echo.
 echo  Run app:
-echo    "%ROOT_DIR%\FEDDA_run-v11.bat"
+echo    "%ROOT_WRAP_DIR%\FEDDA_run-v11.bat"
 echo.
 pause
 exit /b 0
