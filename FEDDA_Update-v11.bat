@@ -24,7 +24,7 @@ if not defined PS_EXE set "PS_EXE=powershell"
 if exist "%SCRIPT_DIR%\scripts\install_lite.ps1" (
     set "TARGET_DIR=%SCRIPT_DIR%"
     for %%I in ("%SCRIPT_DIR%\..") do set "ROOT_WRAP_DIR=%%~fI"
-    set "ROOT_DIR=%ROOT_WRAP_DIR%"
+    set "ROOT_DIR=!ROOT_WRAP_DIR!"
 )
 
 echo.
