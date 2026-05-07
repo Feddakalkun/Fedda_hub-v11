@@ -53,7 +53,7 @@ const CARD_IMAGE_BY_TAB: Record<string, string> = {
   'wan22-img2vid-6frames': '/cards/wan22-story.png',
   'ltx-flf': '/cards/ltx-flf.png',
   'ltx-img-audio': '/cards/ltx-audio.png',
-  xxx: '/cards/v3/xxx.jpg',
+  xxx: '/cards/xxx.png',
   'xxx-influencer': '/cards/v3/influencer.jpg',
   'xxx-realism-sdxl': '/cards/v3/realism-sdxl.jpg',
   'xxx-sdxl-batch': '/cards/v3/sdxl-xxx-batch.jpg',
