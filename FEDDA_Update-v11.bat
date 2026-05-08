@@ -58,6 +58,13 @@ if %errorlevel% neq 0 (
     pause
     exit /b 1
 )
+set "FEDDA_GIT_EXE="
+for /f "delims=" %%G in ('where git 2^>nul') do (
+    if not defined FEDDA_GIT_EXE set "FEDDA_GIT_EXE=%%G"
+)
+if defined FEDDA_GIT_EXE (
+    echo  [INFO] Git runtime: !FEDDA_GIT_EXE!
+)
 
 if not exist "%TARGET_DIR%\scripts\install_lite.ps1" (
     echo  [ERROR] FEDDA install not found at:

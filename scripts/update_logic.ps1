@@ -51,16 +51,38 @@ if (Test-Path $VenvPy) {
 
 # Git setup
 $GitEmbedded = Join-Path $RootPath "git_embeded\cmd\git.exe"
-if (Test-Path $GitEmbedded) {
+$GitFromWrapper = [string]$env:FEDDA_GIT_EXE
+$GitFromSystemCmd = Get-Command git -ErrorAction SilentlyContinue
+$GitFromSystem = if ($GitFromSystemCmd) { $GitFromSystemCmd.Source } else { $null }
+
+if ($GitFromWrapper -and (Test-Path $GitFromWrapper)) {
+    $GitExe = $GitFromWrapper
+    $GitSource = "wrapper"
+} elseif ($GitFromSystem) {
+    $GitExe = $GitFromSystem
+    $GitSource = "system"
+} elseif (Test-Path $GitEmbedded) {
     $GitExe = $GitEmbedded
-    $env:PATH = "$(Split-Path $GitExe);$env:PATH"
+    $GitSource = "embedded"
 } else {
     $GitExe = "git"
+    $GitSource = "path"
+}
+
+if ($GitExe -ne "git") {
+    $env:PATH = "$(Split-Path -Parent $GitExe);$env:PATH"
+}
+
+if (-not $SilentMode) {
+    Write-Host "  Git runtime: $GitExe ($GitSource)" -ForegroundColor DarkGray
 }
 
 # Fix dubious ownership errors (local config only - never modify user's global gitconfig)
 $env:GIT_CONFIG_GLOBAL = Join-Path $RootPath ".gitconfig"
 & $GitExe config --file "$env:GIT_CONFIG_GLOBAL" --add safe.directory '*' 2>$null
+& $GitExe config --file "$env:GIT_CONFIG_GLOBAL" maintenance.auto false 2>$null
+& $GitExe config --file "$env:GIT_CONFIG_GLOBAL" gc.auto 0 2>$null
+& $GitExe config --file "$env:GIT_CONFIG_GLOBAL" gc.autoDetach false 2>$null
 
 if (-not (Test-Path $ComfyDir)) {
     Write-Host "`n  [ERROR] ComfyUI directory not found!" -ForegroundColor Red
