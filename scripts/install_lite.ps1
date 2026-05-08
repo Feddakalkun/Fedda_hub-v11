@@ -622,6 +622,10 @@ $Deps = @(
 )
 Venv-Pip "install $($Deps -join ' ')"
 
+# RTX Video Super Resolution Python dependency (best effort).
+Write-Step "Ensuring nvidia-vfx is installed (RTX nodes)..."
+Venv-Pip "install nvidia-vfx"
+
 # SageAttention for 40/50/60-series (best effort only)
 try {
     if ($GpuProfile.Series -eq "40" -or $GpuProfile.Series -eq "50" -or $GpuProfile.Series -eq "60") {
@@ -707,6 +711,26 @@ foreach ($Node in $NodesConfig) {
         }
     } else {
         $Skipped++
+    }
+}
+
+# Apply tracked node patches (WanVideoWrapper and LTX compatibility shims).
+$PatchSourceDir = Join-Path $RootPath "custom_node_patches"
+if (Test-Path $PatchSourceDir) {
+    Write-Step "Applying custom node patches..."
+    $PatchesFound = Get-ChildItem -Path $PatchSourceDir -Directory
+    foreach ($PFolder in $PatchesFound) {
+        $NodeFolderName = $PFolder.Name
+        $TargetNodeDir = Join-Path $CustomNodesDir $NodeFolderName
+
+        if ($NodeFolderName -eq "WanVideoWrapper") {
+            $TargetNodeDir = Join-Path $CustomNodesDir "ComfyUI-WanVideoWrapper"
+        }
+
+        if (Test-Path $TargetNodeDir) {
+            Copy-Item -Path (Join-Path $PFolder.FullName "*") -Destination $TargetNodeDir -Recurse -Force
+            Write-Step "  [$NodeFolderName] Patch applied." "Green"
+        }
     }
 }
 

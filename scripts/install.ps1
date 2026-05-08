@@ -956,6 +956,11 @@ $Deps = @(
     "browser-cookie3", "edge-tts"
 )
 Run-Pip "install $($Deps -join ' ')"
+
+# RTX Video Super Resolution Python dependency (best effort).
+Write-Log "Ensuring nvidia-vfx is installed (RTX nodes)..."
+Run-Pip "install nvidia-vfx"
+
 Install-MockingbirdRuntime -RootPath $RootPath -GitExe $GitExe -SpeakerSource (Join-Path $RootPath "assets\audio-tts\charlotte\charlotte.wav")
 
 # 7.3 (Removed) llama-cpp-python no longer needed - Ollama handles all LLM tasks
@@ -1114,6 +1119,27 @@ if (Test-Path $EnsureLtx23Script) {
     }
     catch {
         Write-Log "WARNING: LTX 2.3 model ensure failed (non-fatal): $_"
+    }
+}
+
+# 6b. Apply tracked custom node patches (e.g., WanVideoWrapper / LTX compatibility shims)
+$PatchSourceDir = Join-Path $RootPath "custom_node_patches"
+if (Test-Path $PatchSourceDir) {
+    Write-Log "[ComfyUI 6b/9] Applying custom node patches..."
+    $PatchesFound = Get-ChildItem -Path $PatchSourceDir -Directory
+    foreach ($PFolder in $PatchesFound) {
+        $NodeFolderName = $PFolder.Name
+        $TargetNodeDir = Join-Path $CustomNodesDir $NodeFolderName
+
+        # Folder naming mismatch in upstream repo.
+        if ($NodeFolderName -eq "WanVideoWrapper") {
+            $TargetNodeDir = Join-Path $CustomNodesDir "ComfyUI-WanVideoWrapper"
+        }
+
+        if (Test-Path $TargetNodeDir) {
+            Copy-Item -Path (Join-Path $PFolder.FullName "*") -Destination $TargetNodeDir -Recurse -Force
+            Write-Log "[$NodeFolderName] - Patch files applied"
+        }
     }
 }
 

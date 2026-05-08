@@ -344,7 +344,7 @@ if (Test-Path $PatchSourceDir) {
         if (Test-Path $TargetNodeDir) {
             Write-Host "  Applying patches for $NodeFolderName..." -ForegroundColor White
             # Copy all files from patch folder to target node dir recursively
-            Copy-Item -Path "$(Join-Path $PFolder.FullName '*') " -Destination $TargetNodeDir -Recurse -Force
+            Copy-Item -Path (Join-Path $PFolder.FullName "*") -Destination $TargetNodeDir -Recurse -Force
             Write-Host "  $NodeFolderName patches applied OK" -ForegroundColor Green
         }
     }
@@ -387,6 +387,23 @@ try {
 } catch {
     $ErrorActionPreference = "Stop"
     Write-Host "  [WARNING] numpy pin failed (non-fatal): $_" -ForegroundColor Yellow
+}
+
+# RTX Video Super Resolution node requires the nvidia-vfx Python package.
+Write-Host "  Ensuring nvidia-vfx is installed (RTX nodes)..." -ForegroundColor White
+try {
+    $ErrorActionPreference = "Continue"
+    & $PyExe -m pip install nvidia-vfx --no-warn-script-location 2>&1 | Out-Null
+    $NvidiaVfxExit = $LASTEXITCODE
+    $ErrorActionPreference = "Stop"
+    if ($NvidiaVfxExit -eq 0) {
+        Write-Host "  nvidia-vfx OK" -ForegroundColor Green
+    } else {
+        Write-Host "  [WARNING] nvidia-vfx install returned code $NvidiaVfxExit. RTXVideoSuperResolution may be unavailable." -ForegroundColor Yellow
+    }
+} catch {
+    $ErrorActionPreference = "Stop"
+    Write-Host "  [WARNING] nvidia-vfx install failed (non-fatal): $_" -ForegroundColor Yellow
 }
 
 # Florence2 requires transformers >= 4.45
