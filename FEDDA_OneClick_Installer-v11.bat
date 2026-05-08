@@ -104,7 +104,7 @@ popd
 if not "%INSTALL_EXIT%"=="0" goto :err_install
 
 call :ensure_root_launchers
-call :cleanup_install_root_launchers
+call :hide_install_root_launchers
 
 echo.
 echo  ==============================================================
@@ -236,10 +236,11 @@ echo [%date% %time%] ERROR: install failed code %INSTALL_EXIT% >> "%LOG_FILE%"
 pause
 exit /b %INSTALL_EXIT%
 
-:cleanup_install_root_launchers
-if exist "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" del /f /q "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" >nul 2>nul
-if exist "%INSTALL_DIR%\FEDDA_Update-v11.bat" del /f /q "%INSTALL_DIR%\FEDDA_Update-v11.bat" >nul 2>nul
-if exist "%INSTALL_DIR%\FEDDA_Push-v11.bat" del /f /q "%INSTALL_DIR%\FEDDA_Push-v11.bat" >nul 2>nul
+:hide_install_root_launchers
+if exist "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" attrib +h "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" >nul 2>nul
+if exist "%INSTALL_DIR%\FEDDA_Update-v11.bat" attrib +h "%INSTALL_DIR%\FEDDA_Update-v11.bat" >nul 2>nul
+if exist "%INSTALL_DIR%\FEDDA_Push-v11.bat" attrib +h "%INSTALL_DIR%\FEDDA_Push-v11.bat" >nul 2>nul
+if exist "%INSTALL_DIR%\run.bat" attrib +h "%INSTALL_DIR%\run.bat" >nul 2>nul
 exit /b 0
 
 :ensure_root_launchers
@@ -269,8 +270,10 @@ echo ^)
 echo call "%%TARGET_DIR%%\run.bat"
 echo exit /b %%errorlevel%%
 ) > "%ROOT%\FEDDA_run-v11.bat"
+attrib -h "%ROOT%\FEDDA_run-v11.bat" >nul 2>nul
 
 if exist "%ROOT%\FEDDA_Update-v11.bat" (
+    attrib -h "%ROOT%\FEDDA_Update-v11.bat" >nul 2>nul
     echo  [OK] Root launchers ready:
     echo       %ROOT%\FEDDA_run-v11.bat
     echo       %ROOT%\FEDDA_Update-v11.bat

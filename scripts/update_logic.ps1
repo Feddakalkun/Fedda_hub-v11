@@ -647,6 +647,22 @@ exit /b %errorlevel%
     } catch {
         Write-Host "  [WARNING] Could not refresh root wrappers: $_" -ForegroundColor Yellow
     }
+
+    # Keep internal launcher files hidden inside the install folder to reduce clutter.
+    $InternalLaunchers = @(
+        "FEDDA_OneClick_Installer-v11.bat",
+        "FEDDA_Update-v11.bat",
+        "FEDDA_Push-v11.bat",
+        "run.bat"
+    )
+    foreach ($Launcher in $InternalLaunchers) {
+        $LauncherPath = Join-Path $RootPath $Launcher
+        if (Test-Path $LauncherPath) {
+            try {
+                & attrib +h "$LauncherPath" 2>$null
+            } catch {}
+        }
+    }
 }
 
 
