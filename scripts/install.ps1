@@ -1091,6 +1091,32 @@ if (Test-Path $EnsureZImageScript) {
     }
 }
 
+# Ensure Steady Dancer pose detection ONNX files exist so workflow validates.
+$EnsureSteadyDetectionScript = Join-Path $ScriptPath "ensure_steady_dancer_detection_models.ps1"
+if (Test-Path $EnsureSteadyDetectionScript) {
+    try {
+        Write-Log "Ensuring Steady Dancer detection models..."
+        & $EnsureSteadyDetectionScript -SilentMode
+        Write-Log "Steady Dancer detection models ready."
+    }
+    catch {
+        Write-Log "WARNING: Steady Dancer detection model ensure failed (non-fatal): $_"
+    }
+}
+
+# Ensure LTX 2.3 model bundle exists for LTX workflows.
+$EnsureLtx23Script = Join-Path $ScriptPath "ensure_ltx23_models.ps1"
+if (Test-Path $EnsureLtx23Script) {
+    try {
+        Write-Log "Ensuring LTX 2.3 models..."
+        & $EnsureLtx23Script -SilentMode
+        Write-Log "LTX 2.3 models ready."
+    }
+    catch {
+        Write-Log "WARNING: LTX 2.3 model ensure failed (non-fatal): $_"
+    }
+}
+
 Pause-Step
 
 # 9.5 Cleanup legacy ComfyUI-Manager backup (if exists)

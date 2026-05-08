@@ -177,7 +177,7 @@ foreach ($Node in $NodesConfig) {
 }
 
 # Always force-update nodes that ship new model architectures regularly
-$CriticalNodes = @("ComfyUI-LTXVideo", "RES4LYF", "ComfyUI-KJNodes")
+$CriticalNodes = @("ComfyUI-LTXVideo", "RES4LYF", "Nvidia_RTX_Nodes_ComfyUI", "ComfyUI-KJNodes")
 foreach ($CritNode in $CriticalNodes) {
     $CritDir = Join-Path $CustomNodesDir $CritNode
     if (Test-Path $CritDir) {
@@ -511,6 +511,20 @@ if (Test-Path $EnsureSteadyDetectionScript) {
     }
 } else {
     Write-Host "  [WARNING] ensure_steady_dancer_detection_models.ps1 not found, skipping." -ForegroundColor Yellow
+}
+
+# Ensure LTX 2.3 model bundle exists so LTX workflows validate.
+Write-Host "`n[2c.2/3] Ensuring LTX 2.3 models..." -ForegroundColor Yellow
+$EnsureLtx23Script = Join-Path $RootPath "scripts\ensure_ltx23_models.ps1"
+if (Test-Path $EnsureLtx23Script) {
+    try {
+        & $EnsureLtx23Script -SilentMode
+        Write-Host "  LTX 2.3 models ready." -ForegroundColor Green
+    } catch {
+        Write-Host "  [WARNING] LTX 2.3 model ensure failed (non-fatal): $_" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  [WARNING] ensure_ltx23_models.ps1 not found, skipping." -ForegroundColor Yellow
 }
 
 

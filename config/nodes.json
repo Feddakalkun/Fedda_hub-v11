@@ -162,6 +162,18 @@
     "note": "LTX Video nodes — LTXVImgToVideoConditionOnly, LTXICLoRALoaderModelOnly, LTXAddVideoICLoRAGuide"
   },
   {
+    "name": "RES4LYF",
+    "url": "https://github.com/ClownsharkBatwing/RES4LYF.git",
+    "folder": "RES4LYF",
+    "note": "LTX-compatible sigma/easing sampler nodes (res_2s and related)"
+  },
+  {
+    "name": "Nvidia_RTX_Nodes_ComfyUI",
+    "url": "https://github.com/Comfy-Org/Nvidia_RTX_Nodes_ComfyUI.git",
+    "folder": "Nvidia_RTX_Nodes_ComfyUI",
+    "note": "NVIDIA RTX nodes including RTX Video Super Resolution upscaling"
+  },
+  {
     "name": "ComfyMath",
     "url": "https://github.com/evanspearman/ComfyMath.git",
     "folder": "ComfyMath",

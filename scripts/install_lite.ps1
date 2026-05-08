@@ -938,6 +938,18 @@ if (Test-Path $EnsureSteadyDetectionScript) {
     }
 }
 
+# Ensure LTX 2.3 model bundle exists for LTX workflows.
+$EnsureLtx23Script = Join-Path $ScriptPath "ensure_ltx23_models.ps1"
+if (Test-Path $EnsureLtx23Script) {
+    try {
+        Write-Step "Ensuring LTX 2.3 models..." "Yellow"
+        & $EnsureLtx23Script -SilentMode
+        Write-Step "LTX 2.3 models ready." "Green"
+    } catch {
+        Write-Step "WARNING: LTX 2.3 model ensure failed (non-fatal)." "Yellow"
+    }
+}
+
 # ============================================================================
 # 7. SMOKE TEST
 # ============================================================================
