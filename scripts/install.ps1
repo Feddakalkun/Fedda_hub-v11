@@ -29,6 +29,12 @@ $env:ULTRALYTICS_SETTINGS = (Join-Path $UltralyticsCacheDir "settings.json")
 # Toggle to pause after each major step for review
 $PauseEachStep = $false
 
+# Optional toggles:
+# - FEDDA_AUTO_MODEL_DOWNLOADS=1 enables bundled model ensure/download steps.
+# - FEDDA_INSTALL_NVIDIA_VFX=1 enables automatic nvidia-vfx pip install for RTX nodes.
+$EnableAutoModelDownloads = (([string]$env:FEDDA_AUTO_MODEL_DOWNLOADS).Trim() -eq "1")
+$EnableNvidiaVfxInstall = (([string]$env:FEDDA_INSTALL_NVIDIA_VFX).Trim() -eq "1")
+
 Write-Host "Installation root: $RootPath"
 
 
@@ -957,9 +963,13 @@ $Deps = @(
 )
 Run-Pip "install $($Deps -join ' ')"
 
-# RTX Video Super Resolution Python dependency (best effort).
-Write-Log "Ensuring nvidia-vfx is installed (RTX nodes)..."
-Run-Pip "install nvidia-vfx"
+# RTX Video Super Resolution Python dependency (opt-in, best effort).
+if ($EnableNvidiaVfxInstall) {
+    Write-Log "Ensuring nvidia-vfx is installed (RTX nodes)..."
+    Run-Pip "install nvidia-vfx"
+} else {
+    Write-Log "Skipping nvidia-vfx install (set FEDDA_INSTALL_NVIDIA_VFX=1 to enable)."
+}
 
 Install-MockingbirdRuntime -RootPath $RootPath -GitExe $GitExe -SpeakerSource (Join-Path $RootPath "assets\audio-tts\charlotte\charlotte.wav")
 
@@ -1083,43 +1093,47 @@ if (Test-Path $PreviewSetupScript) {
     }
 }
 
-# Ensure Z-Image core model files exist on fresh install so generation does not fail validation.
-$EnsureZImageScript = Join-Path $ScriptPath "ensure_zimage_core_models.ps1"
-if (Test-Path $EnsureZImageScript) {
-    try {
-        Write-Log "Ensuring Z-Image core models..."
-        & $EnsureZImageScript -SilentMode
-        Write-Log "Z-Image core models ready."
+if ($EnableAutoModelDownloads) {
+    # Ensure Z-Image core model files exist on fresh install so generation does not fail validation.
+    $EnsureZImageScript = Join-Path $ScriptPath "ensure_zimage_core_models.ps1"
+    if (Test-Path $EnsureZImageScript) {
+        try {
+            Write-Log "Ensuring Z-Image core models..."
+            & $EnsureZImageScript -SilentMode
+            Write-Log "Z-Image core models ready."
+        }
+        catch {
+            Write-Log "WARNING: Z-Image core model ensure failed (non-fatal): $_"
+        }
     }
-    catch {
-        Write-Log "WARNING: Z-Image core model ensure failed (non-fatal): $_"
-    }
-}
 
-# Ensure Steady Dancer pose detection ONNX files exist so workflow validates.
-$EnsureSteadyDetectionScript = Join-Path $ScriptPath "ensure_steady_dancer_detection_models.ps1"
-if (Test-Path $EnsureSteadyDetectionScript) {
-    try {
-        Write-Log "Ensuring Steady Dancer detection models..."
-        & $EnsureSteadyDetectionScript -SilentMode
-        Write-Log "Steady Dancer detection models ready."
+    # Ensure Steady Dancer pose detection ONNX files exist so workflow validates.
+    $EnsureSteadyDetectionScript = Join-Path $ScriptPath "ensure_steady_dancer_detection_models.ps1"
+    if (Test-Path $EnsureSteadyDetectionScript) {
+        try {
+            Write-Log "Ensuring Steady Dancer detection models..."
+            & $EnsureSteadyDetectionScript -SilentMode
+            Write-Log "Steady Dancer detection models ready."
+        }
+        catch {
+            Write-Log "WARNING: Steady Dancer detection model ensure failed (non-fatal): $_"
+        }
     }
-    catch {
-        Write-Log "WARNING: Steady Dancer detection model ensure failed (non-fatal): $_"
-    }
-}
 
-# Ensure LTX 2.3 model bundle exists for LTX workflows.
-$EnsureLtx23Script = Join-Path $ScriptPath "ensure_ltx23_models.ps1"
-if (Test-Path $EnsureLtx23Script) {
-    try {
-        Write-Log "Ensuring LTX 2.3 models..."
-        & $EnsureLtx23Script -SilentMode
-        Write-Log "LTX 2.3 models ready."
+    # Ensure LTX 2.3 model bundle exists for LTX workflows.
+    $EnsureLtx23Script = Join-Path $ScriptPath "ensure_ltx23_models.ps1"
+    if (Test-Path $EnsureLtx23Script) {
+        try {
+            Write-Log "Ensuring LTX 2.3 models..."
+            & $EnsureLtx23Script -SilentMode
+            Write-Log "LTX 2.3 models ready."
+        }
+        catch {
+            Write-Log "WARNING: LTX 2.3 model ensure failed (non-fatal): $_"
+        }
     }
-    catch {
-        Write-Log "WARNING: LTX 2.3 model ensure failed (non-fatal): $_"
-    }
+} else {
+    Write-Log "Skipping automatic model downloads (set FEDDA_AUTO_MODEL_DOWNLOADS=1 to enable)."
 }
 
 # 6b. Apply tracked custom node patches (e.g., WanVideoWrapper / LTX compatibility shims)

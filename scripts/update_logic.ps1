@@ -174,6 +174,12 @@ $FailedCount = 0
 $UnstableNodeFolders = @("ComfyUI-F5-TTS")
 $AllowUnstableNodes = (([string]$env:FEDDA_ALLOW_UNSTABLE_NODES).Trim() -eq "1")
 
+# Optional toggles:
+# - FEDDA_AUTO_MODEL_DOWNLOADS=1 enables bundled model ensure/download steps.
+# - FEDDA_INSTALL_NVIDIA_VFX=1 enables automatic nvidia-vfx pip install for RTX nodes.
+$EnableAutoModelDownloads = (([string]$env:FEDDA_AUTO_MODEL_DOWNLOADS).Trim() -eq "1")
+$EnableNvidiaVfxInstall = (([string]$env:FEDDA_INSTALL_NVIDIA_VFX).Trim() -eq "1")
+
 function Sync-NodeSubmodules {
     param([string]$NodeDir)
     $GitmodulesFile = Join-Path $NodeDir ".gitmodules"
@@ -412,20 +418,24 @@ try {
 }
 
 # RTX Video Super Resolution node requires the nvidia-vfx Python package.
-Write-Host "  Ensuring nvidia-vfx is installed (RTX nodes)..." -ForegroundColor White
-try {
-    $ErrorActionPreference = "Continue"
-    & $PyExe -m pip install nvidia-vfx --no-warn-script-location 2>&1 | Out-Null
-    $NvidiaVfxExit = $LASTEXITCODE
-    $ErrorActionPreference = "Stop"
-    if ($NvidiaVfxExit -eq 0) {
-        Write-Host "  nvidia-vfx OK" -ForegroundColor Green
-    } else {
-        Write-Host "  [WARNING] nvidia-vfx install returned code $NvidiaVfxExit. RTXVideoSuperResolution may be unavailable." -ForegroundColor Yellow
+if ($EnableNvidiaVfxInstall) {
+    Write-Host "  Ensuring nvidia-vfx is installed (RTX nodes)..." -ForegroundColor White
+    try {
+        $ErrorActionPreference = "Continue"
+        & $PyExe -m pip install nvidia-vfx --no-warn-script-location 2>&1 | Out-Null
+        $NvidiaVfxExit = $LASTEXITCODE
+        $ErrorActionPreference = "Stop"
+        if ($NvidiaVfxExit -eq 0) {
+            Write-Host "  nvidia-vfx OK" -ForegroundColor Green
+        } else {
+            Write-Host "  [WARNING] nvidia-vfx install returned code $NvidiaVfxExit. RTXVideoSuperResolution may be unavailable." -ForegroundColor Yellow
+        }
+    } catch {
+        $ErrorActionPreference = "Stop"
+        Write-Host "  [WARNING] nvidia-vfx install failed (non-fatal): $_" -ForegroundColor Yellow
     }
-} catch {
-    $ErrorActionPreference = "Stop"
-    Write-Host "  [WARNING] nvidia-vfx install failed (non-fatal): $_" -ForegroundColor Yellow
+} else {
+    Write-Host "  Skipping nvidia-vfx install (set FEDDA_INSTALL_NVIDIA_VFX=1 to enable)." -ForegroundColor DarkGray
 }
 
 # Florence2 requires transformers >= 4.45
@@ -524,46 +534,50 @@ if (Test-Path $PreviewSetupScript) {
     Write-Host "  [WARNING] setup_comfyui_config.py not found, skipping preview defaults." -ForegroundColor Yellow
 }
 
-# Ensure Z-Image core model files exist so prompts don't fail validation on fresh installs.
-Write-Host "`n[2c/3] Ensuring Z-Image core models..." -ForegroundColor Yellow
-$EnsureZImageScript = Join-Path $RootPath "scripts\ensure_zimage_core_models.ps1"
-if (Test-Path $EnsureZImageScript) {
-    try {
-        & $EnsureZImageScript -SilentMode
-        Write-Host "  Z-Image core models ready." -ForegroundColor Green
-    } catch {
-        Write-Host "  [WARNING] Z-Image core model ensure failed (non-fatal): $_" -ForegroundColor Yellow
+if ($EnableAutoModelDownloads) {
+    # Ensure Z-Image core model files exist so prompts don't fail validation on fresh installs.
+    Write-Host "`n[2c/3] Ensuring Z-Image core models..." -ForegroundColor Yellow
+    $EnsureZImageScript = Join-Path $RootPath "scripts\ensure_zimage_core_models.ps1"
+    if (Test-Path $EnsureZImageScript) {
+        try {
+            & $EnsureZImageScript -SilentMode
+            Write-Host "  Z-Image core models ready." -ForegroundColor Green
+        } catch {
+            Write-Host "  [WARNING] Z-Image core model ensure failed (non-fatal): $_" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  [WARNING] ensure_zimage_core_models.ps1 not found, skipping." -ForegroundColor Yellow
     }
-} else {
-    Write-Host "  [WARNING] ensure_zimage_core_models.ps1 not found, skipping." -ForegroundColor Yellow
-}
 
-# Ensure Steady Dancer pose detection ONNX files exist so workflow validates.
-Write-Host "`n[2c.1/3] Ensuring Steady Dancer detection models..." -ForegroundColor Yellow
-$EnsureSteadyDetectionScript = Join-Path $RootPath "scripts\ensure_steady_dancer_detection_models.ps1"
-if (Test-Path $EnsureSteadyDetectionScript) {
-    try {
-        & $EnsureSteadyDetectionScript -SilentMode
-        Write-Host "  Steady Dancer detection models ready." -ForegroundColor Green
-    } catch {
-        Write-Host "  [WARNING] Steady Dancer detection model ensure failed (non-fatal): $_" -ForegroundColor Yellow
+    # Ensure Steady Dancer pose detection ONNX files exist so workflow validates.
+    Write-Host "`n[2c.1/3] Ensuring Steady Dancer detection models..." -ForegroundColor Yellow
+    $EnsureSteadyDetectionScript = Join-Path $RootPath "scripts\ensure_steady_dancer_detection_models.ps1"
+    if (Test-Path $EnsureSteadyDetectionScript) {
+        try {
+            & $EnsureSteadyDetectionScript -SilentMode
+            Write-Host "  Steady Dancer detection models ready." -ForegroundColor Green
+        } catch {
+            Write-Host "  [WARNING] Steady Dancer detection model ensure failed (non-fatal): $_" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  [WARNING] ensure_steady_dancer_detection_models.ps1 not found, skipping." -ForegroundColor Yellow
     }
-} else {
-    Write-Host "  [WARNING] ensure_steady_dancer_detection_models.ps1 not found, skipping." -ForegroundColor Yellow
-}
 
-# Ensure LTX 2.3 model bundle exists so LTX workflows validate.
-Write-Host "`n[2c.2/3] Ensuring LTX 2.3 models..." -ForegroundColor Yellow
-$EnsureLtx23Script = Join-Path $RootPath "scripts\ensure_ltx23_models.ps1"
-if (Test-Path $EnsureLtx23Script) {
-    try {
-        & $EnsureLtx23Script -SilentMode
-        Write-Host "  LTX 2.3 models ready." -ForegroundColor Green
-    } catch {
-        Write-Host "  [WARNING] LTX 2.3 model ensure failed (non-fatal): $_" -ForegroundColor Yellow
+    # Ensure LTX 2.3 model bundle exists so LTX workflows validate.
+    Write-Host "`n[2c.2/3] Ensuring LTX 2.3 models..." -ForegroundColor Yellow
+    $EnsureLtx23Script = Join-Path $RootPath "scripts\ensure_ltx23_models.ps1"
+    if (Test-Path $EnsureLtx23Script) {
+        try {
+            & $EnsureLtx23Script -SilentMode
+            Write-Host "  LTX 2.3 models ready." -ForegroundColor Green
+        } catch {
+            Write-Host "  [WARNING] LTX 2.3 model ensure failed (non-fatal): $_" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  [WARNING] ensure_ltx23_models.ps1 not found, skipping." -ForegroundColor Yellow
     }
 } else {
-    Write-Host "  [WARNING] ensure_ltx23_models.ps1 not found, skipping." -ForegroundColor Yellow
+    Write-Host "`n[2c/3] Skipping automatic model downloads (set FEDDA_AUTO_MODEL_DOWNLOADS=1 to enable)." -ForegroundColor DarkGray
 }
 
 

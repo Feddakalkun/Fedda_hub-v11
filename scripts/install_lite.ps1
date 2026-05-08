@@ -11,6 +11,12 @@ $RootPath = Split-Path -Parent $ScriptPath
 $RootPath = (Resolve-Path $RootPath).Path
 Set-Location $RootPath
 
+# Optional toggles:
+# - FEDDA_AUTO_MODEL_DOWNLOADS=1 enables bundled model ensure/download steps.
+# - FEDDA_INSTALL_NVIDIA_VFX=1 enables automatic nvidia-vfx pip install for RTX nodes.
+$EnableAutoModelDownloads = (([string]$env:FEDDA_AUTO_MODEL_DOWNLOADS).Trim() -eq "1")
+$EnableNvidiaVfxInstall = (([string]$env:FEDDA_INSTALL_NVIDIA_VFX).Trim() -eq "1")
+
 # Logging
 $LogsDir = Join-Path $RootPath "logs"
 if (-not (Test-Path $LogsDir)) { New-Item -ItemType Directory -Path $LogsDir | Out-Null }
@@ -622,9 +628,13 @@ $Deps = @(
 )
 Venv-Pip "install $($Deps -join ' ')"
 
-# RTX Video Super Resolution Python dependency (best effort).
-Write-Step "Ensuring nvidia-vfx is installed (RTX nodes)..."
-Venv-Pip "install nvidia-vfx"
+# RTX Video Super Resolution Python dependency (opt-in, best effort).
+if ($EnableNvidiaVfxInstall) {
+    Write-Step "Ensuring nvidia-vfx is installed (RTX nodes)..."
+    Venv-Pip "install nvidia-vfx"
+} else {
+    Write-Step "Skipping nvidia-vfx install (set FEDDA_INSTALL_NVIDIA_VFX=1 to enable)." "Gray"
+}
 
 # SageAttention for 40/50/60-series (best effort only)
 try {
@@ -938,40 +948,44 @@ if (Test-Path $PreviewSetupScript) {
     }
 }
 
-# Ensure Z-Image core model files exist on fresh install so generation does not fail validation.
-$EnsureZImageScript = Join-Path $ScriptPath "ensure_zimage_core_models.ps1"
-if (Test-Path $EnsureZImageScript) {
-    try {
-        Write-Step "Ensuring Z-Image core models..." "Yellow"
-        & $EnsureZImageScript -SilentMode
-        Write-Step "Z-Image core models ready." "Green"
-    } catch {
-        Write-Step "WARNING: Z-Image core model ensure failed (non-fatal)." "Yellow"
+if ($EnableAutoModelDownloads) {
+    # Ensure Z-Image core model files exist on fresh install so generation does not fail validation.
+    $EnsureZImageScript = Join-Path $ScriptPath "ensure_zimage_core_models.ps1"
+    if (Test-Path $EnsureZImageScript) {
+        try {
+            Write-Step "Ensuring Z-Image core models..." "Yellow"
+            & $EnsureZImageScript -SilentMode
+            Write-Step "Z-Image core models ready." "Green"
+        } catch {
+            Write-Step "WARNING: Z-Image core model ensure failed (non-fatal)." "Yellow"
+        }
     }
-}
 
-# Ensure Steady Dancer ONNX detection models exist so workflow validates.
-$EnsureSteadyDetectionScript = Join-Path $ScriptPath "ensure_steady_dancer_detection_models.ps1"
-if (Test-Path $EnsureSteadyDetectionScript) {
-    try {
-        Write-Step "Ensuring Steady Dancer detection models..." "Yellow"
-        & $EnsureSteadyDetectionScript -SilentMode
-        Write-Step "Steady Dancer detection models ready." "Green"
-    } catch {
-        Write-Step "WARNING: Steady Dancer detection model ensure failed (non-fatal)." "Yellow"
+    # Ensure Steady Dancer ONNX detection models exist so workflow validates.
+    $EnsureSteadyDetectionScript = Join-Path $ScriptPath "ensure_steady_dancer_detection_models.ps1"
+    if (Test-Path $EnsureSteadyDetectionScript) {
+        try {
+            Write-Step "Ensuring Steady Dancer detection models..." "Yellow"
+            & $EnsureSteadyDetectionScript -SilentMode
+            Write-Step "Steady Dancer detection models ready." "Green"
+        } catch {
+            Write-Step "WARNING: Steady Dancer detection model ensure failed (non-fatal)." "Yellow"
+        }
     }
-}
 
-# Ensure LTX 2.3 model bundle exists for LTX workflows.
-$EnsureLtx23Script = Join-Path $ScriptPath "ensure_ltx23_models.ps1"
-if (Test-Path $EnsureLtx23Script) {
-    try {
-        Write-Step "Ensuring LTX 2.3 models..." "Yellow"
-        & $EnsureLtx23Script -SilentMode
-        Write-Step "LTX 2.3 models ready." "Green"
-    } catch {
-        Write-Step "WARNING: LTX 2.3 model ensure failed (non-fatal)." "Yellow"
+    # Ensure LTX 2.3 model bundle exists for LTX workflows.
+    $EnsureLtx23Script = Join-Path $ScriptPath "ensure_ltx23_models.ps1"
+    if (Test-Path $EnsureLtx23Script) {
+        try {
+            Write-Step "Ensuring LTX 2.3 models..." "Yellow"
+            & $EnsureLtx23Script -SilentMode
+            Write-Step "LTX 2.3 models ready." "Green"
+        } catch {
+            Write-Step "WARNING: LTX 2.3 model ensure failed (non-fatal)." "Yellow"
+        }
     }
+} else {
+    Write-Step "Skipping automatic model downloads (set FEDDA_AUTO_MODEL_DOWNLOADS=1 to enable)." "Gray"
 }
 
 # ============================================================================
