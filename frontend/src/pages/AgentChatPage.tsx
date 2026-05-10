@@ -8,6 +8,7 @@ type ChatRole = 'user' | 'assistant';
 interface ChatMessage {
   role: ChatRole;
   content: string;
+  images?: string[];
 }
 
 interface FishModelOption {
@@ -212,7 +213,6 @@ export const AgentChatPage = () => {
       return 'Kore';
     }
   });
-  const [panelOpen, setPanelOpen] = useState(false);
   const [agentEnabled, setAgentEnabled] = useState<boolean>(() => {
     try {
       return localStorage.getItem(AGENT_ENABLED_KEY) !== '0';
@@ -699,6 +699,116 @@ export const AgentChatPage = () => {
     return run;
   };
 
+  const isImageGenerationIntent = (text: string) => {
+    const normalized = text.toLowerCase();
+    const asksImage = /(image|bilde|photo|picture)/i.test(normalized);
+    const asksGenerate = /(generate|create|make|lag|skap)/i.test(normalized);
+    const mentionsZImage = /\bz-?image\b|\bzimage\b/i.test(normalized);
+    return asksImage && (asksGenerate || mentionsZImage);
+  };
+
+  const extractLoraHint = (text: string) => {
+    const explicit = text.match(/\b([a-z0-9._-]{3,})\s+lora\b/i);
+    if (explicit?.[1]) return explicit[1];
+    const withMatch = text.match(/\bwith\s+([a-z0-9._ -]{3,40})\b/i);
+    if (withMatch?.[1]) {
+      const cleaned = withMatch[1]
+        .replace(/\bz-?image\b/gi, '')
+        .replace(/\band\b/gi, '')
+        .trim();
+      if (cleaned.length >= 3) return cleaned;
+    }
+    if (/\bhelene\b/i.test(text)) return 'helene';
+    return '';
+  };
+
+  const generateImageInChat = async (text: string) => {
+    const loraHint = extractLoraHint(text);
+    const prompt = text
+      .replace(/\bz-?image\b/gi, '')
+      .replace(/\b(please\s+)?(generate|create|make|lag|skap)(\s+me)?\b/gi, '')
+      .replace(/\b(an?|et)\s+(image|bilde|photo|picture)\b/gi, '')
+      .replace(/\b(with|med)\s+[a-z0-9._ -]{3,40}\s+lora\b/gi, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim() || 'highly detailed cinematic portrait, realistic skin, dynamic light, sharp focus';
+
+    let resolvedLora = '';
+    if (loraHint) {
+      try {
+        const loraRes = await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.LORA_LIST}`);
+        const loraData = await loraRes.json();
+        const loras = Array.isArray(loraData?.loras) ? loraData.loras.map((v: unknown) => String(v)) : [];
+        resolvedLora =
+          loras.find((name: string) => name.toLowerCase() === loraHint.toLowerCase()) ||
+          loras.find((name: string) => name.toLowerCase().includes(loraHint.toLowerCase())) ||
+          '';
+      } catch {
+        // best-effort only
+      }
+    }
+
+    const params: Record<string, unknown> = {
+      prompt,
+      negative: 'low quality, blurry, watermark, text artifact',
+      width: 832,
+      height: 1216,
+      seed: Math.floor(Math.random() * 10_000_000_000),
+      steps: 28,
+      cfg: 4.5,
+      client_id: `fedda_chat_${Date.now()}`,
+    };
+    if (resolvedLora) {
+      params.loras = [{ name: resolvedLora, strength: 1 }];
+    }
+
+    const runRes = await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.GENERATE}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ workflow_id: 'z-image', params }),
+    });
+    const runData = await runRes.json();
+    if (!runRes.ok || !runData?.success || !runData?.prompt_id) {
+      throw new Error(runData?.detail || runData?.error || 'Z-Image generation failed');
+    }
+
+    const promptId = String(runData.prompt_id);
+    const startedAt = Date.now();
+    while (Date.now() - startedAt < 3 * 60 * 1000) {
+      const statusRes = await fetch(`${BACKEND_API.BASE_URL}${BACKEND_API.ENDPOINTS.GENERATE_STATUS}/${encodeURIComponent(promptId)}`);
+      const statusData = await statusRes.json();
+      if (!statusRes.ok || !statusData?.success) {
+        throw new Error(statusData?.detail || statusData?.error || 'Failed to read generation status');
+      }
+
+      const status = String(statusData.status || '');
+      if (status === 'completed') {
+        const images = Array.isArray(statusData.images)
+          ? statusData.images
+              .map((img: unknown) => {
+                const cast = img as { filename?: string; subfolder?: string; type?: string };
+                if (!cast?.filename) return '';
+                const type = cast.type || 'output';
+                const subfolder = cast.subfolder || '';
+                return `/comfy/view?filename=${encodeURIComponent(cast.filename)}&subfolder=${encodeURIComponent(subfolder)}&type=${encodeURIComponent(type)}`;
+              })
+              .filter((url: string) => url.length > 0)
+          : [];
+        if (images.length === 0) {
+          throw new Error('Generation completed, but no images were returned.');
+        }
+        return { images, usedLora: resolvedLora };
+      }
+
+      if (status === 'failed' || status === 'error') {
+        throw new Error(String(statusData?.error || 'Generation failed'));
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 1400));
+    }
+
+    throw new Error('Generation timed out.');
+  };
+
   const approveAgentActions = async (approveAll: boolean, actionIds?: number[]) => {
     if (!currentRun) return;
     setAgentBusy(true);
@@ -798,6 +908,15 @@ export const AgentChatPage = () => {
     setMessages((prev) => [...prev, userMsg]);
 
     try {
+      if (isImageGenerationIntent(text)) {
+        const { images, usedLora } = await generateImageInChat(text);
+        const assistantText = usedLora
+          ? `Done. Generated with Z-Image and LoRA: ${usedLora}`
+          : 'Done. Generated with Z-Image.';
+        setMessages((prev) => [...prev, { role: 'assistant', content: assistantText, images }]);
+        return;
+      }
+
       if (agentEnabled) {
         const run = await runAgentTask(text);
         const pendingCount = run.actions.filter((a) => a.status === 'pending_approval').length;
@@ -1034,12 +1153,6 @@ export const AgentChatPage = () => {
             Auto Voice
           </button>
           <button
-            onClick={() => setPanelOpen((v) => !v)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 text-xs text-slate-300 bg-white/[0.02]"
-          >
-            Chat Settings
-          </button>
-          <button
             onClick={resetSession}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 text-xs text-slate-300 bg-white/[0.02]"
           >
@@ -1057,7 +1170,7 @@ export const AgentChatPage = () => {
         </div>
       </div>
 
-      <div className="flex-1 min-h-0 grid grid-cols-1 xl:grid-cols-[1fr_300px] gap-4">
+      <div className="flex-1 min-h-0 grid grid-cols-1 gap-4">
         <section className="min-h-0 flex flex-col rounded-2xl border border-white/10 bg-black/30 overflow-hidden">
           {(!localReady || !backendOnline) && (
             <div className="border-b border-amber-300/20 bg-amber-500/5 p-3 text-xs text-amber-100 flex flex-col gap-2">
@@ -1117,6 +1230,21 @@ export const AgentChatPage = () => {
                     : 'bg-white/[0.03] border-white/10 text-slate-100'
                 }`}>
                   <p className="whitespace-pre-wrap">{msg.content}</p>
+                  {Array.isArray(msg.images) && msg.images.length > 0 && (
+                    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {msg.images.map((imageUrl, imageIdx) => (
+                        <a
+                          key={`${idx}-img-${imageIdx}`}
+                          href={imageUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block rounded-lg overflow-hidden border border-white/15 bg-black/30"
+                        >
+                          <img src={imageUrl} alt={`Generated ${imageIdx + 1}`} className="w-full h-auto object-cover" />
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 {msg.role === 'assistant' && (
                   <button
@@ -1176,7 +1304,7 @@ export const AgentChatPage = () => {
           )}
         </section>
 
-        <aside className={`rounded-2xl border border-white/10 bg-black/25 p-4 overflow-y-auto custom-scrollbar ${panelOpen ? 'block' : 'hidden xl:block'}`}>
+        <aside className="hidden rounded-2xl border border-white/10 bg-black/25 p-4 overflow-y-auto custom-scrollbar">
           <h3 className="text-xs uppercase tracking-[0.16em] text-slate-400 mb-3">Chat Settings</h3>
 
           <label className="block text-[11px] text-slate-400 mb-1">Chat Model</label>
