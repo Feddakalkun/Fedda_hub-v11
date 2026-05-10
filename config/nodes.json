@@ -42,6 +42,12 @@
     "note": "ShowText|pysssss — debug display, workflow utilities"
   },
   {
+    "name": "ComfyLiterals",
+    "url": "https://github.com/m1kep/ComfyLiterals.git",
+    "folder": "ComfyLiterals",
+    "note": "Literal text/string nodes (String Literal / Text Concatenate helpers)"
+  },
+  {
     "name": "ComfyUI-Studio-nodes",
     "url": "https://github.com/comfyuistudio/ComfyUI-Studio-nodes.git",
     "folder": "ComfyUI-Studio-nodes",

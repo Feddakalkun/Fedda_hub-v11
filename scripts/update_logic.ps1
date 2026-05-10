@@ -204,20 +204,22 @@ foreach ($Node in $NodesConfig) {
     if (-not (Test-Path $NodeDir_Check)) { $HasMissing = $true; break }
 }
 
-# Always force-update nodes that ship new model architectures regularly
-$CriticalNodes = @("ComfyUI-LTXVideo", "RES4LYF", "Nvidia_RTX_Nodes_ComfyUI", "ComfyUI-KJNodes")
-foreach ($CritNode in $CriticalNodes) {
-    $CritDir = Join-Path $CustomNodesDir $CritNode
-    if (Test-Path $CritDir) {
-        try {
-            Set-Location $CritDir
-            $ErrorActionPreference = "Continue"
-            & $GitExe pull 2>&1 | Out-Null
-            $ErrorActionPreference = "Stop"
-            Set-Location $RootPath
-            Sync-NodeSubmodules -NodeDir $CritDir
-        } catch {
-            Set-Location $RootPath
+# Only force-update critical nodes during a full node refresh.
+if ($NeedNodeUpdate) {
+    $CriticalNodes = @("ComfyUI-LTXVideo", "RES4LYF", "Nvidia_RTX_Nodes_ComfyUI", "ComfyUI-KJNodes")
+    foreach ($CritNode in $CriticalNodes) {
+        $CritDir = Join-Path $CustomNodesDir $CritNode
+        if (Test-Path $CritDir) {
+            try {
+                Set-Location $CritDir
+                $ErrorActionPreference = "Continue"
+                & $GitExe pull 2>&1 | Out-Null
+                $ErrorActionPreference = "Stop"
+                Set-Location $RootPath
+                Sync-NodeSubmodules -NodeDir $CritDir
+            } catch {
+                Set-Location $RootPath
+            }
         }
     }
 }
