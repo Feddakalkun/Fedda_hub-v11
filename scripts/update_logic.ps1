@@ -224,6 +224,22 @@ if ($NeedNodeUpdate) {
     }
 }
 
+function Install-FilteredRequirements {
+    param([string]$NodeDir)
+    $ReqFile = Join-Path $NodeDir "requirements.txt"
+    if (-not (Test-Path $ReqFile)) { return }
+    $SkipPkgs = @('^\s*insightface','^\s*byaldi','^\s*nano-graphrag','^\s*kaleido','^\s*qwen-vl-utils','^\s*fastparquet')
+    $ReqContent = Get-Content $ReqFile
+    $Filtered = $ReqContent
+    foreach ($p in $SkipPkgs) { $Filtered = $Filtered | Where-Object { $_ -notmatch $p } }
+    $TmpReq = Join-Path $NodeDir "_req_filtered.txt"
+    Set-Content -Path $TmpReq -Value $Filtered
+    $ErrorActionPreference = "Continue"
+    & $PyExe -m pip install -r "$TmpReq" --no-warn-script-location 2>&1 | Out-Null
+    $ErrorActionPreference = "Stop"
+    Remove-Item $TmpReq -Force -ErrorAction SilentlyContinue
+}
+
 # Always remove known unstable nodes unless explicitly allowed.
 if (-not $AllowUnstableNodes) {
     foreach ($UnstableFolder in $UnstableNodeFolders) {
@@ -281,20 +297,8 @@ if ($NeedNodeUpdate -or $HasMissing) {
                     Write-Host "  [$($Node.name)] Installed OK" -ForegroundColor Green
                     Sync-NodeSubmodules -NodeDir $NodeDir_Install
 
-                    $ReqFile = Join-Path $NodeDir_Install "requirements.txt"
-                    if (Test-Path $ReqFile) {
-                        Write-Host "  [$($Node.name)] Installing dependencies..." -ForegroundColor Gray
-                        $SkipPkgs = @('^\s*insightface','^\s*byaldi','^\s*nano-graphrag','^\s*kaleido','^\s*qwen-vl-utils','^\s*fastparquet')
-                        $ReqContent = Get-Content $ReqFile
-                        $Filtered = $ReqContent
-                        foreach ($p in $SkipPkgs) { $Filtered = $Filtered | Where-Object { $_ -notmatch $p } }
-                        $TmpReq = Join-Path $NodeDir_Install "_req_filtered.txt"
-                        Set-Content -Path $TmpReq -Value $Filtered
-                        $ErrorActionPreference = "Continue"
-                        & $PyExe -m pip install -r "$TmpReq" --no-warn-script-location 2>&1 | Out-Null
-                        $ErrorActionPreference = "Stop"
-                        Remove-Item $TmpReq -Force -ErrorAction SilentlyContinue
-                    }
+                    Write-Host "  [$($Node.name)] Installing dependencies..." -ForegroundColor Gray
+                    Install-FilteredRequirements -NodeDir $NodeDir_Install
                 } else {
                     Write-Host "  [$($Node.name)] Clone failed!" -ForegroundColor Red
                     $FailedCount++
@@ -323,19 +327,7 @@ if ($NeedNodeUpdate -or $HasMissing) {
                 Set-Location $RootPath
             }
 
-            $ReqFile = Join-Path $NodeDir_Install "requirements.txt"
-            if (Test-Path $ReqFile) {
-                $SkipPkgs = @('^\s*insightface','^\s*byaldi','^\s*nano-graphrag','^\s*kaleido','^\s*qwen-vl-utils','^\s*fastparquet')
-                $ReqContent = Get-Content $ReqFile
-                $Filtered = $ReqContent
-                foreach ($p in $SkipPkgs) { $Filtered = $Filtered | Where-Object { $_ -notmatch $p } }
-                $TmpReq = Join-Path $NodeDir_Install "_req_filtered.txt"
-                Set-Content -Path $TmpReq -Value $Filtered
-                $ErrorActionPreference = "Continue"
-                & $PyExe -m pip install -r "$TmpReq" --no-warn-script-location 2>&1 | Out-Null
-                $ErrorActionPreference = "Stop"
-                Remove-Item $TmpReq -Force -ErrorAction SilentlyContinue
-            }
+            Install-FilteredRequirements -NodeDir $NodeDir_Install
         }
         else {
             $SkippedCount++
@@ -355,6 +347,26 @@ if ($NeedNodeUpdate -or $HasMissing) {
     Write-Host "`n  Summary: $($Parts -join ', ')" -ForegroundColor Cyan
 } else {
     Write-Host "  No missing nodes found. Skipping node sync." -ForegroundColor Green
+}
+
+# Ensure key utility node dependencies are installed even in SMART missing-only mode.
+# This avoids "installed folder but node not loaded" issues for core workflow nodes.
+$EnsureNodeDeps = @(
+    "was-node-suite-comfyui",        # Text Concatenate
+    "ComfyUI-Custom-Scripts",        # text utility fallbacks
+    "ComfyLiterals",                 # String Literal
+    "ComfyUI-Styles_CSV_Loader",     # Load Styles CSV
+    "ComfyUI-qwenmultiangle"         # QwenMultiangleCameraNode
+)
+foreach ($NodeFolder in $EnsureNodeDeps) {
+    $NodeDir = Join-Path $CustomNodesDir $NodeFolder
+    if (Test-Path $NodeDir) {
+        try {
+            Install-FilteredRequirements -NodeDir $NodeDir
+        } catch {
+            Write-Host "  [WARNING] Could not sync requirements for ${NodeFolder}: $_" -ForegroundColor Yellow
+        }
+    }
 }
 
 # ============================================================================
