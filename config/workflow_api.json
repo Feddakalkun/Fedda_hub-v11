@@ -418,6 +418,43 @@
       }
     }
   },
+  "flux2klein-txt2img9b": {
+    "name": "FLUX2-KLEIN Txt2Img 9B",
+    "filename": "fluxklein/FLUX-2-klein-9b-txt2img.json",
+    "description": "FLUX2-KLEIN txt2img workflow.",
+    "inputs": {
+      "prompt": {
+        "node_id": "180",
+        "type": "string",
+        "label": "Prompt",
+        "widget_index": 0
+      },
+      "width": {
+        "node_id": "205",
+        "type": "number",
+        "label": "Width",
+        "widget_index": 0
+      },
+      "height": {
+        "node_id": "205",
+        "type": "number",
+        "label": "Height",
+        "widget_index": 1
+      },
+      "steps": {
+        "node_id": "205",
+        "type": "number",
+        "label": "Steps",
+        "widget_index": 2
+      },
+      "seed": {
+        "node_id": "192",
+        "type": "number",
+        "label": "Seed",
+        "widget_index": 0
+      }
+    }
+  },
   "qwen-multi-angles": {
     "name": "Qwen Multi Angles",
     "filename": "qwen/qwen-multi-angles.json",

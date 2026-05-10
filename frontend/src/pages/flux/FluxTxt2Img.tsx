@@ -6,7 +6,7 @@ export const FluxTxt2Img = () => {
   return (
     <Txt2ImgPage
       storageKey="flux_txt2img"
-      workflowId="z-image"
+      workflowId="flux2klein-txt2img9b"
       familyLabel="FLUX2-KLEIN"
       promptContext="zimage"
       accent="violet"
