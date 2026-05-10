@@ -317,11 +317,24 @@ body {
 }
 
 .v11-square-card {
-  aspect-ratio: 1 / 1;
-  min-height: 260px;
+  aspect-ratio: 3 / 4;
+  min-height: 320px;
   padding: 14px;
   border-radius: 14px;
   isolation: isolate;
+}
+
+.v11-square-card .v11-card-bg {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transform: none;
+  filter: saturate(1.06) contrast(1.02);
+}
+
+.v11-square-card:hover .v11-card-bg {
+  transform: none;
+  filter: saturate(1.1) contrast(1.05);
 }
 
 .v11-card-bg {
@@ -422,6 +435,6 @@ body {
 
 @media (max-width: 900px) {
   .v11-square-card {
-    min-height: 210px;
+    min-height: 260px;
   }
 }
