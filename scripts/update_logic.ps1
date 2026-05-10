@@ -438,19 +438,22 @@ if ($EnableNvidiaVfxInstall) {
     Write-Host "  Skipping nvidia-vfx install (set FEDDA_INSTALL_NVIDIA_VFX=1 to enable)." -ForegroundColor DarkGray
 }
 
-# Florence2 requires transformers >= 4.45
-$TransformersVersion = & $PyExe -c "import transformers; print(transformers.__version__)" 2>$null
-$NeedsTransformersUpgrade = $true
-if ($TransformersVersion -match '^(\d+)\.(\d+)') {
-    $Major = [int]$Matches[1]; $Minor = [int]$Matches[2]
-    if ($Major -gt 4 -or ($Major -eq 4 -and $Minor -ge 45)) { $NeedsTransformersUpgrade = $false }
-}
-if ($NeedsTransformersUpgrade) {
-    Write-Host "  Upgrading transformers (Florence2 fix)..." -ForegroundColor White
-    & $PyExe -m pip install --upgrade transformers --no-warn-script-location 2>&1 | Out-Null
-    Write-Host "  transformers upgraded OK" -ForegroundColor Green
-} else {
-    Write-Host "  transformers OK ($TransformersVersion)" -ForegroundColor Green
+# Keep model-runtime stack compatible for Florence2/LTX/Qwen nodes.
+Write-Host "  Enforcing transformers/hub/safetensors compatibility..." -ForegroundColor White
+try {
+    $ErrorActionPreference = "Continue"
+    & $PyExe -m pip install --upgrade --force-reinstall "transformers>=4.57.6,<5" "huggingface-hub>=0.34.0,<1.0" "safetensors>=0.8.0rc0,<1.0" --no-warn-script-location 2>&1 | Out-Null
+    $CompatExit = $LASTEXITCODE
+    $ErrorActionPreference = "Stop"
+    if ($CompatExit -eq 0) {
+        $TransformersVersion = & $PyExe -c "import transformers; print(transformers.__version__)" 2>$null
+        Write-Host "  transformers compatibility OK ($TransformersVersion)" -ForegroundColor Green
+    } else {
+        Write-Host "  [WARNING] transformers compatibility pin returned code $CompatExit (non-fatal)." -ForegroundColor Yellow
+    }
+} catch {
+    $ErrorActionPreference = "Stop"
+    Write-Host "  [WARNING] transformers compatibility pin failed (non-fatal): $_" -ForegroundColor Yellow
 }
 
 # ============================================================================

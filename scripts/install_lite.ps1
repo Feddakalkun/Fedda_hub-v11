@@ -513,9 +513,10 @@ function Install-TorchStack {
     param(
         [string[]]$Indexes
     )
+    $torchSpec = "torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0"
     foreach ($idx in $Indexes) {
         Write-Step "Trying torch stack from $idx ..."
-        & $VenvPy -m pip install --upgrade --force-reinstall torch torchvision torchaudio --index-url $idx --no-warn-script-location
+        & $VenvPy -m pip install --upgrade --force-reinstall $torchSpec --index-url $idx --no-warn-script-location
         if ($LASTEXITCODE -eq 0) {
             Write-Step "Torch stack installed from $idx." "Green"
             return @{ ok = $true; index = $idx }
@@ -555,38 +556,32 @@ Write-Header "STEP 3/7 - PyTorch + Dependencies"
 
 $GpuProfile = Get-NvidiaGpuProfile
 Write-Step "GPU profile: $($GpuProfile.Name) | Driver $($GpuProfile.Driver) | VRAM $([math]::Round($GpuProfile.VramMB / 1024,1)) GB"
-
-if ($GpuProfile.Series -eq "60" -or $GpuProfile.Series -eq "50") {
-    Write-Step "RTX 50/60-series detected. Using newer CUDA wheel priority."
-    $torchResult = Install-TorchStack -Indexes @(
-        "https://download.pytorch.org/whl/cu128",
-        "https://download.pytorch.org/whl/cu126",
-        "https://download.pytorch.org/whl/cu124",
-        "https://download.pytorch.org/whl/cu121"
-    )
-} else {
-    $torchResult = Install-TorchStack -Indexes @(
-        "https://download.pytorch.org/whl/cu124",
-        "https://download.pytorch.org/whl/cu121"
-    )
-}
+$torchResult = Install-TorchStack -Indexes @(
+    "https://download.pytorch.org/whl/cu124",
+    "https://download.pytorch.org/whl/cu121"
+)
 
 if (-not $torchResult.ok) {
     throw "PyTorch CUDA installation failed for this system."
 }
 
-Write-Step "Installing xformers (optional performance package)..."
-& $VenvPy -m pip install xformers --index-url https://download.pytorch.org/whl/cu124 --no-warn-script-location
-if ($LASTEXITCODE -ne 0) {
-    Write-Step "xformers install failed on cu124, trying default wheel..." "Yellow"
-    & $VenvPy -m pip install xformers --no-warn-script-location
-    if ($LASTEXITCODE -ne 0) {
-        Write-Step "xformers unavailable for this GPU/driver combo. Continuing with PyTorch SDPA fallback." "Yellow"
-    } else {
-        Write-Step "xformers installed via fallback wheel." "Green"
-    }
+if ($GpuProfile.Series -eq "50" -or $GpuProfile.Series -eq "60") {
+    Write-Step "RTX 50/60-series detected. Forcing native SDPA (removing xformers if present)..."
+    & $VenvPy -m pip uninstall -y xformers --no-warn-script-location 2>&1 | Out-Null
 } else {
-    Write-Step "xformers installed (cu124)." "Green"
+    Write-Step "Installing xformers (optional performance package)..."
+    & $VenvPy -m pip install xformers==0.0.29.post3 --index-url https://download.pytorch.org/whl/cu124 --no-warn-script-location
+    if ($LASTEXITCODE -ne 0) {
+        Write-Step "xformers install failed on cu124, trying default wheel..." "Yellow"
+        & $VenvPy -m pip install xformers==0.0.29.post3 --no-warn-script-location
+        if ($LASTEXITCODE -ne 0) {
+            Write-Step "xformers unavailable for this GPU/driver combo. Continuing with PyTorch SDPA fallback." "Yellow"
+        } else {
+            Write-Step "xformers installed via fallback wheel." "Green"
+        }
+    } else {
+        Write-Step "xformers installed (cu124)." "Green"
+    }
 }
 
 Write-Step "Installing ComfyUI requirements..."
@@ -609,8 +604,8 @@ Venv-Pip "install insightface --prefer-binary --no-build-isolation"
 # Comprehensive deps (same as portable)
 Write-Step "Installing comprehensive dependencies..."
 $Deps = @(
-    "accelerate", "transformers", "diffusers", "safetensors",
-    "huggingface-hub", "onnxruntime-gpu", "onnxruntime", "omegaconf",
+    "accelerate", "transformers>=4.57.6,<5", "diffusers", "safetensors>=0.8.0rc0,<1.0",
+    "huggingface-hub>=0.34.0,<1.0", "onnxruntime-gpu", "onnxruntime", "omegaconf",
     "aiohttp", "aiohttp-sse",
     "pytube", "yt-dlp", "moviepy", "youtube-transcript-api",
     "numba",
@@ -627,6 +622,10 @@ $Deps = @(
     "browser-cookie3", "edge-tts"
 )
 Venv-Pip "install $($Deps -join ' ')"
+
+# Hard pin compatibility for the transformers/hub stack to avoid drift.
+Write-Step "Enforcing compatibility pins (transformers/huggingface-hub/safetensors)..."
+Venv-Pip "install --upgrade --force-reinstall `"transformers>=4.57.6,<5`" `"huggingface-hub>=0.34.0,<1.0`" `"safetensors>=0.8.0rc0,<1.0`""
 
 # RTX Video Super Resolution Python dependency (opt-in, best effort).
 if ($EnableNvidiaVfxInstall) {

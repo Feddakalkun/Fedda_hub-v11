@@ -681,6 +681,7 @@ function Run-Pip {
     if ($Process.ExitCode -ne 0) {
         Write-Log "WARNING: Pip command failed: $Arguments"
     }
+    return $Process.ExitCode
 }
 
 function Run-Git {
@@ -785,23 +786,28 @@ Run-Pip "install --upgrade pip wheel setuptools"
 
 Write-Log "Installing PyTorch (CUDA 12.4)..."
 # CUDA 12.4 has latest PyTorch builds and supports GPUs from GTX 1060 to RTX 60xx
-Run-Pip "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124"
-if ($LASTEXITCODE -ne 0) {
+$TorchExit = Run-Pip "install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124"
+if ($TorchExit -ne 0) {
     Write-Log "CUDA 12.4 torch failed, trying CUDA 12.1 fallback..."
-    Run-Pip "install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121"
-    if ($LASTEXITCODE -ne 0) {
+    $TorchExit = Run-Pip "install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu121"
+    if ($TorchExit -ne 0) {
         Write-Log "ERROR: CUDA torch install failed on both cu124 and cu121."
         throw "PyTorch CUDA install failed"
     }
 }
 
-Write-Log "Installing Xformers..."
-Run-Pip "install xformers --index-url https://download.pytorch.org/whl/cu124"
-if ($LASTEXITCODE -ne 0) {
-    Write-Log "xformers cu124 wheel failed, trying generic xformers wheel..."
-    Run-Pip "install xformers"
-    if ($LASTEXITCODE -ne 0) {
-        Write-Log "WARNING: xformers unavailable for this GPU/driver combo. Continuing with SDPA fallback."
+if ($GPUName -match "RTX 50\d\d" -or $GPUName -match "RTX 60\d\d") {
+    Write-Log "RTX 50/60 detected. Enforcing no-xformers path (stability hardening)."
+    $null = Run-Pip "uninstall -y xformers"
+} else {
+    Write-Log "Installing Xformers (pinned)..."
+    $XformersExit = Run-Pip "install xformers==0.0.29.post3 --index-url https://download.pytorch.org/whl/cu124"
+    if ($XformersExit -ne 0) {
+        Write-Log "xformers cu124 wheel failed, trying generic pinned xformers..."
+        $XformersExit = Run-Pip "install xformers==0.0.29.post3"
+        if ($XformersExit -ne 0) {
+            Write-Log "WARNING: xformers unavailable for this GPU/driver combo. Continuing with SDPA fallback."
+        }
     }
 }
 
@@ -944,8 +950,8 @@ Run-Pip "install insightface --prefer-binary --no-build-isolation"
 
 # 7.2 Main Dependencies
 $Deps = @(
-    "accelerate", "transformers", "diffusers", "safetensors",
-    "huggingface-hub", "onnxruntime-gpu", "onnxruntime", "omegaconf",
+    "accelerate", "transformers>=4.57.6,<5", "diffusers", "safetensors>=0.8.0rc0,<1.0",
+    "huggingface-hub>=0.34.0,<1.0", "onnxruntime-gpu", "onnxruntime", "omegaconf",
     "aiohttp", "aiohttp-sse",
     "pytube", "yt-dlp", "moviepy", "youtube-transcript-api",
     "numba",
@@ -962,6 +968,8 @@ $Deps = @(
     "browser-cookie3", "edge-tts"
 )
 Run-Pip "install $($Deps -join ' ')"
+Write-Log "Enforcing transformer/hub/safetensors compatibility pins..."
+$null = Run-Pip "install --upgrade --force-reinstall `"transformers>=4.57.6,<5`" `"huggingface-hub>=0.34.0,<1.0`" `"safetensors>=0.8.0rc0,<1.0`""
 
 # RTX Video Super Resolution Python dependency (opt-in, best effort).
 if ($EnableNvidiaVfxInstall) {
