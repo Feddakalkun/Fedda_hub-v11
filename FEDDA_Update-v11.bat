@@ -12,11 +12,13 @@ set "TARGET_DIR=%SCRIPT_DIR%\comfyuifeddafront"
 set "ROOT_WRAP_DIR=%SCRIPT_DIR%"
 set "TARGET_NAME=FEDDA v11"
 set "FORCE_NODE_ARG="
+set "FORCE_CORE_ARG="
 set "NO_STASH=0"
 set "AUTO_STASHED=0"
 set "AUTO_FULL_NODE_UPDATE=0"
 set "PS_EXE="
 if /I "%~1"=="--full-nodes" set "FORCE_NODE_ARG=-ForceNodeUpdate"
+if /I "%~1"=="--full-core" set "FORCE_CORE_ARG=-ForceCoreUpdate"
 if /I "%~1"=="--no-stash" set "NO_STASH=1"
 where pwsh >nul 2>&1 && set "PS_EXE=pwsh"
 if not defined PS_EXE set "PS_EXE=powershell"
@@ -39,6 +41,12 @@ if defined FORCE_NODE_ARG (
 ) else (
     echo    Node mode: SMART ^(missing nodes only, faster^)
     echo               tip: use --full-nodes for full node refresh
+)
+if defined FORCE_CORE_ARG (
+    echo    Core mode: FULL ^(force ComfyUI core update^)
+) else (
+    echo    Core mode: SMART ^(skip if updated within 7d^)
+    echo               tip: use --full-core to force core refresh
 )
 echo.
 
@@ -198,7 +206,7 @@ if defined OLD_HEAD if defined NEW_HEAD (
 
 echo  [INFO] Running post-update repair/sync...
 if exist "scripts\update_logic.ps1" (
-    %PS_EXE% -ExecutionPolicy Bypass -File ".\scripts\update_logic.ps1" -SilentMode %FORCE_NODE_ARG%
+    %PS_EXE% -ExecutionPolicy Bypass -File ".\scripts\update_logic.ps1" -SilentMode %FORCE_NODE_ARG% %FORCE_CORE_ARG%
     if %errorlevel% neq 0 (
         echo  [WARN] update_logic.ps1 returned non-zero.
     ) else (

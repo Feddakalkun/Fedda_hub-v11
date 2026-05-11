@@ -4,7 +4,8 @@
 
 param(
     [switch]$SilentMode,
-    [switch]$ForceNodeUpdate
+    [switch]$ForceNodeUpdate,
+    [switch]$ForceCoreUpdate
 )
 
 $ErrorActionPreference = "Stop"
@@ -26,6 +27,7 @@ $VenvPy     = Join-Path $RootPath "venv\Scripts\python.exe"
 $NodeEmbed  = Join-Path $RootPath "node_embeded\node.exe"
 $ComfyDir = Join-Path $RootPath "ComfyUI"
 $CustomNodesDir = Join-Path $ComfyDir "custom_nodes"
+$CoreUpdateMarker = Join-Path $RootPath ".last_comfy_core_update"
 
 # Detection order: venv = Lite (even if python_embeded also exists, since
 # Lite now embeds Python 3.11.9 but still creates a venv from it).
@@ -90,6 +92,10 @@ if (-not (Test-Path $ComfyDir)) {
     exit 1
 }
 
+# Optional toggles used by update flow:
+# - FEDDA_FORCE_COMFY_CORE_UPDATE=1 forces ComfyUI core update on every run.
+$ForceCoreFromEnv = (([string]$env:FEDDA_FORCE_COMFY_CORE_UPDATE).Trim() -eq "1")
+
 # Ensure predictable LoRA folder structure used by UI upload/import.
 $LoRADir = Join-Path $ComfyDir "models\loras"
 $LoRATargets = @(
@@ -115,21 +121,51 @@ foreach ($target in $LoRATargets) {
 # ============================================================================
 # 0. UPDATE COMFYUI CORE
 # ============================================================================
-Write-Host "`n[0/3] Updating ComfyUI core..." -ForegroundColor Yellow
-try {
-    Set-Location $ComfyDir
-    $ErrorActionPreference = "Continue"
-    # ComfyUI is installed at a pinned commit (detached HEAD), so we can't
-    # just `git pull`. Fetch latest master and reset hard to it instead.
-    & $GitExe fetch origin master 2>&1 | Out-Null
-    & $GitExe checkout master 2>&1 | Out-Null
-    & $GitExe reset --hard origin/master 2>&1 | Out-Null
-    $ErrorActionPreference = "Stop"
-    Set-Location $RootPath
-    Write-Host "  ComfyUI core updated to latest master." -ForegroundColor Green
-} catch {
-    Set-Location $RootPath
-    Write-Host "  [WARNING] ComfyUI core update failed (non-fatal): $_" -ForegroundColor Yellow
+Write-Host "`n[0/3] ComfyUI core..." -ForegroundColor Yellow
+$NeedCoreUpdate = $false
+$CoreReason = ""
+if ($ForceCoreUpdate -or $ForceCoreFromEnv) {
+    $NeedCoreUpdate = $true
+    $CoreReason = "forced"
+} elseif (Test-Path $CoreUpdateMarker) {
+    $LastCoreUpdate = (Get-Item $CoreUpdateMarker).LastWriteTime
+    $DaysSinceCore = ((Get-Date) - $LastCoreUpdate).TotalDays
+    if ($DaysSinceCore -ge 7) {
+        $NeedCoreUpdate = $true
+        $CoreReason = "older than 7d"
+    } else {
+        $DaysCoreAgo = [math]::Floor($DaysSinceCore)
+        Write-Host "  Skipping core update (last update ${DaysCoreAgo}d ago). Use --full-core to force." -ForegroundColor DarkGray
+    }
+} else {
+    $NeedCoreUpdate = $true
+    $CoreReason = "first run"
+}
+
+$CoreWasUpdated = $false
+if ($NeedCoreUpdate) {
+    Write-Host "  Updating ComfyUI core ($CoreReason)..." -ForegroundColor White
+    try {
+        Set-Location $ComfyDir
+        $ErrorActionPreference = "Continue"
+        $OldCoreHead = (& $GitExe rev-parse HEAD 2>$null)
+        & $GitExe fetch origin master 2>&1 | Out-Null
+        & $GitExe checkout master 2>&1 | Out-Null
+        & $GitExe reset --hard origin/master 2>&1 | Out-Null
+        $NewCoreHead = (& $GitExe rev-parse HEAD 2>$null)
+        $ErrorActionPreference = "Stop"
+        Set-Location $RootPath
+        if ($OldCoreHead -and $NewCoreHead -and ($OldCoreHead.Trim() -ne $NewCoreHead.Trim())) {
+            $CoreWasUpdated = $true
+            Write-Host "  ComfyUI core updated to latest master." -ForegroundColor Green
+        } else {
+            Write-Host "  ComfyUI core already current." -ForegroundColor Green
+        }
+        "Updated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" | Out-File $CoreUpdateMarker -Force
+    } catch {
+        Set-Location $RootPath
+        Write-Host "  [WARNING] ComfyUI core update failed (non-fatal): $_" -ForegroundColor Yellow
+    }
 }
 
 # ============================================================================
@@ -244,6 +280,19 @@ function Install-FilteredRequirements {
     & $PyExe -m pip install -r "$TmpReq" --no-warn-script-location 2>&1 | Out-Null
     $ErrorActionPreference = "Stop"
     Remove-Item $TmpReq -Force -ErrorAction SilentlyContinue
+}
+
+function Test-PackageVersion {
+    param(
+        [string]$Module,
+        [string]$ConstraintScript
+    )
+    try {
+        & $PyExe -c "import importlib.metadata as m; v=m.version('$Module'); assert ($ConstraintScript), v" 2>$null
+        return ($LASTEXITCODE -eq 0)
+    } catch {
+        return $false
+    }
 }
 
 # Always remove known unstable nodes unless explicitly allowed.
@@ -405,37 +454,51 @@ if (Test-Path $PatchSourceDir) {
 Write-Host "`n[1b/3] Patching Python dependencies..." -ForegroundColor Yellow
 
 # Ensure OpenCV is installed for video frame extraction
-Write-Host "  Ensuring opencv-python is installed..." -ForegroundColor White
+Write-Host "  Checking opencv-python..." -ForegroundColor White
+$OpenCvOk = $false
 try {
-    $ErrorActionPreference = "Continue"
-    & $PyExe -m pip install opencv-python --no-warn-script-location 2>&1 | Out-Null
-    $OpenCvExit = $LASTEXITCODE
-    $ErrorActionPreference = "Stop"
-    if ($OpenCvExit -eq 0) {
-        Write-Host "  opencv-python OK" -ForegroundColor Green
-    } else {
-        Write-Host "  [WARNING] opencv-python install returned code $OpenCvExit (non-fatal)." -ForegroundColor Yellow
+    & $PyExe -c "import cv2" 2>$null
+    $OpenCvOk = ($LASTEXITCODE -eq 0)
+} catch { $OpenCvOk = $false }
+if ($OpenCvOk) {
+    Write-Host "  opencv-python OK (already installed)" -ForegroundColor Green
+} else {
+    try {
+        $ErrorActionPreference = "Continue"
+        & $PyExe -m pip install opencv-python --no-warn-script-location 2>&1 | Out-Null
+        $OpenCvExit = $LASTEXITCODE
+        $ErrorActionPreference = "Stop"
+        if ($OpenCvExit -eq 0) {
+            Write-Host "  opencv-python installed." -ForegroundColor Green
+        } else {
+            Write-Host "  [WARNING] opencv-python install returned code $OpenCvExit (non-fatal)." -ForegroundColor Yellow
+        }
+    } catch {
+        $ErrorActionPreference = "Stop"
+        Write-Host "  [WARNING] opencv-python install failed (non-fatal): $_" -ForegroundColor Yellow
     }
-} catch {
-    $ErrorActionPreference = "Stop"
-    Write-Host "  [WARNING] opencv-python install failed (non-fatal): $_" -ForegroundColor Yellow
 }
 
 # Keep NumPy pinned to 1.x for ONNX Runtime / ControlNet Aux binary compatibility.
-Write-Host "  Enforcing NumPy < 2 for ONNX compatibility..." -ForegroundColor White
-try {
-    $ErrorActionPreference = "Continue"
-    & $PyExe -m pip install "numpy<2" --no-warn-script-location 2>&1 | Out-Null
-    $NumpyExit = $LASTEXITCODE
-    $ErrorActionPreference = "Stop"
-    if ($NumpyExit -eq 0) {
-        Write-Host "  numpy<2 OK" -ForegroundColor Green
-    } else {
-        Write-Host "  [WARNING] numpy pin returned code $NumpyExit (non-fatal)." -ForegroundColor Yellow
+Write-Host "  Checking NumPy < 2..." -ForegroundColor White
+$NumpyOk = Test-PackageVersion -Module "numpy" -ConstraintScript "int(v.split('.')[0]) -lt 2"
+if ($NumpyOk) {
+    Write-Host "  numpy<2 OK (already compatible)" -ForegroundColor Green
+} else {
+    try {
+        $ErrorActionPreference = "Continue"
+        & $PyExe -m pip install "numpy<2" --no-warn-script-location 2>&1 | Out-Null
+        $NumpyExit = $LASTEXITCODE
+        $ErrorActionPreference = "Stop"
+        if ($NumpyExit -eq 0) {
+            Write-Host "  numpy<2 fixed." -ForegroundColor Green
+        } else {
+            Write-Host "  [WARNING] numpy pin returned code $NumpyExit (non-fatal)." -ForegroundColor Yellow
+        }
+    } catch {
+        $ErrorActionPreference = "Stop"
+        Write-Host "  [WARNING] numpy pin failed (non-fatal): $_" -ForegroundColor Yellow
     }
-} catch {
-    $ErrorActionPreference = "Stop"
-    Write-Host "  [WARNING] numpy pin failed (non-fatal): $_" -ForegroundColor Yellow
 }
 
 # RTX Video Super Resolution node requires the nvidia-vfx Python package.
@@ -460,21 +523,29 @@ if ($EnableNvidiaVfxInstall) {
 }
 
 # Keep model-runtime stack compatible for Florence2/LTX/Qwen nodes.
-Write-Host "  Enforcing transformers/hub/safetensors compatibility..." -ForegroundColor White
-try {
-    $ErrorActionPreference = "Continue"
-    & $PyExe -m pip install --upgrade --force-reinstall "transformers>=4.57.6,<5" "huggingface-hub>=0.34.0,<1.0" "safetensors>=0.8.0rc0,<1.0" --no-warn-script-location 2>&1 | Out-Null
-    $CompatExit = $LASTEXITCODE
-    $ErrorActionPreference = "Stop"
-    if ($CompatExit -eq 0) {
-        $TransformersVersion = & $PyExe -c "import transformers; print(transformers.__version__)" 2>$null
-        Write-Host "  transformers compatibility OK ($TransformersVersion)" -ForegroundColor Green
-    } else {
-        Write-Host "  [WARNING] transformers compatibility pin returned code $CompatExit (non-fatal)." -ForegroundColor Yellow
+Write-Host "  Checking transformers/hub/safetensors compatibility..." -ForegroundColor White
+$TfmOk = Test-PackageVersion -Module "transformers" -ConstraintScript "tuple(int(x) for x in v.split('.')[:2]) -ge (4,57) -and int(v.split('.')[0]) -lt 5"
+$HubOk = Test-PackageVersion -Module "huggingface-hub" -ConstraintScript "int(v.split('.')[0]) -lt 1"
+$SafetensorsOk = Test-PackageVersion -Module "safetensors" -ConstraintScript "int(v.split('.')[0]) -lt 1"
+if ($TfmOk -and $HubOk -and $SafetensorsOk) {
+    $TransformersVersion = & $PyExe -c "import transformers; print(transformers.__version__)" 2>$null
+    Write-Host "  transformers compatibility OK ($TransformersVersion) [already compatible]" -ForegroundColor Green
+} else {
+    try {
+        $ErrorActionPreference = "Continue"
+        & $PyExe -m pip install --upgrade --force-reinstall "transformers>=4.57.6,<5" "huggingface-hub>=0.34.0,<1.0" "safetensors>=0.8.0rc0,<1.0" --no-warn-script-location 2>&1 | Out-Null
+        $CompatExit = $LASTEXITCODE
+        $ErrorActionPreference = "Stop"
+        if ($CompatExit -eq 0) {
+            $TransformersVersion = & $PyExe -c "import transformers; print(transformers.__version__)" 2>$null
+            Write-Host "  transformers compatibility fixed ($TransformersVersion)" -ForegroundColor Green
+        } else {
+            Write-Host "  [WARNING] transformers compatibility pin returned code $CompatExit (non-fatal)." -ForegroundColor Yellow
+        }
+    } catch {
+        $ErrorActionPreference = "Stop"
+        Write-Host "  [WARNING] transformers compatibility pin failed (non-fatal): $_" -ForegroundColor Yellow
     }
-} catch {
-    $ErrorActionPreference = "Stop"
-    Write-Host "  [WARNING] transformers compatibility pin failed (non-fatal): $_" -ForegroundColor Yellow
 }
 
 # ============================================================================
@@ -528,11 +599,21 @@ if (Test-Path $FrontendDir) {
 Write-Host "`n[2a/3] Syncing ComfyUI requirements..." -ForegroundColor Yellow
 $ComfyRequirements = Join-Path $ComfyDir "requirements.txt"
 if (Test-Path $ComfyRequirements) {
-    try {
-        & $PyExe -m pip install -r "$ComfyRequirements" --no-warn-script-location 2>&1 | Out-Null
-        Write-Host "  ComfyUI requirements synced." -ForegroundColor Green
-    } catch {
-        Write-Host "  [WARNING] ComfyUI requirements sync failed (non-fatal): $_" -ForegroundColor Yellow
+    $ReqHashFile = Join-Path $RootPath ".last_comfy_requirements_hash"
+    $ReqHash = (Get-FileHash -Path $ComfyRequirements -Algorithm SHA256).Hash
+    $LastReqHash = ""
+    if (Test-Path $ReqHashFile) { $LastReqHash = (Get-Content -Path $ReqHashFile -Raw).Trim() }
+    $NeedReqSync = $CoreWasUpdated -or ($ReqHash -ne $LastReqHash)
+    if ($NeedReqSync) {
+        try {
+            & $PyExe -m pip install -r "$ComfyRequirements" --no-warn-script-location 2>&1 | Out-Null
+            $ReqHash | Out-File -FilePath $ReqHashFile -Force -Encoding ascii
+            Write-Host "  ComfyUI requirements synced." -ForegroundColor Green
+        } catch {
+            Write-Host "  [WARNING] ComfyUI requirements sync failed (non-fatal): $_" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  ComfyUI requirements unchanged; skipping pip sync." -ForegroundColor DarkGray
     }
 }
 
