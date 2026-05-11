@@ -169,9 +169,15 @@ $UpdatedCount = 0
 $SkippedCount = 0
 $FailedCount = 0
 
-# Known unstable/optional nodes that can crash startup on some installs.
+# Known unstable/optional nodes that can crash startup or fail import on some installs.
 # Can be overridden with: $env:FEDDA_ALLOW_UNSTABLE_NODES=1
-$UnstableNodeFolders = @("ComfyUI-F5-TTS")
+$UnstableNodeFolders = @(
+    "ComfyUI-F5-TTS",
+    "ComfyUI_Searge_LLM",
+    "ComfyUI_InstantID",
+    "ComfyUI-tbox",
+    "ComfyUI-Diffusers"
+)
 $AllowUnstableNodes = (([string]$env:FEDDA_ALLOW_UNSTABLE_NODES).Trim() -eq "1")
 
 # Optional toggles:

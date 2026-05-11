@@ -825,6 +825,23 @@ Write-Log "`n[ComfyUI 6/9] Installing Custom Nodes..."
 $NodesConfig = Get-Content (Join-Path $RootPath "config\nodes.json") | ConvertFrom-Json
 $CustomNodesDir = Join-Path $ComfyDir "custom_nodes"
 $InstallGguf = ($env:FEDDA_INSTALL_GGUF -eq "1")
+$AllowUnstableNodes = (([string]$env:FEDDA_ALLOW_UNSTABLE_NODES).Trim() -eq "1")
+$UnstableNodeFolders = @(
+    "ComfyUI-F5-TTS",
+    "ComfyUI_Searge_LLM",
+    "ComfyUI_InstantID",
+    "ComfyUI-tbox",
+    "ComfyUI-Diffusers"
+)
+
+if (-not $AllowUnstableNodes) {
+    foreach ($Folder in $UnstableNodeFolders) {
+        $P1 = Join-Path $CustomNodesDir $Folder
+        $P2 = Join-Path $CustomNodesDir ($Folder + ".disabled")
+        if (Test-Path $P1) { Remove-Item -Recurse -Force -LiteralPath $P1 -ErrorAction SilentlyContinue }
+        if (Test-Path $P2) { Remove-Item -Recurse -Force -LiteralPath $P2 -ErrorAction SilentlyContinue }
+    }
+}
 
 $InstalledCount = 0
 $SkippedCount = 0
@@ -833,6 +850,10 @@ $FailedCount = 0
 foreach ($Node in $NodesConfig) {
     if ($Node.folder -eq "ComfyUI-GGUF" -and -not $InstallGguf) {
         Write-Log "[$($Node.name)] - Optional GGUF pack skipped (set FEDDA_INSTALL_GGUF=1 to include)"
+        continue
+    }
+    if ((-not $AllowUnstableNodes) -and ($UnstableNodeFolders -contains [string]$Node.folder)) {
+        Write-Log "[$($Node.name)] - Optional unstable node skipped by default (set FEDDA_ALLOW_UNSTABLE_NODES=1 to include)"
         continue
     }
     # Skip local nodes (e.g., AutoModelFetcher)

@@ -655,6 +655,23 @@ $CustomNodesDir = Join-Path $ComfyDir "custom_nodes"
 if (-not (Test-Path $CustomNodesDir)) { New-Item -ItemType Directory -Path $CustomNodesDir | Out-Null }
 
 $Installed = 0; $Skipped = 0; $Failed = 0
+$AllowUnstableNodes = (([string]$env:FEDDA_ALLOW_UNSTABLE_NODES).Trim() -eq "1")
+$UnstableNodeFolders = @(
+    "ComfyUI-F5-TTS",
+    "ComfyUI_Searge_LLM",
+    "ComfyUI_InstantID",
+    "ComfyUI-tbox",
+    "ComfyUI-Diffusers"
+)
+
+if (-not $AllowUnstableNodes) {
+    foreach ($Folder in $UnstableNodeFolders) {
+        $P1 = Join-Path $CustomNodesDir $Folder
+        $P2 = Join-Path $CustomNodesDir ($Folder + ".disabled")
+        if (Test-Path $P1) { Remove-Item -Recurse -Force -LiteralPath $P1 -ErrorAction SilentlyContinue }
+        if (Test-Path $P2) { Remove-Item -Recurse -Force -LiteralPath $P2 -ErrorAction SilentlyContinue }
+    }
+}
 
 function Clone-NodeWithFallback {
     param(
@@ -697,6 +714,11 @@ function Clone-NodeWithFallback {
 foreach ($Node in $NodesConfig) {
     if ($Node.local -eq $true) {
         Write-Step "  [$($Node.name)] Local - skipped" "Gray"
+        continue
+    }
+    if ((-not $AllowUnstableNodes) -and ($UnstableNodeFolders -contains [string]$Node.folder)) {
+        Write-Step "  [$($Node.name)] Optional unstable node - skipped by default (set FEDDA_ALLOW_UNSTABLE_NODES=1 to include)" "DarkYellow"
+        $Skipped++
         continue
     }
 
