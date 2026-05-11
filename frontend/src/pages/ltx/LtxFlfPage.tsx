@@ -108,11 +108,7 @@ export const LtxFlfPage = () => {
   ) => {
     setUpl(true);
     try {
-      const form = new FormData();
-      form.append('file', file);
-      const res  = await fetch(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body: form });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.detail || 'Upload failed');
+      const data = await comfyService.uploadInputFile(file);
       setFn(data.filename);
       if (typeof data.view_url === 'string' && data.view_url.trim()) {
         setView(data.view_url);
@@ -124,6 +120,36 @@ export const LtxFlfPage = () => {
     } catch (err: any) { toast(err.message || 'Upload failed', 'error'); }
     finally { setUpl(false); }
   };
+
+  useEffect(() => {
+    const fallbackFirst = firstFilename
+      ? `/comfy/view?filename=${encodeURIComponent(firstFilename)}&type=input`
+      : null;
+    const fallbackLast = lastFilename
+      ? `/comfy/view?filename=${encodeURIComponent(lastFilename)}&type=input`
+      : null;
+
+    if (firstViewUrl?.startsWith('blob:')) {
+      URL.revokeObjectURL(firstViewUrl);
+      setFirstViewUrl(fallbackFirst);
+    } else if (!firstViewUrl && fallbackFirst) {
+      setFirstViewUrl(fallbackFirst);
+    }
+
+    if (lastViewUrl?.startsWith('blob:')) {
+      URL.revokeObjectURL(lastViewUrl);
+      setLastViewUrl(fallbackLast);
+    } else if (!lastViewUrl && fallbackLast) {
+      setLastViewUrl(fallbackLast);
+    }
+  }, [
+    firstFilename,
+    lastFilename,
+    firstViewUrl,
+    lastViewUrl,
+    setFirstViewUrl,
+    setLastViewUrl,
+  ]);
 
   useEffect(() => {
     if (!isGenerating && !pendingPromptId) return;

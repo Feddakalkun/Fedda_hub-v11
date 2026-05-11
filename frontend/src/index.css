@@ -325,7 +325,7 @@ body {
 }
 
 .v11-square-card .v11-card-bg {
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   transform: none;

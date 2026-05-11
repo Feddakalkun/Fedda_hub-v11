@@ -248,11 +248,7 @@ export const Txt2ImgPage = ({
   const handleUploadImage = async (file: File) => {
     setUploadingImage(true);
     try {
-      const form = new FormData();
-      form.append('file', file);
-      const res = await fetch(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body: form });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.detail || 'Upload failed');
+      const data = await comfyService.uploadInputFile(file);
       setUploadedImageName(data.filename);
       if (uploadedImage?.startsWith('blob:')) URL.revokeObjectURL(uploadedImage);
       setUploadedImage(URL.createObjectURL(file));

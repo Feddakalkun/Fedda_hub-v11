@@ -343,11 +343,8 @@ async function pollGeneration(promptId: string, timeoutMs = 240000): Promise<Gen
 }
 
 async function uploadFileToComfyInput(file: File): Promise<string> {
-  const form = new FormData();
-  form.append('file', file);
-  const res = await fetch(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body: form });
-  const data = await res.json();
-  if (!res.ok || !data?.success || !data?.filename) throw new Error(data?.detail || data?.error || 'Upload failed');
+  const data = await comfyService.uploadInputFile(file);
+  if (!data?.filename) throw new Error('Upload failed');
   return String(data.filename);
 }
 export const InfluencerPage = () => {

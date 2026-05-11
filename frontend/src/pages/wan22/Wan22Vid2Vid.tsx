@@ -169,11 +169,7 @@ export const Wan22Vid2Vid = () => {
   const handleUpload = async (file: File) => {
     setUploading(true);
     try {
-      const form = new FormData();
-      form.append('file', file);
-      const res = await fetch(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body: form });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.detail || 'Upload failed');
+      const data = await comfyService.uploadInputFile(file);
       setUploadedVideoName(data.filename);
     } catch (err: any) {
       toast(err.message || 'Upload failed', 'error');

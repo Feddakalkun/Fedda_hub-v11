@@ -198,10 +198,7 @@ export const Wan21SteadyDancerPage = () => {
   ) => {
     setUploading(true);
     try {
-      const form = new FormData();
-      form.append('file', file);
-      const data = await fetchJson<any>(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body: form });
-      if (!data.success) throw new Error(data.detail || 'Upload failed');
+      const data = await comfyService.uploadInputFile(file);
       setFilename(data.filename);
     } catch (error: any) {
       toast(error.message || 'Upload failed', 'error');

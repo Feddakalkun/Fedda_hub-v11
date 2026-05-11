@@ -168,6 +168,43 @@ class ComfyUIService {
         return `${this.getComfyBaseUrl()}${COMFY_API.ENDPOINTS.VIEW}?${params}`;
     }
 
+    public async uploadInputFile(file: File): Promise<{
+        success: true;
+        filename: string;
+        subfolder: string;
+        type: string;
+        view_url: string;
+    }> {
+        const form = new FormData();
+        form.append('image', file, file.name);
+
+        const resp = await fetch(`${this.getComfyBaseUrl()}${COMFY_API.ENDPOINTS.UPLOAD_IMAGE}`, {
+            method: 'POST',
+            body: form,
+        });
+        const data = await resp.json().catch(() => ({}));
+        if (!resp.ok) {
+            throw new Error(data?.detail || data?.error || `Upload failed (${resp.status})`);
+        }
+
+        const filename = String(data?.name ?? data?.filename ?? file.name);
+        const subfolder = String(data?.subfolder ?? '');
+        const fileType = String(data?.type ?? 'input');
+        const params = new URLSearchParams({
+            filename,
+            subfolder,
+            type: fileType,
+        });
+
+        return {
+            success: true,
+            filename,
+            subfolder,
+            type: fileType,
+            view_url: `${this.getComfyBaseUrl()}${COMFY_API.ENDPOINTS.VIEW}?${params.toString()}`,
+        };
+    }
+
     public async getLoras(prefix?: string): Promise<string[]> {
         try {
             const url = prefix

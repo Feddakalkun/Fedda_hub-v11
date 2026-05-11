@@ -66,6 +66,24 @@ export const Wan226FramesPage = () => {
     }).catch(() => {});
   }, []);
 
+  useEffect(() => {
+    setImages((prev) => {
+      let changed = false;
+      const next = prev.map((url, idx) => {
+        const filename = imageNames[idx];
+        const staleBlob = typeof url === 'string' && url.startsWith('blob:');
+        const missingButHasFile = (!url || !url.trim()) && !!filename;
+        if (!staleBlob && !missingButHasFile) return url;
+        if (staleBlob) URL.revokeObjectURL(url);
+        changed = true;
+        return filename
+          ? `/comfy/view?filename=${encodeURIComponent(filename)}&type=input`
+          : '';
+      });
+      return changed ? next : prev;
+    });
+  }, [imageNames, setImages]);
+
   // ── Upload ────────────────────────────────────────────────────────────────
   const triggerUpload = (index: number) => {
     activeUploadRef.current = index;
@@ -75,11 +93,7 @@ export const Wan226FramesPage = () => {
   const handleUpload = async (file: File, index: number) => {
     setUploadingIdx(index);
     try {
-      const form = new FormData();
-      form.append('file', file);
-      const res = await fetch(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body: form });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.detail || 'Upload failed');
+      const data = await comfyService.uploadInputFile(file);
       
       setImageNames(prev => {
         const n = [...prev];

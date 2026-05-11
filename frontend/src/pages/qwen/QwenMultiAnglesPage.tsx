@@ -4,6 +4,7 @@ import type { DragEvent as ReactDragEvent } from 'react';
 import { Camera, Loader2, RefreshCw, Upload } from 'lucide-react';
 import { BACKEND_API } from '../../config/api';
 import { useToast } from '../../components/ui/Toast';
+import { comfyService } from '../../services/comfyService';
 
 const WHEEL_SIZE = 260;
 const WHEEL_RADIUS_X = 92;
@@ -217,13 +218,7 @@ export const QwenMultiAnglesPage = () => {
   const uploadReference = async (file: File) => {
     setIsUploading(true);
     try {
-      const body = new FormData();
-      body.append('file', file);
-      const res = await fetch(`${BACKEND_API.BASE_URL}/api/upload`, { method: 'POST', body });
-      const data = await res.json();
-      if (!res.ok || !data?.success) {
-        throw new Error(data?.detail || data?.error || 'Upload failed');
-      }
+      const data = await comfyService.uploadInputFile(file);
       setUploadedImageName(String(data.filename ?? ''));
       if (uploadedPreview.startsWith('blob:')) URL.revokeObjectURL(uploadedPreview);
       setUploadedPreview(URL.createObjectURL(file));
