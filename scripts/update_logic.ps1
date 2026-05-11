@@ -214,6 +214,9 @@ $UnstableNodeFolders = @(
     "ComfyUI-tbox",
     "ComfyUI-Diffusers"
 )
+$DeprecatedNodeFolders = @(
+    "v337"
+)
 $AllowUnstableNodes = (([string]$env:FEDDA_ALLOW_UNSTABLE_NODES).Trim() -eq "1")
 
 # Optional toggles:
@@ -422,6 +425,28 @@ foreach ($NodeFolder in $EnsureNodeDeps) {
         } catch {
             Write-Host "  [WARNING] Could not sync requirements for ${NodeFolder}: $_" -ForegroundColor Yellow
         }
+    }
+}
+
+# Always remove deprecated custom-node folders no longer supported.
+foreach ($DeprecatedFolder in $DeprecatedNodeFolders) {
+    $DeprecatedPath = Join-Path $CustomNodesDir $DeprecatedFolder
+    $DeprecatedDisabledPath = Join-Path $CustomNodesDir ($DeprecatedFolder + ".disabled")
+    try {
+        $RemovedAny = $false
+        if (Test-Path $DeprecatedPath) {
+            Remove-Item -Recurse -Force -LiteralPath $DeprecatedPath -ErrorAction SilentlyContinue
+            $RemovedAny = $true
+        }
+        if (Test-Path $DeprecatedDisabledPath) {
+            Remove-Item -Recurse -Force -LiteralPath $DeprecatedDisabledPath -ErrorAction SilentlyContinue
+            $RemovedAny = $true
+        }
+        if ($RemovedAny) {
+            Write-Host "  [$DeprecatedFolder] Removed (deprecated custom node folder)." -ForegroundColor Yellow
+        }
+    } catch {
+        Write-Host "  [WARNING] Could not remove deprecated folder ${DeprecatedFolder}: $_" -ForegroundColor Yellow
     }
 }
 
