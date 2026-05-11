@@ -79,17 +79,8 @@ export const Wan21SteadyDancerPage = () => {
   const [width, setWidth] = usePersistentState('wan21_sd_width', 512);
   const [height, setHeight] = usePersistentState('wan21_sd_height', 512);
   const [videoLength, setVideoLength] = usePersistentState('wan21_sd_length', 5);
-  const [fps, setFps] = usePersistentState('wan21_sd_fps', 24);
-  const [seed, setSeed] = usePersistentState('wan21_sd_seed', -1);
-  const [steps, setSteps] = usePersistentState('wan21_sd_steps', 4);
-  const [cfg, setCfg] = usePersistentState('wan21_sd_cfg', 1.0);
-  const [contextFrames, setContextFrames] = usePersistentState('wan21_sd_context_frames', 81);
-  const [attentionMode, setAttentionMode] = usePersistentState<'sdpa' | 'xformers'>('wan21_sd_attention_mode', 'sdpa');
-  const [loadDevice, setLoadDevice] = usePersistentState<'offload_device' | 'cuda'>('wan21_sd_load_device', 'offload_device');
-  const [textDevice, setTextDevice] = usePersistentState<'gpu' | 'offload_device'>('wan21_sd_text_device', 'gpu');
-  const [useDiskCache, setUseDiskCache] = usePersistentState('wan21_sd_use_disk_cache', true);
-  const [samplerForceOffload, setSamplerForceOffload] = usePersistentState('wan21_sd_sampler_force_offload', true);
-  const [interpolationMultiplier, setInterpolationMultiplier] = usePersistentState<1 | 2>('wan21_sd_interp_multiplier', 2);
+  const [fps] = usePersistentState('wan21_sd_fps', 24);
+  const [seed] = usePersistentState('wan21_sd_seed', -1);
   const [poseSpatial] = usePersistentState('wan21_sd_pose_spatial', 1);
   const [poseTemporal] = usePersistentState('wan21_sd_pose_temporal', 1);
   const [showAdvanced, setShowAdvanced] = usePersistentState('wan21_sd_show_advanced', false);
@@ -128,15 +119,12 @@ export const Wan21SteadyDancerPage = () => {
   const [startSecond, setStartSecond] = usePersistentState('wan21_sd_start_second', 0);
   const [endSecond, setEndSecond] = usePersistentState('wan21_sd_end_second', 5);
   const [videoDurationSec, setVideoDurationSec] = useState(5);
-  const [sourceWidth, setSourceWidth] = useState<number>(width);
-  const [sourceHeight, setSourceHeight] = useState<number>(height);
-  const [scalePercent, setScalePercent] = usePersistentState('wan21_sd_scale_percent', 100);
+  const [scalePercent] = usePersistentState('wan21_sd_scale_percent', 100);
   const [resolutionProfile, setResolutionProfile] = usePersistentState<'square' | 'portrait' | 'landscape'>(
     'wan21_sd_resolution_profile',
     'square',
   );
   const [showLatestVideo, setShowLatestVideo] = usePersistentState('wan21_sd_show_latest_video', false);
-  const [perfPreset, setPerfPreset] = usePersistentState<'fast' | 'balanced' | 'quality'>('wan21_sd_perf_preset', 'balanced');
 
   const [isGenerating, setIsGenerating] = useState(false);
   const [pendingPromptId, setPendingPromptId] = useState<string | null>(null);
@@ -166,12 +154,6 @@ export const Wan21SteadyDancerPage = () => {
   }, []);
 
   useEffect(() => {
-    if (perfPreset === 'balanced' && contextFrames < 81) {
-      setContextFrames(81);
-    }
-  }, [perfPreset, contextFrames, setContextFrames]);
-
-  useEffect(() => {
     if (!motionPreview) return;
     const probe = document.createElement('video');
     probe.preload = 'metadata';
@@ -181,8 +163,6 @@ export const Wan21SteadyDancerPage = () => {
       setVideoDurationSec(seconds);
       const w = Math.max(64, Math.floor(probe.videoWidth || width));
       const h = Math.max(64, Math.floor(probe.videoHeight || height));
-      setSourceWidth(w);
-      setSourceHeight(h);
       setWidth(Math.max(64, Math.floor((w * scalePercent) / 100)));
       setHeight(Math.max(64, Math.floor((h * scalePercent) / 100)));
       if (startSecond > seconds) setStartSecond(seconds - 1);
@@ -656,46 +636,6 @@ export const Wan21SteadyDancerPage = () => {
       cancelled = true;
     };
   }, [needsPromotedZimage, isGeneratingFrameImage]);
-
-  const applyPerfPreset = (preset: 'fast' | 'balanced' | 'quality') => {
-    setPerfPreset(preset);
-    if (preset === 'fast') {
-      setSteps(4);
-      setCfg(1.0);
-      setContextFrames(32);
-      setFps(20);
-      setAttentionMode('sdpa');
-      setLoadDevice('offload_device');
-      setTextDevice('gpu');
-      setUseDiskCache(true);
-      setSamplerForceOffload(false);
-      setInterpolationMultiplier(1);
-      return;
-    }
-    if (preset === 'quality') {
-      setSteps(8);
-      setCfg(1.2);
-      setContextFrames(64);
-      setFps(24);
-      setAttentionMode('xformers');
-      setLoadDevice('cuda');
-      setTextDevice('gpu');
-      setUseDiskCache(false);
-      setSamplerForceOffload(false);
-      setInterpolationMultiplier(2);
-      return;
-    }
-    setSteps(4);
-    setCfg(1.0);
-    setContextFrames(81);
-    setFps(24);
-    setAttentionMode('sdpa');
-    setLoadDevice('offload_device');
-    setTextDevice('gpu');
-    setUseDiskCache(true);
-    setSamplerForceOffload(true);
-    setInterpolationMultiplier(2);
-  };
 
   return (
     <div className="flex h-full bg-[#07080a] overflow-hidden">
