@@ -288,8 +288,17 @@ ${combinedNarrative}`;
 
   // ── Generate ──────────────────────────────────────────────────────────────
   const handleGenerate = async () => {
-    // Need at least first frame image and prompt
-    if (!imageNames[0] || !prompts[0].trim() || isGenerating) return;
+    if (isGenerating) return;
+    if (missingImageFrames.length > 0) {
+      const labels = missingImageFrames.map((i) => i + 1).join(', ');
+      toast(`Upload all 6 images first. Missing frame(s): ${labels}`, 'error');
+      return;
+    }
+    if (missingPromptFrames.length > 0) {
+      const labels = missingPromptFrames.map((i) => i + 1).join(', ');
+      toast(`Fill all 6 prompts first. Missing prompt(s): ${labels}`, 'error');
+      return;
+    }
     
     sessionRef.current = [];
     prevCountRef.current = 0;
@@ -306,8 +315,8 @@ ${combinedNarrative}`;
       };
 
       for (let i = 0; i < FRAME_COUNT; i++) {
-        params[`image${i+1}`] = imageNames[i] || imageNames[0]; // fallback to frame 1 if missing
-        params[`prompt${i+1}`] = prompts[i].trim() || prompts[0].trim();
+        params[`image${i+1}`] = imageNames[i];
+        params[`prompt${i+1}`] = prompts[i].trim();
       }
 
       if (loraHigh) params.lora_high = { on: true, lora: loraHigh, strength: loraStrengthHigh };
@@ -361,6 +370,13 @@ ${combinedNarrative}`;
   };
 
   const currentGenVideo = sessionVideos.length > 0 ? sessionVideos[sessionVideos.length - 1] : null;
+  const missingImageFrames = Array.from({ length: FRAME_COUNT })
+    .map((_, i) => i)
+    .filter((i) => !imageNames[i]);
+  const missingPromptFrames = Array.from({ length: FRAME_COUNT })
+    .map((_, i) => i)
+    .filter((i) => !prompts[i]?.trim());
+  const canGenerate = !isGenerating && missingImageFrames.length === 0 && missingPromptFrames.length === 0;
 
   return (
     <div className="flex h-full bg-[#030303] overflow-hidden">
@@ -645,12 +661,12 @@ ${combinedNarrative}`;
           {/* ── GENERATE ACT ── */}
           <div className="pt-4 pb-12">
             <motion.button 
-              whileHover={(!imageNames[0] || !prompts[0].trim() || isGenerating) ? {} : { scale: 1.01, y: -2 }}
-              whileTap={(!imageNames[0] || !prompts[0].trim() || isGenerating) ? {} : { scale: 0.99 }}
-              disabled={!imageNames[0] || !prompts[0].trim() || isGenerating} 
+              whileHover={!canGenerate ? {} : { scale: 1.01, y: -2 }}
+              whileTap={!canGenerate ? {} : { scale: 0.99 }}
+              disabled={!canGenerate} 
               onClick={handleGenerate}
               className={`relative w-full py-6 rounded-3xl font-black text-sm uppercase tracking-[0.5em] transition-all duration-700 flex items-center justify-center gap-4 overflow-hidden shadow-2xl ${
-                !imageNames[0] || !prompts[0].trim() || isGenerating 
+                !canGenerate
                   ? 'bg-white/5 text-white/10 cursor-not-allowed border border-white-[0.03]' 
                   : 'bg-gradient-to-r from-violet-600 via-fuchsia-600 to-violet-600 bg-[length:200%_auto] hover:bg-right text-white shadow-violet-600/30'
               }`}
