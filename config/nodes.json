@@ -120,6 +120,12 @@
     "note": "Inpaint Stitch Improved"
   },
   {
+    "name": "ComfyUI Inpaint Nodes",
+    "url": "https://github.com/Acly/comfyui-inpaint-nodes.git",
+    "folder": "comfyui-inpaint-nodes",
+    "note": "INPAINT_* nodes for Fooocus inpaint/outpaint conditioning and mask preprocessing"
+  },
+  {
     "name": "ComfyUI-Frame-Interpolation",
     "url": "https://github.com/Fannovel16/ComfyUI-Frame-Interpolation.git",
     "folder": "ComfyUI-Frame-Interpolation",

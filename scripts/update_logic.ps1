@@ -362,7 +362,8 @@ $EnsureNodeDeps = @(
     "ComfyUI-Custom-Scripts",        # text utility fallbacks
     "ComfyLiterals",                 # String Literal
     "ComfyUI-Styles_CSV_Loader",     # Load Styles CSV
-    "ComfyUI-qwenmultiangle"         # QwenMultiangleCameraNode
+    "ComfyUI-qwenmultiangle",        # QwenMultiangleCameraNode
+    "comfyui-inpaint-nodes"          # INPAINT_* nodes (Fooocus inpaint/outpaint)
 )
 foreach ($NodeFolder in $EnsureNodeDeps) {
     $NodeDir = Join-Path $CustomNodesDir $NodeFolder

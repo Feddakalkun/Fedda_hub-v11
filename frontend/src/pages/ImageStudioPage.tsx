@@ -146,6 +146,11 @@ export const ImageStudioPage = ({ activeTab = 'z-image' }: ImageStudioPageProps)
         requireImageUpload
         imageParamKey="image"
         imageLabel="Image To Outpaint"
+        showDenoiseControl
+        defaultDenoise={1.0}
+        allowEmptyPrompt
+        hideLoraSection
+        outpaintMode
         loraPrefixes={[]}
         loraPacks={[]}
       />

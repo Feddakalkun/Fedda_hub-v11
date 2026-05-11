@@ -39,6 +39,9 @@ interface Txt2ImgPageConfig {
   imageLabel?: string;
   showDenoiseControl?: boolean;
   defaultDenoise?: number;
+  allowEmptyPrompt?: boolean;
+  hideLoraSection?: boolean;
+  outpaintMode?: boolean;
 }
 
 type LoraCatalogItem = {
@@ -98,6 +101,9 @@ export const Txt2ImgPage = ({
   imageLabel = 'Reference Image',
   showDenoiseControl = false,
   defaultDenoise = 0.5,
+  allowEmptyPrompt = false,
+  hideLoraSection = false,
+  outpaintMode = false,
 }: Txt2ImgPageConfig) => {
   const key = (name: string) => `${storageKey}_${name}`;
   const [prompt, setPrompt]                   = usePersistentState(key('prompt'), '');
@@ -122,6 +128,16 @@ export const Txt2ImgPage = ({
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [uploadedImageName, setUploadedImageName] = useState<string | null>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [outpaintLeft, setOutpaintLeft] = usePersistentState(key('outpaint_left'), 512);
+  const [outpaintTop, setOutpaintTop] = usePersistentState(key('outpaint_top'), 0);
+  const [outpaintRight, setOutpaintRight] = usePersistentState(key('outpaint_right'), 0);
+  const [outpaintBottom, setOutpaintBottom] = usePersistentState(key('outpaint_bottom'), 0);
+  const [outpaintFeather, setOutpaintFeather] = usePersistentState(key('outpaint_feather'), 60);
+  const [outpaintFillMode, setOutpaintFillMode] = usePersistentState(key('outpaint_fill_mode'), 'telea');
+  const [outpaintFillExpand, setOutpaintFillExpand] = usePersistentState(key('outpaint_fill_expand'), 0);
+  const [outpaintBlur, setOutpaintBlur] = usePersistentState(key('outpaint_blur'), 40);
+  const [outpaintBlurFalloff, setOutpaintBlurFalloff] = usePersistentState(key('outpaint_blur_falloff'), 0);
+  const [outpaintDiffusionStrength, setOutpaintDiffusionStrength] = usePersistentState(key('outpaint_diffusion_strength'), 1.0);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const { toast } = useToast();
@@ -305,7 +321,8 @@ export const Txt2ImgPage = ({
   }, [isGenerating, outputReadyCount, lastOutputImages, setHistory, setCurrentImage]);
 
   const handleGenerate = async () => {
-    if (!prompt.trim() || isGenerating) return;
+    const normalizedPrompt = prompt.trim();
+    if ((!allowEmptyPrompt && !normalizedPrompt) || isGenerating) return;
     if (requireImageUpload && !uploadedImageName) {
       toast(`${familyLabel}: upload a reference image first`, 'error');
       return;
@@ -320,14 +337,27 @@ export const Txt2ImgPage = ({
     setIsGenerating(true);
     clearOutputs();
     try {
+      const promptValue = normalizedPrompt || (allowEmptyPrompt ? 'high quality details' : normalizedPrompt);
       const params: Record<string, unknown> = {
-        prompt, negative: negativePrompt, width, height,
+        prompt: promptValue, negative: negativePrompt, width, height,
         seed: seed === -1 ? Math.floor(Math.random() * 10_000_000_000) : seed,
         steps, cfg, client_id: (comfyService as any).clientId,
       };
       if (showDenoiseControl) params.denoise = denoise;
       if (requireImageUpload && uploadedImageName) {
         params[imageParamKey] = uploadedImageName;
+      }
+      if (outpaintMode) {
+        params.outpaint_left = Math.max(0, Math.round(outpaintLeft));
+        params.outpaint_top = Math.max(0, Math.round(outpaintTop));
+        params.outpaint_right = Math.max(0, Math.round(outpaintRight));
+        params.outpaint_bottom = Math.max(0, Math.round(outpaintBottom));
+        params.outpaint_feather = Math.max(0, Math.round(outpaintFeather));
+        params.outpaint_fill_mode = (outpaintFillMode || 'telea').toString();
+        params.outpaint_fill_expand = Number.isFinite(outpaintFillExpand) ? Number(outpaintFillExpand) : 0;
+        params.outpaint_mask_blur = Number.isFinite(outpaintBlur) ? Number(outpaintBlur) : 40;
+        params.outpaint_mask_blur_falloff = Number.isFinite(outpaintBlurFalloff) ? Number(outpaintBlurFalloff) : 0;
+        params.outpaint_diffusion_strength = Number.isFinite(outpaintDiffusionStrength) ? Number(outpaintDiffusionStrength) : 1.0;
       }
       const activeLoras = loraEntries
         .filter((l) => l.name && l.name.trim())
@@ -496,54 +526,144 @@ export const Txt2ImgPage = ({
             accent={accent}
             label="Prompt"
           />
-
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/25">Characters / LoRAs</span>
-              <span className="text-[8px] font-mono text-white/20">{loraEntries.length || 1}/6</span>
+          {outpaintMode && (
+            <div className="space-y-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-3">
+              <div className="text-[9px] font-black uppercase tracking-[0.2em] text-white/25">Outpaint Controls</div>
+              <div className="grid grid-cols-2 gap-2">
+                {[['Left', outpaintLeft, setOutpaintLeft], ['Top', outpaintTop, setOutpaintTop], ['Right', outpaintRight, setOutpaintRight], ['Bottom', outpaintBottom, setOutpaintBottom]].map(([label, val, fn]) => (
+                  <label key={label as string} className="space-y-1">
+                    <span className="text-[8px] font-black uppercase tracking-widest text-white/15">{label as string}</span>
+                    <input
+                      type="number"
+                      min={0}
+                      value={val as number}
+                      onChange={(e) => (fn as (v: number) => void)(Math.max(0, Number(e.target.value)))}
+                      className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-2.5 py-1.5 text-[11px] font-mono text-white/50 focus:border-emerald-500/20 outline-none"
+                    />
+                  </label>
+                ))}
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <label className="space-y-1">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/15">Feather</span>
+                  <input
+                    type="number"
+                    min={0}
+                    value={outpaintFeather}
+                    onChange={(e) => setOutpaintFeather(Math.max(0, Number(e.target.value)))}
+                    className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-2.5 py-1.5 text-[11px] font-mono text-white/50 focus:border-emerald-500/20 outline-none"
+                  />
+                </label>
+                <label className="space-y-1">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/15">Fill Mode</span>
+                  <select
+                    value={outpaintFillMode}
+                    onChange={(e) => setOutpaintFillMode(e.target.value)}
+                    className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-2.5 py-1.5 text-[11px] font-mono text-white/60 focus:border-emerald-500/20 outline-none"
+                  >
+                    <option value="telea">telea</option>
+                    <option value="ns">ns</option>
+                  </select>
+                </label>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <label className="space-y-1">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/15">Fill Expand</span>
+                  <input
+                    type="number"
+                    value={outpaintFillExpand}
+                    onChange={(e) => setOutpaintFillExpand(Number(e.target.value))}
+                    className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-2.5 py-1.5 text-[11px] font-mono text-white/50 focus:border-emerald-500/20 outline-none"
+                  />
+                </label>
+                <label className="space-y-1">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/15">Mask Blur</span>
+                  <input
+                    type="number"
+                    value={outpaintBlur}
+                    onChange={(e) => setOutpaintBlur(Number(e.target.value))}
+                    className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-2.5 py-1.5 text-[11px] font-mono text-white/50 focus:border-emerald-500/20 outline-none"
+                  />
+                </label>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <label className="space-y-1">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/15">Blur Falloff</span>
+                  <input
+                    type="number"
+                    step="0.05"
+                    value={outpaintBlurFalloff}
+                    onChange={(e) => setOutpaintBlurFalloff(Number(e.target.value))}
+                    className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-2.5 py-1.5 text-[11px] font-mono text-white/50 focus:border-emerald-500/20 outline-none"
+                  />
+                </label>
+                <label className="space-y-1">
+                  <span className="text-[8px] font-black uppercase tracking-widest text-white/15">Diffusion</span>
+                  <input
+                    type="number"
+                    min={0}
+                    max={1}
+                    step="0.01"
+                    value={outpaintDiffusionStrength}
+                    onChange={(e) => setOutpaintDiffusionStrength(Number(e.target.value))}
+                    className="w-full bg-white/[0.02] border border-white/[0.06] rounded-lg px-2.5 py-1.5 text-[11px] font-mono text-white/50 focus:border-emerald-500/20 outline-none"
+                  />
+                </label>
+              </div>
             </div>
+          )}
 
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-              {(loraEntries.length > 0 ? loraEntries : [{ name: '', strength: 1.0 }]).map((entry, idx) => (
-                <LoraCharacterCard
-                  key={`zimage-lora-card-${idx}`}
-                  index={idx}
-                  value={entry.name}
-                  strength={entry.strength}
-                  options={availableLoras}
-                  previewUrl={getLoraPreview(entry.name)}
-                  accent={accent}
-                  onChange={(name) => {
-                    setLoraEntries((prev) => {
-                      const source = prev.length > 0 ? [...prev] : [{ name: '', strength: 1.0 }];
-                      source[idx] = { ...source[idx], name };
-                      return source;
-                    });
-                  }}
-                  onStrengthChange={(strength) => {
-                    setLoraEntries((prev) => {
-                      const source = prev.length > 0 ? [...prev] : [{ name: '', strength: 1.0 }];
-                      source[idx] = { ...source[idx], strength };
-                      return source;
-                    });
-                  }}
-                  onRemove={idx > 0 ? () => setLoraEntries((prev) => prev.filter((_, i) => i !== idx)) : undefined}
-                />
-              ))}
-            </div>
-          </div>
+          {!hideLoraSection && (
+            <>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white/25">Characters / LoRAs</span>
+                  <span className="text-[8px] font-mono text-white/20">{loraEntries.length || 1}/6</span>
+                </div>
 
-          <button
-            onClick={() => setLoraEntries((prev) => (prev.length >= 6 ? prev : [...prev, { name: '', strength: 1.0 }]))}
-            disabled={loraEntries.length >= 6}
-            className={`inline-flex items-center gap-1 rounded-lg border px-2.5 py-1.5 text-[9px] font-black uppercase tracking-wider transition-all ${
-              loraEntries.length >= 6
-                ? 'cursor-not-allowed border-white/[0.05] bg-white/[0.02] text-white/20'
-                : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/15'
-            }`}
-          >
-            <Plus className="h-3 w-3" /> Add LoRA
-          </button>
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+                  {(loraEntries.length > 0 ? loraEntries : [{ name: '', strength: 1.0 }]).map((entry, idx) => (
+                    <LoraCharacterCard
+                      key={`zimage-lora-card-${idx}`}
+                      index={idx}
+                      value={entry.name}
+                      strength={entry.strength}
+                      options={availableLoras}
+                      previewUrl={getLoraPreview(entry.name)}
+                      accent={accent}
+                      onChange={(name) => {
+                        setLoraEntries((prev) => {
+                          const source = prev.length > 0 ? [...prev] : [{ name: '', strength: 1.0 }];
+                          source[idx] = { ...source[idx], name };
+                          return source;
+                        });
+                      }}
+                      onStrengthChange={(strength) => {
+                        setLoraEntries((prev) => {
+                          const source = prev.length > 0 ? [...prev] : [{ name: '', strength: 1.0 }];
+                          source[idx] = { ...source[idx], strength };
+                          return source;
+                        });
+                      }}
+                      onRemove={idx > 0 ? () => setLoraEntries((prev) => prev.filter((_, i) => i !== idx)) : undefined}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <button
+                onClick={() => setLoraEntries((prev) => (prev.length >= 6 ? prev : [...prev, { name: '', strength: 1.0 }]))}
+                disabled={loraEntries.length >= 6}
+                className={`inline-flex items-center gap-1 rounded-lg border px-2.5 py-1.5 text-[9px] font-black uppercase tracking-wider transition-all ${
+                  loraEntries.length >= 6
+                    ? 'cursor-not-allowed border-white/[0.05] bg-white/[0.02] text-white/20'
+                    : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/15'
+                }`}
+              >
+                <Plus className="h-3 w-3" /> Add LoRA
+              </button>
+            </>
+          )}
 
           <div className="h-px bg-white/[0.04]" />
 
@@ -642,9 +762,9 @@ export const Txt2ImgPage = ({
 
           {/* Generate */}
           <div className="pb-6">
-            <button disabled={!prompt.trim() || isGenerating} onClick={handleGenerate}
+            <button disabled={(!allowEmptyPrompt && !prompt.trim()) || isGenerating} onClick={handleGenerate}
               className={`w-full py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.35em] transition-all duration-300 flex items-center justify-center gap-3 ${
-                !prompt.trim() || isGenerating
+                ((!allowEmptyPrompt && !prompt.trim()) || isGenerating)
                   ? 'bg-white/[0.03] text-white/10 cursor-not-allowed border border-white/[0.04]'
                   : 'bg-emerald-500 text-black hover:bg-emerald-400 hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] active:scale-[0.98]'
               }`}>
