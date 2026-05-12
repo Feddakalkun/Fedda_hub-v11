@@ -9,6 +9,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+try { $PSNativeCommandUseErrorActionPreference = $false } catch {}
 $ScriptPath = $PSScriptRoot
 $RootPath = Split-Path -Parent $ScriptPath
 Set-Location $RootPath
@@ -280,7 +281,7 @@ function Install-FilteredRequirements {
     $TmpReq = Join-Path $NodeDir "_req_filtered.txt"
     Set-Content -Path $TmpReq -Value $Filtered
     $ErrorActionPreference = "Continue"
-    & $PyExe -m pip install -r "$TmpReq" --no-warn-script-location 2>&1 | Out-Null
+    & $PyExe -m pip install -r "$TmpReq" --no-warn-script-location | Out-Null
     $ErrorActionPreference = "Stop"
     Remove-Item $TmpReq -Force -ErrorAction SilentlyContinue
 }
@@ -490,7 +491,7 @@ if ($OpenCvOk) {
 } else {
     try {
         $ErrorActionPreference = "Continue"
-        & $PyExe -m pip install opencv-python --no-warn-script-location 2>&1 | Out-Null
+        & $PyExe -m pip install opencv-python --no-warn-script-location | Out-Null
         $OpenCvExit = $LASTEXITCODE
         $ErrorActionPreference = "Stop"
         if ($OpenCvExit -eq 0) {
@@ -512,7 +513,7 @@ if ($NumpyOk) {
 } else {
     try {
         $ErrorActionPreference = "Continue"
-        & $PyExe -m pip install "numpy<2" --no-warn-script-location 2>&1 | Out-Null
+        & $PyExe -m pip install "numpy<2" --no-warn-script-location | Out-Null
         $NumpyExit = $LASTEXITCODE
         $ErrorActionPreference = "Stop"
         if ($NumpyExit -eq 0) {
@@ -531,7 +532,7 @@ if ($EnableNvidiaVfxInstall) {
     Write-Host "  Ensuring nvidia-vfx is installed (RTX nodes)..." -ForegroundColor White
     try {
         $ErrorActionPreference = "Continue"
-        & $PyExe -m pip install nvidia-vfx --no-warn-script-location 2>&1 | Out-Null
+        & $PyExe -m pip install nvidia-vfx --no-warn-script-location | Out-Null
         $NvidiaVfxExit = $LASTEXITCODE
         $ErrorActionPreference = "Stop"
         if ($NvidiaVfxExit -eq 0) {
@@ -558,7 +559,7 @@ if ($TfmOk -and $HubOk -and $SafetensorsOk) {
 } else {
     try {
         $ErrorActionPreference = "Continue"
-        & $PyExe -m pip install --upgrade --force-reinstall "transformers>=4.57.6,<5" "huggingface-hub>=0.34.0,<1.0" "safetensors>=0.8.0rc0,<1.0" --no-warn-script-location 2>&1 | Out-Null
+        & $PyExe -m pip install --upgrade --force-reinstall "transformers>=4.57.6,<5" "huggingface-hub>=0.34.0,<1.0" "safetensors>=0.8.0rc0,<1.0" --no-warn-script-location | Out-Null
         $CompatExit = $LASTEXITCODE
         $ErrorActionPreference = "Stop"
         if ($CompatExit -eq 0) {
@@ -593,14 +594,14 @@ if (Test-Path $FrontendDir) {
         }
         $NpmCmd = Join-Path $NodeExeDir "npm.cmd"
         if (Test-Path $NpmCmd) {
-            & "$NpmCmd" "install" 2>&1 | Out-Null
+            & "$NpmCmd" "install" | Out-Null
             Write-Host "  Frontend dependencies updated." -ForegroundColor Green
         }
         else {
             $NodeExe = Join-Path $NodeExeDir "node.exe"
             $NpmCli = Join-Path $NodeExeDir "node_modules\npm\bin\npm-cli.js"
             if (Test-Path $NpmCli) {
-                & "$NodeExe" "$NpmCli" "install" 2>&1 | Out-Null
+                & "$NodeExe" "$NpmCli" "install" | Out-Null
                 Write-Host "  Frontend dependencies updated." -ForegroundColor Green
             }
             else {
@@ -609,7 +610,7 @@ if (Test-Path $FrontendDir) {
         }
     } else {
         # Lite mode - use system npm
-        & npm install 2>&1 | Out-Null
+        & npm install | Out-Null
         Write-Host "  Frontend dependencies updated." -ForegroundColor Green
     }
 
@@ -631,7 +632,7 @@ if (Test-Path $ComfyRequirements) {
     $NeedReqSync = $CoreWasUpdated -or ($ReqHash -ne $LastReqHash)
     if ($NeedReqSync) {
         try {
-            & $PyExe -m pip install -r "$ComfyRequirements" --no-warn-script-location 2>&1 | Out-Null
+            & $PyExe -m pip install -r "$ComfyRequirements" --no-warn-script-location | Out-Null
             $ReqHash | Out-File -FilePath $ReqHashFile -Force -Encoding ascii
             Write-Host "  ComfyUI requirements synced." -ForegroundColor Green
         } catch {
@@ -644,7 +645,7 @@ if (Test-Path $ComfyRequirements) {
 
 # Ensure backend voice fallback dependency exists after update
 try {
-    & $PyExe -m pip install edge-tts --no-warn-script-location 2>&1 | Out-Null
+    & $PyExe -m pip install edge-tts --no-warn-script-location | Out-Null
     Write-Host "  edge-tts synced." -ForegroundColor Green
 } catch {
     Write-Host "  [WARNING] edge-tts sync failed (non-fatal): $_" -ForegroundColor Yellow
@@ -655,7 +656,7 @@ Write-Host "`n[2b/3] Applying Comfy preview defaults..." -ForegroundColor Yellow
 $PreviewSetupScript = Join-Path $RootPath "scripts\setup_comfyui_config.py"
 if (Test-Path $PreviewSetupScript) {
     try {
-        & $PyExe "$PreviewSetupScript" 2>&1 | Out-Null
+        & $PyExe "$PreviewSetupScript" | Out-Null
         Write-Host "  Preview defaults applied (Execution=auto, VHS=Always)." -ForegroundColor Green
     } catch {
         Write-Host "  [WARNING] Preview defaults update failed (non-fatal): $_" -ForegroundColor Yellow
