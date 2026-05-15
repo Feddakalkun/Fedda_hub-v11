@@ -441,11 +441,10 @@ Write-Step "pip is ready in embedded Python." "Green"
 
 # Helper to run pip
 function Venv-Pip {
-    param([string]$PipArgs)
-    $cmd = "& '$VenvPy' -m pip $PipArgs --no-warn-script-location"
-    Invoke-Expression $cmd
+    param([Parameter(Mandatory = $true)][string[]]$PipArgs)
+    & $VenvPy -m pip @PipArgs --no-warn-script-location
     if ($LASTEXITCODE -ne 0) {
-        Write-Step "WARNING: pip command had issues: $PipArgs" "Yellow"
+        Write-Step "WARNING: pip command had issues: $($PipArgs -join ' ')" "Yellow"
     }
 }
 
@@ -626,7 +625,7 @@ if ($GpuProfile.Series -eq "50" -or $GpuProfile.Series -eq "60") {
 
 Write-Step "Installing ComfyUI requirements..."
 $ComfyReq = Join-Path $ComfyDir "requirements.txt"
-Venv-Pip "install -r `"$ComfyReq`""
+Venv-Pip @("install", "-r", $ComfyReq)
 
 # Re-assert matching torch/torchvision/torchaudio after Comfy reqs to avoid binary mismatch.
 Write-Step "Re-validating torch stack consistency..."
@@ -636,10 +635,10 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Step "Installing build tools..."
-Venv-Pip "install cmake ninja Cython"
+Venv-Pip @("install", "cmake", "ninja", "Cython")
 
 Write-Step "Installing insightface..."
-Venv-Pip "install insightface --prefer-binary --no-build-isolation"
+Venv-Pip @("install", "insightface", "--prefer-binary", "--no-build-isolation")
 
 # Comprehensive deps (same as portable)
 Write-Step "Installing comprehensive dependencies..."
@@ -661,16 +660,23 @@ $Deps = @(
     "fastapi", "uvicorn[standard]", "python-multipart",
     "browser-cookie3", "edge-tts"
 )
-Venv-Pip "install $($Deps -join ' ')"
+Venv-Pip (@("install") + $Deps)
 
 # Hard pin compatibility for the transformers/hub stack to avoid drift.
 Write-Step "Enforcing compatibility pins (transformers/huggingface-hub/safetensors)..."
-Venv-Pip "install --upgrade --force-reinstall `"transformers>=4.57.6,<5`" `"huggingface-hub>=0.34.0,<1.0`" `"safetensors>=0.8.0rc0,<1.0`""
+Venv-Pip @(
+    "install",
+    "--upgrade",
+    "--force-reinstall",
+    "transformers>=4.57.6,<5",
+    "huggingface-hub>=0.34.0,<1.0",
+    "safetensors>=0.8.0rc0,<1.0"
+)
 
 # RTX Video Super Resolution Python dependency (opt-in, best effort).
 if ($EnableNvidiaVfxInstall) {
     Write-Step "Ensuring nvidia-vfx is installed (RTX nodes)..."
-    Venv-Pip "install nvidia-vfx"
+    Venv-Pip @("install", "nvidia-vfx")
 } else {
     Write-Step "Skipping nvidia-vfx install (set FEDDA_INSTALL_NVIDIA_VFX=1 to enable)." "Gray"
 }
@@ -679,7 +685,7 @@ if ($EnableNvidiaVfxInstall) {
 try {
     if ($GpuProfile.Series -eq "40" -or $GpuProfile.Series -eq "50" -or $GpuProfile.Series -eq "60") {
         Write-Step "RTX 40/50/60-series detected - attempting SageAttention install..."
-        Venv-Pip "install sageattention"
+        Venv-Pip @("install", "sageattention")
     }
 } catch {}
 
