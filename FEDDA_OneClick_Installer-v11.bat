@@ -107,8 +107,49 @@ popd
 
 if not "%INSTALL_EXIT%"=="0" goto :err_install
 
-call :ensure_root_launchers
-call :hide_install_root_launchers
+echo  [INFO] Creating root launchers...
+echo [%date% %time%] Creating root launchers in %ROOT% >> "%LOG_FILE%"
+
+if exist "%INSTALL_DIR%\FEDDA_Update-v11.bat" (
+    copy /Y "%INSTALL_DIR%\FEDDA_Update-v11.bat" "%ROOT%\FEDDA_Update-v11.bat" >nul 2>nul
+)
+
+(
+echo @echo off
+echo setlocal EnableExtensions
+echo set "ROOT_DIR=%%~dp0"
+echo if "%%ROOT_DIR:~-1%%"=="\" set "ROOT_DIR=%%ROOT_DIR:~0,-1%%"
+echo set "TARGET_DIR=%%ROOT_DIR%%\comfyuifeddafront"
+echo if not exist "%%TARGET_DIR%%\run.bat" ^(
+echo   echo.
+echo   echo  [ERROR] FEDDA install not found at:
+echo   echo          %%TARGET_DIR%%
+echo   echo.
+echo   echo  Run FEDDA_OneClick_Installer-v11.bat first.
+echo   echo.
+echo   pause
+echo   exit /b 1
+echo ^)
+echo call "%%TARGET_DIR%%\run.bat"
+echo exit /b %%errorlevel%%
+) > "%ROOT%\FEDDA_run-v11.bat"
+attrib -h "%ROOT%\FEDDA_run-v11.bat" >nul 2>nul
+
+if exist "%ROOT%\FEDDA_Update-v11.bat" (
+    attrib -h "%ROOT%\FEDDA_Update-v11.bat" >nul 2>nul
+    echo  [OK] Root launchers ready:
+    echo       %ROOT%\FEDDA_run-v11.bat
+    echo       %ROOT%\FEDDA_Update-v11.bat
+) else (
+    echo  [WARN] Could not place FEDDA_Update-v11.bat in root.
+    echo        You can still run update from:
+    echo        %INSTALL_DIR%\FEDDA_Update-v11.bat
+)
+
+if exist "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" attrib +h "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" >nul 2>nul
+if exist "%INSTALL_DIR%\FEDDA_Update-v11.bat" attrib +h "%INSTALL_DIR%\FEDDA_Update-v11.bat" >nul 2>nul
+if exist "%INSTALL_DIR%\FEDDA_Push-v11.bat" attrib +h "%INSTALL_DIR%\FEDDA_Push-v11.bat" >nul 2>nul
+if exist "%INSTALL_DIR%\run.bat" attrib +h "%INSTALL_DIR%\run.bat" >nul 2>nul
 
 echo.
 echo  ==============================================================
