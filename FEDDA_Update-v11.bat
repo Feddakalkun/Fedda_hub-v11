@@ -118,7 +118,13 @@ if not "!HAS_UNMERGED!"=="0" (
 
 set "ORIGIN_URL="
 for /f "delims=" %%r in ('git remote get-url origin 2^>nul') do set "ORIGIN_URL=%%r"
-if /I not "!ORIGIN_URL!"=="%REPO_URL%" (
+set "ORIGIN_URL_NORM=!ORIGIN_URL!"
+set "EXPECTED_URL_NORM=%REPO_URL%"
+if /I "!ORIGIN_URL_NORM:~-4!"==".git" set "ORIGIN_URL_NORM=!ORIGIN_URL_NORM:~0,-4!"
+if "!ORIGIN_URL_NORM:~-1!"=="/" set "ORIGIN_URL_NORM=!ORIGIN_URL_NORM:~0,-1!"
+if /I "!EXPECTED_URL_NORM:~-4!"==".git" set "EXPECTED_URL_NORM=!EXPECTED_URL_NORM:~0,-4!"
+if "!EXPECTED_URL_NORM:~-1!"=="/" set "EXPECTED_URL_NORM=!EXPECTED_URL_NORM:~0,-1!"
+if /I not "!ORIGIN_URL_NORM!"=="!EXPECTED_URL_NORM!" (
     echo  [ERROR] Install points to a different repo:
     echo          !ORIGIN_URL!
     echo          Expected: %REPO_URL%

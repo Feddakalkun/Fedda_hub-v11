@@ -513,7 +513,11 @@ function Install-TorchStack {
     param(
         [string[]]$Indexes
     )
-    $torchSpec = "torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0"
+    $torchSpec = @(
+        "torch==2.6.0",
+        "torchvision==0.21.0",
+        "torchaudio==2.6.0"
+    )
     foreach ($idx in $Indexes) {
         Write-Step "Trying torch stack from $idx ..."
         & $VenvPy -m pip install --upgrade --force-reinstall $torchSpec --index-url $idx --no-warn-script-location
@@ -524,6 +528,43 @@ function Install-TorchStack {
         Write-Step "Torch stack failed on $idx" "Yellow"
     }
     return @{ ok = $false; index = "" }
+}
+
+function Get-TorchIndexesForGpu {
+    param(
+        [Parameter(Mandatory = $true)][string]$Series
+    )
+
+    # Optional manual override for advanced users/friend installs.
+    $override = [string]$env:FEDDA_TORCH_INDEXES
+    if (-not [string]::IsNullOrWhiteSpace($override)) {
+        $parts = $override.Split(",") | ForEach-Object { $_.Trim() } | Where-Object { $_ }
+        if ($parts.Count -gt 0) {
+            Write-Step "Using FEDDA_TORCH_INDEXES override: $($parts -join ', ')" "Yellow"
+            return $parts
+        }
+    }
+
+    if ($Series -eq "60" -or $Series -eq "50") {
+        return @(
+            "https://download.pytorch.org/whl/cu128",
+            "https://download.pytorch.org/whl/cu126",
+            "https://download.pytorch.org/whl/cu124",
+            "https://download.pytorch.org/whl/cu121"
+        )
+    }
+
+    if ($Series -eq "40") {
+        return @(
+            "https://download.pytorch.org/whl/cu124",
+            "https://download.pytorch.org/whl/cu121"
+        )
+    }
+
+    return @(
+        "https://download.pytorch.org/whl/cu124",
+        "https://download.pytorch.org/whl/cu121"
+    )
 }
 
 # ============================================================================
@@ -556,10 +597,9 @@ Write-Header "STEP 3/7 - PyTorch + Dependencies"
 
 $GpuProfile = Get-NvidiaGpuProfile
 Write-Step "GPU profile: $($GpuProfile.Name) | Driver $($GpuProfile.Driver) | VRAM $([math]::Round($GpuProfile.VramMB / 1024,1)) GB"
-$torchResult = Install-TorchStack -Indexes @(
-    "https://download.pytorch.org/whl/cu124",
-    "https://download.pytorch.org/whl/cu121"
-)
+$torchIndexes = Get-TorchIndexesForGpu -Series $GpuProfile.Series
+Write-Step "Torch index fallback order: $($torchIndexes -join ' -> ')" "Gray"
+$torchResult = Install-TorchStack -Indexes $torchIndexes
 
 if (-not $torchResult.ok) {
     throw "PyTorch CUDA installation failed for this system."

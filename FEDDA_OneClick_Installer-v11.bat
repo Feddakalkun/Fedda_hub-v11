@@ -56,7 +56,11 @@ echo  [INFO] Existing FEDDA install detected. Updating repo...
 pushd "%INSTALL_DIR%" || goto :err_pushd
 
 for /f "delims=" %%r in ('git remote get-url origin 2^>nul') do set "ORIGIN_URL=%%r"
-if /I not "%ORIGIN_URL%"=="%REPO_URL%" goto :err_remote
+set "ORIGIN_URL_NORM=%ORIGIN_URL%"
+set "EXPECTED_URL_NORM=%REPO_URL%"
+call :normalize_repo_url ORIGIN_URL_NORM
+call :normalize_repo_url EXPECTED_URL_NORM
+if /I not "%ORIGIN_URL_NORM%"=="%EXPECTED_URL_NORM%" goto :err_remote
 
 git diff --quiet --ignore-submodules HEAD
 if not "%ERRORLEVEL%"=="0" (
@@ -235,6 +239,14 @@ echo    %INSTALL_DIR%\logs\
 echo [%date% %time%] ERROR: install failed code %INSTALL_EXIT% >> "%LOG_FILE%"
 pause
 exit /b %INSTALL_EXIT%
+
+:normalize_repo_url
+setlocal EnableDelayedExpansion
+set "URL=!%~1!"
+if /I "!URL:~-4!"==".git" set "URL=!URL:~0,-4!"
+if "!URL:~-1!"=="/" set "URL=!URL:~0,-1!"
+endlocal & set "%~1=%URL%"
+exit /b 0
 
 :hide_install_root_launchers
 if exist "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" attrib +h "%INSTALL_DIR%\FEDDA_OneClick_Installer-v11.bat" >nul 2>nul
