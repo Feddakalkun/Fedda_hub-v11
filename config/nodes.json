@@ -180,6 +180,24 @@
     "note": "LTX-compatible sigma/easing sampler nodes (res_2s and related)"
   },
   {
+    "name": "ComfyUI-GGUF",
+    "url": "https://github.com/city96/ComfyUI-GGUF.git",
+    "folder": "ComfyUI-GGUF",
+    "note": "GGUF model loaders including CLIPLoaderGGUF"
+  },
+  {
+    "name": "ComfyUI_PowerShiftScheduler",
+    "url": "https://github.com/silveroxides/ComfyUI_PowerShiftScheduler.git",
+    "folder": "ComfyUI_PowerShiftScheduler",
+    "note": "PowerShiftScheduler node used by Chroma/Radiance workflows"
+  },
+  {
+    "name": "ComfyUI-QuantOps",
+    "url": "https://github.com/silveroxides/ComfyUI-QuantOps.git",
+    "folder": "ComfyUI-QuantOps",
+    "note": "QuantizedUNETLoader and quantized model loading helpers"
+  },
+  {
     "name": "Nvidia_RTX_Nodes_ComfyUI",
     "url": "https://github.com/Comfy-Org/Nvidia_RTX_Nodes_ComfyUI.git",
     "folder": "Nvidia_RTX_Nodes_ComfyUI",

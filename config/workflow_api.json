@@ -59,6 +59,61 @@
       }
     }
   },
+  "z-image-chroma": {
+    "name": "Z-Image Chroma (Comfy Native)",
+    "filename": "z-image/z-image-chroma-txt2img.json",
+    "description": "Chroma txt2img using Comfy native Chroma/RES4LYF nodes.",
+    "inputs": {
+      "prompt": {
+        "node_id": "33",
+        "input_key": "string",
+        "type": "string",
+        "label": "Positive Prompt"
+      },
+      "negative": {
+        "node_id": "34",
+        "input_key": "string",
+        "type": "string",
+        "label": "Negative Prompt"
+      },
+      "width": {
+        "node_id": "13",
+        "input_key": "width",
+        "type": "number",
+        "label": "Width"
+      },
+      "height": {
+        "node_id": "13",
+        "input_key": "height",
+        "type": "number",
+        "label": "Height"
+      },
+      "seed": {
+        "node_id": "3",
+        "input_key": "seed",
+        "type": "number",
+        "label": "Seed"
+      },
+      "steps": {
+        "node_id": "3",
+        "input_key": "steps",
+        "type": "number",
+        "label": "Steps"
+      },
+      "cfg": {
+        "node_id": "3",
+        "input_key": "cfg",
+        "type": "number",
+        "label": "CFG Scale"
+      },
+      "denoise": {
+        "node_id": "3",
+        "input_key": "denoise",
+        "type": "number",
+        "label": "Denoise"
+      }
+    }
+  },
   "z-image-img2img": {
     "name": "Z-Image Img2Img",
     "filename": "z-image/img2img-api.json",

@@ -13,12 +13,12 @@
     },
     "class_type": "HuggingFaceDownloader",
     "_meta": {
-      "title": "🤗 HuggingFace Model Downloader Pro"
+      "title": "ðŸ¤— HuggingFace Model Downloader Pro"
     }
   },
   "29": {
     "inputs": {
-      "text": "=== DOWNLOAD REPORT ===\nTotal files: 6\nSuccessful downloads: 0\nAlready existed: 6\nInterrupted: 0\nFailed: 0\nMax concurrent: 3\nSpeed limit: Unlimited\nResume enabled: True\nValidation enabled: False\nAuto-organize: False\n\nDetails:\n✓ z_image_turbo_bf16.safetensors: Already exists (11.46 GB)\n✓ qwen_3_4b.safetensors: Already exists (7.49 GB)\n✓ z-image-vae.safetensors: Already exists (319.77 MB)\n✓ Z-Image-Turbo-Fun-Controlnet-Union.safetensors: Already exists (2.89 GB)\n✓ lotus-depth-g-v2-0-disparity.safetensors: Already exists (3.23 GB)\n✓ vae-ft-mse-840000-ema-pruned.safetensors: Already exists (319.14 MB)",
+      "text": "=== DOWNLOAD REPORT ===\nTotal files: 6\nSuccessful downloads: 0\nAlready existed: 6\nInterrupted: 0\nFailed: 0\nMax concurrent: 3\nSpeed limit: Unlimited\nResume enabled: True\nValidation enabled: False\nAuto-organize: False\n\nDetails:\nâœ“ z_image_turbo_bf16.safetensors: Already exists (11.46 GB)\nâœ“ qwen_3_4b.safetensors: Already exists (7.49 GB)\nâœ“ z-image-vae.safetensors: Already exists (319.77 MB)\nâœ“ Z-Image-Turbo-Fun-Controlnet-Union.safetensors: Already exists (2.89 GB)\nâœ“ lotus-depth-g-v2-0-disparity.safetensors: Already exists (3.23 GB)\nâœ“ vae-ft-mse-840000-ema-pruned.safetensors: Already exists (319.14 MB)",
       "anything": [
         "28",
         0
@@ -302,3 +302,5 @@
     }
   }
 }
+
+

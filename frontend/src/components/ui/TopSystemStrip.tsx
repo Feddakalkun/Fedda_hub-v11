@@ -57,8 +57,18 @@ export const TopSystemStrip = () => {
       if (comfy.isConnected) {
         try {
           const r = await fetch(`${COMFY_API.BASE_URL}/system_stats`, { cache: 'no-store' });
-          if (r.ok && mounted) setComfyStats(await r.json());
-        } catch {}
+          if (r.ok && mounted) {
+            setComfyStats(await r.json());
+          } else {
+            throw new Error('proxy-system-stats-not-ok');
+          }
+        } catch {
+          // Fallback for occasional proxy hiccups in dev mode.
+          try {
+            const direct = await fetch('http://127.0.0.1:8199/system_stats', { cache: 'no-store' });
+            if (direct.ok && mounted) setComfyStats(await direct.json());
+          } catch {}
+        }
       } else {
         if (mounted) setComfyStats(null);
       }

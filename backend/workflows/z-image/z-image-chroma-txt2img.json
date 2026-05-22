@@ -1,0 +1,149 @@
+{
+  "3": {
+    "inputs": {
+      "eta": 0.5,
+      "sampler_name": "multistep/res_2m",
+      "scheduler": "beta57",
+      "steps": 24,
+      "steps_to_run": -1,
+      "denoise": 1.0,
+      "cfg": 4.0,
+      "seed": 123456789,
+      "sampler_mode": "standard",
+      "bongmath": true,
+      "model": [
+        "16",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "13",
+        3
+      ]
+    },
+    "class_type": "ClownsharKSampler_Beta",
+    "_meta": {
+      "title": "Chroma Sampler"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": [
+        "33",
+        0
+      ],
+      "clip": [
+        "16",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": [
+        "34",
+        0
+      ],
+      "clip": [
+        "16",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "16",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "IMAGE/CHROMA/0",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "13": {
+    "inputs": {
+      "resize_to_input": "false",
+      "width": 1024,
+      "height": 1024,
+      "mask_channel": "red",
+      "invert_mask": false,
+      "latent_type": "16_channels",
+      "vae": [
+        "16",
+        2
+      ]
+    },
+    "class_type": "VAEEncodeAdvanced",
+    "_meta": {
+      "title": "Chroma Empty Latent"
+    }
+  },
+  "16": {
+    "inputs": {
+      "model_name": "chroma-unlocked-v29.5_float8_e4m3fn_scaled_stochastic.safetensors",
+      "weight_dtype": "fp8_e4m3fn_fast",
+      "clip_name1_opt": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "clip_name2_opt": ".none",
+      "clip_name3_opt": ".none",
+      "clip_name4_opt": ".none",
+      "clip_type": "chroma",
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "ClownModelLoader",
+    "_meta": {
+      "title": "Load Chroma Model"
+    }
+  },
+  "33": {
+    "inputs": {
+      "string": "a cinematic portrait photo"
+    },
+    "class_type": "String Literal",
+    "_meta": {
+      "title": "POSITIVE PROMPT"
+    }
+  },
+  "34": {
+    "inputs": {
+      "string": "blurry, low quality, bad anatomy"
+    },
+    "class_type": "String Literal",
+    "_meta": {
+      "title": "NEGATIVE PROMPT"
+    }
+  }
+}

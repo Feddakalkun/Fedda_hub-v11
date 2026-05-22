@@ -1952,6 +1952,23 @@ async def get_generation_status(prompt_id: str):
             data = resp.json()
             if prompt_id in data:
                 history = data[prompt_id]
+                comfy_status = history.get("status") or {}
+                if comfy_status.get("status_str") == "error":
+                    error_detail = "ComfyUI execution failed"
+                    for message_type, message_data in comfy_status.get("messages", []):
+                        if message_type == "execution_error" and isinstance(message_data, dict):
+                            error_detail = message_data.get("exception_message") or error_detail
+                            break
+                    return {
+                        "success": False,
+                        "status": "failed",
+                        "error": error_detail,
+                        "images": [],
+                        "videos": [],
+                        "audios": [],
+                        "detected_boxes": [],
+                        "raw_status": comfy_status,
+                    }
                 outputs = history.get("outputs", {})
                 images = []
                 videos = []

@@ -182,7 +182,7 @@
     },
     "class_type": "HuggingFaceDownloader",
     "_meta": {
-      "title": "🤗 HuggingFace Model Downloader Pro"
+      "title": "ðŸ¤— HuggingFace Model Downloader Pro"
     }
   },
   "29": {
@@ -206,7 +206,7 @@
     },
     "class_type": "AspectRatioImageSize",
     "_meta": {
-      "title": "🧩 Aspect Ratio Image Size"
+      "title": "ðŸ§© Aspect Ratio Image Size"
     }
   },
   "31": {
@@ -397,3 +397,4 @@
     }
   }
 }
+

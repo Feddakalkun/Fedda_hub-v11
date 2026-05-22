@@ -139,6 +139,7 @@ export const Txt2ImgPage = ({
   const [outpaintBlurFalloff, setOutpaintBlurFalloff] = usePersistentState(key('outpaint_blur_falloff'), 0);
   const [outpaintDiffusionStrength, setOutpaintDiffusionStrength] = usePersistentState(key('outpaint_diffusion_strength'), 1.0);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const statusPollStartedAtRef = useRef<number | null>(null);
 
   const { toast } = useToast();
   const {
@@ -260,6 +261,71 @@ export const Txt2ImgPage = ({
   useEffect(() => {
     if (execState === 'error') { setIsGenerating(false); setPendingPromptId(null); }
   }, [execState]);
+
+  // Fallback poller: some Comfy execution chains don't reliably flip execState to "done".
+  // Keep polling backend status while prompt_id is pending, so UI always resolves.
+  useEffect(() => {
+    if (!pendingPromptId) {
+      statusPollStartedAtRef.current = null;
+      return;
+    }
+
+    if (!statusPollStartedAtRef.current) {
+      statusPollStartedAtRef.current = Date.now();
+    }
+
+    let cancelled = false;
+
+    const poll = async () => {
+      if (cancelled) return;
+      try {
+        const res = await fetch(`${BACKEND_API.BASE_URL}/api/generate/status/${pendingPromptId}`);
+        const data = await res.json().catch(() => ({}));
+        if (cancelled) return;
+
+        const status = String(data?.status || '').toLowerCase();
+        if (status === 'completed') {
+          const imgs: Array<{ filename: string; subfolder: string; type: string }> = data.images ?? [];
+          if (imgs.length > 0) {
+            const img = imgs[imgs.length - 1];
+            const url = `/comfy/view?filename=${encodeURIComponent(img.filename)}&subfolder=${encodeURIComponent(img.subfolder || '')}&type=${encodeURIComponent(img.type || 'output')}`;
+            setCurrentImage(url);
+            setHistory(prev => (prev.includes(url) ? prev : [url, ...prev.slice(0, 39)]));
+          }
+          setIsGenerating(false);
+          setPendingPromptId(null);
+          clearOutputs();
+          return;
+        }
+
+        if (status === 'failed' || status === 'error') {
+          toast(data?.error || `${familyLabel} generation failed`, 'error');
+          setIsGenerating(false);
+          setPendingPromptId(null);
+          clearOutputs();
+          return;
+        }
+
+        // Safety timeout: don't keep spinner forever if backend/comfy never returns terminal state.
+        const startedAt = statusPollStartedAtRef.current || Date.now();
+        if (Date.now() - startedAt > 5 * 60 * 1000) {
+          toast(`${familyLabel}: generation timeout (no final status).`, 'error');
+          setIsGenerating(false);
+          setPendingPromptId(null);
+          clearOutputs();
+        }
+      } catch {
+        // Keep polling on transient backend hiccups.
+      }
+    };
+
+    poll();
+    const id = window.setInterval(poll, 1500);
+    return () => {
+      cancelled = true;
+      window.clearInterval(id);
+    };
+  }, [pendingPromptId, toast, familyLabel, clearOutputs, setCurrentImage, setHistory]);
 
   const handleUploadImage = async (file: File) => {
     setUploadingImage(true);
